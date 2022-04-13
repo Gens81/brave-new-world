@@ -121,3 +121,10 @@ org $d86428+20 : db $64		;Ninja scroll water
 org $d8640a+20 : db $64		;Ninja scroll fire
 org $d86446+20 : db $64		;Ninja scroll bolt
 org $d86482+20 : db $00		;Ninja scroll smoke
+
+;--------------------------------------------------------
+;Flash position fixed
+;--------------------------------------------------------
+
+org $D0784B
+db $A7
