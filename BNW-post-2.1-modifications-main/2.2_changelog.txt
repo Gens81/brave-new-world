@@ -78,7 +78,7 @@
 - No lag in the shop menu (fix by abyssonym ported to Bnw by Ryo_Hazuki) 
 - Decoupled mp color digits to fix reflect palette corruptions and Crusader bug (fix by Silent Enigma ported to bnw by Ryo_Hazuki) 
 - "Native" dance shown in yellow (Fëanor)
-more walkable beach tiles" in solitary island for faster fish_catching (Fëanor)
+- more walkable beach tiles" in solitary island for faster fish_catching (Fëanor)
 - Item/hands battle menu will always arrange inventory to have respectively items/weapons-shields on top of the list (Ryo_Hazuki)
 - Glyphs immune to font color changing (Ryo_Hazuki) 
 - Press X to leave the menu everywhere  (Fëanor) 
@@ -112,13 +112,12 @@ Events
 	Locke: "Right."
 	(Leaves in the right direction)
 	Sabin: "...what do you see in that guy?"
-- Add "CT - Mistery from the past" track to Ultima's sealed door
-- Add a battle dialogue when you trigger elixir counter vs Magimaster (and/or a NPC line about dispel utility)
 - Banon's death reference at the end of Thamasa events 
 	Terra: Where's Banon?
 	Edgar: <head down>He... didn't make it out.
 	Sabin: At least we get to keep playing though, amirite?
 - Restore Shadow cutscene during Soul train fight
+- Add "CT - Mistery from the past" track to Ultima's sealed door
 
 "Bro new world" features candidates for porting:
 - Allow Esper menu to open "Curative Ally Targeting" submenu
@@ -143,7 +142,6 @@ Bugfixes/features temporarily discarded:
 BIB ideas:
 - Rods don't consume MP on non critical attacks
 - Physical blitzes can crit
-- Mana battery power raised from 1 to 2
 - Remove 1 fight in IAF and/or Mine Cart
 - Magitek rided by humans are stealable
 - Remove Siren from BAR-BAR-BAR pool
