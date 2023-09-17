@@ -17,7 +17,17 @@ org $CCD31D
                                             ; <A12> can do much more than just [Mimic].<D>
                                             ; Customize their command list on the status page.
 org $CCD321
-  db $6A,$16,$21,$08,$06                    ; Change Map: Gogo's room at (8,6)
+  db $6A,$16,$21,$08,$06                    ; Change Map: Gogo's room at (8,6);
+  
+; clears invisible Red-D
+; Note: This works only for Red-D because there's a second event bit $0E3
+; that's used for tracking its statue state
+
+org $CC204B
+    db $DD,$9C                  ; clear event bit $69C
+    db $B2,$25,$51,$01          ; call subroutine $CB5125
+    db $FD,$FD                  ; clear redundant hide command
+warnpc $CC2053
 
 
 ;;; Sealed by... song data (overwritten song ends at $C98D84, added twelve 00 bytes)	
