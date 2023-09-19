@@ -39,7 +39,7 @@
 - Party selection menu "how it should have always been" (Ryo_Hazuki)
 - Better alignment of ailments icons into the main menu screen (Ryo_Hazuki)
 - Added "Ranged" icon and category to the inventory (Gens, Ryo)
-- Decensor Cafe>Pub signs (Gens)
+- Decensored Cafe>Pub signs (Gens)
 - Fixed Intangir transfering its weaknesses to Intangir Z (Seibaby)
 - Cleanup Esper Menu to highlight EL bonus assigning (Ryo_Hazuki)
 - Added an icon to distinguish lores (Gens)
@@ -88,10 +88,11 @@
 
 b20 (not yet released)
 - colosseum fights don't auto-arrange inventory anymore (Ryo_Hazuki)
-- fix sprite priority bug after covering (Bropedio)
 - pressing/holding A will advance dialog text (Fëanor)
+bugfixes:
 - clears invisible Red-D (Fëanor)
-other:
+- fix sprite priority bug after covering (Bropedio)
+- fixed final lineup allowing selecting more than 4 chars
 - fixed party map coord after gogo's tutorial
 
 2.2 roadmap (ordered by priority):
