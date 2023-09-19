@@ -214,4 +214,4 @@ warnpc $C4F3AF
 
 org $C3F577
   Padbyte $FF
-  Pad $C3F5C1
+  Pad $C3F5C0
