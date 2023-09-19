@@ -55,10 +55,7 @@ Meant to restore dialogues on a notext rom.
 -random_battle_songs (Madsiur)
 Randomly plays between 8 battle fight themes and 4 victory fanfares from final fantasy saga.
 
--ted_portraits (Gens)
-Laurel-style portraits matching t-edition sprites.
-
--ted_sprites (Gens)
+-t-dition_style (Gens)
 Change the whole cast appearance with sprites matching or heavily inspired from those used on t-edition hack.
 
 -DoubleSpeedEnemies, SlowerPlayer or Both (Nowea)
@@ -80,7 +77,6 @@ This can be considered an "accessibility" patch. There are players that find dis
 -remove_collisions_in_gogo_cave (Fëanor)
 Another user-friendly patch by Ben. This removes the automatic collision>fall in Gogo's cave bridge section. You can still fall to the bottom floor speaking to the npc purposely
 
--legacy_portraits, abysswolf_portraits, fft_portraits(Gens)
+-legacy_portraits, abysswolf_portraits (Gens)
 Portraits in vanilla styles but colorful, more detailed and in many cases, matching their sprites (check the png for a preview). Ripped from a patch built for ffvi pr.
 Portraits based on the original pixel art by abysswolf from deviantart.
-Portraits in Final Fantasy Tactics style taken, edited, from original pixel art by ffhacktics users.
