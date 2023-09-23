@@ -41,11 +41,11 @@ bugfixes:
 - No longer show damage on Interceptor
 - If "Fight" will yield a desperation attack, the text is yellow 
 - Scan anytime (HP/MP accessible via X, Status via Y, weaknesses and AI hints via scan)
-- Enemy script changes shown in message boxes (eg. "Disabled)
+- Enemy script changes shown in message boxes (eg. "Disabled")
 - Status tick rate not affected by speed/haste/slow
 - Defend work against piercing (ignore defense) attacks
 - Dog Block and Golem preempt check for cover
-- # Smart targeting
+- Smart targeting
 	Random targeting behaves differently 50% of the time
 	If setting/toggling status, selects target without the status
 	If lifting status, select target with the status
