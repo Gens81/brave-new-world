@@ -11,6 +11,15 @@ hirom
 org $C10CFA : JSR CheckSel
 
 ; ########################################################################
+; New Items Buffer
+;
+; Fix Item Buffer Overflow
+; Was causing some items to get eaten up when Weapon Swapping too
+; many times in a row.
+
+org $C112D5 : CPX #$0050 ; wipe entire "pending item transfer" buffer
+
+; ########################################################################
 ; RNG
 
 org $C11861 : JSL Random
@@ -346,6 +355,7 @@ SetStatus:          ; 54 bytes
   LDA $3EF8,X       ; current status 3
   EOR #$FF          ; unset statuses 3
   AND $3C6D,X       ; equipment statuses that aren't set
+  AND #$EF          ; equipment statuses other than "Stop" that aren't set
   ORA $3DE8,X       ; combine with status-to-set 3
   STA $3DE8,X       ; update status-to-set 3
   RTL
@@ -410,6 +420,105 @@ org $C18DFC
   NOP #5         ; no status update when equipment first selected
 
 ; ########################################################################
+; Equip Swap Code that never runs ($C18EFE used as freespace)
+
+; ------------------------------------------------------------------------
+; Helpers to prevent pause buffering during Setzers slot machine selection
+
+org $C18EFE
+CloseSlotsHelp:
+  STA $7BC4     ; vanilla code (moved)
+  STZ $EC0F     ; enable pausing (after slot machine)
+  RTS
+OpenSlotsHelp:
+  INC $EC0F     ; disable pausing (during slot machine)
+  JMP $5A4A     ; vanilla code (moved)
+warnpc $C18F0B+1
+
+; ------------------------------------------------------------------------
+; Wait Gauge helpers
+
+org $C18F85
+WaitRemaining:
+  LDA $1D4E        ; config options
+  ASL              ; carry: "Display Wait Times"
+  LDA $3219,X      ; ATB gauge
+  PHA              ; store on stack for later
+  BCC .atb         ; always display ATB when option turned off
+  BNE .atb         ; display ATB when filling
+  LDA $3205,X      ; more special flags
+  BPL .atb         ; never show wait during Palidor
+  LDA $3AA0,X      ; special state flags
+  BIT #$04         ; awaiting input
+  BNE .atb         ; display ATB when input pending
+  LDA $322C,X      ; total wait for command
+  INC              ; is it "null"
+  BNE .wait        ; branch if not ^
+  LDA $3AA1,X      ; special state flags
+  BIT #$01         ; "executing attack"
+  BNE .empty       ; show empty "wait" when ^
+.atb
+  LDA $01,S        ; ATB gauge
+  DEC
+  BRA .set         ; branch and exit
+.empty
+  LDA #$01         ; use smallest gauge (empty)
+  BRA .set         ; branch and exit
+.wait
+  SEC
+  SBC $3AB5,X      ; total wait - wait progress
+  CMP #$40         ; largest displayable wait
+  BCC .valid       ; branch if less than ^
+  LDA #$3F         ; else, enforce cap (affects Jump)
+.valid
+  ASL #2           ; x4 (make wait larger to see)
+.set
+  XBA              ; store gauge value
+  SEC              ; assume full ATB
+  PLA              ; ATB gauge
+  BEQ .shift       ; branch if full ATB
+  CLC              ; else, clear flag
+.shift
+  XBA              ; restore gauge value
+  ROR              ; shift "full ATB" flag into top bit
+  RTL
+GaugeValue:
+  CPX $00          ; fully empty gauge?
+  BNE .done
+  LDA $4E          ; get gauge color
+  CMP #$3D         ; red (stop status)
+  BEQ .done        ; use default (F1) value if ^
+  LDA #$F0         ; else, use fully empty F0
+  RTS
+.done
+  LDA $C168AC,X    ; gauge value
+  RTS
+
+; -------------------------------------------------------------------------
+; Helper for cover animation sprite priority bug
+
+DetermineRight:
+  PHY            ; save offset to character target
+  JSR $BC89      ; set attacker in $10
+  LDA $10        ; attacker index
+  BPL .character ; branch if character
+  ASL            ; double monster index, remove monster flag (set carry)
+  SBC #$08       ; get monster index 0-10
+  TAY            ; index it
+  LDA $80F3,Y    ; flipped due to formation
+  EOR $617E,Y    ; toggle with muddle/control flipped
+  INC            ; toggle lowest bit "Horizontal Flip"
+  BRA .done
+.character
+  TAY            ; character index
+  LDA $7B10,Y    ; character facing right (bit 0)
+.done
+  LSR            ; carry: Facing right
+  PLY            ; restore offset to character target
+  RTS
+warnpc $C19102+1
+
+; ########################################################################
 ; Damage number color palette routine
 ;
 ; Intercept to check for new MP dmg flag at bit6, part of Imzogelmo's 
@@ -451,7 +560,26 @@ StatusTextDisp: ; @returns: bit 0 = Regen, Bit 1 = Rerise, Bit 2 = Sap
   PLA           ; restore original B
   XBA           ; store in B ^
   RTS
+
+; ------------------------------------------------------------------------
+; Runic Stance helper
+
+RunicAbsorb:
+  JSR $BAB7      ; regular runic absorb animation
+  JSR $BCA6      ; get first target index
+  CMP #$04       ; is absorber a monster?
+  JMP $AB92      ; reset sprite to default if not
+warnpc $C145B3+1
+
 padbyte $FF : pad $C145B3
+
+; #######################################################################
+; Get ATB/Morph/Condemned gauge data for active battle menu ($C14A97)
+;
+; Since the morph ram is used for the wait gauge now, we need to force
+; the code to never draw the morph gauge even if it appears to be on.
+
+org $C14AB7 : LDA #$00 ; Always disable morph gauge
 
 ; #######################################################################
 ; Equipment Swap Palette Drawing
@@ -460,6 +588,17 @@ org $C14B87         ; code draws valid swaps in yellow
   LDA $890E         ; still-equipped item's flags
   JSR DrawDual      ; set carry if not able to dual wield
   BCS $0F           ; branch if no dual wield
+
+; #######################################################################
+; Slot Machine "Menu"
+
+; -----------------------------------------------------------------------
+; When Opening Slots, Disable Pausing
+org $C15618 : JMP OpenSlotsHelp
+
+; -----------------------------------------------------------------------
+; When Closing Slots, Re-enable Pausing
+org $C156B1 : JSR CloseSlotsHelp
 
 ; #######################################################################
 ; Spell Name Message Display
@@ -480,32 +619,36 @@ org $C16031 : LDA $E6F567,X ; decrement starting offset by 1
 ; are changed so that the uncharged ones don't use colors 2 or 4, just
 ; the grey and transparency. Then the charged endcaps use colors 4
 ; (the brightest) and optionally color 2 like the vanilla endcaps did.
+;
+; Rewritten to support Wait Gauge
 
 org $C16854
-ATBEndCaps:
-  PHA
-  JSL LeftCap
-  JSR $66F3        ; Draw opening end of ATB gauge
-  LDA #$04
-  STA $1A
+DrawGauge:
+  JML HelpCaps
+FinGauge:
+  JSL NormDraw     ; draw it
+  LDA #$04         ; gauge iterator
+  STA $1A          ; save it
 .loop
-  LDA $C168AC,X    ; Get the ATB gauge character
-  JSR $66F3        ; Draw tile A
-  INX
-  DEC $1A          ; Decrement tiles to do
-  BNE .loop        ; Branch if we haven't done 4
-  PLA
-  JML RightCap
+  JSR GaugeValue   ; get gauge value
+  JSR $66F3        ; draw it
+  INX              ; next
+  DEC $1A          ; next
+  BNE .loop        ; loop for all 4 tiles
+  PLA              ; get end cap value
+  JSL NormDraw     ; draw it
+  RTS
   NOP
+warnpc $C16872+1
 
 ; -----------------------------------------------------------------------
 ; Add checks for statuses to ATB drawing routine
 
 org $C16872
-drawGauge:
+ATBDrawFix:
   LDA $2021        ; ATB gauge setting
   LSR              ; Gauge enabled?
-  BCC .draw_hp     ; Branch if disabled
+  BCC drawMaxHP    ; Branch if disabled
   LDA $4E          ; Text color
   PHA              ; Save it
   LDX $10          ; Offset to character data
@@ -519,17 +662,19 @@ drawGauge:
   STA $4E          ; Store text color
 .exit
   RTS
+LongDraw:
+  JSR $66F3
+  RTL
+warnpc $C16898+1
 
 ; Leftover from earlier version of patch TODO: Remove below
-  PLA              ; Restore ATB gauge value
-  JSR $6854        ; Draw the gauge
   PLA              ; Get saved text color
   STA $4E          ; Store text color
   RTS
 ; Leftover from earlier version of patch TODO: Remove above
 
 org $C16898
-.draw_hp
+drawMaxHP:
   LDA #$C0         ; Draw a "/" as HP divider
 
 ; #######################################################################
@@ -672,11 +817,38 @@ org $C1A6E6 : NOP : JSL SetMPDmgFlagMass
 org $C1ABA6 : CMP #$19 ; increase black magic range by 1
 
 ; ######################################################################
+; Reset attacking character sprite to default
+
+org $C1AB8E : JSL StanceCheck ; Skip reset for Runic or Defend
+
+; ######################################################################
 ; Odin Animation
 ; Skip "Cleave" effect in Odin animation
 
 org $C1B0E4 : BRA No_Odin_Cleave
 org $C1B0EC : No_Odin_Cleave:
+
+; ######################################################################
+; Attack Animations Lookup Table
+
+org $C1B78B : dw RunicPrep
+org $C1B7BF : dw RunicAbsorb
+
+; ######################################################################
+; Cover Animation
+;
+; Cover allies on correct side, based on attacker
+; facing direction, rather than intended target
+
+org $C1BD8B : JSR DetermineRight : BCS $05
+
+; ######################################################################
+; Execute Physical Attack Animation
+;
+; Fix sprite priority after cover
+
+org $C1C225 : BEQ $05
+org $C1C22A : NOP #2
 
 ; ######################################################################
 ; RNG
@@ -707,5 +879,14 @@ SwdTechMeter:
   ADC $36        ; adds known Bushid count (to speed up)
   STA $7B82      ; update meter position
   RTS
-  NOP            ; [unused space] TODO: Why?
+  NOP            ; [unused space] TODO: Remove
+  db $FF         ; [unused space] TODO: Remove
+
+; ----------------------------------------------------------------------
+; Runic Stance helper
+
+RunicPrep:
+  JSR $BAAA      ; regular runic prep animation 
+  JMP $914D      ; set sprite to "ready"
+warnpc $C20000+1
 

@@ -26,10 +26,24 @@
 !aura_cycle = $2EA9 ; $2EC9 ; $2EE9 ; $2F09
 
 ; ------------------------------------------------------------------------
-; Mind Blast targets (new location for more targets
-; Old Mind Blast RAM unused: $3A5C - $3A63
+; Mind Blast targets (new location for more targets)
+; Old Mind Blast RAM unused: $3A5C - $3A61, $3A63
 
 !blast = $3F54 ; $3F55 $3F56 $3F57 $3F58 $3F59 $3F5A $3F5B $3F5C $3F5D
+
+; ------------------------------------------------------------------------
+!mimic = $3A62 ; battle RAM, used to be mind blast target
+
+; ------------------------------------------------------------------------
+; $3A46:$10 ("Palidor was summoned this turn" flag) is now unused, due
+; to the "Palidor Redux" patch
+
+; ------------------------------------------------------------------------
+; Unused RAM from the Equip Check Function
+; Used for battle power halving logic
+
+!baseb = $11CC ; apparently unused (in equip check func)
+!basec = $11CD ; needed for zero 16-bit read
 
 ; ========================================================================
 ; SRAM

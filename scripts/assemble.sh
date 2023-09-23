@@ -9,11 +9,6 @@ source "./settings.sh"
 assemble () {
   "${XKAS_PATH[@]}" $1 ../$rom_path
 }
-assemble_master () {
-  cd ../asm/$1
-  assemble $2
-  cd ../../scripts
-}
 assemble_batch () {
   cd ../asm/$1
   for file in *.asm
@@ -32,10 +27,6 @@ cat *.asm > "$allbanks"
 assemble "$allbanks"
 rm "$allbanks"
 cd ../../scripts
-
-# Assemble bropedio asm using master files
-assemble_master bropedio-2.0 RC33.asm
-assemble_master bropedio-2.1 RC-18.asm
 
 # Assemble private (hidden) assembly
 assemble_batch private

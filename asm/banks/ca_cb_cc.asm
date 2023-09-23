@@ -337,6 +337,10 @@ org $CB0AAE
   db $BC,$0A,$01       ; Branches to assigned Shadow caption
 
 ; ------------------------------------------------------------------------
+; Violet Dies (assumes "Dead Boy" sprite converted to "Dead Girl"
+org $CB12C8 : db $2D,$83 ; When pulling Violet from bed, switch to "dead" earlier
+
+; ------------------------------------------------------------------------
 ; Overwrite a completely pointless 1-byte jump to flag Cyan as having
 ; joined the party once recruited in Sabin's scenario. This wasn't done
 ; in vanilla for some reason.
@@ -1053,6 +1057,16 @@ org $CB6698 : db $4B,$08,$0B
 org $CB73DA : db $B2,$E2,$51,$01   ; JSR $CB51E2
 
 ; ------------------------------------------------------------------------
+; Upon speaking to Leeroy in Thamasa, Hidon will
+; now reappear 100% of the time (rather than 12.5%).
+; Point all 50% branches to "Hidon Reappears"
+
+org $CB73FE
+  db $BD : dl $01740A
+  db $BD : dl $01740A
+  db $BD : dl $01740A
+
+; ------------------------------------------------------------------------
 ; Removes a dialogue branch that no longer exists
 ; 7 bytes of free space after this return.
 
@@ -1208,10 +1222,13 @@ org $CC19E8 : db $C0,$2F,$02,$EB,$51,$01
 ; ------------------------------------------------------------------------
 ; Changes the statue of Odin to drop the cracked stone rare item
 ; The queen's statue now turns the stone into the Odin magicite
+; The stairwell is always visible
 
+org $CC1A06 : dw $FDFD : dw $FDFD : dw $FDFD ; always reveal stairs on map load
 org $CC1ED1 : db $D2,$E0 ; Gain stone: Sets event bit $1E80($1E0) [$1EBC, bit 0]
 org $CC1F81 : db $D3,$E0 ; Lose stone: Clears event bit $1E80($1E0) [$1EBC, bit 0]
 org $CC1F85 : db $86,$41 ; Add Odin to party esper list
+org $CC1F8B : db $FE     ; Remove event when examining hidden tile in castle
 
 ; ------------------------------------------------------------------------
 ; Re-write the dragon counting routine to add a fade to each result

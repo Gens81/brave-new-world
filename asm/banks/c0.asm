@@ -298,8 +298,7 @@ RespecELs:
 ; $0x: Vigor    $0x: Stamina     $xx: Defense  $xx: Mdef         $0x: Evade
 
 org $C0D690
-  db $00                  ; Ramuh: Status immunity 1
-  db $00                  ; Ramuh: Status immunity 2
+  dw $0000                ; Ramuh: Status immunity 1/2
   db $00                  ; Ramuh: Innate status
   db $00                  ; Ramuh: Damage & HP%/MP% bonuses
   db $04                  ; Ramuh: Elemental resistance
@@ -309,32 +308,32 @@ org $C0D690
   db $00                  ; Ramuh: Magic Defense
   db $00                  ; Ramuh: M.Block & Evade
 
-  db $00,$00,$00,$00,$01,$00,$00,$00,$00,$00    ; Ifrit
-  db $00,$00,$00,$00,$02,$00,$00,$00,$00,$00    ; Shiva
-  db $01,$28,$00,$00,$00,$00,$00,$00,$00,$00    ; Siren
-  db $00,$00,$00,$00,$40,$00,$00,$00,$00,$00    ; Terrato
-  db $00,$00,$00,$00,$00,$00,$05,$00,$00,$00    ; Shoat
-  db $00,$00,$00,$00,$10,$00,$00,$00,$00,$00    ; Maduin
-  db $00,$00,$00,$00,$80,$00,$00,$00,$00,$00    ; Bismark
-  db $24,$10,$00,$00,$00,$00,$00,$00,$00,$00    ; Stray
-  db $00,$00,$08,$00,$00,$00,$00,$00,$00,$00    ; Palidor
-  db $00,$00,$20,$00,$00,$00,$00,$00,$00,$00    ; Tritoch
-  db $00,$00,$00,$00,$00,$50,$00,$00,$00,$00    ; Odin
-  db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00    ; Raiden
-  db $00,$00,$40,$00,$00,$00,$00,$00,$00,$00    ; Bahamut
-  db $00,$00,$80,$00,$00,$00,$00,$00,$00,$00    ; Crusader
-  db $00,$00,$00,$02,$00,$00,$00,$00,$00,$00    ; Ragnarok
-  db $00,$00,$00,$01,$00,$00,$00,$00,$00,$00    ; Alexandr
-  db $00,$00,$00,$00,$00,$00,$50,$00,$00,$00    ; Kirin
-  db $00,$00,$00,$00,$00,$00,$00,$00,$0A,$00    ; Zoneseek
-  db $00,$00,$02,$00,$00,$00,$00,$00,$00,$00    ; Carbunkl
-  db $00,$00,$00,$00,$00,$00,$00,$00,$00,$A0    ; Phantom
-  db $C2,$80,$00,$00,$00,$00,$00,$00,$00,$00    ; Seraph
-  db $00,$00,$00,$00,$00,$00,$00,$0A,$00,$00    ; Golem
-  db $00,$00,$00,$00,$00,$05,$00,$00,$00,$00    ; Unicorn
-  db $00,$00,$00,$00,$00,$00,$00,$00,$00,$0A    ; Fenrir
-  db $00,$00,$00,$20,$00,$00,$00,$00,$00,$00    ; Starlet
-  db $00,$00,$00,$04,$00,$00,$00,$00,$00,$00    ; Phoenix
+  dw $0000 : db $00,$00,$01,$00,$00,$00,$00,$00    ; Ifrit
+  dw $0000 : db $00,$00,$02,$00,$00,$00,$00,$00    ; Shiva
+  dw $3800 : db $00,$00,$00,$00,$00,$00,$00,$00    ; Siren
+  dw $0000 : db $00,$00,$40,$00,$00,$00,$00,$00    ; Terrato
+  dw $0000 : db $00,$00,$00,$00,$05,$00,$00,$00    ; Shoat
+  dw $0000 : db $00,$00,$10,$00,$00,$00,$00,$00    ; Maduin
+  dw $0000 : db $00,$00,$80,$00,$00,$00,$00,$00    ; Bismark
+  dw $0025 : db $00,$00,$00,$00,$00,$00,$00,$00    ; Stray
+  dw $0000 : db $08,$00,$00,$00,$00,$00,$00,$00    ; Palidor
+  dw $0000 : db $20,$00,$00,$00,$00,$00,$00,$00    ; Tritoch
+  dw $0000 : db $00,$00,$00,$50,$00,$00,$00,$00    ; Odin
+  dw $0000 : db $00,$00,$00,$00,$00,$00,$00,$00    ; Raiden
+  dw $0000 : db $40,$00,$00,$00,$00,$00,$00,$00    ; Bahamut
+  dw $0000 : db $80,$00,$00,$00,$00,$00,$00,$00    ; Crusader
+  dw $0000 : db $00,$02,$00,$00,$00,$00,$00,$00    ; Ragnarok
+  dw $0000 : db $00,$01,$00,$00,$00,$00,$00,$00    ; Alexandr
+  dw $0000 : db $00,$00,$00,$00,$50,$00,$00,$00    ; Kirin
+  dw $0000 : db $00,$00,$00,$00,$00,$00,$0A,$00    ; Zoneseek
+  dw $0000 : db $02,$00,$00,$00,$00,$00,$00,$00    ; Carbunkl
+  dw $0000 : db $00,$00,$00,$00,$00,$00,$00,$A0    ; Phantom
+  dw $80C2 : db $00,$00,$00,$00,$00,$00,$00,$00    ; Seraph
+  dw $0000 : db $00,$00,$00,$00,$00,$0A,$00,$00    ; Golem
+  dw $0000 : db $00,$00,$00,$05,$00,$00,$00,$00    ; Unicorn
+  dw $0000 : db $00,$00,$00,$00,$00,$00,$00,$0A    ; Fenrir
+  dw $0000 : db $00,$20,$00,$00,$00,$00,$00,$00    ; Starlet
+  dw $0000 : db $00,$04,$00,$00,$00,$00,$00,$00    ; Phoenix
 
 ; -------------------------------------------------------------------------
 ; Esper Equip Bonus application
@@ -425,7 +424,7 @@ MaybeNull:        ; 33 bytes
 SetKill:
   LDA $3AA1,Y     ; check immune to instant death bit
   BRA BitSet
-SetFrac:
+SetFrac:          ; TODO: This label is unused now
   LDA $3C80,Y     ; check fractional dmg immunity bit
 BitSet:
   BIT #$04        ; immune to instant death (or fractional)
@@ -573,6 +572,117 @@ StatusFinHelp:         ; 33 bytes
   RTL
 
 ; -------------------------------------------------------------------------
+; Helper for Poison Tick Adjustments (from C2)
+
+org $C0D930
+TickLogic:
+  STA $BD         ; set damage increment
+  BEQ .incr       ; initialize tick to 100%
+  CPY #$08        ; monster range
+  BCC .incr       ; branch if player target
+  ASL             ; double tick for monsters
+  INC             ; +50% more damage
+  RTL
+.incr
+  INC #2          ; add 100% more damage
+  RTL
+warnpc $C0D93E+1
+
+; -------------------------------------------------------------------------
+; Helper for North Cross targeting
+; (runs immediately before status phase)
+
+org $C0D940
+NorthCrossMiss:
+  PHP
+  LDA $11A9              ; special effect
+  CMP #$52               ; "N.Cross" special index
+  BNE .exit              ; exit if not "N.Cross"
+  REP #$20               ; 16-bit A
+  LDA !miss              ; get "missed" targets
+  STA !fail              ; use "failed" message
+  LDA $A4                ; remaining targets
+  TSB !miss              ; set all as missed
+  PHX                    ; store X
+  JSL PostCheckHelp      ; will change X
+  PLX                    ; restore X
+  ORA $E8                ; combine both targets
+  STA $A4                ; set as new targets
+  TRB !miss              ; remove from "missed" targets
+.exit
+  PLP
+  RTL
+
+; -------------------------------------------------------------------------
+; Helpers for Elemental Status Null patch
+
+Nulled:
+  JSR RemoveStatuses  ; if null dmg, remove statuses
+  STZ $F0             ; zero dmg lobyte [moved]
+  STZ $F1             ; zero dmg hibyte [moved]
+  RTL
+Absorb:
+  JSR RemoveStatuses  ; if absorb dmg, remove statuses
+  LDA $F2             ; attack flags [moved]
+  EOR #$01            ; toggle "Heal" [moved]
+  RTL
+RemoveStatuses:
+  PHP                 ; store flags 
+  TDC                 ; zero A/B
+  REP #$20            ; 16-bit A
+  STA $3DD4,Y         ; clear status-to-set 1, 2
+  STA $3DE8,Y         ; clear status-to-set 3, 4
+  LDA $3018,Y         ; unique bit for target
+  TRB !null           ; remove "null" message (if set)
+  TRB !fail           ; remove "fail" message (if set)
+  PLP                 ; restore flags
+  RTS
+warnpc $C0D990+1
+
+
+; -------------------------------------------------------------------------
+; Helpers for Palidor Redux (in C2)
+
+org $C0D990
+
+WaitTimer:
+  LDA $3204,X            ; load 3204,X and 3205,X
+  BPL .flying            ; branch if entity is riding Palidor
+  LDA $3AC8,X            ; ATB timer incrementor
+  LSR                    ; divided by two
+  RTL
+.flying
+  LDA #$00C8             ; use fixed ATB increment while flying
+  RTL
+
+BetterPaliFlags:
+  BMI .done              ; if not landing, return
+  ORA #$80               ; "has landed since boarding Palidor"
+  STA $3205,X            ; set "has landed" bit
+  LDA $3AA0,X            ; get battle flow byte
+  BPL .done              ; skip setting flag if no extra turn
+  ORA #$08               ; set bit 3 to preserve ATB
+  STA $3AA0,X            ; update battle flow byte
+.done
+  RTL
+
+ClearWaitQ:
+  LDY $3A64              ; current wait queue index
+.loop
+  TXA                    ; put this rider's index in A
+  CMP $3720,Y            ; is this rider in wait queue here?
+  BNE .next              ; if not, branch
+  LDA #$FF               ; null
+  STA $3720,Y            ; set this wait queue entry to null
+.next
+  INY                    ; get next wait queue index
+  CPY $3A65              ; is this lower than the next unfilled entry?
+  BCC .loop              ; continue loop if so
+  LDA $3205,X            ; vanilla code
+  AND #$7F               ; vanilla code
+  RTL
+
+; -------------------------------------------------------------------------
 ; Helper for X Fight Retargeting Fix (in C2)
 
 org $C0D9D0
@@ -618,6 +728,79 @@ ProcFix2:              ; 14 bytes
   INC $3A70            ; [displaced] increment number of remaining strikes
 .exit
   RTL
+
+; -------------------------------------------------------------------------
+; Helper for Defending boost to Tank+Spank
+;
+; Apply on top of Tank+Spank patch to double chance
+; of covering healthy allies when in "defend" mode.
+
+DefendBetter:          ; [13 bytes]
+  SEP #$20             ; 8-bit A
+  LDA $3AA1,X          ; knight's special flags
+  LSR #2               ; shift "defending" flag to carry
+  LDA #$C0             ; 192 (cover threshold / 255)
+  BCC .done            ; branch if not defending
+  LSR                  ; 96 (lower cover threshold / 255)
+.done
+  RTL
+warnpc $C0DA17+1
+
+; -------------------------------------------------------------------------
+; Helpers for "Half Battle Power" patch
+
+org $C0DA20
+GetBushPwr:
+  REP #$20        ; 16-bit A [moved]
+  PHA             ; save power so far
+  SEP #$20        ; 8-bit A
+  LDA $3C58,X     ; weapon effects
+  BIT #$10        ; dual wielding
+  JSR GetBatPwr   ; get base battle power (preserves Z flag)
+  REP #$20        ; 16-bit A
+  BEQ .norm       ; branch if not dual wielding
+  ASL             ; else, double base battle power
+.norm
+  CLC : ADC $01,S ; add to power-so-far
+  STA $01,S : PLA ; clean up stack
+  LSR #2          ; [moved]
+  RTL
+
+GetPwrFork:
+  SEP #$20        ; [moved]
+  LDA $B5         ; command ID
+  CMP #$16        ; is command "Jump"
+  BEQ .get_pwr    ; branch if ^
+  LDA $3413       ; backup command (fight/mug)
+  BMI .exit       ; exit if not fight/mug or battle
+.get_pwr
+  JSR GetBatPwr   ; get base battle power
+  REP #$21        ; 16-bit A
+  ADC $04,S       ; add to stored power on stack
+  STA $04,S       ; overwrite with full power
+  SEP #$20        ; 8-bit A
+.exit
+  LDA $B5         ; [moved]
+  RTL
+
+org $C0DB01
+GetBatPwr:
+  PHP             ; store flags (including Z)
+  LDA $3ED8,X     ; character X's ID
+  STA $004202     ; prep multiplication
+  LDA #$16        ; size of character startup block
+  STA $004203     ; start mutliplication
+  NOP #3          ; wait for processor
+  REP #$30        ; 16-bit X/Y,A
+  LDA $004216     ; get product
+  PHX             ; save character index 
+  TAX             ; index to character data
+  TDC             ; zero A/B
+  SEP #$20        ; 8-bit A
+  LDA $ED7CAA,X   ; character battle power
+  PLX             ; restore character index
+  PLP             ; restore flags (including Z)
+  RTS
 
 ; -------------------------------------------------------------------------
 
@@ -693,6 +876,42 @@ SpreadRandom:        ; 24 bytes
   TSB $BB            ; spread targeting
 .done
   RTL
+
+; -------------------------------------------------------------------------
+; Helper for "Mug Better" patch
+;
+; Delay check for added "Steal" until special effect routine 
+; so other weapon special effects are preserved.
+
+org $C0DF6B
+MugHelper:
+  PHP                   ; store M/X flags
+  SEP #$20              ; 8-bit A
+  JSL LongSpecial       ; process original special effect
+  LDA $B5               ; command id
+  CMP #$06              ; "Mug" command ID
+  BNE .exit             ; exit if not
+  LDA $11A9             ; weapon special effect
+  PHA                   ; store on stack
+  LDA #$A4              ; steal effect (id $52)
+  STA $11A9             ; set steal as temporary special effect
+  JSL LongSpecial       ; run Steal function (for Mug attempt)
+  PLA                   ; pull weapon special effect off stack
+  STA $11A9             ; restore original special effect byte
+  CMP #$02              ; "SwitchBlade" special
+  BEQ .exit             ; attack always hits for SwitchBlade proc
+  LDA $3401             ; steal result message
+  CMP #$03              ; was steal successful?
+  BCS .exit             ; branch if ^
+  STA $3A48             ; flag target as missed
+  LDA #$20              ; "Flash Screen" animation flag
+  TRB $A0               ; remove "Flash" from animation flags
+.exit
+  PLP                   ; restore M/X flags
+  LDA $3A48             ; missed flag (vanilla code)
+  RTL
+warnpc $C0DFA0+1
+
 
 ; #########################################################################
 ; XOR Shift RNG Algorithm (replaces RNG Table)

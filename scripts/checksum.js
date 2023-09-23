@@ -27,9 +27,9 @@ function checksum () {
   const inverted = checksum ^ 0xFFFF;
 
   // Temporary check against "final" version of 2.1
-  if (checksum !== 0xD750) {
-    console.warn(`\n\nWARNING: Checksum does not match v2.1\n\n`);
-  }
+  // if (checksum !== 0xD750) {
+  //   console.warn(`\n\nWARNING: Checksum does not match v2.1\n\n`);
+  // }
 
   write_word_at(0x00FFDE, checksum);
   write_word_at(0x00FFDC, inverted);

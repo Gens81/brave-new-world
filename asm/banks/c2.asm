@@ -11,6 +11,70 @@ hirom
 
 org $C20081 : JSR StatusFinish ; finish removing statuses from dead
 
+; -------------------------------------------------------------------------
+; Only conditionally clear "reaction script ran" based on X-Magic usage
+; This helps ensure only one counterattack can fire per X-Magic use
+
+org $C20084
+CounterFlags:
+  JSR MayReset     ; determine whether to clear 33FC-33FD
+  STA $33FE        ; clear bytes tracking "was attacked"
+  STA $33FF        ; clear bytes tracking "was attacked"
+warnpc $C2008F
+padbyte $EA
+pad $C2008E
+
+; #########################################################################
+; Conventional Turn Postprocessing ($C200F9)
+
+; -------------------------------------------------------------------------
+; When queuing up Mimic command, set flag
+
+org $C20115 : JSR TrackMimic
+
+; -------------------------------------------------------------------------
+; Before starting Palidor Landing turn, set bit to freeze
+; ATB in position. This will ensure uncontrollable characters
+; like Umaro or Gau get to take action right away.
+
+org $C2019B : JSL BetterPaliFlags : NOP
+
+; -------------------------------------------------------------------------
+; Shift some branches in post-turn handling. Notably, the
+; Palidor caster no longer has their wait timer reset, and
+; it's no longer assumed that the caster will be riding.
+
+org $C201AA
+  LDA $3205,X          ; some update flags
+  BPL .palidor         ; branch if riding Palidor
+  LDA $32CC,X          ; entity's action queue entry point
+  INC
+  BNE .valid           ; branch if not null (queue unfinished)
+  LDA #$FF             ; null wait time
+  STA $322C,X          ; set wait time
+  STZ $3AB5,X          ; zero wait timer gauge
+  LDA $3AA0,X          ; some character data
+  BIT #$08             ; is ATB gauge stopped
+  BNE .counter         ; branch if so
+.palidor
+  INC $3219,X          ; is ATB gauge at max
+  BNE .counter         ; branch if not
+  DEC $3219,X          ; return ATB to 255
+.counter
+  LDA #$80             ; "Currently processing queue"
+  TRB $B0              ; unset ^ bit
+  JMP $0267            ; execute animation queue
+  NOP #2               ; 2 free bytes
+.valid
+  STX $3406            ; entity is first in line for action queue
+  RTS                  ; this RTS is a branch destination
+warnpc $C201D9+1
+
+; #########################################################################
+; Set executed command in Mimic Variables ($C2021E)
+
+org $C20224 : JSR ResetMimic ; prevent mimic loops
+
 ; #########################################################################
 ; Part of Attack Prep
 
@@ -214,7 +278,7 @@ MuddleCmds:
   db $2D  ; GP Rain, Health, Shock, MagiTek
 
 ZombieCmds:
-  db $41  ; Fight, Capture
+  db $01  ; Fight (Mug removed since it's not guaranteed to deal damage)
   db $00  ; none
   db $41  ; Rage, Jump
   db $20  ; MagiTek
@@ -259,12 +323,16 @@ warnpc $C204F6+1
 ; Morph random behavior (now freespace)
 
 org $C20557
-ItemMod:
-  BCS .done ; branch if not an actual item
-  STZ $3414 ; ignore damage modification
-.done
-  LDA $3411 ; [displaced]
+
+; ------------------------------------------------------------------------
+; Helper for Umaro Charge attack change
+UmaroRow:
+  TSB $11A2       ; set ignore defense (vanilla)
+  TRB $B3         ; clear "ignore row" flag
   RTS
+
+padbyte $FF ; had been used as an item command helper, now unused
+pad $C20560
 
 ; ------------------------------------------------------------------------
 ; Changes the odds each dance step shows up.
@@ -309,13 +377,15 @@ CommandWaitTimes:
   db $00   ; MagiTek
 
 ; ########################################################################
-; Initialize some things at battle start
+; End of Each Turn Processing ($C2083F)
 
-org $C20847
-  PHY            ; store Y
-  JSR XMagCntr   ; hook to persist X-Magic counter till second strike
-  PLY            ; restore Y
-  NOP            ; [padding]
+; ------------------------------------------------------------------------
+; In some end-of-turn handling, pass Umaro through the same
+; handling as Ragers/Dancers, rather than skipping him altogether.
+; This ensures he takes his reserve turn after landing.
+
+org $C20928 : BEQ Uncontrolled
+org $C20986 : Uncontrolled:
 
 ; ########################################################################
 ; Condemned Counter Initialization
@@ -369,9 +439,8 @@ ATBMultipliers:
 
 ; ########################################################################
 ; Remove Entity from Wait Queue
-; TODO: Note that the JMP below is a bug that is corrected in 2.1
 
-org $C20A2B : JMP ReturnReserve ; return items to inventory on queue wipe
+org $C20A2B : JSR ReturnReserve ; return items to inventory on queue wipe
 
 ; ########################################################################
 ; SOS Equipment Activations
@@ -380,9 +449,9 @@ org $C20A6A : LDA #$23 ; update spell ID for SOS Shell
 org $C20A78 : LDA #$22 ; update spell ID for SOS Safe
 
 ; ########################################################################
-; Switch between Morph and Revert (freespace)
+; Switch between Morph and Revert (freespace after)
 
-org $C20AE5 : RTS ; bypass all morph gauge handling
+org $C20AE3 : JMP ToggleMorphByte ; skip morph gauge handling
 
 ; ------------------------------------------------------------------------
 ; Helper for reflect removal via hit/miss
@@ -394,18 +463,24 @@ ReflectClear3:
   RTS
 
 ; ------------------------------------------------------------------------
-; Helpers for Periodic Effects/Damage
+; Helper for Golem Restrictions
+;
+; Skip Golem if no battle power, and remove
+; element from attack if Golem blocks
 
-Sap_Chk:
-  LDA $11A7        ; Load special byte 3
-  BIT #$0080       ; Test if bit 8 is set
-  BNE Skip_Halving ; If it is, branch
-  LDA $11A4        ; Else, restore displaced code at $C20D24 and return
+GolemRestrict:
+  ORA $3A37        ; check Golem's HP hibyte [moved]
+  BEQ .exit        ; exit if no Golem
+  LDA $11A6        ; battle power of attack
+  BEQ .exit        ; exit without Golem if no damage
+  STZ $11A1        ; remove elemental properties
+.exit
   RTS
+  db $34,$0D       ; TODO: Remove this unused code fragment ASAP
+warnpc $C20AFF+1
 
-Skip_Halving:
-  PLA              ; No longer need to RTS
-  JMP DmgModInc    ; Jump back, skipping the damage halving instruction
+; ------------------------------------------------------------------------
+; Helpers for Periodic Effects/Damage
 
 Tick_Calc:
   PHA              ; store A (Max HP)
@@ -449,6 +524,21 @@ Tick_Calc:
 warnpc $C20B4A+1
 
 ; ########################################################################
+; Palidor Postprocess ($C20B4A)
+
+; ------------------------------------------------------------------------
+; Clear Wait Queue for riders, so any pending command inputs
+; don't have their wait times added to Palidor's, which would
+; cause them to get out of sync with the other riders.
+
+org $C20B72 : JSL ClearWaitQ : NOP
+
+; ------------------------------------------------------------------------
+; Shorten Palidor wait time to match Jump
+
+org $C20B7D : LDA #$70
+
+; ########################################################################
 ; Damage Mod, Elemental Mod, Undead Reverse (per-target)
 ;
 ; Based on Elemental Share, new elemental algorithm simplifies damage
@@ -458,7 +548,7 @@ org $C20B8B
 AllTargetDmgMod:
   JMP .exit        ; elemental routine start - exit if zero battle power
 org $C20B9D
-  LDA $3EE4,Y      ; status-1
+  JSR PetrifyHelp  ; get current/future petrify status
   ASL              ; N: "Petrified"
   BMI .null        ; branch to null dmg if ^
 org $C20BB9
@@ -469,8 +559,7 @@ org $C20BD3
   STA $EE          ; save copy of elemental byte (used in C0 routine)
   AND $3BCC,Y      ; check absorbs
   BEQ .step2       ; if no absorb, continue elemental check
-  LDA $F2
-  EOR #$01
+  JSL Absorb       ; remove pending statuses and get toggled heal flag
   STA $F2          ; toggle heal flag
   BRA .atma_chk    ; finish elemental check
 .step2
@@ -493,8 +582,7 @@ org $C20BD3
   CMP #$00         ; is modifier count zero (immune)?
   BNE .step_3      ; if not, continue
 .null
-  STZ $F0
-  STZ $F1          ; zero damage
+  JSL Nulled       ; zero dmg and remove pending status changes
   BRA .apply_dmg   ; skip past Atma Weapon check
 .step_3
   LSR              ; A = modifier count / 2
@@ -524,47 +612,121 @@ warnpc $C20C2E
 
 ; ########################################################################
 ; Damage Modification (per-target)
-
-org $C20CA6 : SEP #$30        ; 8-bit A, X/Y
-org $C20CB0 : JMP NewVariance ; hook for new vigor/stam-based variance
-OldVariance:                  ; [label] for jump back
-org $C20CBA : AfterVar:       ; [label] for after old variance handling
-org $C20CC9 : BNE IgnoreDef   ; Defense ignoring now still modified by Morph
-org $C20CE0 : LDA #$81        ; Set Golem's Defense to 128
-
-; ------------------------------------------------------------------------
+;
+; Rewritten damage modification routine to save
+; space. Large change is to reuse the X/256
+; multiplication helper.
+;
+; When Golem (or Doggy) blocks, the intended
+; target's defenses should not apply: Row,
+; Defend, Safe/Shell, Morph, Self-Dmg.
+;
 ; Forces magic attacks to take defending targets into consideration
 ; Changes the back row defense boost from 50% damage reduction to 25%
-
-org $C20CFF
-  LDA $3AA1,Y     ; target special state flags
-  BIT #$02        ; "Defending"
-  BEQ .row        ; branch if not ^
-  LSR $F1         ; dmg / 2
-  ROR $F0         ; dmg / 4
-.row
-  PLP             ; restore flags
-  BCC IgnoreDef   ; branch if not "Physical"
-  BIT #$20        ; "Back Row"
-  BEQ IgnoreDef   ; branch if not ^
-  JSR Row_Dmg     ; else lower damage by 25%
-  NOP
-
-; ------------------------------------------------------------------------
+;
 ; Change how morphed character damage is modified
+; Halve sap damage on party
 
-IgnoreDef:
-  LDA $3EF9,Y      ; target status byte 4
-  BIT #$08         ; "Morphed"
-  BEQ .done        ; branch if not ^
-  LDA $3B40,Y      ; target stamina
-  JSR MorphDmg     ; modify damage
-.done
+org $C20C9D
+ExitTop:
+  RTS
+TargetDamageMod:
+  REP #$20         ; 16-bit A
+  LDA $11B0        ; maximum dmg
+  STA $F0          ; set target dmg
+  SEP #$20         ; 8-bit A,X/Y
+  LDA $3414        ; "Modify Damage"
+  BPL ExitTop      ; branch if no ^
+  JSR Variance     ; apply damage variance
 
-; ------------------------------------------------------------------------
+.golem_dog
+  LDA $3A82        ; golem bits
+  AND $3A83        ; dog bits
+  ASL              ; carry: "No golem/dog"
+  LDA $11A2        ; attack flags
+  BIT #$20         ; check "Piercing"
+  BCS .player      ; branch if not Golem/Dog
+  BNE ExitTop      ; exit if Golem/Dog and Piercing
+  LDA #$C0         ; else, use 192 defense
+  JMP InvertMulti  ; exit after defense reduction
 
-org $C20D24 : JSR Sap_Chk ; Add hook to halve sap damage on party
-org $C20D34 : DmgModInc:  ; [label] finish with damage increment
+.player
+  BNE .morph       ; branch if piercing
+  LSR              ; carry: "physical" ($11A2 still in A)
+  LDA $3BB9,Y      ; magic defense
+  BCC .defense     ; branch if "magical"
+
+.backrow
+  LDA $3AA1,Y      ; target flags
+  BIT #$20         ; "Backrow" flag
+  BEQ .physical    ; branch if no ^
+  LDA #$C0         ; 192 (75%)
+  JSR MultiplyDmg  ; multiply 75% * Damage, then add 1
+.physical
+  LDA $3BB8,Y      ; else load physical defense
+
+.defense
+  JSR InvertMulti  ; (255-defense) * dmg / 256 + 1
+
+.shields
+  LDA $3EF8,Y      ; status byte 3
+  BCS .safe        ; branch if "physical"
+  ASL              ; shift byte 3 (safe->shell)
+.safe
+  ASL              ; shift safe/shell into N
+  BPL .defending   ; branch if not safe/shell
+  LDA #$AA         ; else, 66% multiplier
+  JSR MultiplyDmg  ; multiply 66% * Damage, then add 1
+
+.defending
+  LDA $3AA1,Y      ; target flags
+  BIT #$02         ; "Defending"
+  BEQ .morph       ; branch if not ^
+  LSR $F1          ; halve dmg
+  ROR $F0          ; halve dmg
+
+.morph
+  JSR HandleMorph  ; get multiplier based on stamina
+
+.periodic
+  PHP              ; save 8-bit A on stack
+  REP #$20         ; 16-bit A
+  LDA $B2          ; attack bytes (looking at $B3)
+  BPL .exit        ; exit if "Ignore Vanish" (sap/regen/poison)
+
+.self-dmg
+  LDA $11A4        ; attack flags
+  LSR              ; carry: "Healing"
+  LDA $F0          ; damage so far
+  BCS .increment   ; branch if "Healing"
+  CPY #$08         ; target is monster
+  BCS .increment   ; branch if ^
+  CPX #$08         ; attacker is monster
+  BCS .increment   ; branch if ^
+  LSR #2           ; dmg / 4
+
+.increment
+  JSR $370B        ; only exist via special effects at this point
+  STA $F0          ; final modified damage
+
+.exit
+  PLP              ; restore 8-bit A
+  RTS
+warnpc $C20D39+1
+
+; TODO: Remove this unused code fragment vvvvvv
+org $C20D1A
+  BEQ $06
+  LDA $3B40,Y
+  JSR $A65A
+  db $C2,$20,$20,$EF,$0A
+; TODO: Remove this unused code fragment ^^^^^^
+
+org $C20D39
+InvertMulti:
+  EOR #$FF         ; invert and set multiplier before 0D3D below
+MultiplyDmg:
+  STA $E8          ; set multiplier before to 0D3D below
 
 ; ########################################################################
 ; Atlas Armet / Earring Boosts
@@ -606,7 +768,16 @@ warnpc $C20E61+1
 ; One portion of the equipment check function is included below, rewritten
 ; by Assassin to fix a bug that stopped the Genji Glove effect from reducing
 ; each weapon to 75% damage.
+;
+; Changes made to track base battle power in separate variable, to avoid
+; overflow
 
+; ------------------------------------------------------------------------
+; Save base battle power in new variable
+
+org $C20EA6 : STA !baseb : NOP #3 ; save base battle power
+
+; ------------------------------------------------------------------------
 org $C20EF3 : JSL EsperBonuses : NOP ; hook to apply esper equip bonuses
 
 org $C20F15
@@ -694,6 +865,11 @@ WeapChk:
 org $C2101C : BRA AfterImpEquip
 org $C21031 : AfterImpEquip:
 
+; -------------------------------------------------------------------------
+; Load weapon data
+
+org $C210E3 : BNE $01 : INC : STA $11AC,Y : NOP #4 ; overwrite battle power
+
 ; #########################################################################
 ; Called Every Frame (NMI, Sort of)
 
@@ -726,9 +902,37 @@ org $C2114B : .bypass_morph
 org $C21190 : .exit
 
 ; -------------------------------------------------------------------------
+; Align wait time increments for all Palidor riders, so
+; everyone lands at the same time.
+
+org $C21195 : JSL WaitTimer
+
+; -------------------------------------------------------------------------
 ; Update ATB, check for "ATB Autofill"
 
 org $C211C3 : JSR CheckCantrip ; C: whether ATB filled/overflowed
+
+; -------------------------------------------------------------------------
+; When ATB fills, if the "freeze ATB/allow wait timer" flag
+; is set already, don't clear current wait timers. This prevents
+; Palidor riders from getting out of sync wait times if their ATB
+; fills while in the air.
+
+org $C211D4
+GetATurn:
+  LDA #$08             ; "ATB frozen, wait timer enabled"
+  BIT $3AA0,X          ; is ^ set already (not normal)
+  BNE .get_turn        ; if so, skip wait timer reset & auto-attack queue [?]
+  JSR $11B4            ; else, set the bit "ATB frozen, wait timer enabled"
+  LSR
+  LSR                  ; move $02 into carry ("entity controllable")
+  STZ $3AB5,X          ; zero the wait timer
+  LDA #$FF             ; "null"
+  STA $322C,X          ; null the wait threshold
+  BCC QueueWait        ; queue waiting if uncontrollable
+.get_turn
+
+org $C2120E : QueueWait:
 
 ; #########################################################################
 ; Decrease Morph Timer (freespace)
@@ -744,6 +948,25 @@ Noiseblaster:
   STA $11AB           ; set ^ in attack status-2
   STZ $11A2           ; remove "Physical"
   RTS
+
+; -------------------------------------------------------------------------
+; Morph Helper
+; It appears that a piece of the morph reversion code
+; that was removed with the morph gauge/counter
+; caused unusual behavior when a previously morphed
+; Terra moves between tiers of the final battle.
+
+ToggleMorphByte:
+  PLP              ; restore carry flag (if just reverted)
+  PLX              ; restore actor's index
+  TXA              ; copy index into A
+  BCC .morphed     ; branch if just morphed
+  LDA #$FF         ; null
+.morphed
+  STA $3EE2        ; set morphed actor to null or X
+  RTS
+warnpc $C2123B+1
+
 
 ; #########################################################################
 ; True Knight and Love Token
@@ -815,8 +1038,7 @@ EvalKnight:
   LDA $3EE5,X         ; guard status-2
   LSR #2              ; "Near Fatal"
   BCS .exit           ; exit if guard ^
-  SEP #$20            ; 8-bit A
-  LDA #$C0            ; 192
+  JSL DefendBetter    ; set 8-bit A, get cover threshold
   JSR $4B65           ; random(0..191)
   CMP $3B40,X         ; greater than guard stamina (max 128)
   REP #$20            ; 16-bit A
@@ -862,9 +1084,17 @@ EvalKnight:
 org $C213A1 : JMP BossDeath
 
 ; #########################################################################
-; Character/Monster Takes One Turn
+; Add Entities to Battlefield ($C21471)
+; Set pending statuses when entity enters battle
 
-org $C2140C : JSR XMagHelp ; hook to skip counterattacks if X-Magic pending
+org $C21492 : JSR EnterBattleState
+
+; #########################################################################
+; Steal Command
+; Modified to be affected by "Blind" status
+
+org $C21592
+  JSR CoinHelp ; Redirect Steal to helper used by GP Rain
 
 ; #########################################################################
 ; Fight (command)
@@ -874,8 +1104,12 @@ org $C21624 : LDA #$03 ; reduce Offering hits from 4 to 2
 
 ; #########################################################################
 ; Umaro's Attacks (Charge, Throw, Storm)
+;
+; Add the "respect row" flag for Umaro's charge/tackle
+; attack (for balance purposes).
 
 org $C2167F : JSR Tackle ; hook to set Tackle battle power to 255
+org $C21684 : JSR UmaroRow ; add "respect row" flag
 org $C216D6 : LDA #$12 ; "Always Crit"/"Ignore Dmg Inc" if throwing Mog
 
 ; Sets the battle power of Umaro's Rage attack to 255 + gauntlet bonus
@@ -900,6 +1134,8 @@ org $C2172C
 SlotCmd:
   BRA .skip      ; skip check for Jokerdoom
 org $C21734 : .skip
+org $C21738 : BRA $07    ; skip textbox for Lagomorph
+
 
 ; #########################################################################
 ; Dance (command)
@@ -913,8 +1149,11 @@ org $C2179D : JSR DanceChance ; use stamina to get dance chance
 ;
 ; Modified by dn's "Blind Jump Fix" patch to make "Blind" affect Jump
 ; command. Further modified by Synchysi so ensure row is ignored still.
+; Special effects re-enabled by Bropedio's "Jump Better" patch
+; Always jump with right hand if present
 
-org $C2180B : JSL C3_BlindJump : NOP ; helper routine in C3
+org $C21805 : CLC : NOP #2             ; point to right hand
+org $C2180B : JSL C3_BlindJump2 : NOP
 
 ; -------------------------------------------------------------------------
 ; Change the odds of additional bounces from the Dragon Horn effect.
@@ -949,12 +1188,17 @@ org $C2187D
 ; #########################################################################
 ; Item (command)
 
-org $C21897 : NOP #3 ; remove instruction that ignores damage modification
-
 ; #########################################################################
 ; Item and Throw (commands)
 
-org $C218C1 : JSR ItemMod ; hook to disable dmg mod for actual items
+; -------------------------------------------------------------------------
+; Interrupt end of routine to set/change some basic attack flags
+
+org $C218F3
+  JSR SpellProc_no_miss ; set unblockable, unreflectable
+  LDA #$80
+  TSB $B3               ; allow clear/vanish removal
+  DEC $3414             ; allow dmg modification
 
 ; -------------------------------------------------------------------------
 ; Don't clear "can target dead/hidden targets" from all magic-based tools
@@ -1004,6 +1248,7 @@ warnpc $C21977
 ; Code Pointers for Commands
 
 org $C219ED : dw PreDanceCmd ; changed to add Moogle Charm hook
+org $C21A15 : dw FullScan ; new scan command location
 
 ; #########################################################################
 ; AI Command Scripts
@@ -1035,27 +1280,74 @@ MPLowCounter:
 .exit
   RTS
 
-; -------------------------------------------------------------------------
-; Script $FC, command $07 (used to be MP Low Counter)
-; Now repurposed for extra "Hit at All" code path
+  JML $C3F598 : RTS ; TODO: This code can be removed, as it is unused
 
-MeleeParams:
-  JML MeleeParamsLong
-RTS_C2:
-  RTS
 warnpc $C21BD7+1
 
 ; -------------------------------------------------------------------------
-; Script $FC, command $05
+; Script $FC, command $01,$02,$03
+;
+; This patch rewrites Seibaby's counterattack work and refactors the handling
+; for FC 01 - FC 05 so that counterattacks cannot trigger counterattacks.
 
-org $C21C70 : doCounter: ;[label] FC command $05 (Counter if damaged)
+org $C21C3B
+Command01:
+  TDC
+  BRA Pivot
+Command02:
+  LDA #$01
+  BRA Pivot
+Command03:
+  LDA #$14
+Pivot:
+  JSL CounterCheck
+  BMI .fail
+  LDA $3D48,X      ; attack command/spell/item ID
+  CMP $3A2E        ; match first arg
+  BEQ Match        ; if ^, set target + carry
+  CMP $3A2F        ; match second arg
+  BEQ Match        ; if ^, set target + carry
+.fail
+  CLC
+  RTS
+
+Match:             ; [vanilla code]
+  REP #$20         ; 16-bit A
+  LDA $3018,Y      ; last attacker bit
+  STA $FC          ; save as target
+  SEC              ; indicate "true" conditional
+  RTS
+
+Command04:
+  LDA #$15         ; offset to attacker index data
+  JSL CounterCheck
+  BMI .exit
+  LDA $3D48,X      ; attack elements
+  BIT $3A2E        ; compare to arg1
+  BNE Match        ; if match, set target + carry
+.exit
+  RTS
+
+Command05:
+  TYX              ; target index
+  JSL TargetMelee  ; perform melee/mp checks
+  BEQ Match        ; if match, set counter target
+.exit
+  RTS
+
+warnpc $C21C7F+1
 
 ; -------------------------------------------------------------------------
-; Script $FC, command pointers
+; Script $FC, command pointers ($C21D55)
 
-org $C21D5F : dw MeleeParams  ; FC command $05 (hit at all)
-org $C21D61 : dw MPLowCounter ; FC command $06 (HP low counter)
-org $C21D63 : dw MPLowCounter ; FC command $07 (MP low counter)
+org $C21D57
+  dw Command01     ; command counter
+  dw Command02     ; spell counter
+  dw Command03     ; item counter
+  dw Command04     ; element counter
+  dw Command05     ; hit at all counter
+  dw MPLowCounter  ; FC command $06 (HP low counter)
+  dw MPLowCounter  ; FC command $07 (MP low counter)
 
 ; -------------------------------------------------------------------------
 ; Figure out what type of command a spell is
@@ -1128,8 +1420,20 @@ org $C22282
   BPL .golem          ; branch if no ^
   JSR SkipDogBlock    ; C: 50% chance dog block (if no cover)
 
-org $C22291 : .go_dodge
-org $C22293 : .golem
+org $C22291
+.go_dodge
+  BRA .dodge2         ; dodge, but skip M-Tel/Vanish/Zombie check
+                      ; ^ this ensures Interceptor animation is used
+org $C22293
+.golem
+
+org $C22296
+  JSR GolemRestrict   ; skip Golem if no battle power, and remove
+                      ; element from attack if Golem blocks
+
+org $C2229F
+  BRA .dodge2         ; dodge, but skip M-Tel/Vanish/Zombie check
+                      ; ^ this ensures Golem animation/effect is used
 
 org $C222A8           ; replace the old L? spells handling
   NOP
@@ -1140,6 +1444,8 @@ org $C222A8           ; replace the old L? spells handling
 
 org $C222B3 : .hit_miss
 org $C222B5 : .dodge
+org $C222BC : .dodge2
+org $C222C3 : CPX #$06 ; test if golem or dog block (see $C223BF changes)
 org $C222D1 : .miss
 
 org $C222EC
@@ -1225,12 +1531,79 @@ warnpc $C223B3
 org $C223B2 : StamEvdChk: ; [label] carry is set if stamina evades
 
 ; #########################################################################
+; Miss animation selection routine (rewritten for "Doggy Miss" patch)
+;
+; After reaching the miss routine (due to Dog Block or
+; Golem), vanilla selects a miss animation at random from
+; the combination of all available equipment and Interceptor
+; or Golem. If an equipment block is selected, the miss
+; proceeds as though it had been caused by regular evasion.
+;
+; The end result of this (in vanilla) is that Interceptor will appear
+; less frequently when Shadow's equipment enables various
+; block animations: dagger parry, sword parry, shield, and cape.
+; If all 4 equipment animations are available, the chance of
+; Interceptor appearing is reduced from 50% to 10%, though he
+; will still trigger misses 50% of the time.
+;
+; Now, the Doggy and Golem checks precede randomized animation selection
+
+org $C223BF
+ChooseAnimation:       ; 46 bytes
+  PHY                  ; store Y
+  TDC                  ; clear A/B
+  LDA $FE              ; Dog/Golem
+  BEQ .normal          ; branch if neither
+  CMP #$40             ; "Dog Block"
+  BNE .golem           ; if not dog, it's golem
+  STY $3A83            ; save dog blockee
+  BRA .set_miss        ; set miss animation
+.golem
+  STY $3A82            ; save golem blockee
+  BRA .set_miss        ; set miss animation
+.normal
+  LDA $11A2            ; attack flags 1
+  LSR                  ; carry: Physical
+  BCS .get_anim        ; branch if ^
+  INY                  ; next equipment byte
+.get_anim
+  LDA $3CE4,Y          ; phys/magic block animations
+  JSR $522A            ; select random animation (A could be zero)
+.set_miss
+  JSR $51F0            ; get bit number in X (if zero A, carry clear)
+  BCC .exit            ; exit if the animation pool (A) was empty
+  INX                  ; add one (1-based)
+  TYA                  ; target index
+  LSR                  ; get target slot
+  TAY                  ; use as index
+  STX $AA,Y            ; save target animation
+.exit
+  PLY                  ; restore Y
+  RTS
+warnpc $C223ED+1
+
+; #########################################################################
 ; Initialize Many Things at Battle Start
 
 ; ------------------------------------------------------------------------
 ; Always set "Wait" mode variable (nATB)
 
 org $C2247A : STZ $3A8F : NOP #4
+
+; ------------------------------------------------------------------------
+; Never turn off ATB gauges
+
+org $C22493 : BRA $03
+
+; ------------------------------------------------------------------------
+; Delay setting death status at battle start
+
+org $C224A4 : JSR DoubleStatusSet
+
+; -------------------------------------------------------------------------
+; Skip redundant immunity routine
+
+org $C224B8 : NOP #3
 
 ; #########################################################################
 ; Initialize Characters
@@ -1256,6 +1629,7 @@ org $C2256D : JSR condenseSpellLists
 ; Per Bropedio Hack (later) for Pincers
 ; 1. Characters get reduced, but not zero, ATB
 ; 2. Enemies start with full ATB and get to act immediately
+; 3. CHANGE: Pincer behaves like "Front"
 
 org $C22575
 InitializeATBTimers:
@@ -1296,47 +1670,48 @@ InitializeATBTimers:
   LDA $3EE1      ; FF in every case, except for final 4-tier battle
   INC            ; check for null
   BNE .next      ; skip to next entity if not ^
-  LDX #$03       ; assume preemptive (=side type)
-  LDA $B0
-  ASL            ; this also clears Carry flag for later
-  BMI .type      ; keep X==3 if preemptive
-  LDX $201F      ; otherwise, load encounter type
+  LDA $B0        ; attack flags
+  ASL #2         ; carry: preemptive
+  LDA #$03       ; assume preemptive (=side type)
+  BCS .type      ; keep A==3 if preemptive
+  LDA $201F      ; otherwise, load encounter type
 .type
-  DEX            ; decrement type index
-  BMI .front     ; branch to front handling if type was 0
-  DEX            ; prepare for last type check
-  LDA $3018,Y    ; entity bit
-  BIT $3A40      ; acting as enemy?
+  LSR            ; carry: Back or Side attack
+  BCC .front     ; normal ATB if Front or Pincer
+  LSR            ; carry: Side attack (clear: Back)
+  LDA $3018,Y    ; character bit
+  BEQ .monster   ; branch if no character bit (is monster)
+  BIT $3A40      ; character acting as enemy?
   BNE .monster   ; branch if so
-  CPY #$08       ; monster range
-  BCS .monster   ; branch if in ^
 .human
-  DEX            ; decrement type index
-  BEQ .next      ; if type was 3, keep full ATB bar
+  BCS .next      ; if side attack, characters get full ATB
   LDA $F2
-  BRA .lessatb   ; pincer ATB = rand() + speed + genInc
+  BRA .lessatb   ; back attack ATB = rand() + speed + genInc
 .monster
-  DEX            ; decrement type index
-  BNE .next      ; type was 1 or 2 (side/pincer), keep full ATB
+  BCC .next      ; if back attack, monsters get full ATB
   LDA #$01
-  BRA .setatb    ; set top byte of ATB timer to 1
+  BRA .setatb    ; else, set top byte of ATB timer to 1 (no ATB)
 .front
-  LDA $3B19,Y    ; speed
-  ADC #$1E       ; +30
+  LDA $3B19,Y
+  ADC #$1E
   JSR $4B65      ; random(0..30+speed)
   ADC $F2        ; no chance to overflow here
 .lessatb
-  ADC $3B19,Y    ; add speed (again)
-  BCS .overflow  ; branch if overflow
-  ADC $3B19,Y    ; add speed (again)
-  BCS .overflow  ; branch if overflow
+  ADC $3B19,Y
+  BCS .overflow
+  ADC $3B19,Y
+  BCS .overflow
   ADC $F3        ; add general incrementor
-  BCC .setatb    ; branch if no overflow
+  BCC .setatb
 .overflow
   LDA #$FF       ; set to max ATB
 .setatb
   ORA #$01       ; ensure not zero
-  NOP            ; [padding] TODO: Remove
+
+warnpc $C225F7+1 ; TODO: Remove padding here
+padbyte $EA
+pad $C225F7
+
   STA $3219,Y    ; save top byte of ATB timer
 .next
   REP #$20       ; 16-bit A
@@ -1347,11 +1722,10 @@ InitializeATBTimers:
 warnpc $C22602+1
 
 ; #########################################################################
-; Death and Poison Immunity Setup/Handling
-;
-; Modified by dn's "Stop Block" hack to give Stop immunity with Death
+; Permanent Immunity (via Equipment) Setup
+; Allow Stop immunity via equipment
 
-org $c2265b : JSR StopBlock ; Add hook to give stop immunity
+org $C226A0 : AND #$FE78 ; allow "Stop" immunity (EE -> FE)
 
 ; #########################################################################
 ; Load Command and Subcommand Data
@@ -1367,6 +1741,12 @@ ToolSkeanSpells:
   BNE .skip                ; exit if not ^
   SBC Tool_Data_2,X        ; else, get spell number TODO: Just LDA
 org $C22716 : .skip
+
+; -------------------------------------------------------------------------
+; Allow targeting dead and live allies with 0x4E special
+
+org $C22775 : JMP TargetDead  ; check for 4E special
+
 
 ; #########################################################################
 ; Load Character Equipment Properties
@@ -1592,6 +1972,17 @@ MuddleBrush:
   JSR FlipTargeting  ; reset targeting based on equipment
 .nope
   RTS
+
+; -------------------------------------------------------------------------
+; Helper for byte mod long access
+
+org $C22A33
+LongByteMod:
+  JSR $5217      ; X: byte index, A: bitmask for bit in byte
+  RTL
+warnpc $C22A37+1
+
+; -------------------------------------------------------------------------
 
 padbyte $FF
 pad $C22A37
@@ -1844,6 +2235,16 @@ warnpc $C230BC+1
 ; Entity Executes One Hit
 
 ; -------------------------------------------------------------------------
+; Skip handling that sets "Steal" special effect for "Mug".
+; We now have special handling to check for "Mug" in $B5.
+; Now, this code resets the backup command to "Fight", so
+; only the first strike of a dual-wield attack will mug.
+
+org $C231AE
+  LDA #$00              ; "Fight" command ID
+  STA $3413             ; replace backup command with "Fight"
+
+; -------------------------------------------------------------------------
 ; In vanilla, the offering causes the Fight command to strike
 ; 4 times, randomized after the first. In BNW, X-Fight no longer
 ; randomizes, but the "don't retarget if targets are dead/invalid"
@@ -1880,8 +2281,31 @@ org $C233E5                         ; overwrites unused Imp Critical code
 padbyte $EA : pad $C233F2
 
 org $C23414 : .none
-org $C2343C : JSR CounterMiss : NOP ; Set counter variables early TODO [overwritten]
-org $C23447 : NOP #7                ; remove back-attack damage increment
+
+; -------------------------------------------------------------------------
+; Shift vanilla code before status evasion check
+; to make room for Parry/Counter and N.Cross helpers
+; Back-attack damage increment is removed
+
+org $C2343C
+  JSL NorthCrossMiss   ; handle North Cross targeting
+  JSR ParryCounter     ; initialize counterattacks even when miss
+  REP #$20             ; 16-bit A
+  LDY #$12             ; entity iterator
+.loop
+  LDA $3018,Y          ; entity mask
+  TRB $A4              ; remove from targets
+  BEQ .next            ; branch if missed
+warnpc $C2344F
+org $C2346C
+.next
+  DEY #2               ; next entity
+  BPL .loop            ; loop through all entities
+
+
+; -------------------------------------------------------------------------
+; Run extra special effect if Mugging
+org $C2345C : JSL MugHelper : NOP #2
 
 ; #########################################################################
 ; Runic Function
@@ -1908,8 +2332,11 @@ org $C2357E
 ; #########################################################################
 ; Initialize Variables for Counterattack Purposes
 ; New var $327D contains flags for physical, respects row, and MP dmg
+; Overwrite spell/command/item-specific counter data when null
 
-org $C235E9 : JSL InitAttackVars ; hook to track more counterattack vars
+org $C235E9 : JSL AttkBackup        ; hook to track more counterattack vars
+org $C235F8 : STA $3D49,Y : BEQ $01 ; save $FF (empty) for data and entity
+org $C23606 : STA $3D5C,Y : BEQ $01 ; save $FF (empty) for data and entity
 
 ; #########################################################################
 ; Weapon "Addition" Magic
@@ -1984,17 +2411,34 @@ org $C2380F
 SpellProc:
   BEQ .normal           ; improve silly branching logic from vanilla
   JSR Net_Target        ; hook to bypass "Randomize Targets" for "Net"
-  BRA .cannot_miss      ; improve silly branching logic from vanilla
+  BRA .no_miss          ; improve silly branching logic from vanilla
 .normal
 
 org $C2381B : JSL CastTarget ; power-up crit doom to x-zone, multitarget quartr
 org $C23828 : NOP #3         ; always show missed spellcast animations
-org $C2382D : .cannot_miss
+org $C2382D : .no_miss       ; [label] set some flags, then exit
 
 ; #########################################################################
 ; X-Kill Effect
 
+org $C2388C : XKillAbort:        ; used for branching
 org $C23891 : JSL SetKill : NOP  ; test and set death immune miss (informative miss)
+
+; -------------------------------------------------------------------------
+; Skip slice auto-kill effect if mugging (or jumping)
+; Hopefully, Mug/Jump will never reach this point, due to
+; handling in the Zantetsuken special effect
+
+org $C238AB
+  LDA $B5               ; command ID
+  CMP #$16              ; "Jump" ID
+  BEQ XKillAbort        ; abort if "Jump"
+  CMP #$06              ; "Mug" ID
+  BEQ XKillAbort        ; abort if "Mug"
+  NOP
+warnpc $C238B6+1
+
+; -------------------------------------------------------------------------
 org $C238D2 : JSR DisableCounter ; disable counters for X-Kill/Cleave
 
 ; #########################################################################
@@ -2005,15 +2449,19 @@ org $C238FD : ManRTS: ; [label] reusable RTS
 ; #########################################################################
 ; Hawk Eye Effect
 ; Increases the incrementer for "randomly thrown" weapons to 2
+; Disable "HawkEye" Special Effect when Mugging (and Throwing)
 
-org $C23905
-  INC $BC         ; +50% more dmg (now +100%)
-  LDA $3EF9,Y     ; target status-4
-  BPL .throw      ; finish up if no "Float"
-  LDA $B5         ; command ID
-  CMP #$00        ; is it "Fight" [TODO: CMP not necessary]
-  BNE ManRTS      ; exit if not ^ (Jump/Steal)
-
+org $C238FE
+HawkEye:
+  LDA $B5            ; command ID
+  CMP #$00           ; "Fight" ID
+  BNE ManRTS         ; exit if not "Fight" ("Mug"/"Throw")
+  JSR $4B53          ; 50% chance of carry set
+  BCC ManRTS         ; exit 50% of the time
+  INC $BC
+  INC $BC            ; dmg x2
+  LDA $3EF9,Y        ; target status4
+  BPL .throw         ; skip x3 dmg if not floating
 org $C23916 : .throw ; [label] set "Throw" animation for "Critical"
 
 ; #########################################################################
@@ -2031,6 +2479,16 @@ NewLife:
   PLA             ; Pull 16-bit rand(0..250)
   ADC #$00FA      ; Carry is clear, so add 250
   JMP StoreDamage ; use end of Step Mine effect to store damage and RTS
+
+; #########################################################################
+; Palidor per-target Effect
+;
+; Set Palidor targets to "Hide" in per-target hook. This
+; keeps them from being targeted, keeps their ATB functioning
+; correctly, and prevents running from battle while in the air.
+
+org $C23936
+  JSR PaliHide
 
 ; #########################################################################
 ; Discord Effect (now freespace)
@@ -2282,22 +2740,33 @@ StatusMiss:
   JSL StatusHelp
 .exit
   RTS             ; if Carry set, attack misses
-warnpc $C23C05
+warnpc $C23C04+1
 
 ; #########################################################################
 ; Rippler Effect (now freespace)
 
+; -------------------------------------------------------------------------
+; Upon losing a colosseum battle, the wagered item should be
+; returned to the players inventory. The vanilla implementation
+; only incentivizes saving and resetting repeatedly.
+
 org $C23C04
-StopBlock:
-  PHA             ; save A
-  LDA $3330,X     ; vulnerable status-3
-  AND #$EF        ; remove "Stop"
-  STA $3330,X     ; update vulnerable status-3
+RiggedColosseum:
+  LDA $3A97         ; $FF if colosseum, $00 otherwise
+  BEQ .rts          ; exit if not colosseum
+  STA $0205         ; clear wager item (so not billed)
+.rts
+  RTS
+warnpc $C23C12+1
+
+; -------------------------------------------------------------------------
+; TODO: Remove this unused code snippet
   PLA             ; restore A
   ORA #$80        ; [displaced]
   XBA             ; [displaced]
   RTS 
 
+; -------------------------------------------------------------------------
 org $C23C22
 ShadowChk:
   LDA $1E94       ; one event byte
@@ -2350,8 +2819,8 @@ pad $C23C6E
 
 ; #########################################################################
 ; Suplex Effect (now fractional immunity) [informative miss]
-
-org $C23C6E : JSL SetFrac : NOP ; test and set fractional immune miss
+; Clear old fractional routine
+padbyte $FF : org $C23C6E : pad $C23C75
 
 ; #########################################################################
 ; Air Anchor Routine (now freespace)
@@ -2450,9 +2919,34 @@ org $C23DEB : dw Cleave      ; Effect [?] - Cleave [?]
 org $C23E11 : dw NewLife     ; Effect $22 - Life (was Stone)
 org $C23E13 : dw NoCounter   ; Effect [?] - Instant Death
 org $C23E1D : dw $388C       ; no per-target mind blast hook (now inline)
+org $C23E2D : dw Fractional  ; Effect [?] - Fractional damage
 org $C23E43 : dw $388C       ; no per-target evil toot hook (now inline)
 org $C23E4B : dw $388C       ; no per-target stunner hook (now inline)
 org $C23E79 : dw Chainsaw2   ; Effect $56 (was Debilitator, now Chainsaw)
+
+; #########################################################################
+; Switchblade (ThiefKnife) Effect
+;
+; Move command exit check before random JSR, and skip setting
+; "Steal" special effect -- it is handled by new explicit check
+; for "Mug" command.
+
+org $C23E8B
+SwitchBlade:
+  LDA $B5               ; subtract command ID, maybe w/ carry
+  JSR $4B53             ; 50% chance of carry set
+  ROL                   ; combine Carry and Command ID
+  BNE .nope             ; exit if carry set or not "Fight"
+  LDA #$06              ; "Mug" command ID
+  STA $B5               ; set as command
+  RTS
+.nope
+  STZ $11A9             ; remove switchblade effect
+  RTS
+LongSpecial:            ; 4 bytes
+  JSR $387E             ; long access to special effect routine
+  RTL
+warnpc $C23EA0+1
 
 ; #########################################################################
 ; Step Mine (unchanged)
@@ -2486,6 +2980,12 @@ Aero:
 ; -------------------------------------------------------------------------
 ; Shock Command Effect (moved here)
 ; ((3 * ((Level * stamina) + current HP)) / 4) & [Attacker takes 1/8th MHP damage.]
+;
+; Show damage numbers when Shock causes self-damage
+; Rather than directly modifying attacker's HP, instead
+; add damage value to the attacker's "Damage Taken" bytes.
+; Then allow the regular damage handling process both the
+; damage reduction, death (if necessary) and visual dmg numbers.
 
 org $C23EDD
 Shock:
@@ -2505,16 +3005,16 @@ Shock:
   LSR
   LSR
   LSR            ; MaxHP / 8
-  PHA            ; store on stack
-  LDA $3BF4,Y    ; attacker CurrentHP
-  SEC            ; set carry
-  SBC $01,S      ; Current HP - (Max HP / 8)
-  STA $3BF4,Y    ; update CurrentHP ^
-  BCS .exit      ; branch if not dead
-  JSR $1390      ; attacker takes lethal damage
+  STA $33D0,Y    ; store in damage taken for target
+  LDA $3AA1,Y    ; get attacker flags
+  BIT #$0020     ; "back row"
+  BEQ .exit      ; exit if not ^
+  LSR $11B0      ; else, halve damage
 .exit
-  PLA            ; clear stack
   RTS
+warnpc $C23F10
+padbyte $FF
+pad $C23F0F
 
 ; -------------------------------------------------------------------------
 ; Helper for Net spellproc targeting exception
@@ -2531,6 +3031,7 @@ Net_Target:
 
 ; -------------------------------------------------------------------------
 ; Shifted location for MP Crit Effect
+; Modified to ensure MP values in menu update after MP Crit is used
 
 MPCrit:
   LDA $B2          ; special attack flags
@@ -2551,8 +3052,12 @@ MPCrit:
   STA $3C08,Y      ; update current MP
   LDA #$0200       ; "Always Critical" ($B3)
   TRB $B2          ; set ^
+  LSR #2           ; Shift #$0200 -> #$0080
+  JMP $464C        ; Set bit on $3204,Y and return
 .exit
-  RTS
+  RTS              ; Target of the branches in preceding code
+  NOP              ; Just dummying out this lone byte (TODO: Remove)
+warnpc $C23F54+1
 
 ; #########################################################################
 ; Holy Wind Effect
@@ -2663,21 +3168,85 @@ org $C2413E : LDY #$08 ; add 1 more pair of targeting bytes
 org $C24145 : STA !blast,Y ; store Mind Blast targets in new RAM location
 
 ; #########################################################################
-; North Cross Effect ($29)
+; North Cross Effect ($29) (Now entered elsewhere -- this is helper)
 ; One or two targets will be picked randomly
 
 org $C2414D
-  REP #$20        ; Set 16-bit A
-  LDA $A4         ; targets
-  PHA             ; store ^
-  JSR $522A       ; randomly pick an entity from among the targets
-  JMP NCross2     ; jump to second half of routine
-
+PostCheckHelp:           ; replace 11 bytes
+  JSR $522A              ; pick a random target
+  STA $E8                ; save for now
+  LDA $A4                ; remaining targets
+  JSR $522A              ; pick another target
+  RTL
+warnpc $C24158+1
 
 ; #########################################################################
 ; Dice Effect
+;
+; Improve the performance of Dice and Fixed dice by simplifying the
+; rolling algorithm and giving Dice the same bonus received by Fixed
+; Dice when all the dice show the same number.
+;
+; Total routine size: 100 bytes (down from vanilla's 142);
 
-org $C2418F : JSR DiceHelp ; corrects dice issue (by Seibaby)
+org $C24158
+DiceDamage:
+  STZ $3414           ; (vanilla) set to not modify dmg
+  LDA #$20            ; (vanilla)
+  TSB $11A4           ; (vanilla) make roll unblockable
+  LDA $B5             ; (vanilla) command id (animation)
+  BNE .continue       ; (vanilla) skip if command is not "Fight"
+  LDA #$26            ; (vanilla) "Dice Toss" animation id
+  STA $B5             ; store new animation
+.continue
+  LDA #$01            ; use base multiplier of x1
+  XBA                 ; store multiplier in B
+  JSR RollDie         ; roll first die
+  STA $E8             ; set potential dubs multiplier
+  ASL #4              ; move roll into top nibble
+  STA $B7             ; set first roll for animation
+  JSR RollDie         ; roll second die
+  TSB $B7             ; set second roll for animation
+  JSR DiceHelp        ; get hit rate (corrects dice issue -Seibaby)
+  CMP #$03            ; "Fixed Dice" count
+  LDA #$0F            ; prepare to set 3rd die animation to "null"
+  BCC .skip_third     ; skip third die if roll count < 3
+  JSR RollDie         ; roll third die
+.skip_third
+  STA $B6             ; set 3rd die animation
+  LDA $11AF           ; attacker's level
+  ASL                 ; x2
+  JSR $4781           ; get base dmg (die1*die2*die3*lvl*2)
+  LDX $E8             ; check dubs bonus
+  BEQ .set_dmg        ; branch if no dubs bonus
+  INC $E8             ; convert matching die id to multiplier
+  JSR $47B7           ; multiply base dmg by dubs bonus
+  TDC                 ; A = 0000
+  CMP $EA             ; overflow dmg byte 
+  REP #$20            ; 16-bit A
+  DEC                 ; get max damage 0xFFFF
+  BCC .set_dmg        ; if overflow, use max 0xFFFF
+  LDA $E8             ; else, load 16-bit damage product
+.set_dmg
+  REP #$20            ; 16-bit A (duplicate REP needed when no dubs)
+  STA $11B0           ; save attacker damage
+  RTS
+
+RollDie:              ; 19 bytes
+  LDA #$06            ; prepare random range
+  JSR $4B65           ; rand(0...5)
+  PHA                 ; save zero-based roll
+  CMP $E8             ; compare to bonus multiplier
+  BEQ .dubs           ; branch if match
+  STZ $E8             ; else, zero dubs bonus
+.dubs
+  INC                 ; get dmg multiplier
+  JSR $4781           ; multiply with current multiplier
+  XBA                 ; move new multiplier to B
+  PLA                 ; restore zero-based roll
+  RTS
+warnpc $C241E6+1
+
 
 ; #########################################################################
 ; Old Revenge Routine (now freespace)
@@ -2694,7 +3263,33 @@ OldImpNerf:
   BIT #$20       ; "Imp"
   BEQ .exit      ; branch if not ^
   LSR $11B1      ; damage / 2 (hibyte)
-org $C241F9 : .exit
+org $C241F9 : .exit ; TODO: This points to nowhere
+
+; #########################################################################
+; Rewrite Palidor once-per-strike handler. Now, remove dead targets.
+
+org $C241F6
+PalidorStrike:
+  TYX                  ; save Y
+  LDY #$12             ; use Y for loop through entities
+.loop
+  PEA $80C0            ; "Petrify", "Sleep"
+  PEA $2210            ; "Stop", "Hide", "Freeze"
+  JSR $5864            ; clear carry if any are set (also sets 8-bit A)
+  BCS .next            ; branch if valid target
+  REP #$20             ; 16-bit A
+  LDA $3018,Y          ; unique bit
+  TRB $A2              ; remove from targets
+  TRB $A4              ; remove from targets
+.next
+  DEY #2               ; get next entity index
+  BPL .loop            ; loop through all entities
+  TXY                  ; restore Y
+  RTS
+PaliHide:              ; 6 bytes
+  JSR $464C            ; sets "Palidor target" bit in $3204,Y (vanilla)
+  JMP $1F00            ; sets "hide" status on target
+warnpc $C2421B+1
 
 ; #########################################################################
 ; Spiraler (per-strike special effect)
@@ -2776,11 +3371,26 @@ warnpc $C242C6+1
 
 org $C242EB : dw SetIgnDef ; Defense Ignoring weapon
 org $C242EF : dw MPCrit    ; MP Criticals additional hook
+org $C242FF : dw $3E8A     ; Clear unused special effect $0F (MP crit)
 org $C24315 : dw BlowFish  ; Effect $1A - Blow Fish
 org $C2432B : dw GroundDmg ; Effect $25 - Quake
+org $C24333 : dw $3E8A     ; Clear once-per-strike N.Cross hook
 org $C24341 : dw $3E8A     ; Remove random targeting from Suplex effect
 org $C24367 : dw Shock     ; Shock formula
 org $C24383 : dw CoinToss  ; Effect $51 ($C33FB7 now unused)
+
+; #########################################################################
+; Update statuses after each turn (C24391)
+
+; -------------------------------------------------------------------------
+; Handle Petrify and Morph immunities
+
+org $C243C6
+  JSR Vulnerables1 ; clear block
+  AND $F4
+
+org $C243E0 : JSR Vulnerables2 ; clear block
+
 
 ; #########################################################################
 ; Determine Statuses to Set/Clear when Attack Hits (4406)
@@ -2908,12 +3518,21 @@ org $C244F9 : JSR SmartToot
 ; Largely rewritten by Assassin's "Overcast Fix" patch, which ensures
 ; "Zombie" and "Near Fatal" immunities are not ignored by "Overcast"
 ; effect.
+;
+; Remove hacky vanilla code that enforces special
+; status immunities for petrified characters by
+; resetting "Petrify" status every turn. Instead,
+; add more intelligent "immunity" byte routines.
+; These routines now enforce Petrify immunities that
+; include "Imp", "Death", Zombie". The same routines
+; are also used to enforce "Imp" immunity for Morphed
+; characters.
 
 org $C24517
 OvercastFix:
   LDA $3EF8,Y        ; status-3/4 [moved earlier]
   STA $FA            ; backup
-  LDA $331C,Y        ; blocked-1/2
+  JSR Vulnerables1   ; consider petrify/morph immunities
   PHA                ; store ^
   AND $3DD4,Y        ; non-blocked statuses-to-set-1/2
   STA $FC            ; save ^
@@ -2930,8 +3549,8 @@ OvercastFix:
   TSB $F4            ; set "Doom" to-clear
   LDA $3EE4,Y        ; status-1/2
   STA $F8            ; save ^
-  AND #$0040         ; isolate "Petrify"
-  TSB $FC            ; reset "Petrify" if possessed
+  BRA $03            ; remove petrify force-set TODO: Remove this BRA
+  NOP #3             ; remove petrify force-set TODO: Remove this NOP
   LDA $3C1C,Y        ; MaxHP
   LSR #3             ; MaxHP / 8
   CMP $3BF4,Y        ; compare to CurrHP
@@ -2949,7 +3568,7 @@ OvercastFix:
   STA $FC            ; update status-to-set-1/2
   PHA                ; store ^
   LDA $3DE8,Y        ; status-to-set-3/4
-  AND $3330,Y        ; exclude blocked-3/4
+  JSR Vulnerables2   ; handle petrify/morph immunities
   STA $FE            ; save ^
   PHA                ; store ^
   LDA $32DF,Y        ; hit by attack
@@ -3035,6 +3654,7 @@ org $C2469B : NoStatusHook: ; [label] RTS for empty status clear/set hooks
 ; Status on-clear and on-set jump tables
 
 org $C246DE : dw NoStatusHook ; "Reflect" on-set - removed
+org $C246E6 : dw ClearImp     ; "Morph" on-set - clear "Imp"
 org $C246F4 : dw Poison       ; "Poison" on-clear - reset increment
 org $C24710 : dw ClearQueue   ; "Dance" on-clear - clear queue
 org $C24720 : dw RageClear    ; "Rage" on-clear - hook for status removal
@@ -3047,9 +3667,14 @@ FieldItemReturn:
 
 ; #########################################################################
 ; Special Checks for End-of-Battle
-;
+
+; -------------------------------------------------------------------------
 ; Allows partial party engulfs to still transport the party to Gogo's Cave
 org $C24816 : NOP #5
+
+; -------------------------------------------------------------------------
+; Return wagered item after colosseum loss
+org $C24827 : JSR RiggedColosseum
 
 ; #########################################################################
 ; End-of-Battle (or tier switch) Handling
@@ -3064,18 +3689,86 @@ org $C24B6F : JSL Random
 
 ; #########################################################################
 ; Run Monster Script (C24BF4)
-
-; -------------------------------------------------------------------------
+;
 ; Real statuses now persist longer after death, so quasi aren't used
+;
+; There is handling to allow a second reactive script to be queued if a
+; target has died, but there is not handling to allow that reactive script
+; to fire under the same conditions. The solution is to allow the
+; "entity has died" override to occur before the "has reactive script
+; fired already" check. 
 
-org $C24C11 : LDA $3EE4,X ; load real status 1-2, instead of quasi
-org $C24C19 : LDA $3EF8,X ; load real status 3-4, instead of quasi
+org $C24BFD
+DeathCounterFix:
+  TRB $3A56        ; clear "entity died since last 1F"
+  BNE .has_died    ; allow script if has died
+  TRB $33FC        ; clear "no 1F this batch"
+  BEQ .skip_it     ; bypass script if already run
+
+org $C24C11
+  LDA $3EE4,X      ; load real status 1-2, instead of quasi
+org $C24C19
+  LDA $3EF8,X      ; load real status 3-4, instead of quasi
+
+org $C24C28
+.has_died
+  TRB $33FC        ; clear "no 1F this batch" if died override
+org $C24C52
+.skip_it
+
 
 ; #########################################################################
 ; Prepare Counterattacks (C24C5B)
+;
+; Rewritten to ensure that forced death-counter scripts are run in
+; "limited" mode.
+;
+; Assumes that B8/B9 is only used locally here, to determine
+; if was hit. This change bakes B1:01 into that flag.
 
 org $C24C5B
 PrepCounter:     ; set parent label for full routine
+
+org $C24C68
+  STZ $B8            ; zero targets for counterattack
+  STZ $B9            ; zero targets for counterattack
+  LDA $B1            ; check for "normal" attack
+  LSR                ; carry: "non-normal" attack
+  BCS .skip          ; branch if ^
+  LDA $32E0,X        ; "hit by attack"
+  BPL .skip          ; branch if not ^
+  ASL                ; get attacker index
+  STA $EE            ; save in scratch RAM
+  CPX $EE            ; target === attacker?
+  BEQ .skip          ; branch if ^
+  TAY                ; attacker index
+  REP #$20           ; 16-bit A
+  LDA $3018,Y        ; attacker unique bit
+  STA $B8            ; save target for counterattack
+  LDA $3018,X        ; current target bit
+  TRB $33FE          ; flag to use full reactive script
+.skip
+  REP #$20           ; 16-bit A
+  LDA $3018,X        ; current target bit
+  BIT $3A56          ; "died since last reactive script"
+  SEP #$20           ; 8-bit A
+  BNE .react         ; branch if "died", so force script
+  LDA $B8            ; else, check if was attacked by normal
+  ORA $B9            ; ^
+  BEQ .next          ; no counterattack if not ^
+  LDA $32CD,X        ; entry point to counterattack queue
+  BPL .retort        ; branch if already something queued
+.react
+  LDA $3269,X        ; top byte of reactive script pointer
+  BMI .retort        ; branch if null ^
+warnpc $C24CA8
+padbyte $EA
+pad $C24CA7
+org $C24CB1
+.retort
+org $C24CBE
+.next
+
 org $C24CC2 : .no_counter
 org $C24CDD : BNE .counter ; skip blackbelt check for "damaged this turn"
 org $C24CE3 : BCC .counter ; skip blackbelt check for "damaged this turn"
@@ -3124,33 +3817,64 @@ org $C24F47
 ; #########################################################################
 ; Periodic Damage & Healing Calculation
 
-org $C25041 : NOP ; cumulative poison incrementor set to +1, not +2
+; -------------------------------------------------------------------------
+; Allow more cumulative poison damage
+
+org $C2503C
+PoisonTicks:
+  LDA $3E24,Y     ; poison incrementor
+  JSL TickLogic   ; compute next tick
+  CMP #$20        ; above max increment (31)
+  BCC .valid      ; branch if not ^
+  LDA #$1F        ; use max increment 31
+.valid
+  STA $3E24,Y     ; save new increment value
+warnpc $C2504C+1
+
+; -------------------------------------------------------------------------
 org $C2505B : JSR Tick_Calc : NOP #2 ; Re-written formulas for periodic effects
 
 ; #########################################################################
-; Scan Command
+; Scan Command ($C250DD)
+; TODO: Shift around so previous Scan command address can be restored
 
 ; -------------------------------------------------------------------------
-; Branches past HP/MP display for scan (now freespace)
+; Helpers for scan command parts
 
-org $C250F2 : BRA Scan
+org $C250DD
+LongMsgArg:
+  STA $2F35           ; save param for message
+LongMsg:
+  PHA                 ; store A
+  PHP                 ; store flags
+  SEP #$20            ; 8-bit A
+  LDA #$04            ; "Message" animation type
+  JSR $6411           ; process message animation
+  PLP                 ; restore flags
+  PLA                 ; restore A
+  RTL
+warnpc $C250F4+1
+
+org $C250F2 : BRA $44 ; TODO: Remove this unused code fragment
 
 ; -------------------------------------------------------------------------
 ; Some portion of previous routine is now overwritten as freespace
 
+; -------------------------------------------------------------------------
+; Allow fractional damage to hurt bosses a little
+
 org $C250F4
-Row_Dmg:
-  PHP             ; store flags
-  REP #$20        ; 16-bit A
-  LDA $F0         ; dmg
-  LSR             ; dmg / 2
-  LSR             ; dmg / 4
-  EOR #$FFFF      ; -(dmg / 4) - 1
-  SEC             ; set carry (to add 1)
-  ADC $F0         ; dmg - dmg/4
-  STA $F0         ; update dmg
-  PLP             ; restore flags
+Fractional:
+  LDA $3C80,Y     ; monster bits
+  BIT #$04        ; "boss" flag
+  BEQ .exit       ; exit if no boss flag
+  LDA #$80        ; "fractional dmg"
+  TRB $11A4       ; remove from spell flags
+.exit
   RTS
+warnpc $C25105+1
+padbyte $FF
+pad $C25105          ; TODO: Can remove this padding and shift code up
 
 org $C25105
 GetTargeting:
@@ -3174,21 +3898,70 @@ GetTargeting:
 ; TODO: Ops below are leftover from old code. Remove them
   STA $0002,X
   RTS
-warnpc $C25121
+warnpc $C25120+1
 
 ; -------------------------------------------------------------------------
 ; Modified by dn's "Scan Status" patch to add support for Status messages.
 ; The "Scan Weakness" code is now displaced into C4 along with the new
 ; "Scan Status" code.
+;
+; Rewritten for "Scan Restored" patch, which brings back HP/MP display and
+; condenses the routine for space savings
 
-org $C25138
-Scan:
-  JSL ScanWeakness
+org $C25120
+FullScan:
+  PHP                 ; store flags
+  LDX $B6             ; get target of original casting
+  LDA #$FF            ; null (end of script marker)
+  STA $2D72           ; set end-of-script flag
+  LDA #$02            ; "Display Battle Msg" command ID
+  STA $2D6E           ; set battle command ID
+  STZ $2F37           ; clear message parameter
+  STZ $2F3A           ; clear message parameter
+  JSL ScanHPMP
+  JSL ScanWeak
   JSL ScanStatus
+  PLP
   RTS
+warnpc $C25141+1
+padbyte $FF
+pad $C25141
+
+; -------------------------------------------------------------------------
+; Freespace used by "Stray Targeting" patch
+; If special effect 0x4E is set on attack, allow targeting both dead
+; and living allies at the same time.
+
+org $C25141
+TargetDead:       ; When we get here, A = 11A2 & #80
+  PHP             ; store C flag (used later)
+  LDX #$9C        ; load 0x4E * 2 (current X does not need saving)
+  CPX $11A9       ; compare to attack's special effect
+  BNE .end        ; if not set, finish
+  ORA #$08        ; else, add target dead flag
+.end
+  TSB $BA         ; finish setting BA bits
+  PLP             ; restore C flag
+  RTS
+
+; -------------------------------------------------------------------------
+; Helper for Petrify Heal patch
+;
+; Hitting a petrified target with the Remedy spell
+; should both remove petrify status, and do healing,
+; but a hardcoded petrify check automatically nulls
+; all healing and damage. Fix so that damage/healing
+; can be done if the petrify status will be lifted
+; by the attack.
+
+PetrifyHelp:
+  LDA $3DFC,Y        ; status-to-clear 1
+  EOR #$FF           ; status-to-not-clear 1
+  AND $3EE4,Y        ; current-status-keep 1
+  RTS
+warnpc $C25161+1
 padbyte $FF
 pad $C25161
-warnpc $C25161+1
 
 ; #########################################################################
 ; Probabilities for Umaro and Side/Pincer/Back/Normal attacks
@@ -3245,13 +4018,14 @@ DisableCommands:
   TAX                ; index to command data
   LDA $3EE4,Y        ; character status-1
   BIT #$20           ; "Imp"
-  BRA .skip_imp      ; branch if not ^ TODO: Remove unused code below this BRA
-  LDA $CFFE00,X      ; command data
-  BIT #$04           ; "Allowed while Imp"
-  BEQ .disable       ; branch if not ^
+  BEQ .skip_imp      ; branch if not ^
+  CPX #$0006         ; "Morph" command
+  BEQ .disable       ; branch if ^ (disable Morph when Imped)
+  BRA .skip_imp      ; skip unused code
+  db $19             ; previous branch to .disable sublabel TODO: remove ASAP
 .skip_imp
   TXA                ; command ID *2
-  ROR                ; restore command ID (LSR would be fine)
+  LSR                ; restore command ID (was ROR, causing CPX above to bug out)
   LDX #$0009         ; initialize command loop
 .loop
   CMP ModifyCmds,X   ; current command matches special case
@@ -3751,6 +4525,11 @@ org $C25BDE : AND #$30 ; increased chances of running TODO: No effect
 org $C25BE0 : NOP #2   ; always queue running when ready
 
 ; #########################################################################
+; Copy gauge data to animation buffers ($C25C54)
+
+org $C25C5A : JSL WaitRemaining ; compute wait and copy to unused morph ram
+
+; #########################################################################
 ; Update Running Variables and State
 ;
 ; BNW - Run Fast (Version 2)
@@ -3828,17 +4607,21 @@ SetTarget:
   STY $C0        ; save target index in scratch RAM
   JSR $220D      ; [displaced] miss determination
   RTS
-CounterMiss:
+ParryCounter:
   LDY $C0        ; get target index
   LDA $3018,Y    ; target bitmask
   BIT $3A5A      ; "Miss" tile flag set
   BEQ .done      ; branch if not ^
   JSR $35E3      ; else, initialize counter variables
 .done
-  REP #$20       ; [displaced] 16-bit A
+  RTS
+
+; TODO: Remove this leftover code fragment
+  db $20
   LDY #$12       ; [displaced] prep entity loop
   RTS
 
+; -------------------------------------------------------------------------
 org $C25E49 : AfterMorph:
 
 org $C25E4C
@@ -4009,6 +4792,27 @@ ImpNerf:
   ROR $11B0         ; half damage (low byte)
 .skip
   JMP $14AD         ; continue to hitting back check
+  db $FF,$FF        ; TODO: remove this padding
+
+; --------------------------------------------------------------------------
+; Helpers for Petrify/Morph immunities
+
+Vulnerables2:
+  AND $3330,Y     ; mask fixed status vulnerables (3-4)
+  STA $E8         ; store vulnerable status-to-set
+  LDA #$9BFF      ; Dance,Regen,Slow,Haste,Stop,Shell,Safe,Reflect
+                  ; Rage,Frozen,Morph,Spell,Float
+FinishPet:
+  PHA             ; store petrify immunities
+  LDA $3EE3,Y     ; status bytes 1-2
+  ASL #2          ; Carry: "Petrify"
+  PLA             ; restore petrify immunities
+  BCC .done       ; branch if no "Petrify"
+  TRB $E8         ; remove vulnerables
+.done
+  LDA $E8         ; real vulnerables
+  RTS
+warnpc $C261D6+1
 
 ; --------------------------------------------------------------------------
 
@@ -4118,8 +4922,7 @@ org $C263B6 : .simult ; address of simultaneous dmg messages
 org $C26469
 PlayerPhys:
   PHA             ; store A (BatPwr)
-  SEP #$20        ; 8-bit A
-  LDA $B5         ; command ID
+  JSL GetPwrFork  ; get real battle power, and command in A
   CMP #$07        ; "Bushido"
   BNE .two_hand   ; branch if not ^
 .bushido          ; else, include user's weapon(s) and skill modifier
@@ -4131,8 +4934,8 @@ PlayerPhys:
   XBA             ; hibyte of sum
   ADC #$00        ; add carry if overflow
   XBA             ; 16-bit BatPwr sum
-  REP #$20        ; 16-bit A
-  LSR #3          ; BatPwr / 8
+  JSL GetBushPwr  ; get modified bushido power
+  LSR             ; BatPwr / 8
   JSR $47B7       ; (BP / 8) * $E8 (for Bushido, is multiplier)
   LDA $E8         ; modified BatPwr
   STA $01,S       ; replace BatPwr on stack
@@ -4285,6 +5088,54 @@ ReturnReserve:      ; 10 bytes
   RTS
 
 ; -------------------------------------------------------------------------
+; Setting "Death" or "Petrify" status will strip
+; characters of other statuses. Typically, this
+; happens mid-battle, so any permanent equipment
+; statuses will be preserved due to the character
+; having gained "immunity" to them. However, at
+; battle start, characters don't yet have immunity,
+; so if a character is dead to start, setting that
+; status will strip them of their equipment statuses
+; before immunity gets set.
+;
+; This patch inserts a two-phase approach to setting
+; initial character statuses. First, all statuses
+; except "Death" and "Petrify" are set. Then, the
+; status immunity routine is run. Finally, the status
+; routine is called once again, with any "Death" or
+; "Petrify" statuses marked to be set.
+
+org $C2656A
+DoubleStatusSet:         ; 38 bytes
+  LDY #$06               ; prepare character loop
+.loop_1
+  LDA $3DD4,Y            ; status-to-set 1
+  PHA                    ; store it
+  AND #$3F               ; omit Death/Zombie
+  STA $3DD4,Y            ; update status-to-set 1 
+  DEY #2                 ; point to next entity
+  BPL .loop_1            ; loop through all 10
+  JSR $4391              ; update statuses (phase 1)
+  JSR $26C9              ; set status immunities
+  LDY #$00               ; prepare reverse loop
+.loop_2
+  PLA                    ; get initial status-to-set 1
+  AND #$C0               ; isolate Death/Zombie
+  STA $3DD4,Y            ; update status-to-set 1
+  INY #2                 ; point to next entity
+  CPY #$08               ; past character range
+  BCC .loop_2            ; process all 4 characters
+  JMP $4391              ; update statuses (phase 2)
+warnpc $C26590+1
+
+org $C26590
+ClearImp:
+  LDA #$0020      ; Imp
+  JSR $4598       ; mark to be cleared
+  JMP $4678       ; continue with normal morph handling
+warnpc $C2659D+1
+
+; -------------------------------------------------------------------------
 ; Rage on-clear status removal helper
 
 org $C2659D
@@ -4379,15 +5230,18 @@ condenseSpellLists:
   JMP $532C           ; [displaced] modify commands
 
 ; --------------------------------------------------------------------------
+; Was a North Cross helper, but was removed in later update
+; Now helper for EP Gain bug
 
 org $C2661B
-NCross2:
-  STA $A4          ; Save new target
-  PLA              ; Get original targets again
-  JSR $522A        ; Pick one at random
-  TSB $A4          ; Save new target(s)
-  SEP #$20         ; Set 8-bit A
+FixItUp:
+  BIT #$0008      ; "espers acquired" event bit
+  BEQ .exit       ; exit if not ^
+  JMP Calc_EP     ; $E8 = gained EP
+.exit
   RTS
+padbyte $FF       ; TODO: Remove this unnecessary padding
+pad $C26626
 
 ; --------------------------------------------------------------------------
 ; Ghost Ring helper
@@ -4491,12 +5345,15 @@ Zantetsuken:
   JSR $4B5A     ; random(0..256)
   CMP #$40      ; C: 75% chance
 
+; Bypass instant-death for Cleave if not "Fight" command (ie "Mug"/"Jump")
+
 Undead_Killer:
   BCS .exit     ; exit if no proc
   LDA $3AA1,Y   ; target special state flags
-  BIT #$04      ; "Immune to Instant Death"
+  AND #$04      ; "Immune to Instant Death"
+  ORA $B5       ; or any non-Fight command
   BNE .crit     ; do critical damage if ^
-  NOP #3        ; TODO: Remove this padding
+  NOP           ; TODO: Remove this padding
   JMP $38A6     ; execute cleave-kill.
 .crit
   LDA $BC       ; attack incremented damage (Critical Hit?) [TODO: confirm]
@@ -4584,18 +5441,19 @@ BlindHelp:
   RTS
 
 ; -------------------------------------------------------------------------
-; X-Magic Counter Helpers
+; X-Magic Counter Helper (replaced to fix semi-broken original patch)
 
 org $C26744
-XMagHelp:
-  LDA $04,S         ; attacker index
-  TAX               ; index it
-  LDA $32CC,X       ; entrypoint to linked list queue
-  INC               ; null check (always null unless X-Magic)
-  BNE XMagCntr_exit ; branch if not null ^ [TODO: use local RTS]
-  JMP PrepCounter   ; else, prep counterattacks
+MayReset:
+  LDA #$FF         ; "null"
+  LDX $B0          ; loop flags
+  BMI .exit        ; exit if in middle of X-Magic
+  STA $33FC        ; clear bytes tracking "reaction script ran"
+  STA $33FD        ; clear bytes tracking "reaction script ran"
+.exit
   RTS
 
+; TODO: Remove this routine, as it is unused
 XMagCntr:
   LDA $04,S         ; attacker index
   TAY               ; index it
@@ -4748,25 +5606,26 @@ org $C2806F : db $22       ; this is converted to two separate RNG calls (7E/6F8
 ; Freespace
 
 ; -------------------------------------------------------------------------
-; Morph damage taken helper
+; Morph damage taken helper. Updated by Golem Restrictions patch
 
 org $C2A65A
-MorphDmg:
-  CMP #$60          ; target stamina > 96
-  BCC .store        ; branch if not ^
-  LDA #$60          ; else use max 96
-.store
-  STA $E8           ; store stamina as multiplier
-  REP #$20          ; 16-bit A
-  ASL $F0           ; dmg * 2
-  LDA $F0           ; doubled damage
-  JSR $47B7         ; dmg * 2 * stamina / 256
-  PHA               ; store result ^
-  LDA $F0           ; dmg * 2
-  SBC $01,S         ; dmg * 2 - result from above.
-  STA $F0           ; update damage
-  PLA               ; clean up stack
+HandleMorph:
+  LDA $3EF9,Y      ; status byte 4
+  BIT #$08         ; "Morphed"
+  BEQ .exit        ; branch if not ^
+  LDA $3B40,Y      ; Stamina
+  CMP #$60         ; > 96
+  BCC .valid       ; branch if not ^
+  LDA #$60         ; else, use max 96
+.valid
+  ASL $F0          ; double damage
+  ROL $F1          ; double damage
+  JSR InvertMulti  ; invert stamina and multiply
+.exit
   RTS
+warnpc $C2A674+1
+
+  PLA : RTS         ; TODO: Remove this unused code fragment
 
 ; #########################################################################
 ; Esper Level and Experience Messages
@@ -4876,9 +5735,9 @@ Show_EL:
 
 Show_EP:
   JSR $5FD4         ; [displaced]
-  LDA $F1           ; espers have been acquired
-  BEQ .exit         ; exit if not ^
-  JSR Calc_EP       ; $E8 = gained EP
+  STZ $E8           ; clear out scratch RAM
+  LDA $F1           ; espers have been acquired byte
+  JSR FixItUp       ; calculate EP if ^
   LDA $E8           ; ^
   BEQ .exit         ; exit if none ^
   LDA $2F35         ; XP gained
@@ -4928,70 +5787,71 @@ GauRageStatuses2: ; TODO: Remove -- no longer used
 ; stamina in calculating the variance range
 ;
 ; Damage = (Damage * [(225 - 3/4 VigStam) .. (255 - VigStam)] / 225) + 1
+;
+; Routine shifted and reorganized by Golem Restrictions patch
 
 org $C2A770
-NewVariance:
-  LDA $11A4      ; attack flags-3
-  LSR            ; C: "Healing"
-  BCS .old_var   ; branch if ^
-  CPY #$08       ; target is monster
-  BCS .old_var   ; branch if ^
-  PHP            ; store flags
-  TDC            ; zero A/B
-  LDA $11A2      ; attack flags-1
-  LSR            ; C: "Physical"
-  LDA $3B40,Y    ; target's Stamina
-  BCC .variance  ; use Stamina if not "Physical"
-  LDA $3B2C,Y    ; else, load target's Vigor (x2)
-  LSR            ; / 2 to get real Vigor value
-.variance
-  PHA            ; store stat (stam or vig/2) on stack
-  LSR #2         ; stat / 4
-  STA $E8        ; store in scratch ^
-  LDA #$1E       ; A = 30
-  SEC            ; set carry
-  SBC $E8        ; A = 30 - stat/4 (this is the variance range)
-                 ; (hi = 255-stat, lo=225-.75stat. hi - lo = 30 - .25stat)
-  BCC .store     ; if negative, immediately store this value as E8
-  INC
-  JSR $4B65      ; A = random(0...max_variance)
+Variance:
+  LDA $11A4        ; attack flags
+  LSR              ; carry: "Healing"
+  BCS .vanilla     ; use vanilla variance for healing
+  CPY #$08         ; monster range
+  BCC .fancy       ; use vanilla variance for monsters
+.vanilla
+  JSR $4B5A        ; random(255)
+  ORA #$E0         ; random(224-255)
+  JMP MultiplyDmg  ; multiply E8 * Damage, then add 1
+.fancy
+  PHP              ; store flags
+  LDA $11A2        ; attack flags
+  LSR              ; carry: physical
+  LDA $3B40,Y      ; load stamina
+  BCC .magic       ; branch if "magical" damage
+  LDA $3B2C,Y      ; load vigor
+  LSR              ; divide by 2 (vigor is stored doubled)
+.magic
+  PHA              ; store stat (stam or vig/2) on stack
+  LSR              ; / 2
+  LSR              ; / 4
+  STA $E8          ; E8 = stat/4
+  LDA #$1E         ; A = 30
+  SEC : SBC $E8    ; A = 30 - stat/4 (this is the variance range)
+  BCC .store       ; if negative, immediately store this value as E8
+  INC              ; exclusive range
+  JSR $4B65        ; rand(0...max_variance)
 .store
-  STA $E8        ; E8 = random variance OR negative diff between hi and lo
-  PLA            ; A = stat
-  EOR #$FF       ; A = 255 - stat
-  SEC
-  SBC $E8        ; A = (255 - stat) - random_variance
-  STA $E8        ; if E8 is negative, A will equal the low bound
+  STA $E8          ; E8 = random variance OR negative diff between hi and lo
+  PLA              ; restore stat
+  EOR #$FF         ; 255 - stat
+  SEC : SBC $E8    ; A = (255 - stat) - random_variance
+  STA $E8          ; if E8 is negative, A will equal the low bound           
 
-padbyte $EA      ; TODO: Remove this padding
-pad $C2A7A9
-
-.multiply 
-  REP #$20       ; 16-bit A
-  LDA $F0        ; maximum damage
-  JSR $47B7      ; max damage * random variance
-  LDA $E8        ; lower 16-bits of product
-  PHX            ; store X
-  LDX #$E1       ; divisor (225)
-  JSR $4792      ; divide lower 16-bits by ^
-  STA $F0        ; save tentative final dmg
-  CLC            ; clear carry
-  LDX $EA        ; check for overflow from multiplication
-  BEQ .exit      ; exit if none ^
+  REP #$20         ; 16-bit A
+  LDA $F0          ; damage
+  JSR $47B7        ; E8 * damage
+  LDA $E8          ; product low bytes
+  PHX              ; store X
+  LDX #$E1         ; 225
+  JSR $4792        ; E8 * damage / 225
+  STA $F0          ; update damage
+  CLC              ; clear carry
+  LDX $EA          ; product high byte
+  BEQ .finish      ; branch if no overflow
 .loop
-  LDA #$0123     ; overflow increment value: 291 (65536 / 225)
-  ADC $F0        ; add to damage
-  STA $F0        ; update damage
-  DEX            ; decrement overflow iterator
-  BNE .loop      ; loop till all overflow handled
-.exit
-  INC $F0        ; damage + 1
-  PLX            ; restore X
-  PLP            ; restore flags
-  JMP AfterVar   ; jump back to damage mod routine
-.old_var
-  JSR $4B5A      ; random(256)
-  JMP OldVariance; jump back to damage mod routine
+  LDA #$0123       ; 0x10000 / 225 = 0x123
+  ADC $F0          ; add to existing damage
+  STA $F0          ; update damage
+  DEX              ; decrement overflow
+  BNE .loop        ; loop till all overflow gone
+.finish
+  INC $F0          ; dmg + 1
+  PLX              ; restore X
+  PLP              ; restore flags
+  RTS
+warnpc $C2A7D6+1
+
+; TODO: Remove this unused code fragment ASAP
+  db $0C : JSR $4B5A : JMP $0CB3 ; $BA
 
 ; -------------------------------------------------------------------------
 org $C2A7DD
@@ -5322,6 +6182,86 @@ SkipDogBlock:
   JMP $4B53           ; carry: 50% chance of dog block
 
 ; -------------------------------------------------------------------------
+; When battle initializes, any enemy that is hidden
+; or otherwise inactive will have its immunities set,
+; but not its statuses. When the enemy enters the
+; battle later (via scripting), it will be immune
+; to any statuses that are meant to be innate (eg.
+; Float, Safe, Shell).
+;
+; This patch adds special handling to apply any
+; pending "status-to-set" when an entity enters
+; the battlefield in this way, without respecting
+; immunities. These bytes will have been set at
+; battle initialization, but never processed until
+; the enemy enters battle. The downside is that
+; the statuses will not have their regular on-set
+; routines called, so the following statuses are
+; specifically omitted from being set in this way:
+;
+; Zombie, Muddle, Clear, Imp, Petrify, Death, Sleep
+; Condemned, Morph, Stop, Reflect, Freeze
+
+org $C2FB60
+EnterBattleState:        ; 29 bytes
+  PHP                    ; store flags (8-bit)
+  REP #$20               ; 16-bit A
+  LDA $3DE8,X            ; status-to-set 3-4
+  AND #$F56F             ; remove problematic statuses
+  ORA $3EF8,X            ; combine with status 3-4
+  STA $3EF8,X            ; update status 3-4
+  LDA $3DD4,X            ; status-to-set 1-2
+  AND #$5E0D             ; remove problematic statuses
+  ORA $3EE4,X            ; combine with status 1-2
+  STA $3EE4,X            ; update status 1-2
+  PLP                    ; restore flags (8-bit)
+  RTS                    ; exit with status 1 in A
+
+; -------------------------------------------------------------------------
+; Helpers for preventing Mimicry loops
+;
+; Gogo should not be able to Mimic himself, creating endless
+; chains of repeat attacks. While typically not a useful
+; strategy, these repeat mimics can be abused when combined
+; with Palidor, who can be summoned repeatedly without delay.
+
+TrackMimic:
+  STA !mimic      ; set "mimic" flag
+  JMP $01D9       ; continue to mimic handling
+ResetMimic:
+  LDA !mimic      ; was this turn a mimic 
+  BNE .reset      ; branch if so
+  LDA $3A7C       ; just-executed command
+  RTS
+.reset
+  STZ !mimic      ; clear mimic variable
+  STZ $3F20       ; zero last command
+  STZ $3F22       ; zero last targets
+  LDA #$12        ; default command placeholder
+  STA $3F24       ; remove "gembox" command
+  STA $3F28       ; remove "jump" command
+  ASL             ; ensure A is > #$1E
+  RTS
+warnpc $C2FB9F+1
+
+; -------------------------------------------------------------------------
+; Helper for Petrify immunity changes
+
+org $C2FBA0
+Vulnerables1:
+  LDA $331C,Y     ; fixed status vulnerables (1-2)
+  STA $E8         ; store them
+  LDA $3EF8,Y     ; status bytes 3-4
+  BIT #$0800      ; "Morph"
+  BEQ .check_pet  ; branch if no ^
+  LDA #$0020      ; "Imp"
+  TRB $E8         ; remove vulnerable ^
+.check_pet
+  LDA #$FEB7      ; Dark,Poison,Clear,Wounded,Image,Mute
+  JMP FinishPet   ; Berserk,Muddle,Sap,Sleep,Imp,Death,Zombie
+warnpc $C2FBB8+1
+
+; -------------------------------------------------------------------------
 ; Poison status on-clear helper to reset damage incrementor
 
 org $C2FBC6
@@ -5438,13 +6378,4 @@ GroundDmg:
   STA $B8         ; set filtered targets
   TYX             ; attacker index
   JMP $57C2       ; update targets [?]
-
-; -------------------------------------------------------------------------
-
-org $C2FCCD
-LongByteMod:
-  JSR $5217      ; X: byte index, A: bitmask for bit in byte
-  RTL
-warnpc $C2FCD1+1
-
 

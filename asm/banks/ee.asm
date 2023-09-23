@@ -338,3 +338,38 @@ RightCap:
   LDA #$FC         ; Draw tail end of ATB gauge
 .drawrightcap
   JML $C166F3      ; Draw tile A
+
+; -------------------------------------------------------------------------
+; Wait Gauge helpers
+
+org $EEB1C4
+
+HelpCaps:
+  BMI .full        ; branch if ATB is full
+  PEA $FAF9        ; empty endcaps
+  BRA .done
+.full
+  PEA $FCFB        ; special endcaps
+.done
+  PHA              ; save gauge value
+  TDC              ; clear B
+  PLA              ; restore gauge value
+  AND #$7C         ; masked
+  TAX              ; index it
+  PLA              ; get first cap value 
+  JML FinGauge     ; finish up
+NormDraw:
+  PHA
+  LDA $4E
+  XBA
+  LDA #$35
+  STA $4E
+  PLA
+  JSL LongDraw
+  XBA
+  STA $4E
+  TDC
+  RTL
+warnpc $EEB200+1
+
+
