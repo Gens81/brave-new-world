@@ -12,7 +12,7 @@ org $C207C8
 ClearZinger:
 
 ; Most of this is copied verbatim from BNW repo
-; This claims 8 of the 9 unused bytes in the routine
+; This claims all 9 unused bytes in the routine
 ; to add a helper for clearing Zinger when Near Fatal
 
 org $C24517
@@ -48,6 +48,7 @@ OvercastFix:
   PHP                ; preserve flags
   PHX                ; preserve X
   JML ZingerHelper   ; clear zinger/charm/love token
+  PLA                ; restore low byte of A
   PLX                ; restore X
   PLP                ; restore flags
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -77,12 +78,12 @@ OvercastFix:
   PLA                ; restore status-to-set-1/2
   STA $FC            ; save ^
   RTS
-  RTS                ; 1 unused byte (was RTS previously, preserving out of caution)
 
 org !freeZinger
 ZingerHelper:
   TSB $FC            ; to-set "Near Fatal"
   TYX                ; store target in X
   SEP #$20           ; 8-bit A
+  PHA                ; stash low byte of A
   PEA $4555          ; set return address for ClearZinger
   JML ClearZinger    ; clear Zinger, Love Token, Charm variables
