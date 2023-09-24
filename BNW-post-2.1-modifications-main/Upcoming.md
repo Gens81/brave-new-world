@@ -57,7 +57,7 @@ bugfixes:
 - Imperial camp dialogue fix (sabin aware of doma without speaking to Shadow)
 
 ### BIB ideas:
-- Rods don't consume MP on non critical attacks
+- Rods consume MP only when procs spells
 - Physical blitzes can crit
 - Remove 1 fight in IAF and/or Mine Cart
 - Magitek rided by humans are stealable
