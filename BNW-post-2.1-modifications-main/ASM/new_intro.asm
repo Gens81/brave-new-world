@@ -10,7 +10,7 @@ hirom
 ;(original code) start of reset vector, often $00FF00 if it's HiROM, or commonly $008000 for LoROM
 !OriginalCodeOffset = $C0002C
 !NewCodeOffset = $F00000   ;the compiled code will take up less than 0x300 (768) bytes
-!ReturnCodeOffset = $C00032
+!ReturnCodeOffset = $C00031
 
 ;change this to where the palette data should be stored (takes up about 0x200 bytes)
 org $F00300
