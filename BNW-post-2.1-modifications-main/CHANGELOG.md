@@ -92,6 +92,8 @@
 - Fixed ST Cure removing poison from chars wearing a poison denying relic (CDude)
 - Figaro Guards bugfix (DrakeyC)
 - No lag in the shop menu (fix by abyssonym ported to Bnw by Ryo_Hazuki) 
-- Decoupled mp color digits to fix reflect palette corruptions and Crusader bug (fix by Silent Enigma ported to bnw by Ryo_Hazuki) 
+- Decoupled mp color digits to fix reflect palette corruptions and Crusader bug (fix by Silent Enigma ported to bnw by Ryo_Hazuki)
+- Fixed the display glitch after 255 "named" attack are shown in battle (Fëanor) 
+- Ghost ring fix : preserves the Undead status when raging a non-undead monster (Fëanor)
 
 ## Previous Versions are not tracked by this Doc
