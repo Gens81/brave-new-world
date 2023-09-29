@@ -5,6 +5,7 @@ features/tweaks:
 - possession, charm and love token go away if near fatal (Sir Newton Fig)
 - colosseum fights don't auto-arrange inventory anymore (Ryo_Hazuki)
 - pressing/holding A will advance dialog text (Fëanor)
+
 bugfixes:
 - clears invisible Red-D (Fëanor)
 - fix sprite priority bug after covering (Bropedio)
