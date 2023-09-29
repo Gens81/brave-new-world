@@ -36,6 +36,10 @@ bugfixes:
 	Terra: Where's Banon?
 	Edgar: <head down>He... didn't make it out.
 	Sabin: At least we get to keep playing though, amirite?
+- Unhide Cid sprite to give the option to the player to trigger the banquet without waiting
+  	Cid: Are you done talking to the soldiers? 
+        >No
+        >Yes
 - Restore Shadow cutscene during Soul train fight
 - Add "CT - Mistery from the past" track to Ultima's sealed door
 
