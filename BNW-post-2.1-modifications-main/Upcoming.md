@@ -10,6 +10,8 @@ bugfixes:
 - fix sprite priority bug after covering (Bropedio)
 - fixed final lineup (you can select 4 chars max again)
 - fixed party map coord after gogo's tutorial
+- fixed an harmless bug in new_intro.asm
+- the "X dragons left" captions now render correctly
 
 ### 2.2 roadmap (ordered by priority):
 
