@@ -5,6 +5,7 @@ features/tweaks:
 - possession, charm and love token go away if near fatal (Sir Newton Fig)
 - colosseum fights don't auto-arrange inventory anymore (Ryo_Hazuki)
 - pressing/holding A will advance dialog text (Fëanor)
+- you may start the banquet speaking to emperor's servants (Fëanor)
 
 bugfixes:
 - clears invisible Red-D (Fëanor)
@@ -19,8 +20,9 @@ bugfixes:
 - Rich status menu showing inherent statuses, ailment immunities and elemental properties
 - Press A on a Rage to show details: Elemental weaknesses/resistance, Statuses immunities/innate
 - Compress title screen graphic and/or import Snaphat compression algorythm
-- Phoenix glitch fix
 - Double Meteor fix in Kefka fight
+- Phoenix glitch fix
+- List equips in the equip screen by descending price (unique items - marked by 1 GP selling value - are always on top)
 - Import Alphabetical Lore by Silent Enigma: useless for english version but useful for translations or future lores edits
 - Disintegration animation for enemies that get petrified
 - Add bottom shadow to menu letters g,p,q,y
@@ -34,12 +36,8 @@ bugfixes:
 	Sabin: "...what do you see in that guy?"
 - Banon's death reference at the end of Thamasa events 
 	Terra: Where's Banon?
-	Edgar: <head down>He... didn't make it out.
+	Edgar: (head down) He... didn't make it out.
 	Sabin: At least we get to keep playing though, amirite?
-- Unhide Cid sprite to give the option to the player to trigger the banquet without waiting
-  	Cid: Are you done talking to the soldiers? 
-        >No
-        >Yes
 - Restore Shadow cutscene during Soul train fight
 - Add "CT - Mistery from the past" track to Ultima's sealed door
 
