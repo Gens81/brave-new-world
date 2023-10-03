@@ -201,7 +201,7 @@ Need help?
 <C> No
 
 [caption #54]
-You'll fight in 3 groups. Press ± to switch between them.<EOP>
+You'll fight in 3 groups. Press   to switch between them.<EOP>
 Your objective is to defeat the commander before his men reach <A0>.<EOP>
 And don't steal my spear - I need it to defend myself. <D>Go buy your own, kupo.
 
@@ -2144,7 +2144,7 @@ We thought that was stupid, so now they don't.
 
 [caption #605]
 When outfitting your party, remember that most equipment does more now than just boost raw defense or battle power.<EOP>
-Hold ± when shopping to view the full stats of any item prior to purchase.<EOP>
+Hold   when shopping to view the full stats of any item prior to purchase.<EOP>
 Equipment can be also reviewed in the item menu: press $ twice for info and use @/& to switch views.<EOP>
 Note that while stat boosts from equipment will stack, other properties (including HP/MP boosts) will not.
 
@@ -2167,17 +2167,17 @@ Larger foes and bosses may counter ANY kind of damage, so be careful when attack
 Finally, hitting an elemental weakness can sometimes have additional effects on enemies beyond the extra damage dealt.
 
 [caption #609]
-Hold down £ and { to run from battles that get out of hand.<EOP>
+Hold down   and { to run from battles that get out of hand.<EOP>
 Faster characters like <A1> are better at getting away quickly than others are.<EOP>
 Also, you can view your party's maximum HP values in battle by holding }`.
 
 [caption #610]
-Press ^ or ± in battle to [hold] an active character's turn and cycle to the next available ally.<EOP>
+Press ^ or   in battle to [hold] an active character's turn and cycle to the next available ally.<EOP>
 When a command is input, there will be a delay until it executes indicated by the ATB gauge counting down.<EOP>
 This feature can be disabled in the config menu if you find it distracting.
 
 [caption #611]
-Press £ or { to select multiple targets for any spell with no targeting restrictions, such as
+Press   or { to select multiple targets for any spell with no targeting restrictions, such as
 <A0>'s Fire and Cure spells.<EOP>
 Other commands with [free] targeting are [Throw] (with stars) and [GP Toss].<EOP>
 The damage (or healing) dealt by anything split in this manner will be reduced by 50%.<EOP>
@@ -3163,7 +3163,7 @@ Need some info?
 <C> No
 
 [caption #877]
-You'll fight in 2 groups. Press ± to switch between them.<EOP>
+You'll fight in 2 groups. Press   to switch between them.<EOP>
 Defeat Kefka before his men reach Banon, or it's game over!
 
 [caption #878]
@@ -3347,7 +3347,7 @@ Wanna know how to ride a chocobo?
 | = steer
 $ = move forward
 \ = dismount
-£/{ = do a barrel roll
+ /{ = do a barrel roll
 
 [caption #934]
 Chocobo ride, 100 GP!
@@ -4703,7 +4703,7 @@ Would you like to know more?
 <C> No
 
 [caption #1317]
-<A9>: Press #+ to toggle the map. Hold ± and use the | to move in all directions.<EOP>
+<A9>: Press #+ to toggle the map. Hold   and use the | to move in all directions.<EOP>
 <A9>: Crash this thing and so help me I will fuck you with a rake.
 
 [caption #1318]
@@ -5327,35 +5327,35 @@ Maduin: Madonna!
 
 [caption #1497]
 
-       7 dragons left<E$08><OP$12> 
+       7 dragons left <OP$12><E$08>
 
 [caption #1498]
 
-       6 dragons left<E$08><OP$12> 
+       6 dragons left <OP$12><E$08>
 
 [caption #1499]
 
-       5 dragons left<E$08><OP$12> 
+       5 dragons left <OP$12><E$08>
 
 [caption #1500]
 
-       4 dragons left<E$08><OP$12> 
+       4 dragons left <OP$12><E$08>
 
 [caption #1501]
 
-       3 dragons left<E$08><OP$12> 
+       3 dragons left <OP$12><E$08>
 
 [caption #1502]
 
-       2 dragons left<E$08><OP$12> 
+       2 dragons left <OP$12><E$08>
 
 [caption #1503]
 
-       1 dragon left<E$08><OP$12> 
+       1 dragon left <OP$12><E$08>
 
 [caption #1504]
 
-       No dragons left_<E$08><OP$12> 
+       No dragons left_ <OP$12><E$08>
 
 [caption #1505]
 
@@ -6214,7 +6214,9 @@ Unequip anyone?
 <C> No
 
 [caption #1756]
-
+Are you done talking to the soldiers? 
+<C>No
+<C>Yes
 
 [caption #1757]
 Moogle: Thankupo!
@@ -6399,7 +6401,8 @@ Gestahl: After all that the Empire has put them through, we likely won't reach a
 Gestahl: That is why_ <D>I need <A0>'s help.
 
 [caption #1808]
-Cid: If anyone can bridge the gap between esper and human, it's <A0>.
+Cid: If anyone can bridge the gap between esper and human, it's
+<A0>.
 
 [caption #1809]
 Gestahl: There is a freighter moored at the port in Albrook ready to leave for Crescent Island.<EOP>
@@ -8579,7 +8582,7 @@ Bob: If you'd like to try, be my guest. He's loud, obnoxious, and he smells like
 We fight for rare items and equipment here. First, you're provided with a list of prizes for all the items you have.<EOP>
 After you choose an item to trade, your opponent will be shown. Choose someone from your party to fight them.<EOP>
 An automatic battle will then take place. Win, and you get the prize. Lose, and you get your item back instead.<EOP>
-There's no risk, so don't reset the game if you lose.
+Yellow bets are reversible. There's no risk, so don't reset the game if you lose.
 
 [caption #2428]
 The Colosseum only accepts rare items for betting. If it's not priceless, don't bother.
@@ -9293,7 +9296,7 @@ Many people have since gone there in search of loot.<EOP>
 Some like to call it [treasure hunting], but I just call it common thievery.
 
 [caption #2614]
-Press ± to switch parties.
+Press   to switch parties.
 
 [caption #2615]
 Don't bother heading in_ <D>there's nothing left.
@@ -10782,11 +10785,11 @@ Kefka: I, Kefka, will knock you all down!
 
 [caption #3036]
 
-          _is ********. <E$08><OP$12>
+          _is xxxxxxxx. <E$08><OP$12>
 
 [caption #3037]
 
-     Got it? It's ********. <E$08><OP$12>
+     Got it? It's xxxxxxxx. <E$08><OP$12>
 
 [caption #3038]
 <A6>: Ugh_ <E$08><OP$12>
