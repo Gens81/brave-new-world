@@ -2,10 +2,12 @@
 
 ### b20 (not yet released)
 features/tweaks:
+- rich status menu showing ailment immunities and inherent statuses (Ryo_Hazuki)
 - possession, charm and love token go away if near fatal (Sir Newton Fig)
 - colosseum fights don't auto-arrange inventory anymore (Ryo_Hazuki)
 - pressing/holding A will advance dialog text (Fëanor)
-- you may start the banquet speaking to emperor's servants (Fëanor)
+- added an option to trigger the banquet scene (Fëanor)
+- changed mastered espers icon to a star (Gens)
 
 bugfixes:
 - clears invisible Red-D (Fëanor)
@@ -17,7 +19,7 @@ bugfixes:
 
 ### 2.2 roadmap (ordered by priority):
 
-- Rich status menu showing inherent statuses, ailment immunities and elemental properties
+- Add char elemental properties to the status menu
 - Press A on a Rage to show details: Elemental weaknesses/resistance, Statuses immunities/innate
 - Compress title screen graphic and/or import Snaphat compression algorythm
 - Double Meteor fix in Kefka fight
@@ -25,7 +27,6 @@ bugfixes:
 - List equips in the equip screen by descending price (unique items - marked by 1 GP selling value - are always on top)
 - Import Alphabetical Lore by Silent Enigma: useless for english version but useful for translations or future lores edits
 - Disintegration animation for enemies that get petrified
-- Add bottom shadow to menu letters g,p,q,y
 
 ### Events
 - When Lockes leaves the party in Returners Hideout
@@ -57,9 +58,11 @@ bugfixes:
 	If damaging/healing, selects near fatal target
 
 ### Bugfixes/features temporarily discarded:
+- Stuck in a pose (walking pose in events like npc unequip)
 - Bird bars (setzer position after bar-bar-bar palidor)
 - Banon riding chocobo pose 
 - Imperial camp dialogue fix (sabin aware of doma without speaking to Shadow)
+- Bottom shadow for menu letters q,p,g,y,j
 
 ### BIB ideas:
 - Rods consume MP only when procs spells
