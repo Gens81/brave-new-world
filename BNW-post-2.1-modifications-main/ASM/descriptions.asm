@@ -897,7 +897,7 @@ Terrato: db "Earth Rage:|Earth damage - all foes",$00
 Shoat: db "Hurricane:|Sets [Petrify] - all foes",$00
 Maduin: db "Chaos Wing: Wind damage - all foes|Ignores def.",$00
 Bismark: db "Sea Song:|Water damage - all foes",$00
-Stray: db "Caith Sith: Stamina-based cure - party|Sets [Regen]",$00
+Stray: db "Cait Sith: Stamina-based cure - party|Sets [Regen]",$00
 Palidor: db "Air Raid:|Party attacks with [Jump]",$00
 Tritoch: db "Trisection:|Fire/Ice/Bolt damage - all foes",$00
 Odin: db "Atom Edge: Stamina-based - all foes|Non-elemental dmg; ignores def.",$00
