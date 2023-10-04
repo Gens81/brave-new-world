@@ -1,6 +1,6 @@
 hirom
 
-!freeZinger = $C4B6EE
+!freeZinger = $C4B6D9
 
 org $C2FBA0
 Vulnerables1:
