@@ -72,5 +72,5 @@ bugfixes:
 - Remove Siren from BAR-BAR-BAR pool
 
 ### Long-term goals (3.0?):
-Colosseum overhaul
-Multiparty FC
+- Colosseum overhaul
+- Multiparty FC
