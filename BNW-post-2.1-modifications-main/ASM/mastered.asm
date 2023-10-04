@@ -16,7 +16,7 @@ hirom
 ;;|----------------------------------------------|
 
 ;constant STAR_ENABLED(0)		;; value of 1 to add star icon, other values disable insertion
-ICON = $CF				;; star icon value (can be changed to another icon)
+ICON = $D0				;; star icon value (can be changed to another icon)
 
 ;;|----------------------------------------------|
 ;;| functions                                    |
