@@ -29,6 +29,50 @@ org $CC204B
     db $FD,$FD                  ; clear redundant hide command
 warnpc $CC2053
 
+; skip to banquet option (Fëanor)
+
+!free = $CB5790
+!offset = $CA0000
+
+; update event script of left door
+org $CC85E3
+    db $C0,$27,$01              ; always jump to target
+    dl LeftDoor-!offset         ; ^ continued
+padbyte $FE : pad $CC85EB
+
+; update event script of right door
+org $CC860D
+    db $C0,$27,$01              ; always jump to target
+    dl RightDoor-!offset        ; ^ continued
+padbyte $FE : pad $CC8615
+
+org $CC8A96 : Banquet:          ; entry point when timer expires
+
+; new event code that gives the player the option to skip directly to the
+; banquet during the "talk to the soldiers" segment
+org !free
+LeftDoor:
+    db $C1,$3C,$81,$F1,$81,$B3  ; [displaced] if $13C==On || $1F1==On return else
+    db $5E,$00                  ; [displaced] ^ continue
+    db $C0,$7C,$00,$EB,$85,$02  ; if $07C==Off jump to $CC85EB else continue
+    db $C0,$27,$01              ; always jump to target
+    dl Choice-!offset           ; ^ continued
+RightDoor:
+    db $C1,$3C,$81,$F1,$81,$B3  ; [displaced] if $13C==On || $1F1==On return else
+    db $5E,$00                  ; [displaced] ^ continue
+    db $C0,$7C,$00,$15,$86,$02  ; if $07C==Off jump to $CC8615 else continue
+    db $C0,$27,$01              ; always jump to target
+    dl Choice-!offset           ; ^ continued
+Choice:
+    db $4B,$DD,$06              ; display caption $06DD
+    db $B6                      ; jump based on choice
+    dl StepBack-!offset         ; ^ continued
+    dl Banquet-!offset          ; ^ continued
+    db $FE                      ; return
+StepBack:
+    db $31,$82,$82,$FF          ; action queue for player character
+    db $FE                      ; return
+
 
 ;;; Sealed by... song data (overwritten song ends at $C98D84, added twelve 00 bytes)	
 ;;org $C98CE8
