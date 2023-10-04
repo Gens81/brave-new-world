@@ -745,7 +745,7 @@ org $C9fcf0
 change_palette:
     cmp #$ED        ; Cmp if icon
     BCS no_change   ; greater or equal?
-    cmp #$CF
+    cmp #$D0
     BEQ change
     cmp #$D7
     BCC no_change
@@ -1115,4 +1115,3 @@ org $C3622A
 ; Set a section of Status menu to mask wrapping Gogo portrait
 org $C35F50  
 	LDX #$610A      ; Tilemap ptr
-	
