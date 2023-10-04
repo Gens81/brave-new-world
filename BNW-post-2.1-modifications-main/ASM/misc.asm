@@ -542,6 +542,11 @@ warnpc !warn
 org $C1C225 : BEQ $05
 org $C1C22A : NOP #2
 
+;pressing/holding A will advance dialog text (Fëanor)
+
+org $C0854F : LDA #$01
+org $C08579 : LDA #$01
+
 ;Brave New World data
 org $C33BB8
 	db $d1,$78,"Brave New World 2.2 b20",$00
