@@ -917,6 +917,8 @@ Fenrir: db "Moonshine:|Sets [Image] - party",$00
 Starlet: db "Group Hug: Cures HP to max - party|Lifts all bad statuses",$00
 Phoenix: db "Rebirth: Revives fallen allies - party|(HP = max)",$00
 
+warnpc $CB5790
+
 ;----------------------------------------------------
 ;Equip bonus descriptions
 ;----------------------------------------------------
