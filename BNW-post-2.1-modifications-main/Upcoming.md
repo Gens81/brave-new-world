@@ -8,6 +8,7 @@ features/tweaks:
 - pressing/holding A will advance dialog text (Fëanor)
 - added an option to trigger the banquet scene (Fëanor)
 - changed mastered espers icon to a star (Gens)
+- Final Kefka can't "dual-cast" Meteor anymore (Fëanor)
 
 bugfixes:
 - clears invisible Red-D (Fëanor)
@@ -22,7 +23,6 @@ bugfixes:
 - Add char elemental properties to the status menu
 - Press A on a Rage to show details: Elemental weaknesses/resistance, Statuses immunities/innate
 - Compress title screen graphic and/or import Snaphat compression algorythm
-- Double Meteor fix in Kefka fight
 - Phoenix glitch fix
 - List equips in the equip screen by descending price (unique items - marked by 1 GP selling value - are always on top)
 - Import Alphabetical Lore by Silent Enigma: useless for english version but useful for translations or future lores edits
