@@ -9,6 +9,7 @@
 - List equips in the equip screen by descending price (unique items - marked by 1 GP selling value - are always on top)
 - Import Alphabetical Lore by Silent Enigma: useless for english version but useful for translations or future lores edits
 - Disintegration animation for enemies that get petrified
+- Align hand cursor to text where needed
 
 ### Events
 - When Lockes leaves the party in Returners Hideout
@@ -17,6 +18,7 @@
 	Locke: "Right."
 	(Leaves in the right direction)
 	Sabin: "...what do you see in that guy?"
+- Make Cyan join the party for Wrexsoul fight
 - Banon's death reference at the end of Thamasa events 
 	Terra: Where's Banon?
 	Edgar: (head down) He... didn't make it out.
