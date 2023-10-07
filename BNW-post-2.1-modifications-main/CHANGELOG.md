@@ -1,6 +1,6 @@
 # Changelog
 
-## [2.2 b19.2](https://github.com/Gens81/brave-new-world/releases) - 2023/09/10
+## [2.2 b20](https://github.com/Gens81/brave-new-world/releases) - 2023/10/07
 
 ### Features
 
@@ -30,6 +30,10 @@
 - Item/hands battle menu will always arrange inventory to have respectively items/weapons-shields on top of the list (Ryo_Hazuki)
 - Press X to leave the menu everywhere  (Fëanor) 
 - Colosseum reversible trades highlighted in yellow (Fëanor)
+- Rich status menu showing ailment immunities and inherent statuses (Ryo_Hazuki)
+- Possession, charm and love token go away if near fatal (Sir Newton Fig)
+- Pressing/holding A will advance dialog text (Fëanor)
+- Added an option to trigger the banquet scene (Fëanor)
 
 ### Tweaks
 
@@ -71,7 +75,8 @@
 - Fixed visual bugs when changing rows in Intangir Z fight and it works mechanically as intended (Fëanor)
 - Throw menu stops at line 21st (Ryo_Hazuki)
 - Glyphs immune to font color changing (Ryo_Hazuki) 
-- Descriptions on the equip menu without pressing Y (Ryo_Hazuki) 
+- Descriptions on the equip menu without pressing Y (Ryo_Hazuki)
+- Final Kefka can't "dual-cast" Meteor anymore (Fëanor)
 
 ### Bugfixes
 
@@ -95,5 +100,7 @@
 - Decoupled mp color digits to fix reflect palette corruptions and Crusader bug (fix by Silent Enigma ported to bnw by Ryo_Hazuki)
 - Fixed the display glitch after 255 "named" attack are shown in battle (Fëanor) 
 - Ghost ring fix : preserves the Undead status when raging a non-undead monster (Fëanor)
+- clears invisible Red-D (Fëanor)
+- fix sprite priority bug after covering (Bropedio)
 
 ## Previous Versions are not tracked by this Doc
