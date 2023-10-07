@@ -222,33 +222,7 @@ org $C3FC47
 	LDA #$001A							; Portrait Y-pos
 
 
-;$00	;Ramuh    
-;$01	;Ifrit     
-;$02	;Shiva     
-;$03	;Siren     
-;$04	;Terrato  
-;$05	;Shoat    
-;$06	;Maduin   
-;$07	;Bismark  
-;$08	;Stray    
-;$09	;Palidor  
-;$0a	;Tritoch  
-;$0b	;Odin     
-;$0c	;Loki	 
-;$0d	;Bahamut  
-;$0e	;Crusader 
-;$0f	;Ragnarok 
-;$10	;Alexandr 
-;$11	;Kirin    
-;$12	;ZoneSeek 
-;$13	;Carbunkl 
-;$14	;Phantom  
-;$15	;Seraph   
-;$16	;Golem    
-;$17	;Unicorn  
-;$18	;Fenrir   
-;$19	;Starlet  
-;$1a	;Phoenix  
+
 ;	
 ;org $C4B700
 org $C4B6EE
@@ -262,7 +236,7 @@ C4B6D5:
 	lda #$28							; Grey text
 	sta $29                             ;
 	ldx #statuses                       ; Statuses pointer
-	ldy #$0038                          ; Pointers q.ty
+	ldy #$003A                          ; Pointers q.ty
 	jsr C369BA                          ; Prepare print
 	rtl
 	
@@ -273,8 +247,10 @@ light_up_statuses:
 	STX $DE                             ;   ^   $DE Item Value Index Counter
 	STX $DC                             ;   ^   $DC Check Byte counter
 .loop	
-	PHY									; Save Equip Index
+	LDA $DA								; At the begin of the cycle?
+	BEQ .esper							; Branch if so
 	LDA $161F,Y							; load item id
+	PHY									; Save Equip Index
 	CMP #$FF							; $FF (empty) item value?
 	BEQ .empty_slot						; Branch if so	
 	CMP #$66							; Cursed Shield?
@@ -282,10 +258,9 @@ light_up_statuses:
 	JSR take_item_index					; go to index and keep bit
 .next_bit
 	PHX									; Save Item Value Index
-	LDA $D85006,X						; load item function
+	LDA $D85006,X						; load item function from $D85006 to $D85009
 	JSR check_byte						; Jump and check if the value return active label
-.avoid_check
-	plx									; Restore Item Value Index
+	PLX									; Restore Item Value Index
 	INX									; Inc X for next value 
 	INC $DE								; Inc $DE counter
 	LDA $DE								; Load in A
@@ -293,7 +268,7 @@ light_up_statuses:
 	BEQ .next_bit						; Branch if not
 .second_bit
 	PHX
-	LDA $D85008,X						; load item function
+	LDA $D85008,X						; load item function in $D85000C
 	JSR check_byte						; Jump and check if the value return active label
 	plx									; Restore Item Value Index
 	INX									; Inc X for next value
@@ -301,7 +276,7 @@ light_up_statuses:
 	LDA $DE								; Load in A
 	CMP #$05							; Counter it's 5?
 	BNE .second_bit						; Branch to check anoter flag if not
-	LDA $D85014,X						; load item function	
+	LDA $D85014,X						; load item function in $D85019
 	jsr check_byte						; Jump and check if the value return active label
 .empty_slot	
 	PLY									; Restore Equip Index
@@ -309,10 +284,35 @@ light_up_statuses:
 	INC $DA								; Inc $DA Counter
 	ldx $00								; Clear X for next
 	LDA $DA								; Load $DA counter
-	CMP #$06							; 6 item done? 
+	CMP #$07							; 6 item done? 
 	BNE .second_loop					; Branch if not
 	RTL                                 ; Go Back
 
+.esper
+	PHY									; Save Actor Index
+	LDA $161E,Y							; Esper ID
+	CMP #$FF							; Empty Esper?
+	BEQ .no_esper
+	STA $211B							; low byte
+	STZ $211B                           ; keep only low byte
+	LDA #$0A							; multiplier
+	JSR take_item_index+8				; Go and keep Esper Index
+	LDA $C0D690,X						; 1st byte esper 
+	STX $D2								; Save Esper index
+	JSR check_byte						; Jump and check if the value return active label 
+	LDX $D2								; Load esper index
+	LDA $C0D691,X						; 2nd byte esper
+	JSR check_byte						; Jump and check if the value return active label
+	LDX $D2								; load esper index
+	LDA $C0D692,X						; 3rd byte esper
+	JSR check_byte						; Jump and check if the value return active label
+.no_esper
+	INC $DA								; Inc. equip index counter
+	LDX $00								; Clear X
+	STZ $D2								; Clear $D2
+	PLY									; Load actor index
+	JMP .second_loop					; Branch to star equipment loop
+	
 take_item_index:
 	STA $211B							; low byte
 	STZ $211B                           ; keep only low byte
@@ -325,9 +325,7 @@ take_item_index:
 	TDC									; Clear A
 	RTS
 
-check_byte:
-; Blocks
-	
+check_byte:	
 	STA $DF								; Save A in scratch
 	LDX $DC								; Load check byte counter
 .next_bit	
@@ -345,23 +343,23 @@ check_byte:
 	SEP #$20							; 8-bit A
 	JSR C402F9                          ; Go to print
 	PLX                                 ; Restore Check byte Index
-	CPX #$0009							; You are here if bit it's true 
+	CPX #$000A							; You are here if bit it's true 
 	BEQ .Block_Sap						; Regen Bit true? branch if so
-	CPX #$000A                          ; You are here if bit it's true
+	CPX #$000B                          ; You are here if bit it's true
 	BEQ .Block_Slow                     ; Haste Bit true? branch if so
 .not_active                                 
 	inx                                 ; Increment index
-	CPX #$0004							; Compare index
+	CPX #$0005							; Compare index
 	BEQ .next_status                    ; Branch if so
-	CPX #$0009                          ; Compare index
+	CPX #$000a                          ; Compare index
 	BEQ .next_status                    ; Branch if so
-	CPX #$000F                          ; Compare index
+	CPX #$0010                          ; Compare index
 	BEQ .next_status                    ; Branch if so
-	CPX #$0017                          ; Compare index
+	CPX #$0018                          ; Compare index
 	BEQ .next_status	                ; Branch if so
-	CPX #$0019                          ; Compare index
+	CPX #$001a                          ; Compare index
 	BEQ .next_status                    ; Branch if so
-	CPX #$001A                          ; Compare index
+	CPX #$001b                          ; Compare index
 	BEQ .next_status                    ; Branch and check new cycle bit
 	bra .next_bit                       ; Branch to another bit in the same cycle
 .next_status
@@ -379,88 +377,12 @@ check_byte:
 	JSR C402F9                          ; Go to print
 	PLX									; Restore X
 	BRA .not_active						; Branch and continue
-	
-	
-statuses_bitmask:
-	db $01   ; Blind
-	db $04   ; Poison
-	db $20   ; Mute
-	db $40   ; Petrify
-
-	db $01   ; Death
-	db $08   ; Imp
-	db $10   ; Berserk
-	db $20   ; Muddle
-	db $80   ; Sleep
-
-	db $02   ; Regen (Block Sap)
-	db $08   ; Haste (Block Slow)
-	db $10   ; Stop
-	db $20   ; Shell
-	db $40   ; Safe
-	db $80   ; Reflect
-
-	db $01   ; ATK +
-	db $02   ; Mag +
-	db $10   ; HP/MP +
-	db $10   ; HP/MP +
-	db $04   ; HP ++
-	db $08   ; HP +++
-	db $20   ; MP ++
-	db $40	 ; MP +++
-
-	db $02	 ; Counter
-	db $40	 ; Cover
-	
-	db $10	 ; Auto Berserk
 
 Info:
 	dw #Auto
 	dw #Blocks
 	dw #Bonus
-
-statuses:
-	dw #blind
-	dw #poison
-	dw #mute
-	dw #petrify
-
-	dw #death	
-	dw #imp
-	dw #berserk
-	dw #muddle	
-	dw #sleep
-
-	dw #regen
-	dw #haste
-	dw #stop	
-	dw #shell
-	dw #safe
-	dw #reflect
-
-	dw #atk
-	dw #mag
-	dw #HP_label
-	dw #MP_label
-	dw #plus_HP_1
-	dw #plus_HP_2
-	dw #plus_MP_1
-	dw #plus_MP_2
 	
-	dw #counter
-	dw #cover
-	
-	dw #brsrk_auto
-	
-
-	dw #slow
-	dw #sap
-
-
-
-
-	
-
 Auto:		dw $7E6F : db "Auto",$00
 Blocks:		dw $7c6F : db "Blocks",$00
 Bonus:		dw $7f6F : db "Bonus",$00
@@ -502,6 +424,79 @@ plus_MP_2:	dw $3EFB : db $3E,$4F,$CA,$3F,$00
 WARNPC $C4b900
 
 org $C4a700
+statuses_bitmask:
+	db $01   ; Blind
+	db $04   ; Poison
+	db $20   ; Imp
+	db $40   ; Petrify
+	db $80	 ; Death
+
+	db $01   ; Death (repel condemned)
+	db $08   ; Mute
+	db $10   ; Berserk
+	db $20   ; Muddle
+	db $80   ; Sleep
+
+	db $02   ; Regen (Block Sap)
+	db $08   ; Haste (Block Slow)
+	db $10   ; Stop
+	db $20   ; Shell
+	db $40   ; Safe
+	db $80   ; Reflect
+
+	db $01   ; ATK +
+	db $02   ; Mag +
+	db $10   ; HP/MP +
+	db $10   ; HP/MP +
+	db $04   ; HP ++
+	db $08   ; HP +++
+	db $20   ; MP ++
+	db $40	 ; MP +++
+
+	db $02	 ; Counter
+	db $40	 ; Cover
+	
+	db $10	 ; Auto Berserk
+
+
+statuses:
+	dw #blind
+	dw #poison
+	dw #imp
+	dw #petrify
+	dw #death
+
+	dw #death	
+	dw #mute
+	dw #berserk
+	dw #muddle	
+	dw #sleep
+
+	dw #regen
+	dw #haste
+	dw #stop	
+	dw #shell
+	dw #safe
+	dw #reflect
+
+	dw #atk
+	dw #mag
+	dw #HP_label
+	dw #MP_label
+	dw #plus_HP_1
+	dw #plus_HP_2
+	dw #plus_MP_1
+	dw #plus_MP_2
+	
+	dw #counter
+	dw #cover
+	
+	dw #brsrk_auto
+	
+
+	dw #slow
+	dw #sap
+	
 ;Prepare write
 C402F9:  
 
@@ -743,20 +738,22 @@ org $C3031c
 	
 org $C9fcf0
 change_palette:
-    cmp #$ED        ; Cmp if icon
-    BCS no_change   ; greater or equal?
-    cmp #$D0
-    BEQ change
-    cmp #$D7
-    BCC no_change
-change:    
-    LDA #$38
-    BRA color_change
+    cmp #$ED               ; Cmp if icon - Value over Ranged icon
+    BCS no_change          ; Branch if greater or equal
+    cmp #$D0            ; Star value?
+    BEQ change            ; Branch if so
+    cmp #$D7            ; Cmp if icon - Value below 
+    BCC no_change        ; Branch if so
+    LDA #$38            ; White colour
+    BRA color_change    ; Go to save in ram
 no_change:    
-    lda $29
+    lda $29                ; User colour
 color_change:    
-    sta [$EB],y
+    sta [$EB],y            ; Save in Ram
     rtl
+change: 
+    LDA #$34            ; Yellow colour
+    bra color_change    ; Go to save in ram
 
 org $C0814E
     jsr changeshadow
@@ -1115,3 +1112,4 @@ org $C3622A
 ; Set a section of Status menu to mask wrapping Gogo portrait
 org $C35F50  
 	LDX #$610A      ; Tilemap ptr
+	
