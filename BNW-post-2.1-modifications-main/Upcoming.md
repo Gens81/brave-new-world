@@ -1,23 +1,5 @@
 # Upcoming
 
-### b20 (not yet released)
-features/tweaks:
-- rich status menu showing ailment immunities and inherent statuses (Ryo_Hazuki)
-- possession, charm and love token go away if near fatal (Sir Newton Fig)
-- colosseum fights don't auto-arrange inventory anymore (Ryo_Hazuki)
-- pressing/holding A will advance dialog text (Fëanor)
-- added an option to trigger the banquet scene (Fëanor)
-- changed mastered espers icon to a star (Gens)
-- Final Kefka can't "dual-cast" Meteor anymore (Fëanor)
-
-bugfixes:
-- clears invisible Red-D (Fëanor)
-- fix sprite priority bug after covering (Bropedio)
-- fixed final lineup (you can select 4 chars max again)
-- fixed party map coord after gogo's tutorial
-- fixed an harmless bug in new_intro.asm
-- the "X dragons left" captions now render correctly
-
 ### 2.2 roadmap (ordered by priority):
 
 - Add char elemental properties to the status menu
