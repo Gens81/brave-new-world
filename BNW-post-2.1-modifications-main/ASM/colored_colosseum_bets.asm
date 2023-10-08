@@ -160,7 +160,7 @@ org $DFB773 : db !open      ; Targe
 org $DFB777 : db !open      ; Gold Shield
 org $DFB77B : db !closed    ; Aegis Shield
 org $DFB77F : db !open      ; Diamond Kite
-org $DFB783 : db !open      ; Flameguard
+org $DFB783 : db !closed    ; Flameguard
 org $DFB787 : db !closed    ; Iceguard
 org $DFB78B : db !open      ; Thunderguard
 org $DFB78F : db !open      ; Crystal Kite
