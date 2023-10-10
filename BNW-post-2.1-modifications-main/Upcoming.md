@@ -1,13 +1,19 @@
 # Upcoming
 
+### b21 (not yet released)
+
+- Added elemental properties to the status menu
+- Make Cyan join the party for Wrexsoul fight
+- Menu opens to equip party in place of auto-optimize routine (Before Cranes, Phunbaba 3, Tentacles and Wrexsoul)
+- Custom equip screen ordering (unique pieces on top, weapons by attack value, armors by combined defenses value, relics alphabetically) ✓
+- Fixed dual wield penalty shown regardless of whether you're using a second hand
+
 ### 2.2 roadmap (ordered by priority):
 
-- Add char elemental properties to the status menu
 - Press A on a Rage to show details: Elemental weaknesses/resistance, Statuses immunities/innate
 - Compress title screen graphic and/or import Snaphat compression algorythm
-- Phoenix glitch fix
-- List equips in the equip screen by descending price (unique items - marked by 1 GP selling value - are always on top)
 - Import Alphabetical Lore by Silent Enigma: useless for english version but useful for translations or future lores edits
+- Phoenix glitch fix
 - Disintegration animation for enemies that get petrified
 - Align hand cursor to text where needed
 
@@ -18,7 +24,6 @@
 	Locke: "Right."
 	(Leaves in the right direction)
 	Sabin: "...what do you see in that guy?"
-- Make Cyan join the party for Wrexsoul fight
 - Banon's death reference at the end of Thamasa events 
 	Terra: Where's Banon?
 	Edgar: (head down) He... didn't make it out.
