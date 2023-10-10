@@ -55,7 +55,7 @@ Meant to restore dialogues on a notext rom.
 -random_battle_songs (Madsiur)
 Randomly plays between 8 battle fight themes and 4 victory fanfares from final fantasy saga.
 
--t-dition_style (Gens)
+-t-edition_style (Gens)
 Change the whole cast appearance with sprites matching or heavily inspired from those used on t-edition hack.
 
 -DoubleSpeedEnemies, SlowerPlayer or Both (Nowea)
@@ -86,3 +86,6 @@ Portraits based on the original pixel art by abysswolf from deviantart.
 \- removes some optional events that are easily triggered while exploring/looting
 \- streamlines certain segments (wounded soldier, Imperial banquet, feeding Cid)
 \- smaller tweaks like short resting animations
+
+- speedrun
+It's a combination of abridged+notext+fast_anim+accurate_descriptions. It's a way to sail fast in a bnw playtrough for your n replay
