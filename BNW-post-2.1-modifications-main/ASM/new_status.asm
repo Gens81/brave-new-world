@@ -306,6 +306,9 @@ light_up_statuses:
 	LDX $D2								; load esper index
 	LDA $C0D692,X						; 3rd byte esper
 	JSR check_byte						; Jump and check if the value return active label
+	LDX $D2								; load esper index
+	LDA $C0D693,X						; 3rd byte esper
+	JSR check_byte						; Jump and check if the value return active label
 .no_esper
 	INC $DA								; Inc. equip index counter
 	LDX $00								; Clear X
