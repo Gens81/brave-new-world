@@ -521,7 +521,7 @@ summon:
 	db "Hurricane  "
 	db "Chaos>Wing "
 	db "Sea>Song   "
-	db "Caith>Sith "
+	db "Cait>Sith  "
 	db "Air>Raid   "
 	db "Trisection "
 	db "Atom>Edge  "
