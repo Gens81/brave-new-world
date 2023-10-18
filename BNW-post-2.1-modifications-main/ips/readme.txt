@@ -81,11 +81,11 @@ Another user-friendly patch by Ben. This removes the automatic collision>fall in
 Portraits in vanilla styles but colorful, more detailed and in many cases, matching their sprites (check the png for a preview). Ripped from a patch built for ffvi pr.
 Portraits based on the original pixel art by abysswolf from deviantart.
 
-- abridged_alpha (Fëanor)
+- abridged_beta (Fëanor)
 \- removes ~3 hours of mandatory events/cutscenes
 \- removes some optional events that are easily triggered while exploring/looting
 \- streamlines certain segments (wounded soldier, Imperial banquet, feeding Cid)
 \- smaller tweaks like short resting animations
 
 - speedrun
-It's a combination of abridged+notext+fast_anim+accurate_descriptions. It's a way to sail fast in a bnw playtrough for your n replay
+It's a combination of abridged+notext+fast_anim+accurate_descriptions. It's a way to sail fast in a bnw playtrough for your replays.
