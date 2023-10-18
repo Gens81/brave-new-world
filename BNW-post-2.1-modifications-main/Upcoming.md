@@ -5,8 +5,8 @@
 - Added elemental properties to the status menu
 - Make Cyan join the party for Wrexsoul fight
 - Menu opens to equip party in place of auto-optimize routine (Before Cranes, Phunbaba 3, Tentacles and Wrexsoul)
-- Custom equip screen ordering (unique pieces on top, weapons by attack value, armors by combined defenses value, relics alphabetically) ✓
 - Fixed dual wield penalty shown regardless of whether you're using a second hand
+- Fixed If Near Fatal causes Zinger to be removed from a target, any remaining strikes will target whoever is in the 2nd slot
 
 ### 2.2 roadmap (ordered by priority):
 
@@ -24,11 +24,10 @@
 	Locke: "Right."
 	(Leaves in the right direction)
 	Sabin: "...what do you see in that guy?"
+- Restore Shadow cutscene during Soul train fight
 - Banon's death reference at the end of Thamasa events 
 	Terra: Where's Banon?
 	Edgar: (head down) He... didn't make it out.
-	Sabin: At least we get to keep playing though, amirite?
-- Restore Shadow cutscene during Soul train fight
 - Add "CT - Mistery from the past" track to Ultima's sealed door
 
 ### "Bro new world" features candidates for porting:
