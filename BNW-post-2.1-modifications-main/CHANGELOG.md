@@ -1,6 +1,6 @@
 # Changelog
 
-## [2.2 b20](https://github.com/Gens81/brave-new-world/releases) - 2023/10/07
+## [2.2 b20.1](https://github.com/Gens81/brave-new-world/releases) - 2023/10/14
 
 ### Features
 
@@ -77,6 +77,7 @@
 - Glyphs immune to font color changing (Ryo_Hazuki) 
 - Descriptions on the equip menu without pressing Y (Ryo_Hazuki)
 - Final Kefka can't "dual-cast" Meteor anymore (Fëanor)
+- Equipment menu list sorted by value (Fëanor)
 
 ### Bugfixes
 
@@ -100,7 +101,7 @@
 - Decoupled mp color digits to fix reflect palette corruptions and Crusader bug (fix by Silent Enigma ported to bnw by Ryo_Hazuki)
 - Fixed the display glitch after 255 "named" attack are shown in battle (Fëanor) 
 - Ghost ring fix : preserves the Undead status when raging a non-undead monster (Fëanor)
-- clears invisible Red-D (Fëanor)
-- fix sprite priority bug after covering (Bropedio)
+- Clears invisible Red-D (Fëanor)
+- Fix sprite priority bug after covering (Bropedio)
 
 ## Previous Versions are not tracked by this Doc
