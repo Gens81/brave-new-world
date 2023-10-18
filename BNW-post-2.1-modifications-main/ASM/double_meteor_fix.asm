@@ -1,13 +1,13 @@
 hirom
 
-!free = $CFCF38
-!warn #= !free+408
+; frees up previous script location $CFAC22-$CFAD20 (255 bytes)
+
+; uses the documented freespace $CFCF50-$CFD0CF (384 bytes)
+!free = $CFCF50
+!warn #= !free+384
 
 ; update pointer to AI script
 org $CF8654 : dw Kefka-$CF8700
-
-; clear old AI script
-org $CFAC22 : padbyte $FF : pad $CFAD21
 
 ; updated AI script, changes are marked with [ADDED] or [UPDATED]
 org !free
@@ -40,8 +40,8 @@ Kefka:
     db $13                      ; use attack: Meteor
     db $FB,$00,$00              ; [ADDED] reset local battle timer
     db $FE                      ; endif
-    db $FC,$15,$04,$00          ; [CHANGED] if ~(variable $04 & 0)
-    db $F8,$04,$01              ; [CHANGED] variable $04 = 1
+    db $FC,$15,$04,$00          ; [UPDATED] if ~(variable $04 & 0)
+    db $F8,$04,$01              ; [UPDATED] variable $04 = 1
     db $F7,$20                  ; trigger event: $20
     db $FE                      ; endif
     db $FC,$0D,$24,$02          ; if variable $24 >= 2
