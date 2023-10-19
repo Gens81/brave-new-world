@@ -40,9 +40,6 @@ Pad $C35902
 warnpc $C35902
 
 
-org $C326F5
-
-warnpc $C32706
 
 org $C35902
 is_white:
