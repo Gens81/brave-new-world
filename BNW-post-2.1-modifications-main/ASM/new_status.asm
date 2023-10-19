@@ -187,12 +187,7 @@ reset_item_desc:
 
 New_Blue:
 	jsr $69ba							; Jump to sub routine that add new pointers instead of "prepare print"
-	;lda #$24							; Load Blue Palette  
-	;sta $29   							; Store on $29
-	;ldx #Info							; Start pointer address
-	;ldy #$0004							; Pointers to read (2 bytes each pointer)
-	;jsr $69ba							; Prepare print
-	jsl C4B6D5							; Jump and print new text
+	jsl C4B6EE							; Jump and print new text
 	rts
 	
 STATUS_PRTRT:
@@ -221,114 +216,292 @@ org $C30AF1
 org $C3FC47
 	LDA #$001A							; Portrait Y-pos
 
+;****************************************************;
+;                       							 ;
+; Init/Sustain Status							     ;
+;                        							 ;
+;****************************************************;
 
 
-;	
-;org $C4B700
-org $C4B6EE
-C4B6D5:
-	lda #$2c							; Blue text
-	sta $29                             ;
-	ldx #Info                       	; statuses pointer
-	ldy #$0006                          ; Pointers q.ty
-	jsr C369BA                          ; Prepare print
+; Queue pushing Y OAM function
+org $C36102
+C36102:
+	JSL Condense_Status_txt				; Draw menu; portrait
+	LDA #$01        					; Min slot: 8
+	LDY #C36124							; C3/6510
+	JSR $1173							; Queue OAM fn
+	LDX $00		
+.loop		
+	LDA.l y_button,X					; Cursor, etc. color
+	STA $7E3219,X						; Save in RAM
+	STA $2122							; Put LB in CGRAM
+	INX			
+	CPX #$0008							; Done 4 colors?
+	BNE .loop							; Loop if not	
+	JMP $3541							; BRT:1 + NMI
+
+C36124:
+	JSL EDFCB0							; Jump to create pushing button
+	RTS
+	dl #$FFFFFF
+warnpc $c3612c		 
+
+; 0B: Initialize Status menu
+ORG $C31C46
+C31C46:  JSR $352F      				; Reset/Stop stuff
+         JSR $620B      				; Set to shift text
+         JSR $5D05      				; Draw menu; portrait
+         JSR $1C5D      				; Init cursor data
+         LDA #$01        				; C3/1D7E
+         STA $26         				; Next: Fade-in
+         LDA #$0C        				; C3/21F5
+         STA $27        				; Queue: Sustain menu
+         JMP C36102
+
+; 0C Sustain Status menu
+org $C321F5
+	JSR refresh_status_screen			; Refresh Screen
+
+; Handle R
+org $C32202
+	jsr Clear_BG_L_R
+
+;Handle L
+org $C32228
+	jsr Clear_BG_L_R
+		 
+;[...]
+; Fork: Handle B
+org $C32244
+	NOP
+	LDA $09         					; No-autofire keys
+	JMP Handle_Y						; Load B button test and jump
+	JSR $0EA9							; Sound: Cursor
+	LDA #$04        					; C3/1A8A
+	STA $27        						; Queue main menu
+	STZ $26      						; Next: Fade-out
+	RTS
+
+; Fork: Handle Gogo 
+warnpc $C32254
+
+; Fork: Handle Y
+org $C3F646
+refresh_status_screen:
+	JSR $0F39								; Set to redraw cmds
+	JSR $0EFD								; Resfresh Statuses/Elements
+	RTS				
+
+Clear_BG_L_R:
+	JSR $0Eb2							; Sound: click
+	LDX #$0300							; $7E3B49
+	JSR $6A4E							; Jump to clear BG1 A
+	STZ $C5
+	TDC            						; Clear A
+	LDA $28 					        ; Member slot
+	RTS
 	
+Handle_Y:		 				
+	BIT #$80							; Pushing B?
+	BEQ .Handle_Y						; Branch if not
+	JMP $224A							; Go to exit menu
+.Handle_Y				
+	LDA $09								; No-autofire
+	BIT #$40							; Pushing Y?
+	BEQ .not							; Branch if not
+	LDA $C5								; Status/elements flag
+	BNE .status							; Branch if status on
+	DEC $C5								; Reset flag if not
+	BRA .elements
+.status				
+	JSR $0Eb2							; Sound: click
+	LDX #$0300							; $7E3B49
+	JSR $6A4E							; Jump to clear BG1 A
+	JSL C4B6EE							; Reprint Statuses
+	JSR C3607B							; Compute Actor index and light_up statuses
+	INC $C5								; Active Elements flag
+	bra .not
+.elements	
+	JSR $0Eb2							; Sound: click
+	LDX #$0300							; $7E3B49
+	JSR $6A4E							; Jump to clear BG1 A
+	JSL Elements_routine
+.not 				
+	JMP $2254							; Go to handle GOGO
+
+warnpc $C3F6B0
+
+
+
+!Multiple_string_bank = #$C4
+!Single_string_Bank = #$C4
+
+org $C4B6EE
+
+; Statuses & Title
+C4B6EE:
 	lda #$28							; Grey text
-	sta $29                             ;
+	sta $29                             ; Set
 	ldx #statuses                       ; Statuses pointer
 	ldy #$003A                          ; Pointers q.ty
 	jsr C369BA                          ; Prepare print
+	ldx #Info                       	; statuses pointer	
+	ldy #$0006                          ; Pointers q.ty
+print:
+	lda #$24							; Blue text
+	sta $29                             ; Set
+	jsr C369BA                          ; Prepare print
+	rtl
+elements_title:
+	ldx #Elements
+	ldy #$0008
+	bra print
+
+;************************;
+;                        ;
+; Elements Routine	     ;
+;                        ;
+;************************;
+Elements_routine:
+	jmp elements_title
+	jsr esper_item_value
+	jsr esper_index
+	LDA $C0D694,X
+	%FakeC3(88a8)
 	rtl
 	
 light_up_statuses:
 	LDX $00								; Clear X
-	STX $DA                             ;   ^   $DA Equip index counter
-.second_loop
 	STX $DE                             ;   ^   $DE Item Value Index Counter
 	STX $DC                             ;   ^   $DC Check Byte counter
-.loop	
-	LDA $DA								; At the begin of the cycle?
-	BEQ .esper							; Branch if so
-	LDA $161F,Y							; load item id
-	PHY									; Save Equip Index
-	CMP #$FF							; $FF (empty) item value?
-	BEQ .empty_slot						; Branch if so	
-	CMP #$66							; Cursed Shield?
-	BEQ .empty_slot						; Branch if so
-	JSR take_item_index					; go to index and keep bit
-.next_bit
-	PHX									; Save Item Value Index
+	LDA #$06							; Load item equip counter
+	STA	$C2								; Set
+	STY $C0								; Save index Y (Actor index)
+	STY $c3								; Save twice (Elements matters)
+	JSR esper_item_value				; Go to bring Value
+	CMP #$FF							; Empty value?	
+	BEQ skip_2_lines					; Skip index routine and light up label routine
+	JSR esper_index						; Go to bring Esper Index
+	JSR esper_light_up					; Go to light up label
+skip_2_lines:
+
+;************************;
+;                        ;
+; Item Equip loop (6)    ;
+;                        ;
+;************************;
+
+.loop
+	JSR esper_item_value				; Go to bring equipment value
+	CMP #$FF							; Empty?
+	beq .skip							; Branch if so
+	JSR take_item_index                 ; Go to bring Esper Index
+	JSR item_light_up	                ; Go to light up label
+.skip
+	DEC $c2                             ; Decrease counter
+	BNE .loop                           ; $C2 = 0? Branch if not
+	LDY $C3
+	STY $C0
+	RTL                                 ; Go back
+	
+;****************************************************;
+;                       							 ;
+; Routine that bring equipped item or esper value    ;
+;                        							 ;
+;****************************************************;
+
+esper_item_value:
+	LDY $C0                             ; Load actor index
+	LDA $161E,Y                         ; Load esper or item equipped value
+	CMP #$FF                            ; Blank?
+	BNE .skip                           ; Branch if so
+	CMP #$66                            ; Cursed shield?
+	BNE .skip                           ; Branch if so
+	LDA #$FF                            ; Make it $FF
+.skip
+	INC $C0                             ; Inc. actor index
+	STZ $DE                             ; Clear $DE Item Value Index Counter
+	STZ $DC                             ; Clear $DC Check Byte counter
+	RTS
+
+;****************************************************;
+;                       							 ;
+; Routine that index the esper value (part 1/2)		 ;
+;                        							 ;
+;****************************************************;
+esper_index:
+	STA $211B							; low byte
+	STZ $211B                           ; keep only low byte
+	LDA #$0A							; multiplier
+	JMP take_item_index+8				; Go and keep Esper Index (next Routine have a RTS)
+
+
+;****************************************************;
+;                       							 ;
+; Routine that light up esper labels				 ;
+;                        							 ;
+;****************************************************;
+
+esper_light_up:	
+	LDA $C0D690,X						; 1st byte esper 
+	JSR check_byte						; Jump and check if the value return active label 
+	LDA $C0D691,X						; 2nd byte esper
+	JSR check_byte						; Jump and check if the value return active label
+	LDA $C0D692,X						; 3rd byte esper
+	JSR check_byte						; Jump and check if the value return active label
+	LDA $C0D693,X						; 4th byte esper
+	JSR check_byte						; Jump and check if the value return active label
+	LDX $00								; Clear X
+	RTS
+
+;****************************************************;
+;                       							 ;
+; Routine that light up item equipped labels		 ;
+;                        							 ;
+;****************************************************;
+
+item_light_up:
 	LDA $D85006,X						; load item function from $D85006 to $D85009
 	JSR check_byte						; Jump and check if the value return active label
-	PLX									; Restore Item Value Index
 	INX									; Inc X for next value 
 	INC $DE								; Inc $DE counter
 	LDA $DE								; Load in A
 	BIT #$04							; Counter It's 4?
-	BEQ .next_bit						; Branch if not
+	BEQ item_light_up						; Branch if not
+	
 .second_bit
-	PHX
 	LDA $D85008,X						; load item function in $D85000C
 	JSR check_byte						; Jump and check if the value return active label
-	plx									; Restore Item Value Index
 	INX									; Inc X for next value
 	INC $DE								; Inc $DE Counter 
 	LDA $DE								; Load in A
 	CMP #$05							; Counter it's 5?
 	BNE .second_bit						; Branch to check anoter flag if not
 	LDA $D85014,X						; load item function in $D85019
-	jsr check_byte						; Jump and check if the value return active label
-.empty_slot	
-	PLY									; Restore Equip Index
-	INY									; Inc Y index for next 
-	INC $DA								; Inc $DA Counter
-	ldx $00								; Clear X for next
-	LDA $DA								; Load $DA counter
-	CMP #$07							; 6 item done? 
-	BNE .second_loop					; Branch if not
-	RTL                                 ; Go Back
+	jmp check_byte						; Jump and check if the value return active label
 
-.esper
-	PHY									; Save Actor Index
-	LDA $161E,Y							; Esper ID
-	CMP #$FF							; Empty Esper?
-	BEQ .no_esper
-	STA $211B							; low byte
-	STZ $211B                           ; keep only low byte
-	LDA #$0A							; multiplier
-	JSR take_item_index+8				; Go and keep Esper Index
-	LDA $C0D690,X						; 1st byte esper 
-	STX $D2								; Save Esper index
-	JSR check_byte						; Jump and check if the value return active label 
-	LDX $D2								; Load esper index
-	LDA $C0D691,X						; 2nd byte esper
-	JSR check_byte						; Jump and check if the value return active label
-	LDX $D2								; load esper index
-	LDA $C0D692,X						; 3rd byte esper
-	JSR check_byte						; Jump and check if the value return active label
-	LDX $D2								; load esper index
-	LDA $C0D693,X						; 3rd byte esper
-	JSR check_byte						; Jump and check if the value return active label
-.no_esper
-	INC $DA								; Inc. equip index counter
-	LDX $00								; Clear X
-	STZ $D2								; Clear $D2
-	PLY									; Load actor index
-	JMP .second_loop					; Branch to star equipment loop
-	
+;****************************************************************************;
+;                       													 ;
+; Routine that index the esper value (part 2/2)	$ index item equipped value	 ;
+;                        													 ;
+;****************************************************************************;
+
 take_item_index:
 	STA $211B							; low byte
 	STZ $211B                           ; keep only low byte
 	LDA #$1E                            ; multiplier
 	STA $211C                           ; store to get  
-	LDA $2135                           ; Get Mid Byte
-	xba                                 ; exchange A
-	LDA $2134                           ; Get Lo-Byte
-	TAX									; Index It
+	LDX $2134                           ; Get Mid Byte
 	TDC									; Clear A
 	RTS
 
+;****************************************************************************;
+;                       													 ;
+; Routine that check if item osper can light up a label and do it if can	 ;
+;                        													 ;
+;****************************************************************************;
 check_byte:	
+	PHX									; Item or esper index
 	STA $DF								; Save A in scratch
 	LDX $DC								; Load check byte counter
 .next_bit	
@@ -367,6 +540,7 @@ check_byte:
 	bra .next_bit                       ; Branch to another bit in the same cycle
 .next_status
 	STX $DC								; Save check byte counter
+	PLX									; Restore Item or esper index
 	RTS
 	
 .Block_Sap
@@ -385,10 +559,21 @@ Info:
 	dw #Auto
 	dw #Blocks
 	dw #Bonus
+
+Elements:
+	dw #Half
+	dw #No_Dmg
+	dw #Absorb
+	dw #Weak
 	
-Auto:		dw $7E6F : db "Auto",$00
-Blocks:		dw $7c6F : db "Blocks",$00
-Bonus:		dw $7f6F : db "Bonus",$00
+Half:		dw $3BEF : db "Half Damage",$00
+No_Dmg:		dw $3CAF : db "Absorb",$00
+Absorb:		dw $3D6F : db "No Damage",$00
+Weak:		dw $3E2F : db "Weakness",$00
+	
+Auto:		dw $3D6F : db "Auto",$00
+Blocks:		dw $3BEF : db "Blocks",$00
+Bonus:		dw $3E2F : db "Bonus",$00
 
 poison:     dw $3C31 : db $49,$4a,$4b,$00				
 sleep:      dw $3C39 : db $2a,$2b,$29,$00
@@ -424,8 +609,117 @@ plus_HP_2:  dw $3eF1 : db $4E,$4F,$CA,$3F,$00
 plus_MP_1:  dw $3eFB : db $3E,$4F,$CA,$00
 plus_MP_2:	dw $3EFB : db $3E,$4F,$CA,$3F,$00		
 
-WARNPC $C4b900
 
+
+padbyte $FF
+pad $C4B9CE
+
+WARNPC $C4b9CF
+
+;****************************************************;
+;                       							 ;
+; Create Lightning Y button						     ;
+;                        							 ;
+;****************************************************;
+
+!bank = #$ED
+
+org $EDFCB0
+; Update Y's sprite
+EDFCB0:  TAX             ; Index mode
+         JMP (EDFCB4,X)  ; Handle mode
+
+; Jump table for the above
+EDFCB4:  dw EDFCB8       ; Initialize button
+         dw EDFCDC       ; Sustain button
+
+; Mode 0: Initialize Y
+EDFCB8:  LDX $2D         ; Queue index
+         REP #$20        ; 16-bit A
+         LDA #EDFCF5     ; Anim table ptr
+         STA $32C9,X     ; Set sprite's
+         SEP #$20        ; 8-bit A
+         LDA !bank       ; Bank: $ED
+         STA $35CA,X     ; Set ptr HB
+         %FakeC3(1206)   ; Set pose timer
+         INC $3649,X     ; Mode +1
+         LDA #$01        ; Pans with BG1
+         STA $364A,X     ; Set sprite flags
+		 
+; Mode 1: Sustain Y
+EDFCDC:  LDX $2D
+		 LDA #$E8         ; Cursor's X
+         STA $33CA,X      ; Set sprite's
+         LDA #$c6         ; Cursor's Y
+		 STA $344A,X      ; Set sprite's
+         %FakeC3(1221)    ; Define OAM
+		 SEC              ; Set to requeue
+         RTL              ; Exit
+
+
+; Animation table for pushing Y
+EDFCF5:  dw EDFCFE       ; Top button sprite
+         db $18          ; Frames: 18
+         dw EDFD03       ; Pushed button sprite
+         db $18          ; Frames: 18
+         dw EDFCFE       ; Bogus... 
+         db $FF          ; Loop
+
+; OAM for unpushed Y
+EDFCFE:  db $01          ; Tiles: 1
+         dw $0080        ; 16x16, X+0, Y+0
+         dw $3C2E        ; Tile ??, pal 6, prio 3
+
+; OAM for pushed Y
+EDFD03:  db $01          ; Tiles: 1
+         dw $0080        ; 16x16, X+0, Y+0
+         dw $3C0E        ; Tile ??, pal 6, prio 3
+
+; Animation table for holding Y
+EDFD06:  dw EDFCFE       ; Top button sprite
+         db $18          ; Frames: 18
+         dw EDFD03       ; Pushed button sprite
+         db $36          ; Frames: 36
+         dw EDFCFE       ; Bogus... 
+         db $FF          ; Loop
+
+; Update Y's sprite
+EDFD12:  TAX             ; Index mode
+         JMP (EDFD14,X)  ; Handle mode
+
+; Jump table for the above
+EDFD14:  dw EDFD1B       ; Initialize button
+         dw EDFD2B       ; Sustain button
+
+; Mode 0: Initialize Y
+EDFD1B:  LDX $2D         ; Queue index
+         REP #$20        ; 16-bit A
+         LDA #EDFD06     ; Anim table ptr
+         STA $32C9,X     ; Set sprite's
+         SEP #$20        ; 8-bit A
+         LDA !bank       ; Bank: $ED
+         STA $35CA,X     ; Set ptr HB
+         %FakeC3(1206)   ; Set pose timer
+         INC $3649,X     ; Mode +1
+         LDA #$01        ; Pans with BG1
+         STA $364A,X     ; Set sprite flags
+		 
+; Mode 1: Sustain Y
+EDFD2B:  LDA $47         ; Menu flags
+         AND #$01        ; Actors shown?
+         BEQ .DELETE      ; Delete if not
+		 LDX $2D
+		 LDA #$E8         ; Cursor's X
+         STA $33CA,X      ; Set sprite's
+         LDA #$86         ; Cursor's Y
+		 STA $344A,X      ; Set sprite's
+         %FakeC3(1221)    ; Define OAM
+		 SEC              ; Set to requeue
+         RTL              ; Exit
+.DELETE  CLC
+		 RTL
+
+;c4b8cc
 org $C4a700
 statuses_bitmask:
 	db $01   ; Blind
@@ -503,50 +797,50 @@ statuses:
 ;Prepare write
 C402F9:  
 
-	LDA #$20		; White text
-	STA $29			; Save
-	STY $E7         ; Set src LBs
-	LDA #$C4        ; Bank: C3
-	STA $E9         ; Set src HB
-	%FakeC3(02FF)	; Draw string
+	LDA #$20					; White text
+	STA $29						; Save
+	STY $E7       				; Set src LBs
+	LDA !Single_string_Bank     ; Bank
+	STA $E9        				; Set src HB
+	%FakeC3(02FF)				; Draw string
 
 	RTS
 	
 ; Draw multiple strings using consecutive pointers
-C369BA:  STX $F1         	; Set ptrs loc
-         STY $EF         	; Set counter
-         LDA #$C4        	; Bank: C3
-         STA $F3         	; Set loc HB
-         LDY $00         	; Index: 0
-C369C4:  REP #$20        	; 16-bit A
-         LDA [$F1],Y     	; Text pointer
-         STA $E7         	; Set src LBs
-         PHY             	; Save index
-         SEP #$20        	; 8-bit A
-         LDA #$C4        	; Bank: C3
-         STA $E9         	; Set src HB
-		 %FakeC3(02FF)	; Draw string
-         PLY             	; String index
-         INY             	; Index +1
-         INY             	; Index +1
-         CPY $EF         	; None left?
-         BNE C369C4      	; Loop if not
+C369BA:  STX $F1        		 	; Set ptrs loc
+         STY $EF       			  	; Set counter
+         LDA !Multiple_string_bank  ; Bank
+         STA $F3         			; Set loc HB
+         LDY $00         			; Index: 0
+C369C4:  REP #$20        			; 16-bit A
+         LDA [$F1],Y     			; Text pointer
+         STA $E7         			; Set src LBs
+         PHY             			; Save index
+         SEP #$20        			; 8-bit A
+         LDA !Multiple_string_bank  ; Bank: C4
+         STA $E9         			; Set src HB
+		 %FakeC3(02FF)				; Draw string
+         PLY             			; String index
+         INY             			; Index +1
+         INY             			; Index +1
+         CPY $EF         			; None left?
+         BNE C369C4      			; Loop if not
 		 RTS
 		 
 ; Set to condense BG1 text in Status menu
 Condense_Status_txt:
-	LDA #$02        ; 1Rx2B to PPU
-	STA $4360       ; Set DMA mode
-	LDA #$0E        ; $2112
-	STA $4361       ; To BG3 V-Scroll
-	LDY #HDMA_Table ; 
-	STY $4362       ; Set src LBs
-	LDA #$C4        ; Bank: C3
-	STA $4364       ; Set src HB
-	LDA #$C4        ; ...
-	STA $4367       ; Set indir HB
-	LDA #$40        ; Channel: 6
-	TSB $43         ; Queue HDMA-6
+	LDA #$02        				; 1Rx2B to PPU
+	STA $4360       				; Set DMA mode
+	LDA #$0E        				; $2112
+	STA $4361       				; To BG3 V-Scroll
+	LDY #HDMA_Table 				; 
+	STY $4362       				; Set src LBs
+	LDA #$C4        				; Bank: C3
+	STA $4364       				; Set src HB
+	LDA #$C4        				; ...
+	STA $4367       				; Set indir HB
+	LDA #$40        				; Channel: 6
+	TSB $43         				; Queue HDMA-6
 	RTL
 	
 ;New HDMA Table
@@ -575,21 +869,7 @@ org $C302A3
 
 org $C3A897
 	JSR reset_item_desc		; Jump to new subroutine C3/FA3B
-	
-; 0B: Initialize Status menu
-org $C31C46
-	JSR $352F  			      ; Reset/Stop stuff
-	JSR $620B 			      ; Set to shift text
-	JSR $26F5
 
-org $C326F5
-	JSL Condense_Status_txt		; Draw menu; portrait
-	JSR $5D05					; Draw menu; portrait
-	RTS
-
-org $c3632A
-	jsl Condense_Status_txt
-	jsr $620b
 	
 	
 
@@ -631,7 +911,7 @@ dw $0000,$3868,$39CE,$7FFF		;gray font with purple shadow
 
 dw $0000,$1084,$5294,$7FFF		;white font with gray shadow
 dw $0000,$1084,$5294,$7FFF		;white font with gray shadow
-dw $0000,$0000,$39CE,$7FFF		;white font with black shadow
+dw $0000,$1084,$5294,$7FFF		;white font with black shadow
 dw $0000,$1084,$5294,$7FFF		;white font with gray shadow
 
 ; 6th row
@@ -639,12 +919,32 @@ Yellow:
 dw $0000,$0000,$39CE,$03BF		;yellow font (esper bonus points)
 dw $FFFF,$FFFF,$FFFF,$FFFF		;null
 dw $FFFF,$FFFF,$FFFF,$FFFF		;null
-dw $FFFF,$FFFF,$FFFF,$FFFF		;null
+y_button:
+dw $1084,$4d6c,$450a,$7294
 
 ;7th row
 White:
 dw $0000,$0000,$39CE,$7FFF		;white font
 
+
+; Load color gauge palette
+org $C3395E
+		LDX $00         ; Color index: 0
+        LDA #$40        ; CGRAM: $0080
+        STA $2121       ; To BG pal 4
+C33965: REP #$20        ; 16-bit A
+        LDA $D8E850,X   ; Font color
+        STA $7E30C9,X   ; Save in RAM
+        SEP #$20        ; 8-bit A
+        STA $2122       ; Put LB in CGRAM
+        XBA             ; Switch to HB
+        STA $2122       ; Put HB in CGRAM
+        INX             ; Color index +1
+        INX             ; Color index +1
+        CPX #$0020      ; Done 16 colors?
+        BNE C33965      ; Loop if not
+        RTS
+		
 org $C36BEE
 	rep #$20			; 16 bit A
 	lda MenuPalette,x	; Load Palette Data
@@ -658,7 +958,7 @@ org $C36BEE
 	cpx #$00C8			; Set 120 colors
 
 
-; Try to load Elements in the main menu
+; Load Elements GFX in the main menu
 
 ; 04: Initialize main menu
 org $C31A8A
@@ -709,9 +1009,10 @@ pick_white_color:
 	JSR $1BA8	   ; Go to unfreeze CGRAM and refresh and allow to load portrait GFX
 	JMP $3541      ; BRT:1 + NMI
 
-;padbyte $FF
-;pad $C32706
-;warnpc $C32706
+; clean up unused data
+padbyte $FF
+pad $C38E4F
+warnpc $C38E50
 
 org $C4B4F0
 C4B500:
@@ -741,22 +1042,20 @@ org $C3031c
 	
 org $C9fcf0
 change_palette:
-    cmp #$ED               ; Cmp if icon - Value over Ranged icon
-    BCS no_change          ; Branch if greater or equal
-    cmp #$D0            ; Star value?
-    BEQ change            ; Branch if so
-    cmp #$D7            ; Cmp if icon - Value below 
-    BCC no_change        ; Branch if so
-    LDA #$38            ; White colour
-    BRA color_change    ; Go to save in ram
+    cmp #$ED        ; Cmp if icon
+    BCS no_change   ; greater or equal?
+    cmp #$CF
+    BEQ change
+    cmp #$D7
+    BCC no_change
+change:    
+    LDA #$38
+    BRA color_change
 no_change:    
-    lda $29                ; User colour
+    lda $29
 color_change:    
-    sta [$EB],y            ; Save in Ram
+    sta [$EB],y
     rtl
-change: 
-    LDA #$34            ; Yellow colour
-    bra color_change    ; Go to save in ram
 
 org $C0814E
     jsr changeshadow
@@ -955,98 +1254,98 @@ Make1ESBCValue:
 	
 org $C35FCB
 PrintValueRoutine:				
-	LDA $0000,Y				; load actor ID
-	STA $004202				; set multiplicand
-	LDA #$16				; size of init data block
-	STA $004203				; get offset to actor init data
-	TDC 					; Clear X
-	TAX
-	LDA #$20				; load White palette
-	STA $29					; store
-	REP #$20                ; 16-bit A
-	LDA $4216               ; load product
-	STA $0100               ; store on $0100 for statdiff routines
-	SEP #$20                ; 8-bit A
+		LDA $0000,Y				; load actor ID
+		STA $004202				; set multiplicand
+		LDA #$16				; size of init data block
+		STA $004203				; get offset to actor init data
+		TDC 					; Clear X
+		TAX
+		LDA #$20				; load White palette
+		STA $29					; store
+		REP #$20                ; 16-bit A
+		LDA $4216               ; load product
+		STA $0100               ; store on $0100 for statdiff routines
+		SEP #$20                ; 8-bit A
 .loop 
-	LDA $11A0,X				; Load stat indexed value
-	PHX						; Save index X
-	JSR !TurnIntoText8bit	; Go to routine that turn values into text
-	PLX						; Take index X
-	REP #$20				; 16 bit A
-	LDA !StatCoord,X		; Load indexed stat coord in A
-	SEP #$20				; 8 bit A
-	PHX						; Save index X
-	TAX						; Transfer to X
-	JSR !Draw3Digits		; Go to the routine that print the value
-	PLX						; Take index X
-	INX						; Increment X
-	INX						; Increment X
-	CPX #$000C				; Check if m.evade (11AA) is already done (11A0 + 000B = 11AB)
-	BMI .loop				; Branch to loop and load stat value and coord.
-	LDA $11BA				; Defense value
-	JSR !TurnIntoText8bit
-	LDX #$7EdF			; Defense stat position
-	JSR !Draw3Digits	
-	LDA $11BB				; M.Defense Value
-	JSR !TurnIntoText8bit
-	LDX #$7f5F			; M.Defense stat position
-	JSR !Draw3Digits
-	JSR $9371				; Define Attack
+		LDA $11A0,X				; Load stat indexed value
+		PHX						; Save index X
+		JSR !TurnIntoText8bit	; Go to routine that turn values into text
+		PLX						; Take index X
+		REP #$20				; 16 bit A
+		LDA !StatCoord,X		; Load indexed stat coord in A
+		SEP #$20				; 8 bit A
+		PHX						; Save index X
+		TAX						; Transfer to X
+		JSR !Draw3Digits		; Go to the routine that print the value
+		PLX						; Take index X
+		INX						; Increment X
+		INX						; Increment X
+		CPX #$000C				; Check if m.evade (11AA) is already done (11A0 + 000B = 11AB)
+		BMI .loop				; Branch to loop and load stat value and coord.
+		LDA $11BA				; Defense value
+		JSR !TurnIntoText8bit
+		LDX #$7EdF			; Defense stat position
+		JSR !Draw3Digits	
+		LDA $11BB				; M.Defense Value
+		JSR !TurnIntoText8bit
+		LDX #$7f5F			; M.Defense stat position
+		JSR !Draw3Digits
+		JSR $9371				; Define Attack
 ;C36002 BNW new data
-	BRA Skip				; skip over unused code, now freespace for helper function
+		BRA Skip				; skip over unused code, now freespace for helper function
 PowHelper:	
-	LDX #$300C				; use addresses $300C and $300D for hand Battle Powers
-	STX $E0					; save in temp variable
-	LDX $CE					; just want bottom half, top half will be ignored
-	CLC	
-	LDA $A0					; check for Gauntlet, setting Zero Flag accordingly
-	NOP	
-	RTS	
-	Skip:	
-	JSR $052E				; [vanilla] unchanged, left for context
+		LDX #$300C				; use addresses $300C and $300D for hand Battle Powers
+		STX $E0					; save in temp variable
+		LDX $CE					; just want bottom half, top half will be ignored
+		CLC	
+		LDA $A0					; check for Gauntlet, setting Zero Flag accordingly
+		NOP	
+		RTS	
+		Skip:	
+		JSR $052E				; [vanilla] unchanged, left for context
 ;C36010 'Till here
-	LDX #$7e5F			; Attack Text position
-	JSR $0486				; Draw 3 digits
-	LDY #$38CD				; Text position
-	JSR $34CF				; Draw actor name
-	LDY #$399D				; Text position
-	JSR $34E5				; Actor class...
-	JSR $F3BF				; EP Text
-	JSR $FC4B				; Next EL 
-	JSR $6102				; Draw commands
-	LDA #$20				; Palette 0
-	STA $29					; Color: User's
-	LDX #$6096				; Coords tbl ptr
-	JSR $0C6C				; Draw LV, HP, MP
-	LDX $67					; Actor's address
-;	LDA $0011,X				; Experience LB
-;	STA $F1					; Memorize it
-;	LDA $0012,X				; Experience MB
-;	STA $F2					; Memorize it
-;	LDA $0013,X				; Experience HB
-;	STA $F3					; Memorize it
-;	JSR $0582				; Turn into text
-;	LDX #$7AD9				; Text position
-;	JSR $04A3				; Draw 8 digits
-	JSR $60A0				; Get needed exp
-	JSR $0582				; Turn into text
-	LDX #$39A3				; Text position
-	JSR Digits_6			; Draw 6 digits
-	JSL.l C4B500			; reload yellow palette
-	JSR !HpMpDiff	        ; go to routine that set Hp/Mp difference
-	JSR !StatDiff	        ; go to routine that set stats difference	
-	LDX $0102	            ; load $0102 (ship status menu portrait values) 
-	STX $1E	                ; store
-	STZ $47					; Ailments: Off
-	JSR $11B0				; Hide ail. icons
-	JSR $625B				; Display status
-	REP #$20				; 16 bit-A
-	LDA $67					; Charachter
-	SBC #$1600				; Subtract base
-	TAY						; Index it
-	SEP #$20				; 8 bit-A
-	JSL light_up_statuses	; jump on the subroutine that light up text
-	RTS
+		LDX #$7e5F			; Attack Text position
+		JSR $0486				; Draw 3 digits
+		LDY #$38CD				; Text position
+		JSR $34CF				; Draw actor name
+		LDY #$399D				; Text position
+		JSR $34E5				; Actor class...
+		JSR $F3BF				; EP Text
+		JSR $FC4B				; Next EL 
+		JSR Gogo_commands		; Draw commands
+		LDA #$20				; Palette 0
+		STA $29					; Color: User's
+		LDX #$6096				; Coords tbl ptr
+		JSR $0C6C				; Draw LV, HP, MP
+		LDX $67					; Actor's address
+;		LDA $0011,X				; Experience LB
+;		STA $F1					; Memorize it
+;		LDA $0012,X				; Experience MB
+;		STA $F2					; Memorize it
+;		LDA $0013,X				; Experience HB
+;		STA $F3					; Memorize it
+;		JSR $0582				; Turn into text
+;		LDX #$7AD9				; Text position
+;		JSR $04A3				; Draw 8 digits
+		JSR $60A0				; Get needed exp
+		JSR $0582				; Turn into text
+		LDX #$39A3				; Text position
+		JSR Digits_6			; Draw 6 digits
+		JSL.l C4B500			; reload yellow palette
+		JSR !HpMpDiff	        ; go to routine that set Hp/Mp difference
+		JSR !StatDiff	        ; go to routine that set stats difference	
+		LDX $0102	            ; load $0102 (ship status menu portrait values) 
+		STX $1E	                ; store
+		STZ $47					; Ailments: Off
+		JSR $11B0				; Hide ail. icons
+		JSR $625B				; Display status
+C3607B:	REP #$20				; 16 bit-A
+		LDA $67					; Charachter
+		SBC #$1600				; Subtract base
+		TAY						; Index it
+		SEP #$20				; 8 bit-A
+		JSL light_up_statuses	; jump on the subroutine that light up text
+		RTS
 
 ; Draw 6 digits
 Digits_6:
@@ -1069,7 +1368,8 @@ org $C39382
 ;org $c3FC47
 ;	JSR Portrait_position
 	
-org $c36102
+org $c36505
+Gogo_commands:
 	ldy #$7975		; Gogo Tech
 	JSR $4598		;
 	ldy #$79f5		; Gogo Tech
@@ -1077,7 +1377,11 @@ org $c36102
 	LDY #$7a75		; Gogo Tech
 	JSR $45A5		;
 	ldy #$7af5		; Gogo Tech
+	JSR $45AD
+	RTS
 
+warnpc $C3652D
+	
 ; Navigation data for non-shifted Status menu
 org $C3370E
 	db $80          ; Wraps vertically
