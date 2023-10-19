@@ -718,6 +718,8 @@ EDFD2B:  LDA $47         ; Menu flags
          RTL              ; Exit
 .DELETE  CLC
 		 RTL
+org $ED5AC0
+incbin "../GFX/2D5AC0_Y_button_Sprite.bin"
 
 ;c4b8cc
 org $C4a700
