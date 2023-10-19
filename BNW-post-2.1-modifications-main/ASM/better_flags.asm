@@ -7,8 +7,8 @@ table "menu.tbl", ltr
 !numProps = #$0014		; how many properties to check for (should match size of tables at the bottom)
 !maxProps = #$0005		; how many properties are we willing to display?
 !overwriteRow = $C0DC6E
-!Continue = $C4B931
-!HealingWeapons = $C4B94D
+!Continue = $C4F3DE
+!HealingWeapons = $C4F3FA
 
 macro FakeShortC3(addr)
 	phk						; push 
@@ -158,10 +158,7 @@ itemweakness:		dw $7d0d-64 : db "Weakness",$00
 elementattack:		dw $7B8D-64 : db "Damage Type",$00
 itemowned:			dw $79CD    : db "Owned:",$00
 
-; clean up unused data
-padbyte $FF
-pad $C38E4F
-warnpc $C38E50
+
 
 ; stats value	
 org $C386AA : LDA #$8445-64	; vigor
@@ -240,7 +237,7 @@ OffensiveProps2:
 	JSL OffensiveProps2_long
 	RTS
 	
-org $C4B900
+org $C4F3AD
 OffensiveProps2_long:
   PHX
   LDA #$20             ; "user's color" palette (white)
