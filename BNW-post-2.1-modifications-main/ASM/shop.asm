@@ -134,7 +134,7 @@ org	$C3FA0F
 org $C3FB0A
 
 holdy:
-	db $1F,$79,"Y>shows>details.  ",$00
+	db $1F,$79,"Whatcha need?     ",$00
 shopvigor:
 	db $0d,$82,"Vigor",$00
 shopspeed:
@@ -415,3 +415,30 @@ check_stats:
 
 org $C3FAAD
 gear_desc:
+
+
+; Initialize Buy menu
+org $C3B7A3
+C3B7A3:  JSR $B8A0      ; Load navig data
+         JSR $B8A9      ; Relocate cursor
+         LDA #$08        ; Arm waving: On
+         TRB $47         ; Never off...
+         JSR $C09A      ; Create actors
+         JSR $C23B      ; Create signs
+C3B7B3:  LDY #$0100      ; X: 256
+         STY $39         ; Set BG2 X-Pos
+         LDY $00         ; Y: 0
+         STY $3B         ; Set BG2 Y-Pos
+         JSR $B986      ; Draw all text
+         JSR $BCFD      ; Build sign list
+         LDA #$26        ; C3/B4BD
+		 JMP C3B4D2		; Go to queue Hold Y sprite
+	
+org $C3B4D2
+C3B4D2:
+    STA $26         ; Next: Buy list
+    LDY #C3B4DA		; C3/B4DA
+	JMP $1173		; Queue OAM fn
+C3B4DA:
+	JSL EDFD12
+	RTS
