@@ -294,7 +294,7 @@ org $C39995
 	RTS
 warnpc $C3999A
 
-org $c3651A
+org $c36525
 refresh_bg3:
 	jsr $9e23
 	lda #$55
@@ -304,8 +304,3 @@ refresh_bg3:
 padbyte $FF
 pad $C3652C
 warnpc $C3652D
-
-Org $C3B4D2
-padbyte $EE
-pad $C3B4E5
-warnpc $C3B4E6
