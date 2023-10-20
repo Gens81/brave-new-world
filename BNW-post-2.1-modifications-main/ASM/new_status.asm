@@ -584,7 +584,7 @@ mute:       dw $3C79 : db $30,$27,$33,$00
 imp:        dw $3C7F : db $56,$29,$00
 
 muddle:     dw $3CB1 : db $30,$31,$32,$33,$00
-death:      dw $3CB9 : db $46,$47,$48,$00
+death:      dw $3CB9 : db $46,$38,$48,$00
 stop:       dw $3CBF : db $40,$41,$00
 
 petrify:    dw $3CF1 : db $2c,$2d,$2e,$2f,$00
@@ -601,13 +601,13 @@ regen:      dw $3DFF : db $20,$21,$22,$00
 atk:        dw $3e71 : db $38,$39,$3A,$00
 mag:        dw $3e7B : db $3B,$3C,$3D,$00
 cover:      dw $3eb1 : db $57,$58,$59,$00
-counter:    dw $3eBB : db $57,$5a,$5B,$5C,$00
+counter:    dw $3eBB : db $57,$3E,$3F,$59,$00
 HP_label:	dw $3eF1 : db $4E,$4F,$00
-MP_label:   dw $3eFB : db $3E,$4F,$00
+MP_label:   dw $3eFB : db $47,$4F,$00
 plus_HP_1:  dw $3eF1 : db $4E,$4F,$CA,$00
-plus_HP_2:  dw $3eF1 : db $4E,$4F,$CA,$3F,$00
-plus_MP_1:  dw $3eFB : db $3E,$4F,$CA,$00
-plus_MP_2:	dw $3EFB : db $3E,$4F,$CA,$3F,$00		
+plus_HP_2:  dw $3eF1 : db $4E,$4F,$CA,$0E,$00
+plus_MP_1:  dw $3eFB : db $47,$4F,$CA,$00
+plus_MP_2:	dw $3EFB : db $47,$4F,$CA,$0E,$00		
 
 
 
@@ -1044,20 +1044,22 @@ org $C3031c
 	
 org $C9fcf0
 change_palette:
-    cmp #$ED        ; Cmp if icon
-    BCS no_change   ; greater or equal?
-    cmp #$CF
-    BEQ change
-    cmp #$D7
-    BCC no_change
-change:    
-    LDA #$38
-    BRA color_change
+    cmp #$ED               ; Cmp if icon - Value over Ranged icon
+    BCS no_change          ; Branch if greater or equal
+    cmp #$D0            ; Star value?
+    BEQ change            ; Branch if so
+    cmp #$D7            ; Cmp if icon - Value below 
+    BCC no_change        ; Branch if so
+    LDA #$38            ; White colour
+    BRA color_change    ; Go to save in ram
 no_change:    
-    lda $29
+    lda $29                ; User colour
 color_change:    
-    sta [$EB],y
+    sta [$EB],y            ; Save in Ram
     rtl
+change: 
+    LDA #$34            ; Yellow colour
+    bra color_change    ; Go to save in ram
 
 org $C0814E
     jsr changeshadow
