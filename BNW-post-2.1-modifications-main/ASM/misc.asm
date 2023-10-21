@@ -547,6 +547,10 @@ org $C1C22A : NOP #2
 org $C0854F : LDA #$01
 org $C08579 : LDA #$01
 
+;Stray Flash by CDude
+org $D0784B 
+	db $A7	;fix flash tool sprite position
+
 ;Brave New World data
 org $C33BB8
-	db $d1,$78,"Brave New World 2.2 b20",$00
+	db $d1,$78,"Brave New World 2.2 b21",$00
