@@ -20,7 +20,7 @@ org $C4B6d9
 change_palette_fft:
 	cmp #$ED			; Cmp if icon
 	BCS	no_change_fft	; grater or equal?
-	cmp #$cf
+	cmp #$D0
 	BEQ change_fft
 	cmp #$D7
 	BCC no_change_fft
@@ -393,11 +393,13 @@ next_value:
 	JMP $7FD9               ; prepare print
 
 new_checkmark:
-	db $63                  ; 1st Tile
-	db $64                  ; 2nd Tile
-	db $65                  ; 3rd Tile
-	db $66                  ; 4th Tile
-	db $67                  ; 5th Tile
+	db $60                  ; 1st Tile
+	db $61                  ; 2nd Tile
+	db $62                  ; 3rd Tile
+	db $63                  ; 4th Tile
+	db $64                  ; 5th Tile
 
 warnpc $C3FD79
+
+
 	
