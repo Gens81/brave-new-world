@@ -17,7 +17,7 @@ org $D2BC99	;Gum pod
 	db $EB 
 
 org $D2BB7B
-	db $D8,"Defibr",$10,$11,"ator"
+	db $D8,"Defibr",$0C,$0D,"ator"
 
 org $D2B681	;Full Moon
 	db $EC
@@ -59,4 +59,3 @@ org $D2BEBB
     db $EB,"Dried>Meat  "
     
 warnpc $D2BFF3
-
