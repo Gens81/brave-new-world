@@ -170,7 +170,7 @@ spell:
 	db $E9,"X-Zone "
 	db $E9,"Meteor "
 	db $E9,"Ultima "
-	db $E9,"M",$08,$09,$0A,$0B,$0C,$0D
+	db $E9,"M",$08,$09,$0A,$0B,"wn"
 	db $E9,"Demi   "
 	db $E9,"Quartr "
 	db $E9,"Drain  "
