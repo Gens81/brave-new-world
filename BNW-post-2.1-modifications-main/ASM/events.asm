@@ -1,6 +1,66 @@
 arch 65816
 hirom
-  
+
+; King's Robes patch v1.3 by Leet Sketcher
+
+org $C13DB7
+outer_loop:
+	LDY #$0008      ; space-optimize these bit reversals into a loop
+    LDA $03C0,X
+    STA $10         ; one instruction replaces one
+    LDA $10C0,X
+inner_loop:
+    ASL $10         ; four instructions replace four
+    ROR $03C0,X
+    ASL A
+    ROR $10C0,X
+	DEY
+	BNE inner_loop
+    INX
+    DEC $12
+    BNE outer_loop
+    PLB
+    PLX
+    PLA
+    ASL A
+    ASL A
+    ASL A
+    ASL A
+    ASL A
+    PHX
+    TAX
+    LDA $2EAE,X     ; get sprite ID
+	CMP #$04        ; if it's Edgar's sprite...
+	BEQ tentacles   ; ...check if we're battling the Tentacles
+    CMP #$0E        ; if it's a soldier sprite...
+    BNE normal_pal  ; ...check if Locke's wearing a uniform
+    LDA $2EC6,X     ; character ID
+    DEC A           ; one for one
+    BNE normal_pal  ; branch if actual character isn't Locke
+    LDA $1EA0
+    AND #$08        ; "Locke wearing a soldier uniform" event bit check
+    BEQ normal_pal
+tentacles:
+	LDA $ECB8
+	CMP #$37        ; check if battle background ID is Tentacles
+	BEQ zero_pal    ; if so, Carry will be set
+	CLC             ; if not, Carry will be cleared
+zero_pal:
+    PLX
+    TDC
+	ROL A           ; load palette 1 iff it's Edgar during Tentacles battle
+    BRA continue
+
+padbyte $EA : pad $C13E1F
+
+org $C13E1F
+normal_pal:
+    PLX
+    LDA $C2CE2B,X
+
+continue:
+
+
 ; Moving Mog tutorial from South Figaro (relics) to Gogo's room (commands customization)
 
 org $CA790E
