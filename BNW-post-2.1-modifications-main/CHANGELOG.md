@@ -83,7 +83,7 @@
 
 - Edgar and Sabin dont blush anymore during Setzer proposal to Celes (Novalia Spirit)
 - Fix flash tool sprite position (FF6hacking)
-- Added 5 graphical fixes (Gi Nattak): bridge correction, button blunder, drained pond tile, oceanic line anomaly, tube job
+- Added 4 graphical fixes (Gi Nattak): bridge correction, button blunder, drained pond tile, tube job
 - Fixed Dumpty script (Gens)
 - Added Seibaby x-files (some almost invisible graphic imprecisions)
 - Fix storm glitch (Leet-Sketcher)
