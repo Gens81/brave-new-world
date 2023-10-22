@@ -401,5 +401,7 @@ new_checkmark:
 
 warnpc $C3FD79
 
+org $C4A755
+    LDA #$38				; white status labels
 
 	
