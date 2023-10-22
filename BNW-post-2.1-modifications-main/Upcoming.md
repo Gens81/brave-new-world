@@ -7,6 +7,7 @@
 - Menu opens to equip party in place of auto-optimize routine (Before Cranes, Phunbaba 3, Tentacles and Wrexsoul)
 - Fixed dual wield penalty shown regardless of whether you're using a second hand
 - Fixed If Near Fatal causes Zinger to be removed from a target, any remaining strikes will target whoever is in the 2nd slot
+- cleanup of misc.ips patching
 
 ### 2.2 roadmap (ordered by priority):
 
@@ -51,6 +52,7 @@
 - Banon riding chocobo pose 
 - Imperial camp dialogue fix (sabin aware of doma without speaking to Shadow)
 - Bottom shadow for menu letters q,p,g,y,j
+- Oceanic line anomaly
 
 ### BIB ideas:
 - Rods consume MP only when procs spells
