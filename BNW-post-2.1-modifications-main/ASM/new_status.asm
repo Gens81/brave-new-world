@@ -228,23 +228,16 @@ org $C36102
 C36102:
 	JSL Condense_Status_txt				; Draw menu; portrait
 	LDA #$01        					; Min slot: 8
-	LDY #C36124							; C3/6510
+	LDY #C36111							; C3/6510
 	JSR $1173							; Queue OAM fn
-	LDX $00		
-.loop		
-	LDA.l y_button,X					; Cursor, etc. color
-	STA $7E3219,X						; Save in RAM
-	STA $2122							; Put LB in CGRAM
-	INX			
-	CPX #$0008							; Done 4 colors?
-	BNE .loop							; Loop if not	
 	JMP $3541							; BRT:1 + NMI
 
-C36124:
+C36111:
 	JSL EDFCB0							; Jump to create pushing button
 	RTS
-	dl #$FFFFFF
-warnpc $c3612c		 
+padbyte $FF : pad $c36127
+
+warnpc $c36128		 
 
 ; 0B: Initialize Status menu
 ORG $C31C46
@@ -263,12 +256,12 @@ org $C321F5
 	JSR refresh_status_screen			; Refresh Screen
 
 ; Handle R
-org $C32202
-	jsr Clear_BG_L_R
+;org $C32202
+;	jsr Clear_BG_L_R
 
 ;Handle L
-org $C32228
-	jsr Clear_BG_L_R
+;org $C32228
+;	jsr Clear_BG_L_R
 		 
 ;[...]
 ; Fork: Handle B
