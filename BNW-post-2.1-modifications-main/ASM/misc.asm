@@ -418,11 +418,6 @@ org $C18739 : LDX #$0220  ; scrollbar reaching the end of the menu correctly
 org $C46DE9
 	db $30
 
-;Fix to totally drain Serpent Trench water pool
-
-org $CA8AD5
-	db $F7
-	
 ;Changing element tiles to print in inventory sub-menu
 
 org $D8E90E
@@ -550,6 +545,9 @@ org $C08579 : LDA #$01
 ;Stray Flash by CDude
 org $D0784B 
 	db $A7	;fix flash tool sprite position
+	
+; button_blunder (Gi Nattak)
+org $CA1B15 : db $0C	;correct button Graphic in Gogo endgame scene
 
 ;Brave New World data
 org $C33BB8
