@@ -16,23 +16,25 @@ org $C16578
 org $C16670
 	jsl lore_btl_palette
 
-org $C4B6d9
+org $C9fcf0
 change_palette_fft:
-	cmp #$ED			; Cmp if icon
-	BCS	no_change_fft	; grater or equal?
-	cmp #$D0
-	BEQ change_fft
-	cmp #$D7
-	BCC no_change_fft
-change_fft:	
-	LDA #$38
-	BRA color_change_fft
-no_change_fft:	
-	lda $29
-color_change_fft:	
-	sta [$eb],y
-	rtl
-warnpc $C4B6EE
+    cmp #$ED               ; Cmp if icon - Value over Ranged icon
+    BCS no_change_fft          ; Branch if greater or equal
+    cmp #$D0            ; Star value?
+    BEQ change_fft            ; Branch if so
+    cmp #$D7            ; Cmp if icon - Value below 
+    BCC no_change_fft        ; Branch if so
+    LDA #$38            ; White colour
+    BRA color_change    ; Go to save in ram
+no_change_fft:    
+    lda $29                ; User colour
+color_change_fft:    
+    sta [$EB],y            ; Save in Ram
+    rtl
+change_fft: 
+    LDA #$34            ; Yellow colour
+    bra color_change    ; Go to save in ram
+
 
 
 org $D095F0
