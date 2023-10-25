@@ -598,9 +598,9 @@ counter:    dw $3eBB : db $57,$3E,$3F,$59,$00
 HP_label:	dw $3eF1 : db $4E,$4F,$00
 MP_label:   dw $3eFB : db $47,$4F,$00
 plus_HP_1:  dw $3eF1 : db $4E,$4F,$CA,$00
-plus_HP_2:  dw $3eF1 : db $4E,$4F,$CA,$0E,$00
+plus_HP_2:  dw $3eF1 : db $4E,$4F,$CA,$D1,$00
 plus_MP_1:  dw $3eFB : db $47,$4F,$CA,$00
-plus_MP_2:	dw $3EFB : db $47,$4F,$CA,$0E,$00		
+plus_MP_2:	dw $3EFB : db $47,$4F,$CA,$D1,$00		
 
 
 
