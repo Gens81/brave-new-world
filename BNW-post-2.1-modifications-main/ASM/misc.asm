@@ -464,7 +464,8 @@ org $C198C5
     STZ $7B67
     LDA #$01
     STA $629E
-warnpc $C198CD
+    STA $E9C3
+warnpc $C198D0
 
 ;Preserves the Undead status set by the Ghost Ring when raging a non-undead monster
 ;Author: Fëanor
@@ -492,13 +493,19 @@ Splice:
     RTS
 warnpc !warn
 
-; Pressing X allows exiting the main menu from anywhere.
-; Author: Fëanor
-
+; -----------------------------------------------------------------------------
+; Synopsis: Adds hotkey to exit the main menu from anywhere.
+;   Author: Fëanor
+;  Created: 2023-07-21
+;  Updated: 2023-10-23
+; -----------------------------------------------------------------------------
 !free = $C3F6B0
 !warn = $C3F6CB
 
-org $C0C5D8 : LDA $08  ; load pressed buttons (no-autofire keys)
+!hotkey = #$10      ; Start
+
+; prevent mini-map toggling if Start is held for too long
+org $EE2028 : LDA $09   ; load pressed buttons (no-autofire keys)
 
 ; -----------------------------------------------------------------------------
 ; Menu State Loop
@@ -519,8 +526,8 @@ MenuLoopSplice:     ; [27 bytes]
     TDC             ; [displaced]
     LDA $0200       ; load menu type
     BNE +           ; branch if ^ not main menu
-    LDA $08         ; load pressed buttons (no-autofire keys)
-    AND #$40        ; check if X button is pressed
+	LDA $09         ; load pressed buttons (no-autofire keys)
+    AND !hotkey     ; check if hotkey is pressed
     BEQ +           ; branch if not ^
     STZ $0205       ; clear item used out-of-battle
     JSR $0EA9       ; play cursor sound effect (cancel)
@@ -530,6 +537,7 @@ MenuLoopSplice:     ; [27 bytes]
   + LDA $26         ; [displaced]
     RTS
 warnpc !warn
+
 
 ; #########################
 ; Fix sprite priority after cover (Bropedio)
