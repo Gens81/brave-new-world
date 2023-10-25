@@ -461,10 +461,10 @@ org $C3A4B2      ; Scrap the old "merged inputs" behaviour that was located here
 ; 255 attack bug fix
 
 org $C198C5
-    STZ $7B67
     LDA #$01
     STA $629E
     STA $E9C3
+    STZ $7B67
 warnpc $C198D0
 
 ;Preserves the Undead status set by the Ghost Ring when raging a non-undead monster
