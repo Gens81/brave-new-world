@@ -2,17 +2,25 @@
 
 ### b21 (not yet released)
 
+Features/tweaks
 - Added elemental properties to the status menu
 - Make Cyan join the party for Wrexsoul fight
 - Menu opens to equip party in place of auto-optimize routine (Before Cranes, Phunbaba 3, Tentacles and Wrexsoul)
+- Changed quote color and enemy flashing before any enemy "reaction"
+Fixes
 - Fixed dual wield penalty shown regardless of whether you're using a second hand
 - Fixed If Near Fatal causes Zinger to be removed from a target, any remaining strikes will target whoever is in the 2nd slot
-- cleanup of misc.ips patching
+- Cleanup of misc.ips patching
+- No splash screen, tweaked title with Brave New World subtitle
+- Removed Y toggle to see rerise learning percentage (It's now shown by default)
+- Elemental properties nomenclature and order changed to: Absorb, No Damage, Half Damage, Weakness
+- Added Cursed Shield/Auto-Regen interaction to the status screen
 
 ### 2.2 roadmap (ordered by priority):
 
 - Press A on a Rage to show details: Elemental weaknesses/resistance, Statuses immunities/innate
-- Compress title screen graphic and/or import Snaphat compression algorythm
+- Import Snaphat compression algorythm
+- Gray out null value in shop details screen 
 - Import Alphabetical Lore by Silent Enigma: useless for english version but useful for translations or future lores edits
 - Phoenix glitch fix
 - Disintegration animation for enemies that get petrified
@@ -21,15 +29,16 @@
 ### Events
 - When Lockes leaves the party in Returners Hideout
 	(Locke leaves in the wrong direction)
-	Edgar: "Uh, Locke..."
+	Edgar: "Uh, Locke_"
 	Locke: "Right."
 	(Leaves in the right direction)
-	Sabin: "...what do you see in that guy?"
+	Sabin: "_what do you see in that guy?"
 - Restore Shadow cutscene during Soul train fight
 - Banon's death reference at the end of Thamasa events 
 	Terra: Where's Banon?
-	Edgar: (head down) He... didn't make it out.
+	Edgar: (head down) He_<D> didn't make it out.
 - Add "CT - Mistery from the past" track to Ultima's sealed door
+- Add Esper portrait to the menu before Phunbaba 3rd fight
 
 ### "Bro new world" features candidates for porting:
 - Allow Esper menu to open "Curative Ally Targeting" submenu
