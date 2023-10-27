@@ -56,8 +56,8 @@ UpdateAura:
 SetColor:
   AND #$E0           ; clear "wait" bit
   JSR $1A0F          ; convert bitmask to bit index in X
-  LDA .color_table,X ; get outline colour
-.color_table
+  LDA.l .clr_table,X ; get outline colour
+.clr_table
   BRA AuraControl  ; implement
   db $04 ; Slow [unused]
   db $03 ; Haste [unused]
@@ -729,16 +729,16 @@ Cascade:
 
 PrepMove:
   LDA #$08
-  STA $14        ; set x_pos for miss tiles
+  STA $14         ; set x_pos for miss tiles
   LDA #$06
-  AND $1E        ; isolate bits 1-2 to get tile index (0, 2, or 4)
+  AND $1E         ; isolate bits 1-2 to get tile index (0, 2, or 4)
   TAX
-  REP #$20       ; 16-bit A
-  LDA MissOff,X  ; load tile data offset for miss message
+  REP #$20        ; 16-bit A
+  LDA.l MissOff,X ; load tile data offset for miss message
   JMP Prep2
 
 padbyte $FF
-pad $C1A531      ; 1 unused byte
+pad $C1A531       ; 1 unused byte
 
 ; ----------------------------------------------------------------------
 ; Label for informative miss

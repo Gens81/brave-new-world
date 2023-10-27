@@ -202,16 +202,16 @@ org $C0BE03
 
 org $C0D613
 Level18:
-  LDA $1D4D        ; config settings
-  AND #$08         ; "Experience Enabled"
-  BNE .lvlup       ; branch if ^ (else, A=0)
+  LDA $1D4D          ; config settings
+  AND #$08           ; "Experience Enabled"
+  BNE .lvlup         ; branch if ^ (else, A=0)
 .finish
-  JMP $9F35        ; A will be minimum new level
+  JMP $9F35          ; A will be minimum new level
 .lvlup
-  LDA $EB          ; event param
-  TAX              ; X = character #
-  LDA RejoinLvl,X  ; A = rejoin level
-  BRA .finish      ; set new level
+  LDA $EB            ; event param
+  TAX                ; X = character #
+  LDA.l RejoinLvl,X  ; A = rejoin level
+  BRA .finish        ; set new level
 
 RejoinLvl:
   db $15 ; Terra

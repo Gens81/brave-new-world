@@ -7,7 +7,7 @@ source "./settings.sh"
 
 # Helpers
 assemble () {
-  "${XKAS_PATH[@]}" $1 ../$rom_path
+  "$ASAR_PATH" $1 ../$rom_path
 }
 assemble_batch () {
   cd ../asm/$1

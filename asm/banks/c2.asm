@@ -213,12 +213,12 @@ UncontrollableCmds:
   LDX $F4            ; N: "Uncontrollable but not Berserked"
   BMI .no_bserk      ; branch if ^
   JSR $5217          ; X: index to bitmask, A: command bit in bitmask
-  AND ZombieCmds,X   ; command allowed when Berserked/Zombied
+  AND.l ZombieCmds,X  ; command allowed when Berserked/Zombied
   BEQ .skip2         ; branch if not ^
   BRA .skip3         ; else, branch
 .no_bserk
   JSR $5217          ; X: index to bitmask, A: command bit in bitmask
-  AND MuddleCmds,X   ; command allowed when Muddled/Charmed/Colosseum
+  AND.l MuddleCmds,X  ; command allowed when Muddled/Charmed/Colosseum
   BNE .skip3         ; branch if ^
 .skip2
   LDA #$FF           ; "null" command
@@ -229,7 +229,7 @@ UncontrollableCmds:
   LDA $01,S          ; current command
   LDX #$0B           ; prep next loop
 .special_loop
-  CMP SpecialCmds,X  ; matches command requiring special function
+  CMP.l SpecialCmds,X ; matches command requiring special function
   BNE .next          ; branch to next if not ^
   TXA                ; table index
   ASL                ; x2
@@ -694,7 +694,7 @@ TargetDamageMod:
   LDA $B2          ; attack bytes (looking at $B3)
   BPL .exit        ; exit if "Ignore Vanish" (sap/regen/poison)
 
-.self-dmg
+.self_dmg
   LDA $11A4        ; attack flags
   LSR              ; carry: "Healing"
   LDA $F0          ; damage so far
@@ -1737,9 +1737,9 @@ org $C226A0 : AND #$FE78 ; allow "Stop" immunity (EE -> FE)
 org $C22708
 ToolSkeanSpells:
   LDX #$06                 ; iterator for list of Spells as Tools/Skeans
-  CMP Tool_Data_1,X        ; check if this tool matches ^
+  CMP.l Tool_Data_1,X      ; check if this tool matches ^
   BNE .skip                ; exit if not ^
-  SBC Tool_Data_2,X        ; else, get spell number TODO: Just LDA
+  SBC.l Tool_Data_2,X      ; else, get spell number TODO: Just LDA
 org $C22716 : .skip
 
 ; -------------------------------------------------------------------------
@@ -3995,7 +3995,7 @@ DisableCommands:
   PHP                ; store flags
   REP #$30           ; 16-bit A,X/Y
   TXY                ; Y: character index
-  LDA MenuOffsets,X  ; character menu data offset
+  LDA.l MenuOffsets,X ; character menu data offset
   TAX                ; index it
   SEP #$20           ; 8-bit A
   LDA $3018,Y        ; character unique bit
@@ -4028,7 +4028,7 @@ DisableCommands:
   LSR                ; restore command ID (was ROR, causing CPX above to bug out)
   LDX #$0009         ; initialize command loop
 .loop
-  CMP ModifyCmds,X   ; current command matches special case
+  CMP.l ModifyCmds,X ; current command matches special case
   BNE .next          ; branch if not ^
   TXA                ; matched command index
   ASL                ; matched command index *2
@@ -4126,7 +4126,7 @@ CommandConversions:
   PHP               ; store flags
   REP #$30          ; 16-bit A, X/Y
   LDY $3010,X       ; offset to character info data
-  LDA MenuOffsets,X ; offset to character menu data
+  LDA.l MenuOffsets,X ; offset to character menu data
   STA $002181       ; set WRAM destination address
   LDA $1616,Y       ; commands 1 and 2
   STA $FC           ; save ^
@@ -4193,7 +4193,7 @@ CommandConversions:
 
   LDX #$05          ; prep special command loop
 .cmd_loop
-  CMP CmdBlanks,X   ; matches blankable command
+  CMP.l CmdBlanks,X ; matches blankable command
   BNE .next         ; branch if not ^
   TXA               ; index to blankable command
   ASL               ; x2 for jump table
@@ -4741,7 +4741,7 @@ ELTable:
   db $00,$00 ; null - Raiden?
 
 AddEL:
-  LDA ELTable,X   ; A = full 2-byte boost
+  LDA.l ELTable,X ; A = full 2-byte boost
   SEP #$20        ; 8-bit A
 .doone
   TYX             ; X = index to character stats

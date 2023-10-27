@@ -287,7 +287,7 @@ org $C33BB7
   RTS           ; automatically return from battle speed jump
 BNWText:   dw $78D1 : db "  Brave New World 2.1.0",$00
                       db "8 ",$00 ; TODO: Remove this text fragment
-BattleTxt: dw $3A4F : db "Battle","$00
+BattleTxt: dw $3A4F : db "Battle",$00
 warnpc $C33BDE+1
 padbyte $FF
 pad $C33BDE
@@ -2382,7 +2382,7 @@ ChkEsp:
   LDA $E0           ; load esper ID
   AND #$07          ; which bit of the equippability byte corresponds to this esper?
   TAY
-  LDA EsperData,X   ; get equippability byte for esper/character pair
+  LDA.l EsperData,X ; get equippability byte for esper/character pair
 - LSR               ; Do: shift right
   DEY               ; | Y--
   BPL -             ; + loop until Y negative
@@ -2868,7 +2868,7 @@ Unspent_EL:
   JSR $3519         ; initialize WRAM buffer with ^
   LDX $00           ; zero X
 .write_uel
-  LDA UnspentTxt,X  ; get "Unspent EL:" tile
+  LDA.l UnspentTxt,X ; get "Unspent EL:" tile
   BEQ .finish       ; break if EOL
   STA $2180         ; else, write to WRAM
   INX               ; next tile index
@@ -3307,7 +3307,7 @@ Learn_Chk:
 Pressed_A:
   LDA $4B           ; pointer index
   BNE .spell        ; branch if pointing at a spell
-  JMP $C358DF       ; vanilla "can equip esper" fork
+  JML $C358DF       ; vanilla "can equip esper" fork TODO: Use JMP
 .spell
   LDA $99           ; load esper ID
   STA $4202         ; set multiplier
