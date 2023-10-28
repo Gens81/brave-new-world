@@ -88,6 +88,33 @@ warnpc $c0ece0
 ; which number option finger cursor allow EL bonus
 org $C33BE2
 	cmp #$04		; row index description msg bouns print
+
+org $C33BE9
+	jmp SummonDescription
+	
+; ------------------------------------------------------------------------
+; Helper for Summon Descriptions (in freespace)
+
+org $C3876B           ; 29 bytes, we'll use 24 >.>
+SummonDescription:    ; Load Esper summon description
+  LDX #EsperDescPointers
+  STX $E7             ; Set ptr loc LBs
+  LDX $00
+  STX $EB             ; Set text loc LBs
+  LDA #$CB            ; Pointer/text bank
+  STA $E9             ; Set ptr loc HB
+  STA $ED             ; Set text loc HB
+  LDA #$10
+  TRB $45             ; Description: On
+  RTS                 ;   It expects (in a roundabout way) this value to be in the X
+                      ;   register in the event a character tries to equip an Esper
+                      ;   that doesn't belong to them, because it needs an offset to
+                      ;   a region of memory where there will be a large swath of
+                      ;   values below #$80 /shrug
+
+padbyte $FF : pad $C3877F
+
+
 	
 org $c3f7b6
 	cmp #$04		; on which row bonus must be given to actor
