@@ -32,7 +32,7 @@ color_change_fft:
     sta [$EB],y            ; Save in Ram
     rtl
 change_fft: 
-    LDA #$34            ; Yellow colour
+    LDA #$38            ; Yellow colour
     bra color_change    ; Go to save in ram
 
 
@@ -250,7 +250,7 @@ dw $0000,$4210,$5294,$7fff		;White font with gray shadow
 
 ; 6th row
 Yellow_fft:
-dw $0000,$4210,$39ce,$3544		;Yellow font (esper bonus points)
+dw $0000,$4210,$39ce,$3544		;Blue font (esper bonus points)
 dw $ffff,$ffff,$ffff,$ffff		;Null
 dw $ffff,$ffff,$ffff,$ffff		;Null
 dw $ffff,$ffff,$ffff,$ffff		;Null
@@ -262,6 +262,7 @@ dW $0000,$0000,$39ce,$7fff		;White font
 ; Btl Palette
 org $EEB15F
 dw $0000,$4210,$5294,$7fff		;User Color
+dw $0000,$4210,$39ce,$3544		;Blue (equip, turn, etc)
 
 
 Org $c36bee
@@ -406,4 +407,9 @@ warnpc $C3FD79
 org $C4A755
     LDA #$38				; white status labels
 
-	
+;counter text color
+
+!textcolor = #$10cd    ; custom text color = dark red
+
+org $C199B2
+    LDX !textcolor    ; set custom text color
