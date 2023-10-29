@@ -273,3 +273,16 @@ C38936:	 LDX #$7C2F
 padbyte $FF
 pad $C38982
 Warnpc $C38983
+
+org $C3f96c
+	jsr C38836
+org $C3f981
+	jsr C38836
+org $C3f99b
+	jsr C38836
+org $C3f9b0
+	jsr C38836
+org $C3Fa3e
+	jsr C3881A
+org $C3Fa6e
+	jsr C38847
