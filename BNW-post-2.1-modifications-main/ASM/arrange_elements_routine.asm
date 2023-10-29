@@ -103,11 +103,11 @@ C38847:  LDY #$9E89      ; 7E/9E89
 
 ; Text for evasion modifiers
 C38854:  db "  0",$00
-         db "+10",$00
-         db "+20",$00
-         db "+30",$00
-         db "+40",$00
-         db "+50",$00
+         db $CA,"10",$00
+         db $CA,"20",$00
+         db $CA,"30",$00
+         db $CA,"40",$00
+         db $CA,"50",$00
          db "-10",$00
          db "-20",$00
          db "-30",$00
@@ -116,13 +116,13 @@ C38854:  db "  0",$00
 
 ; Text for non-evasion stat modifiers
 C38880:  db " 0"
-         db "+1"
-         db "+2"
-         db "+3"
-         db "+4"
-         db "+5"
-         db "+6"
-         db "+7"
+         db $CA,"1"
+         db $CA,"2"
+         db $CA,"3"
+         db $CA,"4"
+         db $CA,"5"
+         db $CA,"6"
+         db $CA,"7"
          db " 0"         ; Unused
          db "-1"
          db "-2"
@@ -284,5 +284,11 @@ org $C3f9b0
 	jsr C38836
 org $C3Fa3e
 	jsr C3881A
-org $C3Fa6e
+org $C3Fa56
+	LDA.l C38854,X  ; Sign
+	STA $7E9E8B    ; Add to string
+	LDA.l C38854+1,X  ; Tens digit
+	STA $7E9E8C    ; Add to string
+	LDA.l C38854+2,X  ; Ones digit
+	STA $7E9E8D    ; Add to string
 	jsr C38847
