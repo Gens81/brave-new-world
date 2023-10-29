@@ -1268,13 +1268,13 @@ Hope you remembered to put him in the back row.
     <C> (Go Left)      <C> (Go Right)
 
 [caption #362]
-
+<A4>: Uh, <A1>_
 
 [caption #363]
-
+<A1>: Right.
 
 [caption #364]
-
+<A5>: What do you see in that guy?
 
 [caption #365]
 
@@ -9472,9 +9472,12 @@ Kefka: Oh dear_ you want to fight, don't you? <D>This is just dreadful!
 
 
 [caption #2663]
-
+Prepare to fight!
 
 [caption #2664]
+Are you ready?
+<C> Yes
+<C> No
 
 
 [caption #2665]
@@ -10785,11 +10788,11 @@ Kefka: I, Kefka, will knock you all down!
 
 [caption #3036]
 
-          _is xxxxxxxx. <E$08><OP$12>
+          _is ******. <E$08><OP$12>
 
 [caption #3037]
 
-     Got it? It's xxxxxxxx. <E$08><OP$12>
+     Got it? It's ******. <E$08><OP$12>
 
 [caption #3038]
 <A6>: Ugh_ <E$08><OP$12>
