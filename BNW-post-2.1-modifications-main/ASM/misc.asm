@@ -557,11 +557,6 @@ org $D0784B
 ; button_blunder (Gi Nattak)
 org $CA1B15 : db $0C	;correct button Graphic in Gogo endgame scene
 
-;Brave New World data
-org $C33BB8
-	db $d1,$78,"Brave New World 2.2 b21",$00
-	
-	
 ; ---------------------------------------------------------
 ; Support more colors for drawing esper names
 
@@ -587,3 +582,7 @@ DrawFromEsperMenu:
 warnpc $C3F4AA
 padbyte $FF
 pad $C3F4AA
+
+;Brave New World data
+org $C33BB8
+	db $d1,$78,"Brave New World 2.2 b21",$00
