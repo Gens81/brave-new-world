@@ -560,3 +560,30 @@ org $CA1B15 : db $0C	;correct button Graphic in Gogo endgame scene
 ;Brave New World data
 org $C33BB8
 	db $d1,$78,"Brave New World 2.2 b21",$00
+	
+	
+; ---------------------------------------------------------
+; Support more colors for drawing esper names
+
+org $C3F480
+DrawEsperName:
+  LDA #$24          ; "blue" palette
+  STA $29           ; set palette color
+  PHY               ; store tile position
+  JSR $34CF         ; draw character name
+  LDA #$34          ; "pink" unset palette (RAM noise)
+  STA $29           ; set palette color
+  REP #$20          ; 16-bit A
+  PLA               ; get tile position
+  CLC               ; prepare add
+  ADC #$0020        ; advance 16 spaces
+  TAY               ; store new tile position
+  SEP #$20          ; 8-bit A
+DrawFromEsperMenu:
+  JSR $34E6         ; draw esper name 
+  LDA #$20          ; "white" palette
+  STA $29           ; set palette color
+  RTS
+warnpc $C3F4AA
+padbyte $FF
+pad $C3F4AA
