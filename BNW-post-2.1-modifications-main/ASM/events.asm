@@ -133,6 +133,55 @@ StepBack:
     db $31,$82,$82,$FF          ; action queue for player character
     db $FE                      ; return
 
+ ; -----------------------------------------------------------------------------
+; Extends the scene with the Returners before the Lete River segment:
+; - (Locke leaves the screen in the wrong direction)
+; - Edgar: "Uh, Locke…"
+; - Locke: "Right."
+; - (Locke reappears, walks across the room and leaves in the right direction)
+; - Sabin: "What do you see in that guy?"
+;
+; The event script has to be edited in two places since are two slighty
+; different scenes playing out depending on if Terra answered "Yes" or three
+; times "No" when asked by Banon. All edits are inline, that is, they do not
+; require additional freespace.
+; -----------------------------------------------------------------------------
+
+; Scene A: Terra answers three times with "No"
+org $CAFF3E
+    db $01,$85,$C2,$CD,$A1,$92  ; action queue for Locke
+    db $FF                      ; ^ continued
+    db $92                      ; wait for 30 frames (1/2 second)
+    db $04,$82,$CD,$FF          ; action queue for Edgar
+    db $4B,$6B,$01              ; display caption $16B (#362)
+    db $4B,$6C,$01              ; display caption $16C (#363)
+    db $04,$02,$CC,$FF          ; action queue for Edgar
+    db $00,$02,$CC,$FF          ; action queue for Terra
+    db $01,$86,$94,$8B,$A2,$A2  ; action queue for Locke
+    db $8E,$FF                  ; ^ continued
+    db $94                      ; wait for 60 frames (1 second)
+    db $4B,$6D,$01              ; display caption $16D (#364)
+    db $94                      ; wait for 60 frames (1 second)
+    db $04,$82,$80,$FF          ; action queue for Edgar
+padbyte $FD : pad $CAFF79
+
+; Scene B: Terra answers with "Yes"
+org $CB0343
+    db $01,$83,$C2,$92,$FF      ; action queue for Locke
+    db $92                      ; wait for 30 frames (1/2 second)
+    db $04,$82,$CD,$FF          ; action queue for Edgar
+    db $4B,$6B,$01              ; display caption $16B (#362)
+    db $4B,$6C,$01              ; display caption $16C (#363)
+    db $04,$02,$CC,$FF          ; action queue for Edgar
+    db $00,$02,$CC,$FF          ; action queue for Terra
+    db $01,$86,$90,$8B,$A2,$A2  ; action queue for Locke
+    db $8E,$FF                  ; ^ continued
+    db $94                      ; wait for 60 frames (1 second)
+    db $4B,$6D,$01              ; display caption $16D (#364)
+    db $94                      ; wait for 60 frames (1 second)
+    db $04,$82,$80,$FF          ; action queue for Edgar
+padbyte $FD : pad $CB037E
+
 
 ;;; Sealed by... song data (overwritten song ends at $C98D84, added twelve 00 bytes)	
 ;;org $C98CE8
