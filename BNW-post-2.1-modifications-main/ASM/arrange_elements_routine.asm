@@ -25,7 +25,10 @@ org $C38700
 	
 org $C3872D	
 	JSR C387EB      ; Draw evasions
-	JSR C388A0      ; Draw 50% elems
+;	JSR C388A0      ; Draw 50% elems
+	nop
+	nop
+	nop
 	JSR C38959      ; Draw other ones
 
 org $C38746
@@ -165,21 +168,23 @@ C388CX:	LDA $26
 		BEQ C388F8
 		
 ; Draw list of attack or halved elements
-C388CE:	LDX #$7B2D      ; Tilemap ptr
-		BRA C388F8		; Draw Element
-		
+C388CE:	LDX #$7B2D       ; Tilemap ptr
+		BRA C388F8		 ; Draw Element
+; Draw list of Halved Elements
+C388XX: LDX #$7C2D       ; Tilemap ptr
+		BRA C388F8       ; Draw Element
 ; Draw list of absorbed elements
-C388DA: LDX #$7Ba9      ; Tilemap ptr
+C388DA: LDX #$7B2D       ; Tilemap ptr
 		BRA C388F8		 ; Draw Element
 ; Draw list of nulled elements
-C388E6: LDX #$7C2D      ; Tilemap ptr
+C388E6: LDX #$7BA9       ; Tilemap ptr
 		BRA C388F8		 ; Draw Element
 ; Draw list of elemental weaknesses
-C388F2: LDX #$7CA9      ; Tilemap ptr
+C388F2: LDX #$7CA9       ; Tilemap ptr
 
-C388F8:	STX $EB         ; Set dest LBs
-        LDA #$7E        ; Bank: 7E
-        STA $ED         ; Set dest HB
+C388F8:	STX $EB          ; Set dest LBs
+        LDA #$7E         ; Bank: 7E
+        STA $ED          ; Set dest HB
 
 ; Draw current list of elements
 C388FE:  TDC             ; Clear A
@@ -237,7 +242,12 @@ C38937:  TDC             ; Clear A
 ; Build and draw list of absorbed, nulled, and weak elements
 C38959:  LDX $2134       ; Item index
          TDC             ; ...
-         LDA $D85016,X   ; Absorbed elements
+         LDA $D8500F,X   ; Elements
+         JSR C388AE      ; Build list
+		 JSR C388XX		 ; Draw list
+         LDX $2134       ; Item index
+         TDC             ; ...		 
+		 LDA $D85016,X   ; Absorbed elements
          JSR C388AE      ; Build list
          JSR C388DA      ; Draw list
          LDX $2134       ; Item index
@@ -252,20 +262,23 @@ C38959:  LDX $2134       ; Item index
          JMP C388F2      ; Draw list
 		 
 ; Build and draw list of halved absorbed, nulled, and weak elements from C4B6EE new status routine
-C38936:	 LDX #$7C2F
-		 LDA $D8
+C38936:	 LDX #$7C2F		 ; 1st Row ptr
+		 LDA $D9		 ; Absorb
 		 JSR C388AE      ; Build list
-         JSR C388F8      ; Draw list		 
-		 LDX #$7CEF
-		 LDA $D9
+         JSR C388F8      ; Draw list	
+		 
+		 LDX #$7CEF		 ; 2nd Row ptr
+		 LDA $DA		 ; No DMG
 		 JSR C388AE      ; Build list
          JSR C388F8      ; Draw list
-		 LDX #$7DAF
- 		 LDA $DA
+		 
+		 LDX #$7DAF		 ; 3rd Row ptr
+ 		 LDA $D8		 ; Half DMG
 		 JSR C388AE      ; Build list
-         JSR C388F8      ; Draw list		 
-		 LDX #$7E6F
-		 LDA $DB	
+         JSR C388F8      ; Draw list		
+		 
+		 LDX #$7E6F		 ; 4th Row ptr
+		 LDA $DB		 ; Weakness	
 		 JSR C388AE      ; Build list
          JSR C388F8      ; Draw list
 		 RTL

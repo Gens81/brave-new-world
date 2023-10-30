@@ -151,14 +151,14 @@ itemspeed:			dw $852f-64 : db "Speed",$00
 itemattack:			dw $862f-64 : db "Attack",$00
 itemdefense:		dw $86af-64 : db "Defense",$00
 itemmdefense:		dw $87af-64 : db "M.Def.",$00
-itemresist:			dw $7b8d-64 : db "Resist",$00
-itemabsorb:			dw $7c0d-64 : db "Absorb",$00
-itemnullify:		dw $7c8d-64 : db "Nullify",$00
+itemresist:			dw $7C8D-64 : db "Half Damage",$00
+itemabsorb:			dw $7B8D-64 : db "Absorb",$00
+itemnullify:		dw $7C0D-64 : db "No Damage",$00
 itemweakness:		dw $7d0d-64 : db "Weakness",$00
 elementattack:		dw $7B8D-64 : db "Damage Type",$00
 itemowned:			dw $79CD    : db "Owned:",$00
 
-
+warnpc $C38E35
 
 ; stats value	
 org $C386AA : LDA #$8445-64	; vigor

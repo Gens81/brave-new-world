@@ -271,12 +271,88 @@ org $C38A54
 ;------------------------------------------------------
 ;Hide rare counter item and expand description box
 ;------------------------------------------------------
+; Some changes for free up space 
+; Moving Compute item data index next to Prepare item description loadin can permit to gain 
+; 10 $FF bytes + the 52 bytes over the compute routine but it's called from 34 routines 
+ORG $C31F35
+    JMP $0F39      ; Queue its upload
+	DL $FFFFFF		; Clean up old JSR
+	
+ORG $C32772
+    JMP $0F39      ; Queue its upload
+	DL $FFFFFF		; Clean up old JSR	
+	RTS				; Labelled
+	
 
-org $c3837f 
-    ldx #$7ac5        ;Set rare item counter out of bounds and hide it
-    
-org $c38e4a
-    db $c5,$7a,$ff,$ff,$ff,$00    ;Set blank tile over the numbers
+ORG $C3A1D8
+	JSR C38308
+ORG $C3B4EF
+	JSR C38308
+ORG $C3B4F8
+	JSR C38308
+ORG $C39F6A
+	JSR C38308
+ORG $C3FF00
+	JSR C38308
+	
+	
+; Load common item's description and draw item count in Item menu
+org $C382F1
+C382F1:  JSR C38308      ; Set desc ptrs
+         TDC             ; Clear A
+         LDA $4B         ; Cursor slot
+         TAY             ; Index it
+         LDA $1869,Y     ; Item in slot
+         JMP $5738
+
+; Prepare item description loading
+C38308:  LDX #$7AA0      ; ED/7AA0
+         STX $E7         ; Set ptr loc LBs
+         LDX #$6400      ; ED/6400
+         STX $EB         ; Set text loc LBs
+         LDA #$ED        ; Bank: ED
+         STA $E9         ; Set ptr loc HB
+         LDA #$ED        ; ...
+         STA $ED         ; Set text loc HB
+         LDX #$9EC9      ; 7E/9EC9
+         STX $2181       ; Set WRAM LBs
+         RTS
+
+padbyte $FF
+Pad $C38321
+warnpc $C38321
+
+; Compute item data index
+;C38321:  PHA             ; Save item
+;C38322:  LDA $4212       ; PPU status
+;         AND #$40        ; H-Blank?
+;         BEQ C38322      ; Loop if not
+;         PLA             ; Item
+;         STA $211B       ; Set matrix A LB
+;         STZ $211B       ; Clear HB
+;         LDA #$1E        ; Item data size
+;         STA $211C       ; Set matrix B
+;         STA $211C       ; ...
+;         RTS
+		 
+; Load rare item's description and draw item count
+org $C38339
+C38339:  LDX #$FB60      ; CE/FB60
+         STX $E7         ; Set ptr loc LBs
+         LDX #$FCB0      ; CE/FCB0
+         STX $EB         ; Set text loc LBs
+         LDA #$CE        ; Bank: CE
+         STA $E9         ; Set ptr loc HB
+         STA $ED         ; Set text loc HB
+         JSR $572A      ; Load description
+         LDA #$20        ; Palette 0
+         STA $29         ; Color: User's
+         RTS
+
+padbyte $FF
+PAD $C38385
+warnpc $C38385
+
 
 ;------------------------------------------------------------------
 ;New consumable icon
