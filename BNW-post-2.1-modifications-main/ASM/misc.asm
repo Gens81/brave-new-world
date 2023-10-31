@@ -659,6 +659,10 @@ warnpc $C3F4AA
 padbyte $FF
 pad $C3F4AA
 
+;changed Exp. to XP
+org $C349AC 
+	db "XP gain ",$00	
+
 ;Brave New World data
 org $C33BB8
 	db $d1,$78,"Brave New World 2.2 b21",$00
