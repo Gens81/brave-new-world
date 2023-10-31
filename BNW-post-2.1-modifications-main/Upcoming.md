@@ -11,15 +11,18 @@ Fixes
 - Fixed dual wield penalty shown regardless of whether you're using a second hand
 - Fixed If Near Fatal causes Zinger to be removed from a target, any remaining strikes will target whoever is in the 2nd slot
 - Cleanup of misc.ips patching
-- No splash screen, tweaked title with Brave New World subtitle
+- Removed splash screen
 - Removed Y toggle to see rerise learning percentage (It's now shown by default)
 - Elemental properties nomenclature and order changed to: Absorb, No Damage, Half Damage, Weakness
 - Added Cursed Shield/Auto-Regen interaction to the status screen
+- Added XP and EP to the "Next" line on status screen
 
 ### 2.2 roadmap (ordered by priority):
 
 - Press A on a Rage to show details: Elemental weaknesses/resistance, Statuses immunities/innate
+- Added Brave New World subtitle to the ingame animated title
 - Import Snaphat compression algorythm
+- Customize command on the default command window
 - Gray out null value in shop details screen 
 - Import Alphabetical Lore by Silent Enigma: useless for english version but useful for translations or future lores edits
 - Phoenix glitch fix
