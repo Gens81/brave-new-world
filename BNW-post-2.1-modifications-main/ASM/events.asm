@@ -182,6 +182,49 @@ org $CB0343
     db $04,$82,$80,$FF          ; action queue for Edgar
 padbyte $FD : pad $CB037E
 
+; -----------------------------------------------------------------------------
+; By default, Shadow and Relm behave slightly differently after being rescued
+; from the Cave on the Veldt and taken back to Thamasa. Shadow will leave as
+; soon as the player exits Thamasa. Relm, however, will only leave after the
+; player exits town, re-enters Strago's house, and exits town again. This hack
+; changes Relm's behavior to match Shadow's.
+;
+; The space required to make this edit inline comes from the fact that there's
+; a redundant event command at CB7B27.
+;
+; CB7B21: C0 A3 80 E3 7B 01     ; if $0A3==On (Shadow Died) jump to CB7BE3 else continue
+; CB7B27: DA 56                 ; set event bit $556 (Thamasa: Shadow in bed)
+;
+; This event command is redundant due to an earlier call to CB7A0C.
+;
+; CB7AA3: B2 0C 7A 01           ; call subroutine CB7A0C
+;
+; CB7A0C: C0 A3 80 15 7A 01     ; if $0A3==On (Shadow Died) jump to CB7A15 else continue
+; CB7A12: DA 56                 ; set event bit $556 (Thamasa: Shadow in bed)
+; CB7A14: FE                    ; return
+; CB7A15: DA 66                 ; set event bit $566 (Thamasa: Relm in bed)
+; CB7A17: FE                    ; return
+; -----------------------------------------------------------------------------
+
+; set event bit that makes character leave as soon as player exits Thamasa for
+; both Relm and Shadow
+org $CB7B21
+    db $D2,$9E                  ; set event bit $19E (Shadow/Relm leaves immediately)
+    db $C0,$A3,$80,$E3,$7B,$01  ; if $0A3==On (Shadow Died) jump to CB7BE3 else continue
+
+; clear event command that sets $19E inside Shadow-exclusive branch
+org $CB7BDA : db $FD,$FD        ; replace with NOPs
+
+; remove Relm's initial response ("…") to mirror Shadow's behavior by changing
+; the event address of her NPC to CB7D24 (formerly CB7D1C)
+org $C45F7C : db $24            ; set event address to CB7D24
+
+; clear event script that's now unreachable because event address was changed
+org $CB7D1C : padbyte $FE : pad $CB7D24
+
+; clear event script for Relm's initial response ("…")
+org $CB7D58 : padbyte $FE : pad $CB7D5C
+
 
 ;;; Sealed by... song data (overwritten song ends at $C98D84, added twelve 00 bytes)	
 ;;org $C98CE8
