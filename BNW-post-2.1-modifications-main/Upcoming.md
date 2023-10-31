@@ -6,16 +6,20 @@ Features/tweaks
 - Added elemental properties to the status menu
 - Make Cyan join the party for Wrexsoul fight
 - Menu opens to equip party in place of auto-optimize routine (Before Cranes, Phunbaba 3, Tentacles and Wrexsoul)
-- Changed quote color and enemy flashing before any enemy "reaction"
+- Changed quote color and/or enemy flashing before any enemy "reaction
+- New Locke scene when leaving Returners Hideout
+- Relm recruitable in Owzer's mansion directly after saving her in the Veldt Cave
+- Added blinking Y button to the status and shop screens
+
 Fixes
-- Fixed dual wield penalty shown regardless of whether you're using a second hand
-- Fixed If Near Fatal causes Zinger to be removed from a target, any remaining strikes will target whoever is in the 2nd slot
 - Cleanup of misc.ips patching
 - Removed splash screen
-- Removed Y toggle to see rerise learning percentage (It's now shown by default)
 - Elemental properties nomenclature and order changed to: Absorb, No Damage, Half Damage, Weakness
 - Added Cursed Shield/Auto-Regen interaction to the status screen
 - Added XP and EP to the "Next" line on status screen
+- Removed Y toggle to see rerise learning percentage (It's now shown by default)
+- Fixed dual wield penalty shown regardless of whether you're using a second hand
+- Fixed If Near Fatal causes Zinger to be removed from a target, any remaining strikes will target whoever is in the 2nd slot
 
 ### 2.2 roadmap (ordered by priority):
 
@@ -30,12 +34,6 @@ Fixes
 - Align hand cursor to text where needed
 
 ### Events
-- When Lockes leaves the party in Returners Hideout
-	(Locke leaves in the wrong direction)
-	Edgar: "Uh, Locke_"
-	Locke: "Right."
-	(Leaves in the right direction)
-	Sabin: "_what do you see in that guy?"
 - Restore Shadow cutscene during Soul train fight
 - Banon's death reference at the end of Thamasa events 
 	Terra: Where's Banon?
