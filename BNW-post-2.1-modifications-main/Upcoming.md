@@ -17,6 +17,7 @@ Fixes
 - Elemental properties nomenclature and order changed to: Absorb, No Damage, Half Damage, Weakness
 - Added Cursed Shield/Auto-Regen interaction to the status screen
 - Added XP and EP to the "Next" line on status screen
+- Changed all exp. references to XP (battle strings shows both)
 - Removed Y toggle to see rerise learning percentage (It's now shown by default)
 - Fixed dual wield penalty shown regardless of whether you're using a second hand
 - Fixed If Near Fatal causes Zinger to be removed from a target, any remaining strikes will target whoever is in the 2nd slot
