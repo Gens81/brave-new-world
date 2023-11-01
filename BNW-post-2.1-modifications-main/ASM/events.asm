@@ -57,7 +57,6 @@ org $C13E1F
 normal_pal:
     PLX
     LDA $C2CE2B,X
-
 continue:
 
 
@@ -89,51 +88,7 @@ org $CC204B
     db $FD,$FD                  ; clear redundant hide command
 warnpc $CC2053
 
-; skip to banquet option (Fëanor)
-
-!free = $CB5790
-!offset = $CA0000
-
-; update event script of left door
-org $CC85E3
-    db $C0,$27,$01              ; always jump to target
-    dl LeftDoor-!offset         ; ^ continued
-padbyte $FE : pad $CC85EB
-
-; update event script of right door
-org $CC860D
-    db $C0,$27,$01              ; always jump to target
-    dl RightDoor-!offset        ; ^ continued
-padbyte $FE : pad $CC8615
-
-org $CC8A96 : Banquet:          ; entry point when timer expires
-
-; new event code that gives the player the option to skip directly to the
-; banquet during the "talk to the soldiers" segment
-org !free
-LeftDoor:
-    db $C1,$3C,$81,$F1,$81,$B3  ; [displaced] if $13C==On || $1F1==On return else
-    db $5E,$00                  ; [displaced] ^ continue
-    db $C0,$7C,$00,$EB,$85,$02  ; if $07C==Off jump to $CC85EB else continue
-    db $C0,$27,$01              ; always jump to target
-    dl Choice-!offset           ; ^ continued
-RightDoor:
-    db $C1,$3C,$81,$F1,$81,$B3  ; [displaced] if $13C==On || $1F1==On return else
-    db $5E,$00                  ; [displaced] ^ continue
-    db $C0,$7C,$00,$15,$86,$02  ; if $07C==Off jump to $CC8615 else continue
-    db $C0,$27,$01              ; always jump to target
-    dl Choice-!offset           ; ^ continued
-Choice:
-    db $4B,$DD,$06              ; display caption $06DD
-    db $B6                      ; jump based on choice
-    dl StepBack-!offset         ; ^ continued
-    dl Banquet-!offset          ; ^ continued
-    db $FE                      ; return
-StepBack:
-    db $31,$82,$82,$FF          ; action queue for player character
-    db $FE                      ; return
-
- ; -----------------------------------------------------------------------------
+; -----------------------------------------------------------------------------
 ; Extends the scene with the Returners before the Lete River segment:
 ; - (Locke leaves the screen in the wrong direction)
 ; - Edgar: "Uh, Locke…"
@@ -225,6 +180,230 @@ org $CB7D1C : padbyte $FE : pad $CB7D24
 ; clear event script for Relm's initial response ("…")
 org $CB7D58 : padbyte $FE : pad $CB7D5C
 
+; -----------------------------------------------------------------------------
+; EVENT EDITS THAT REQUIRE FREESPACE
+; -----------------------------------------------------------------------------
+
+; used to calculate relative offsets for jumps and subroutine calls
+!base = $CA0000
+
+; points to a large chunk of freespace within the event script block gained by
+; getting rid of the event code for the Auction House.
+; Note: the gap to the previous data is on purpose in case that needs expansion
+org $CB5790 : EventScriptFreespace_0:
+
+; -----------------------------------------------------------------------------
+; This hacks ports a QoL feature from the Pixel Remaster to BNW. During the
+; sequence before the Imperial banquet where you have to talk to a bunch of
+; soldiers the player has now the opportunity to skip ahead to the banquet if
+; so desired. Attempting to use one of the two doors behind the throne will
+; open a dialog box with the choice to continue or skip ahead to the banquet.
+; -----------------------------------------------------------------------------
+
+; slice into event script of left door
+org $CC85E3
+    db $C0,$27,$01              ; always jump to target
+    dl LeftDoor-!base           ; ^ continued
+padbyte $FE : pad $CC85EB
+
+; slice into event script of right door
+org $CC860D
+    db $C0,$27,$01              ; always jump to target
+    dl RightDoor-!base          ; ^ continued
+padbyte $FE : pad $CC8615
+
+org $CC8A96 : Banquet:          ; entry point when timer expires
+
+; new event code that gives the player the option to skip directly to the
+; banquet during the "talk to the soldiers" segment
+org EventScriptFreespace_0
+LeftDoor:
+    db $C1,$3C,$81,$F1,$81,$B3  ; [displaced] if $13C==On || $1F1==On return else
+    db $5E,$00                  ; [displaced] ^ continue
+    db $C0,$7C,$00,$EB,$85,$02  ; if $07C==Off jump to $CC85EB else continue
+    db $C0,$27,$01              ; always jump to target
+    dl Choice-!base             ; ^ continued
+RightDoor:
+    db $C1,$3C,$81,$F1,$81,$B3  ; [displaced] if $13C==On || $1F1==On return else
+    db $5E,$00                  ; [displaced] ^ continue
+    db $C0,$7C,$00,$15,$86,$02  ; if $07C==Off jump to $CC8615 else continue
+    db $C0,$27,$01              ; always jump to target
+    dl Choice-!base             ; ^ continued
+Choice:
+    db $4B,$DD,$06              ; display caption $06DD
+    db $B6                      ; jump based on choice
+    dl StepBack-!base           ; ^ continued
+    dl Banquet-!base            ; ^ continued
+    db $FE                      ; return
+StepBack:
+    db $31,$82,$82,$FF          ; action queue for player character
+    db $FE                      ; return
+EventScriptFreespace_1:
+
+; ----------------------------------------------------------------------------
+; This hack implements a new event command $9E that allows opening the main
+; menu as part of the event script. This new feature is used at various points
+; in the game, namely
+; - before Cranes battle
+; - before Tentacles battle
+; - before Phunbaba 3 battle
+; - before Wrexsoul battle
+; to give players the opportunity to equip newly joined party members instead
+; of having them join auto-equipped.
+; ----------------------------------------------------------------------------
+
+!free = $C0DCC7     ; requires 9 bytes in C0
+!warn #= !free+9    ; provides 9 bytes
+
+; update event command jump table
+org $C09996 : dw OpenMainMenu
+
+; implement new event command $9E that opens main menu
+org !free
+OpenMainMenu:       ; [9 bytes]
+    STZ $0200       ; set menu type ($00 = main menu)
+    STZ $0201       ; disable Warp
+    JMP $B0A1       ; reuse code from event command $9D (final battle party select)
+warnpc !warn
+
+; slice into event before Cranes battle
+org $CB40E1
+    db $B2                      ; jump to new event code
+    dl Cranes-!base             ; ^ continued
+warnpc $CB40E5
+
+; slice into event before Tentacles battle
+org $CA6AE4
+    db $B2                      ; jump to new event code
+    dl Tentacles-!base          ; ^ continued
+warnpc $CA6AE8
+
+; make some adjustments to event script after Tentacles battle to compensate
+; for the fact that the map had to be reloaded
+org $CA6B3B
+    db $3D,$1B                  ; create NPC 11
+    db $3D,$1C                  ; create NPC 12
+    db $3D,$1D                  ; create NPC 13
+    db $3D,$1E                  ; create NPC 14
+    db $45                      ; update objects
+    db $1B,$07,$D5,$1D,$05,$D0  ; action queue for NPC 11
+    db $9A,$CF,$FF              ; ^ continued
+    db $91                      ; wait for 15 frames (1/4 second)
+    db $1C,$07,$D5,$1D,$05,$D0  ; action queue for NPC 12
+    db $96,$CD,$FF              ; ^ continued
+    db $91                      ; wait for 15 frames (1/4 second)
+    db $1D,$06,$D5,$1D,$05,$D0  ; action queue for NPC 13
+    db $92,$FF                  ; ^ continued
+    db $91                      ; wait for 15 frames (1/4 second)
+    db $1E,$87,$D5,$1D,$05,$D0  ; action queue for NPC 14
+    db $8E,$CC,$FF              ; ^ continued
+warnpc $CA6B6E : padbyte $FD : pad $CA6B6E
+
+; remove Terra's auto-equip before Phunbaba 3 battle
+org $CC4CD6 : db $FD,$FD        ; replace event command with NOPs
+
+; slice into event before Phunbaba 3 battle
+org $CC4CE8
+    db $B2                      ; jump to new event code
+    dl BeforePhunbaba-!base     ; ^ continued
+warnpc $CC4CEC
+
+; set correct battle background for Phunbaba 3 battle since battle is invoked
+; from another map
+org $CC4CEE : db $05            ; set battle bg $05 = Field (WoR)
+
+; slice into event after Phunbaba 3 battle
+org $CC4CEF
+    db $B2                      ; jump to new event code
+    dl AfterPhunbaba-!base      ; ^ continued
+warnpc $CC4CF3
+
+; slice into event before Wrexsoul battle
+org $CB97EA
+    db $B2                      ; jump to new event code
+    dl Wrexsoul-!base           ; ^ continued
+    db $4D,$5C,$1A              ; Battle Enemy Set $5C, Background Scenery $1A
+    db $F0,$00                  ; play song $00 = Silence
+    db $B2,$A9,$5E,$00          ; call subroutine $CA5EA9 (post-battle)
+    db $D2,$CC                  ; set event bit $1CC = Song Override
+    db $DB,$48                  ; clear event bit $548
+    db $6B,$7E,$20,$19,$0D,$C0  ; load map $207E = Doma Castle: Interior (Cyan's Dream)
+warnpc $CB9802 : padbyte $FD : pad $CB9802
+
+org EventScriptFreespace_1
+MainMenu:
+    db $F2,$10                  ; fade out current song with speed $10
+    db $6B,$03,$04,$08,$10,$40  ; load map $0403 = Empty Map
+    db $96,$5C                  ; fade screen back in (wait until complete)
+    db $4B,$68,$0A              ; display caption $A68 (#2663)
+.open
+    db $9E                      ; open main menu (custom event command)
+    db $96,$5C                  ; fade screen back in (wait until complete)
+    db $4B,$69,$0A              ; display caption $A69 (#2664)
+    db $B6                      ; jump based on choice
+    dl .exit-!base              ; ^ continued
+    dl .open-!base              ; ^ continued
+.exit
+    db $FE                      ; return
+
+Cranes:
+    db $B2                      ; run main menu loop
+    dl MainMenu-!base           ; ^ continued
+    db $FE                      ; return
+
+Tentacles:
+    db $B2                      ; run main menu loop
+    dl MainMenu-!base           ; ^ continued
+    db $C0,$8A,$02              ; if $28A==Off jump to target else continue
+    dl .no_sabin-!base          ; ^ continue
+    db $4D,$54,$37              ; Battle Enemy Set $54, Background Scenery $37
+    db $C0,$27,$01              ; always jump to target
+    dl .continue-!base          ; ^ continue
+.no_sabin
+    db $4D,$53,$37              ; Battle Enemy Set $53, Background Scenery $37
+.continue
+    db $D7,$F0                  ; clear event bit $3F0 = Tentacles (Engine Room)
+    db $D7,$F2                  ; clear event bit $3F2 = Bandits (Engine Room)
+    db $6B,$40,$00,$1D,$0B,$40  ; load map = Figaro Castle: Engine Room
+    db $1A,$05,$D5,$1D,$0B,$24  ; action queue NPC 10 (Gerad)
+    db $FF                      ; ^ continued
+    db $31,$86,$D5,$1D,$0F,$C8  ; action queue for Party Character #1
+    db $03,$FF                  ; ^ continued
+    db $FE                      ; return
+
+BeforePhunbaba:
+    db $B8,$39                  ; [displaced] set bit $1E02
+    db $B8,$3A                  ; [displaced] set bit $1E03
+    ; db $37,$00,$0F              ; assign graphic set "Imp" to Terra
+    db $B2                      ; run main menu loop
+    dl MainMenu-!base           ; ^ continued
+    db $FE                      ; return
+AfterPhunbaba:
+    db $B2,$A9,$5E,$00          ; [displaced] call subroutine $CA5EA9 (post-battle)
+    ; db $37,$00,$00              ; assign graphic set "Terra" to Terra
+    db $FE                      ; return
+
+Wrexsoul:
+    db $94                      ; wait for 60 frames (1 second)
+    db $17,$82,$49,$FF          ; action queue for NPC 7
+    db $92                      ; wait for 30 frames (1/2 second)
+    db $4B,$B4,$8A              ; display caption $AB4 (#2739)
+    db $17,$82,$4A,$FF          ; action queue for NPC 7
+    db $92                      ; wait for 30 frames (1/2 second)
+    db $4B,$B5,$8A              ; display caption $AB5 (#2740)
+    db $3D,$02                  ; create Cyan
+    db $3F,$02,$01              ; assign Cyan to party $01
+    db $47                      ; make character in slot 0 the lead character
+    db $B2                      ; run main menu loop
+    dl MainMenu-!base           ; ^ continued
+    db $FE                      ; return
+EventScriptFreespace_2:
+
+warnpc $CB5EC5
+
+; -----------------------------------------------------------------------------
+; TEMPORARILY DISABLED EDITS
+; -----------------------------------------------------------------------------
 
 ;;; Sealed by... song data (overwritten song ends at $C98D84, added twelve 00 bytes)	
 ;;org $C98CE8
