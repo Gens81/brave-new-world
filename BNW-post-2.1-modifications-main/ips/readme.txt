@@ -89,3 +89,6 @@ Portraits based on the original pixel art by abysswolf from deviantart.
 
 - speedrun
 It's a combination of abridged+notext+fast_anim+accurate_descriptions. It's a way to sail fast in a bnw playtrough for your replays.
+
+- advance_font (Seibaby, Gens)
+Alternative Menu and dialogue font largely inspired to GBA font
