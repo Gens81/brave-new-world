@@ -1605,4 +1605,15 @@ org $CCE5EC
 
 org $CCE5F1 : db $4B,$86,$02,$FE   ; Display caption #645
 
-; EOF
+; ------------------------------------------------------------------------
+; FF3usME garbage bytes TODO: Remove ASAP
+
+org $CCFF00
+  db $01
+  dl $0A004F,$0A0059,$0A0068,$0A0078,$0A007F
+  dl $0A0088,$0A008F,$0A0096,$0A5AD4,$0A5EB4
+  dl $0A5EB5,$0A5EC2,$0A5ECF,$0A5EDC,$0A5EE3
+  dl $0A5EF0,$0A5F0B,$0A5F18,$0A5F39,$0A8C15
+  dl $0A8C58,$0A694F,$0B0BB7,$0BD2F0,$0BD301
+  dl $0BD308,$0A8CAE,$0AF4CD,$0AF4E3
+

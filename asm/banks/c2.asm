@@ -5990,6 +5990,17 @@ org $C2BBEC : JSL Random
 org $C2BC9B : JSL Random
 
 ; #########################################################################
+
+; ########################################################################
+; Song index table
+;
+; Add support for playing the Four Fiends song from FFIV
+; for designated formations. In BNW, this song is used
+; for all WoR dragon battles.
+
+org $C2BF41 : db $25 ; Add "four fiends" song index to song lookup
+
+; #########################################################################
 ; Palette Data for Various Animations
 ;
 ; Modify palette for MP damage, part of "MP Colors" patch
