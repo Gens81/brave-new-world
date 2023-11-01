@@ -123,9 +123,10 @@ org $C3FC2B
 org $c3f33a
 	lda #$2C								; Blue Next EL
 org $C3F277
-	dw $7A59 : db "Next  ",$00
+	dw $7A25 : db "Next",$00
+warnpc $C3f287
 org $C3fc53
-	LDX #$7A65								; Next EL value
+	LDX #$7A63								; Next EL value
 org $C3FC64									; Avoid print EP value					
 	nop
 	nop
@@ -134,9 +135,11 @@ org $C3FC64									; Avoid print EP value
 	nop
 	nop
 org $C3FC6B
-	JMP $02F9								; JMP instead of JSR and avoid print EP
+	JSR $02F9								; Print
+	LDY #Ep
+	
 org $C3FC83
-	dw $7aaf : db "EP",$00
+Ep:	dw $7a6D : db "Ep",$00
 org $C3F3BF
 	LDA #$2C								; EL Blue Palette
 org $C3F2C7
@@ -171,6 +174,7 @@ padbyte $FF : pad $C3876B
 ;Pointers table
 org $C36437
 statusstats:
+;	dw #Command
 	dw #statusvigor
 	dw #statusstamina
 	dw #statusmagic
@@ -181,7 +185,7 @@ charapoint:
 	dw #statusHP
 	dw #statusPM
 	dw #statusnextlv	
-
+	dw #Xp
 slashes:
 	dw #statusslash
 	dw #statusslash2
@@ -200,7 +204,7 @@ statusslash2:		dw $7B1B		: db "/",$00
 statusLV:			dw $7959		: db "LV",$00
 statusHP:			dw $7ACD		: db "HP",$00
 statusPM:			dw $7B0D		: db "MP",$00
-statusnextlv:		dw $7999		: db "Next  ",$00
+statusnextlv:		dw $7965		: db "Next",$00
 statusvigor:		dw $3bCd+128	: db "Vigor",$00
 statusmagic:		dw $3c4d+128	: db "Magic",$00
 statusspeed:		dw $3ccd+128	: db "Speed",$00
@@ -210,6 +214,8 @@ statusdefense:		dw $3e4d+128	: db "Defense",$00
 statusmagicdefense:	dw $3ecd+128	: db "M.Defense",$00
 statusevade:		dw $3f4d+128	: db "Evade",$00
 statusmagicevade:	dw $484D		: db "M.Evade",$00
+Xp:					dw $79AD		: db "Xp",$00
+;Command:			dw $3935		: db "Command",$00
 
 
 new_sub_pointer:			; duplicated from C3/1EF7
@@ -338,8 +344,7 @@ clear_flags:
 Clear_BG_L_R:
 	JSR $0Eb2							; Sound: click
 	DEC $C5
-	LDX #$4300							; $7E7B49
-	JSR $6A4E							; Jump to clear BG1 A	
+	JSR $6A3C							; Jump to clear BG3 A	
 	LDA $28 					        ; Member slot
 	RTS
 	
@@ -359,14 +364,14 @@ Handle_Y:
 .status				
 	JSR $0Eb2							; Sound: click
 	LDX #$4300							; $7E7B49
-	JSR $6A4E							; Jump to clear BG1 A
+	JSR $6A4E							; Jump to clear BG3 A
 	JSL C4B6EE							; Reprint Statuses
 	JSL light_up_statuses				; Light_up statuses
 	bra .not
 .elements	
 	JSR $0Eb2							; Sound: click
 	LDX #$4300							; $7E7B49
-	JSR $6A4E							; Jump to clear BG1 A
+	JSR $6A4E							; Jump to clear BG3 A
 	JSL Elements_routine				; Loads Element Glyph
 
 .not 				
@@ -465,10 +470,11 @@ Elements_routine:
 
 	
 light_up_statuses:
+	LDX $00								; Clear X
+	STX $DE                             ;   ^   $DE Item Value Index Counter
+	STX $DC                             ;   ^   $DC Check Byte counter
 	LDA $C5                             ; Elements flag
 	BNE .active                         ; Branch if Active
-	STZ $DE                             ;   ^   $DE Item Value Index Counter
-	STZ $DC                             ;   ^   $DC Check Byte counter
 	LDY $67								; Actor index address
 	LDA $1E,Y							; Load Esper spot
 	CMP #$FF							; Empty value?	
@@ -652,41 +658,41 @@ Elements:
 
 ; New title and labels
 	
-Half:		dw $7D6F : db "Half Damage",$00
-No_Dmg:		dw $7BEF : db "Absorb",$00
-Absorb:		dw $7CAF : db "No Damage",$00
-Weak:		dw $7E2F : db "Weakness",$00
-Auto:		dw $7D6F : db "Auto",$00
-Blocks:		dw $7BEF : db "Blocks",$00
-Bonus:		dw $7E2F : db "Bonus",$00
-poison:     dw $7C31 : db $49,$4a,$4b,$00				
-sleep:      dw $7C39 : db $2a,$2b,$29,$00
-blind:		dw $7C3F : db $5d,$5e,$5f,$00
-berserk:    dw $7C71 : db $34,$35,$36,$37,$00
-mute:       dw $7C79 : db $30,$27,$33,$00
-imp:        dw $7C7F : db $56,$29,$00
-muddle:     dw $7CB1 : db $30,$31,$32,$33,$00
-death:      dw $7CB9 : db $46,$38,$48,$00
-stop:       dw $7CBF : db $40,$41,$00
-petrify:    dw $7CF1 : db $2c,$2d,$2e,$2f,$00
-slow:		dw $7CF9 : db $2A,$4c,$4D,$00
-sap:		dw $7CFF : db $28,$29,$00
-brsrk_auto: dw $7DB1 : db $34,$35,$36,$37,$00
-safe:       dw $7DB9 : db $28,$45,$00
-shell:      dw $7DBF : db $53,$54,$55,$00
-reflect:    dw $7DF1 : db $20,$25,$26,$52,$00
-haste:      dw $7DF9 : db $42,$43,$44,$00
-regen:      dw $7DFF : db $20,$21,$22,$00
-atk:        dw $7e71 : db $38,$39,$3A,$00
-mag:        dw $7e7B : db $3B,$3C,$3D,$00
-cover:      dw $7eb1 : db $57,$58,$59,$00
-counter:    dw $7eBB : db $57,$3E,$3F,$59,$00
-HP_label:	dw $7eF1 : db $4E,$4F,$00
-MP_label:   dw $7eFB : db $47,$4F,$00
-plus_HP_1:  dw $7eF1 : db $4E,$4F,$CA,$00
-plus_HP_2:  dw $7eF1 : db $4E,$4F,$CA,$D1,$00
-plus_MP_1:  dw $7eFB : db $47,$4F,$CA,$00
-plus_MP_2:	dw $7EFB : db $47,$4F,$CA,$D1,$00		
+Half:		dw $7D6F	 : db "Half Damage",$00
+No_Dmg:		dw $7BEF	 : db "Absorb",$00
+Absorb:		dw $7CAF	 : db "No Damage",$00
+Weak:		dw $7E2F	 : db "Weakness",$00
+Auto:		dw $7D6F	 : db "Auto",$00
+Blocks:		dw $7BEF	 : db "Blocks",$00
+Bonus:		dw $7E2F	 : db "Bonus",$00
+poison:     dw $7C31-2	 : db $49,$4a,$4b,$00				
+sleep:      dw $7C39-2	 : db $2a,$2b,$29,$00
+blind:		dw $7C3F-2	 : db $5d,$5e,$5f,$00
+berserk:    dw $7C71-2	 : db $34,$35,$36,$37,$00
+mute:       dw $7C79-2	 : db $30,$27,$33,$00
+imp:        dw $7C7F-2	 : db $56,$29,$00
+muddle:     dw $7CB1-2	 : db $30,$31,$32,$33,$00
+death:      dw $7CB9-2	 : db $46,$38,$48,$00
+stop:       dw $7CBF-2	 : db $40,$41,$00
+petrify:    dw $7CF1-2	 : db $2c,$2d,$2e,$2f,$00
+slow:		dw $7CF9-2	 : db $2A,$4c,$4D,$00
+sap:		dw $7CFF-2	 : db $28,$29,$00
+brsrk_auto: dw $7DB1-2	 : db $34,$35,$36,$37,$00
+safe:       dw $7DB9-2	 : db $28,$45,$00
+shell:      dw $7DBF-2	 : db $53,$54,$55,$00
+reflect:    dw $7DF1-2	 : db $20,$25,$26,$52,$00
+haste:      dw $7DF9-2	 : db $42,$43,$44,$00
+regen:      dw $7DFF-2	 : db $20,$21,$22,$00
+atk:        dw $7e71-2	 : db $38,$39,$3A,$00
+mag:        dw $7e7B-2	 : db $3B,$3C,$3D,$00
+cover:      dw $7eb1-2	 : db $57,$58,$59,$00
+counter:    dw $7eBB-2	 : db $57,$3E,$3F,$59,$00
+HP_label:	dw $7eF1-2	 : db $4E,$4F,$00
+MP_label:   dw $7eFB-2	 : db $47,$4F,$00
+plus_HP_1:  dw $7eF1-2	 : db $4E,$4F,$ca,$00
+plus_HP_2:  dw $7eF1-2	 : db $4E,$4F,$ca,$d1,$00
+plus_MP_1:  dw $7eFB-2	 : db $47,$4F,$ca,$00
+plus_MP_2:	dw $7EFB-2	 : db $47,$4F,$ca,$d1,$00		
 
 
 padbyte $FF
@@ -796,7 +802,7 @@ Condense_Status_txt:
 	LDA #$02        				; 1Rx2B to PPU
 	STA $4360       				; Set DMA mode
 	LDA #$12        				; $2112
-	STA $4361       				; To BG3 V-Scroll
+	STA $4361       				; To BG3 H-Scroll
 	LDY #HDMA_Table 				; Table ptr
 	STY $4362       				; Set src LBs
 	LDA #$C4        				; Bank: C4
@@ -1259,7 +1265,7 @@ Skip:	JSR $052E				; [vanilla] unchanged, left for context
 		LDX $67					; Actor's address
 		JSR $60A0				; Get needed exp
 		JSR $0582				; Turn into text
-		LDX #$79A3				; Text position
+		LDX #$79A1				; Text position
 		JSR Digits_6			; Draw 6 digits
 		JSR !HpMpDiff	        ; go to routine that set Hp/Mp difference
 		JSR !StatDiff	        ; go to routine that set stats difference	
@@ -1280,7 +1286,7 @@ Digits_6:
 
 warnpc $C36096
 org $C36096
-	dw $795F					; LV value
+	dw $7999					; LV value
 	dw $7AD3					; Current HP
 	dw $7ADD					; Max HP
 	dw $7B13					; Current MP
@@ -1291,7 +1297,7 @@ org $C39382
 	
 
 ; Gogo command ptr	
-org $c36505
+org $c38366
 Gogo_commands2:
 	JSR Gogo_commands			; Print cmds
 	JMP $0EFD               	; Set to redraw cmds
@@ -1306,7 +1312,7 @@ Gogo_commands:
 	JSR $45AD
 	RTS
 
-warnpc $C3652D
+warnpc $C38385
 
 ; Gogo List command ptr
 org $c35f4a : lda #$28			; Palette: Grey
