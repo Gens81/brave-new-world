@@ -117,54 +117,24 @@ org $C35f79
 	dw $588b,$091c			; (Main)
 	dw $58c7,$1200			; (Gogo, L part)
 	dw $6087,$1207			; (Gogo, R part)
-org $C3FC2B
-	dw $5B4B,$0D0f
-
-org $c3f33a
-	lda #$2C								; Blue Next EL
-org $C3F277
-	dw $7A27 : db "Next",$00
-warnpc $C3f287
-org $C3fc53
-	LDX #$7A61								; Next EL value
-org $C3FC64									; Avoid print EP value					
-	nop
-	nop
-	nop
-	nop
-	nop
-	nop
-org $C3FC6B
-	JSR $02F9								; Print
-	LDY #Ep
 	
-org $C3FC83
-Ep:	dw $7a6B : db "EP",$00
-org $C3F3BF
-	LDA #$2C								; EL Blue Palette
-org $C3F2C7
-	dw $7a19 : db "EL",$00
-
-org $c3f385
-	JSR Print_EL_Value
-	
-org $C38750
-Print_EL_Value:
-	SEP #$20
-	LDA $26
-	CMP #$0B
-	BEQ .status
-	CMP #$0C
-	BEQ .status
-	REP #$20
-	lda [$ef]
-	CLC
+org $C38750     
+Print_EL_Value: 
+	SEP #$20    ; 8 bit-A
+	LDA $26     ; Menu flag
+	CMP #$0B    ; Init Status?
+	BEQ .status ; Branch if so
+	CMP #$0C    ; Sustain Status?
+	BEQ .status ; Branch if so
+	REP #$20    ; 16 bit-A
+	lda [$ef]   ; Tilemap position for level display 
+	CLC         ; Clear carry
 	RTS
 .status
-	REP #$20
-	lda [$ef]
-	CLC
-	ADC #$00B4
+	REP #$20    ; 16 bit-A
+	lda [$ef]   ; Tilemap position for level display
+	CLC			; Clear carry 	
+	ADC #$00B4  ; ADC
 	RTS
 	
 padbyte $FF : pad $C3876B
@@ -265,8 +235,7 @@ org $C30AF1
 	JMP STATUS_PRTRT					; Jump from the original routine to change portrait position in status menu
 
 
-org $C3FC47
-	LDA #$001A							; Portrait Y-pos
+
 
 ;****************************************************;
 ;                       							 ;
@@ -1254,7 +1223,7 @@ Skip:	JSR $052E				; [vanilla] unchanged, left for context
 		JSR $34CF				; Draw actor name
 		LDY #$399D				; Text position
 		JSR $34E5				; Actor class...
-		JSR $F3BF				; EP Text
+		JSR C3F3BF				; EP Text
 		JSR $FC4B				; Next EL 
 		JSR Gogo_commands		; Draw commands
 		LDA #$20				; Palette 0

@@ -142,75 +142,76 @@ padbyte $ff
 pad $c35a66
 warnpc $c35a67
 
+;Inserted in another asm C3/FC20 - C3/F277
 
-org $c3f430		
-	ldy #$4711			; El bonus position
-	JSR $3519			; Set pos, WRAM
-	bra new_print
-back:
-	rts
-
-warnpc $c3f43b
-
-org $c3f46b
-new_print:
-	jsl print_new		; go to load string
-	jsr $7fd9			; Draw string
-	jsl print_new2		; go to load string
-	bra back
+;org $c3f430		
+;	ldy #$4711			; El bonus position
+;	JSR $3519			; Set pos, WRAM
+;	bra new_print
+;back:
+;	rts
+;
+;warnpc $c3f43b
+;
+;org $c3f46b
+;new_print:
+;	jsl print_new		; go to load string
+;	jsr $7fd9			; Draw string
+;	jsl print_new2		; go to load string
+;	bra back
 	
-org $c0ed10
-print_new:
-	lda #$24			; blue color
-	sta $29				; store
-	LDX $00				; Char index: 0
-.loop
-	LDA.L EL_Bonus,X	; "EL Bonus" char
-	STA $2180			; Add to string
-	INX					; Point to next
-	CPX #$0009			; Done all 14?
-	BNE .loop			; Loop if not
-	STZ $2180
-	rtl
-	
-print_new2:	
-	ldy #$47bb			; "EL text" bottom position
-	JSR PosWRAM			; Set pos, WRAM
-	LDX $00				; Char index: 0
-.loop2
-	LDA.L ELavlbl,X		; "At..." char
-	STA $2180			; Add to string
-	INX					; Point to next
-	CPX #$0002			; Done all?
-	BNE .loop2			; Loop if not
-	STZ $2180
-	rtl
+;org $c0ed10
+;print_new:
+;	lda #$24			; blue color
+;	sta $29				; store
+;	LDX $00				; Char index: 0
+;.loop
+;	LDA.L EL_Bonus,X	; "EL Bonus" char
+;	STA $2180			; Add to string
+;	INX					; Point to next
+;	CPX #$0009			; Done all 14?
+;	BNE .loop			; Loop if not
+;	STZ $2180
+;	rtl
+;	
+;print_new2:	
+;	ldy #$47bb			; "EL text" bottom position
+;	JSR PosWRAM			; Set pos, WRAM
+;	LDX $00				; Char index: 0
+;.loop2
+;	LDA.L ELavlbl,X		; "At..." char
+;	STA $2180			; Add to string
+;	INX					; Point to next
+;	CPX #$0002			; Done all?
+;	BNE .loop2			; Loop if not
+;	STZ $2180
+;	rtl
+;
+;ELavlbl: db "EL",$00
+;
+;
+;PosWRAM:
+;	LDX #$9E89      ; 7E/9E89
+;	STX $2181       ; Set WRAM LBs
+;	REP #$20        ; 16-bit A
+;	TYA             ; Tilemap ptr
+;	SEP #$20        ; 8-bit A
+;	STA $2180       ; Set position LB
+;	XBA             ; Switch to HB
+;	STA $2180       ; Set position HB
+;	TDC             ; Clear A
+;	LDY $67         ; Actor address
+;	RTS
+;
 
-ELavlbl: db "EL"
+;org $c3f30f
+;available:	db "  Unspent",$00
+;warnpc $c3f31b
 
-
-PosWRAM:
-	LDX #$9E89      ; 7E/9E89
-	STX $2181       ; Set WRAM LBs
-	REP #$20        ; 16-bit A
-	TYA             ; Tilemap ptr
-	SEP #$20        ; 8-bit A
-	STA $2180       ; Set position LB
-	XBA             ; Switch to HB
-	STA $2180       ; Set position HB
-	TDC             ; Clear A
-	LDY $67         ; Actor address
-	RTS
-
-
-org $c3f30f
-available:	db "  Unspent",$00
-warnpc $c3f31b
-
-org $c3f3f2
-	ldy #$472F			; available position
-org $C3F3FA
-	LDA.l available,X 	; get "available" txt
+;org $c3f3f2
+;	ldy #$472F			; available position
+;org $C3F3FA
+;	LDA.l available,X 	; get "available" txt
 
 org $c3599f :	lda #$24
 org $c359a3	:	ldy #learnlabel
@@ -221,13 +222,13 @@ org $C35Ca7
 splabel:	dw $462f : db "SP",$00
 learnlabel:	dw $4435 : db " Learn",$00
 thirty:		dw $463B : db "/30",$00
-EL_Bonus:	db "EL Bonus "				;fd86
+EL_Bonus:	db "EL Bonus ",$00				;fd86
 
-org $C3F41A 
-	LDY #$47b5	; Unspent EL quantity coordinates
-	
-org $c3f751
-	ldx #$4637	; unspent SP quantity coordinates
+;org $C3F41A 
+;	LDY #$47b5	; Unspent EL quantity coordinates
+;	
+;org $c3f751
+;	ldx #$4637	; unspent SP quantity coordinates
 	
 ; Navigation data for esper data menu
 org $C3598C
