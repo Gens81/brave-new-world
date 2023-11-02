@@ -659,9 +659,16 @@ warnpc $C3F4AA
 padbyte $FF
 pad $C3F4AA
 
-;changed Exp. to XP
+;config screen modifications
 org $C349AC 
-	db "XP gain ",$00	
+	db "XP gain ",$00	;changed Exp. to XP
+
+org $C3F453 
+	db "Wait Gauge",$00	;replace Show Delay
+	
+;change Setzer's initial weapon
+org $ED7D75
+	db $03	;Butterfly
 
 ;Brave New World data
 org $C33BB8
