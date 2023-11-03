@@ -37,6 +37,7 @@
 - Menu opens in place of auto-optimize routine before Cranes, Phunbaba 3, Tentacles and Wrexsoul (Fëanor)
 - Cyan joins the party for Wrexsoul fight (Fëanor)
 - New Locke scene in Returners Hideout (Fëanor)
+- Command arrange menu accessible from the "normal" option too (Fëanor)
 
 ### Tweaks
 
