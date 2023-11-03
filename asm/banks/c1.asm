@@ -77,10 +77,8 @@ CycleAura:
   BEQ .loop          ; loop until match found
   BRA UpdateAura     ; set new aura color
   RTS                ; [unneeded] TODO
-warnpc $C12EB5+1
-padbyte $EA          ; fill remaining space with NOP
-pad $C12EB4          ; ensure earlier $C12EB4 branches still work
-  RTS
+%nop($C12EB4)
+  RTS                ; ensure earlier $C12EB4 branches still work
 
 org $C12EC3
 AuraControl:
@@ -114,7 +112,7 @@ AuraControl2:
   JSR CycleAura      ; set (pending) next aura color
   BRA .get_color     ; get current aura color palette
   NOP                ; [unused]
-warnpc $C12EF7+1
+warnpc $C12EF7
 org $C12EF7
 .get_color
 
@@ -196,9 +194,7 @@ HalfTurn:        ; 6 bytes in new freespace TODO: Move this into C2
   LDA #$7E       ; half-full ATB
   STA $3219,X    ; set new ATB value
   RTL
-warnpc $C18A19
-padbyte $FF      ; frees 4 bytes
-pad $C18A18
+%free($C18A18)   ; frees 4 bytes
 
 org $C18A90
 ValidSwap:
@@ -206,8 +202,7 @@ ValidSwap:
   LSR            ; carry set if righthand (left column)
   LDA $2686,X    ; swap-in item id 
   JMP QueueSwap
-  NOP #3
-warnpc $C18A9E
+%nop($C18A9D)
 
 org $C18B4D
 QueueSwap:          ; 84 bytes
@@ -412,9 +407,7 @@ FlagDual:           ; 21 bytes
   STZ $EE           ; displaced vanilla code
   RTL
 
-warnpc $C18CB8
-padbyte $FF
-pad $C18CB7
+%free($C18CB7)
 
 org $C18DFC
   NOP #5         ; no status update when equipment first selected
@@ -433,7 +426,7 @@ CloseSlotsHelp:
 OpenSlotsHelp:
   INC $EC0F     ; disable pausing (during slot machine)
   JMP $5A4A     ; vanilla code (moved)
-warnpc $C18F0B+1
+warnpc $C18F0B
 
 ; ------------------------------------------------------------------------
 ; Wait Gauge helpers
@@ -516,7 +509,7 @@ DetermineRight:
   LSR            ; carry: Facing right
   PLY            ; restore offset to character target
   RTS
-warnpc $C19102+1
+warnpc $C19102
 
 ; ########################################################################
 ; Damage number color palette routine
@@ -569,9 +562,7 @@ RunicAbsorb:
   JSR $BCA6      ; get first target index
   CMP #$04       ; is absorber a monster?
   JMP $AB92      ; reset sprite to default if not
-warnpc $C145B3+1
-
-padbyte $FF : pad $C145B3
+%free($C145B3)
 
 ; #######################################################################
 ; Get ATB/Morph/Condemned gauge data for active battle menu ($C14A97)
@@ -639,7 +630,7 @@ FinGauge:
   JSL NormDraw     ; draw it
   RTS
   NOP
-warnpc $C16872+1
+warnpc $C16872
 
 ; -----------------------------------------------------------------------
 ; Add checks for statuses to ATB drawing routine
@@ -665,7 +656,7 @@ ATBDrawFix:
 LongDraw:
   JSR $66F3
   RTL
-warnpc $C16898+1
+warnpc $C16898
 
 ; Leftover from earlier version of patch TODO: Remove below
   PLA              ; Get saved text color
@@ -737,8 +728,7 @@ PrepMove:
   LDA.l MissOff,X ; load tile data offset for miss message
   JMP Prep2
 
-padbyte $FF
-pad $C1A531       ; 1 unused byte
+%free($C1A531)    ; 1 unused byte
 
 ; ----------------------------------------------------------------------
 ; Label for informative miss
@@ -788,8 +778,7 @@ MissOff:
   dw $C140       ; fail tiles address in $7F
   dw $C180       ; null tiles address in $7F
 
-padbyte $FF
-pad $C1A655      ; 10 unused bytes
+%free($C1A655)   ; 10 unused bytes
 
 ; ----------------------------------------------------------------------
 ; Label for informative miss
@@ -888,5 +877,5 @@ SwdTechMeter:
 RunicPrep:
   JSR $BAAA      ; regular runic prep animation 
   JMP $914D      ; set sprite to "ready"
-warnpc $C20000+1
+warnpc $C20000
 

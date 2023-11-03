@@ -112,7 +112,7 @@ db $1D,$22,$E9,$5D,$20,$91,$4F,$4A,$58,$96,$3D,$1F,$08,$62,$7B,$39
 db $63,$47,$0C,$89,$D4,$2E,$FE,$48,$EE,$17,$0F,$D0,$55,$D2,$61,$21
 db $CE,$03,$41,$70,$6B,$28,$DF,$F1,$75,$72,$5C,$8E,$0B,$13,$05,$01
 db $0E,$18,$42,$66,$F2,$5B,$34,$27,$DD,$46,$88,$93,$F8,$87,$F7,$82
-warnpc $C4A820+1
+warnpc $C4A820
 
 ; #########################################################################
 ; Rage and Dance Descriptions
@@ -619,7 +619,7 @@ DanceDescs:
   db "Blizzard: 7/16, Surge: 5/16",$01
   db "Mirage: 3/16, Ice Rabbit: 1/16",$00
 
-warnpc $C4B9D1
+warnpc $C4B9CF
 
 
 
@@ -754,7 +754,7 @@ CheckEach:
   ASL                 ; shift bit to check
   BNE .loop           ; loop if still bits left
   RTS
-warnpc $C4F26A+1
+warnpc $C4F26A
 
 ; ------------------------------------------------------------------------
 ; Helper for Runic Stance patch
@@ -775,7 +775,7 @@ StanceCheck:     ; 21 bytes
   CMP #$04       ; in character range (abort if carry set)
 .abort
   RTL
-warnpc $C4F27F+1
+warnpc $C4F27F
 
 ; ------------------------------------------------------------------------
 ; TODO: Remove all code below through the warnpc, as it is unused
@@ -834,4 +834,4 @@ TryScan:
 .next
   INC $2D6F        ; point to next message ID
   RTS
-warnpc $C4F2DB+1
+warnpc $C4F2DB

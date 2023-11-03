@@ -84,7 +84,7 @@ InitEqpVars:         ; shifted from 1BBD
   JSR $1B99          ; Queue desc anim
   JSR $94B6          ; Set to shift text
   JMP InitEqpHelp    ; jump to finish routine
-warnpc $C31BE5+1     ; some freespace here
+warnpc $C31BE5       ; some freespace here
 
 ; #########################################################################
 ; Swap Actor in Equip Menu (7E & 7F) - $C31BE5
@@ -288,9 +288,8 @@ org $C33BB7
 BNWText:   dw $78D1 : db "  Brave New World 2.1.0",$00
                       db "8 ",$00 ; TODO: Remove this text fragment
 BattleTxt: dw $3A4F : db "Battle",$00
-warnpc $C33BDE+1
-padbyte $FF
-pad $C33BDE
+
+%free($C33BDE)
 
 ; -------------------------------------------------------------------------
 ; Helper for Loading Summon Descriptions (in freespace)
@@ -307,9 +306,7 @@ LoadDescription:
 .bonus
   JMP $5BF6           ; Load EL description
 
-warnpc $C33BF2+1
-padbyte $FF
-pad $C33BF2
+%free($C33BF2)
 
 org $C33C55 : LDY #WindowTxt
 org $C33C7E : LDY #OnWait
@@ -343,8 +340,7 @@ OptionJumpPage2:
   dw $3F7A     ; B
 
 ;org $C33D7A
-;padbyte $FF    ; remove "Battle Speed" handler code
-;pad $C33DAB
+;%free($C33DAB) ; remove "Battle Speed" handler code
 
 ; #########################################################################
 ; Positioned Text for Config Menu (page 1)
@@ -372,7 +368,7 @@ MultipleTxt:   dw $3DB5 : db "Multiple",$00
 Scale1Txt:     dw $3A25 : db "1 2 3 4 5 6",$00
 Scale2Txt:     dw $3AA5 : db "1 2 3 4 5 6",$00
 CursorTxt:     dw $3C8F : db "Cursor",$00
-warnpc $C34993+1
+warnpc $C34993
 
 org $C34993
 ConfigTxt5: dw ExpGainTxt
@@ -396,7 +392,7 @@ WindowTxt:      dw $3B25 : db "Window",$00
 ResetTxt:       dw $3CA5 : db "Reset",$00
 WalkTxt:        dw $3D35 : db "Walk",$00
 SingleTxt:      dw $3DA5 : db "Single",$00
-warnpc $C34A1C+1
+warnpc $C34A1C
 
 ; #########################################################################
 ; Magic Menu Cursor Positions
@@ -455,7 +451,7 @@ DrawSpellAndCost:
   STA $2180          ; add to string
   JMP EndDrawMP      ; finish old [moved] code
   db $FF,$FF,$FF     ; [fill unused]
-warnpc $C3501A+1
+warnpc $C3501A
 
 org $C35027 : LDY #$000C ; allow for spell name length 12 (was 11)
 
@@ -475,7 +471,7 @@ org $C3519B : No_Imp:
 ; No longer in use, can be used as freespace
 
 org $C351C6
-warnpc $C351F9+1
+warnpc $C351F9
 
 ; #########################################################################
 ; Draw Lore Menu
@@ -527,7 +523,7 @@ BuildRageList:
   RTS
   NOP #3           ; [fill empty space]
   RTS              ; [fill empty space]
-warnpc $C353EE+1
+warnpc $C353EE
 
 ; #########################################################################
 ; Draw Rage Name
@@ -568,7 +564,7 @@ DrawRageName:
   BNE .space_loop ; loop for full length
   STZ $2180       ; EOL
   JMP $7FD9       ; draw empty name
-warnpc $C35452+1
+warnpc $C35452
 
 ; #########################################################################
 ; Draw Esper Menu
@@ -814,7 +810,7 @@ CmdPalette:
   STA $29            ; update palette
   PLA                ; restore command ID
   RTS
-warnpc $C35F50+1
+warnpc $C35F50
 
 ; #########################################################################
 ; Yellow Streak Fix (Gogo's Menu)
@@ -893,7 +889,7 @@ org $C36068
   STZ $47         ; Ailments: Off
   JSR $11B0       ; Hide ail. icons
   JMP $625B       ; Display status
-warnpc $C36096+1
+warnpc $C36096
 
 
 ; -------------------------------------------------------------------------
@@ -927,12 +923,12 @@ StatusCmdOpt:
   JSR $45AD
   RTS
 
-padbyte $EA : pad $C36128
+%nop($C36128)
 
 Long6172:
   JSR $6172      ; Access to existing relic cmd changes (from C2)
   RTL
-warnpc $C3612C+1
+warnpc $C3612C
 
 ; #########################################################################
 ; Relic Effects
@@ -1005,7 +1001,7 @@ StatusMenu:
 .mdef    dw $7FEB : db "M.Defense",$00
 .evade   dw $884D : db "Evade",$00
 .mevade  dw $886B : db "M.Evade",$00
-warnpc $C3652D+1
+warnpc $C3652D
 
 ; TODO: Remove this unused code ASAP
 org $C36511 : dw $7C4D : db "Exp to lv. up:",$00 ; status menu exp text
@@ -1068,7 +1064,7 @@ OffensiveProps:
   LDY #$8E26          ; "Bushido" text data address
   JSR DrawTextData    ; draw ^
   RTS
-padbyte $FF : pad $C38777
+%free($C38777)
 
 ; ------------------------------------------------------------------------
 ; Helper for Summon Descriptions (in freespace)
@@ -1090,7 +1086,7 @@ SummonDescription:    ; Load Esper summon description
                       ;   a region of memory where there will be a large swath of
                       ;   values below #$80 /shrug
 
-padbyte $FF : pad $C38795
+%free($C38795)
 
 ; ------------------------------------------------------------------------
 ; Resume equipment properties code
@@ -1399,7 +1395,7 @@ DrawRel2:
   LDY #Relic2Txt
   BRA DrawTextAlt
 
-warnpc $C391C4+1
+warnpc $C391C4
 
 ; ------------------------------------------------------------------------
 ; Update status based on gear
@@ -1507,7 +1503,7 @@ General:
   PLA             ; get full power again
   SEC : SBC $E0   ; subtract 25%
   BRA .exit       ; finish up
-warnpc $C393E5+1  ; NOTE Some freespace here, maybe
+warnpc $C393E5    ; NOTE Some freespace here, maybe
 
 ; #########################################################################
 ; Draw actor name in Equip or Relic menu
@@ -1539,7 +1535,7 @@ DrawHelmet:
   STA $29         ; Set palette
   LDY #HeadTxt    ; Load text coords
   JMP DrawTextAlt ; Draw text
-warnpc $C3946D+1
+warnpc $C3946D
 
 ; #########################################################################
 ; Window layout for Equip and Relic menus
@@ -1596,7 +1592,7 @@ EqpMenuOpts:
   LDA #$35        ; C3/1BB8
   STA $E0         ; Set init command
   JMP $2022       ; Handle L and R
-warnpc $C39664+1  ; TODO: is $C3964F-$C39664 really unused?
+warnpc $C39664    ; TODO: is $C3964F-$C39664 really unused?
 
 ; TODO: Revert this Equip<>Relic swap code, as it is no longer in effect
 org $C39648 : JMP EquipSwap : NOP #4
@@ -1665,7 +1661,7 @@ RemoveEqps:
   JSR $93F2       ; Define Y
   LDX #$0003      ; Loop R-Hand, L-Hand, Head, Body
   BRA RemoveLoop  ; Remove ^
-warnpc $C396D2+1
+warnpc $C396D2
 
 ; -------------------------------------------------------------------------
 ; General Event Command "Optimize Equipment"
@@ -1902,7 +1898,7 @@ DrawHands:
 .draw_them
   JSR DrawRHand   ; Draw R-Hand name/item
   JMP DrawLHand   ; Draw L-Hand name/item
-warnpc $C399E8+1
+warnpc $C399E8
 
 ; TODO: Remove this old palette shift ASAP, which is now handled above
 org $C399E2 : LDA #$28 ; Yellow
@@ -1931,7 +1927,7 @@ ValidGear:
   CMP #$04        ; Relics?
   BCC ValidTorso  ; Branch if Torso
   JMP GetRelics   ; Handle relics
-warnpc $C39B72+1
+warnpc $C39B72
 
 org $C39B72 : ValidHands: ; Fork: Weapons and shields
 org $C39BB2 : ValidHead:  ; Fork: Helmet list
@@ -2200,7 +2196,7 @@ RemoveTxt: dw $78AB : db "REMOVE",$00
 EmptyTxt:  dw $78BB : db "EMPTY",$00
 
 ; TODO: Freespace here [?]
-warnpc $C3A34D+1
+warnpc $C3A34D
 
 ; TODO: Remove this unused code ASAP. This is freespace now (see above)
 org $C3A32D : db "EMPTY",$00
@@ -2303,7 +2299,7 @@ DrawItemNameNMI:
   JSR $1368        ; refresh screen (NMI)
   JSR $7FD9        ; draw item name
   RTS
-padbyte $FF : pad $C3B4E6
+%free($C3B4E6)
 
 ; #########################################################################
 ; Initialize Main Shop Menu
@@ -2330,7 +2326,7 @@ org $C3B95A
   LDX #$7A33       ; Text position
   JSR $04AC        ; Draw GP total
   RTS
-warnpc $C3B986+1
+warnpc $C3B986
 
 org $C3B989 : LDY #HelpText
 org $C3BABA : NOP #3 ; skip drawing "Power" info on buy order menu
@@ -2922,7 +2918,7 @@ GaugeOn:
   LDA #$80          ; 'Show Delay' flag
   STA $1D4E         ; init config option
   RTS
-warnpc $C3F46A+1
+warnpc $C3F46A
 
 ; TODO: Remove this unused code snippet
   db $05
@@ -2958,9 +2954,7 @@ DrawEsperName:
   LDA #$20          ; "white" palette
   STA $29           ; set palette color
   RTS
-warnpc $C3F4B1+1
-padbyte $FF
-pad $C3F4B1
+%free($C3F4B1)
 
 ; Duplicate Unused ==========================================
 ; TODO: This "dup" namespace code is unused, and duplicative
@@ -3005,7 +2999,7 @@ EquipSubSwap:
   LDA $26
   CLC : ADC #$29
   BRA HandleLR
-warnpc $C3F4ED+1
+warnpc $C3F4ED
 namespace off
 
 org $C3F4F0
@@ -3041,7 +3035,7 @@ BlitzNames:
   PLA               ; clean up stack (hi byte of PHY earlier)
   PLA               ; get Blitz ID back
   JMP $5683         ; [moved] build tilemap
-warnpc $C3F530+1
+warnpc $C3F530
 
 org $C3F530
 ; TODO: Remove Relic <-> Equip Screen Swap code, as it is no longer in effect
@@ -3086,7 +3080,7 @@ EquipSubSwap:
   LDA $26           ; menu mode
   CLC : ADC #$29    ; "Swap Actor in Equip Menu" (retain Equip or Remove mode)
   BRA HandleLR      ; branch
-warnpc $C3F570+1
+warnpc $C3F570
 
 ; -------------------------------------------------------------------------
 ; Keep frame counter updated for RNG algorithm
@@ -3144,7 +3138,7 @@ CounterCheck:
   LDY $3290,X      ; relevant attacker index
 .exit
   RTL
-warnpc $C3F5C0+1
+warnpc $C3F5C0
 
 ; -------------------------------------------------------------------------
 ; Helpers for Randomize Final Party patch
@@ -3225,7 +3219,7 @@ EndDrawPercent:
   STA $2180      ; add to string
   STZ $2180      ; end string
   JMP $7FD9      ; draw string
-warnpc $C3F721+1
+warnpc $C3F721
 
 ; TODO: Dunno why we've left 2 unused bytes in between here
 
@@ -3243,7 +3237,7 @@ C3_BlindJump2:
   STZ $11A4         ; clear "Cannot Miss" [TODO: Why?]
 .exit
   RTL
-warnpc $C3F737+1
+warnpc $C3F737
 
 ; TODO: Another two unused bytes here
 

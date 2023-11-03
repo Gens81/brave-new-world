@@ -370,6 +370,6 @@ NormDraw:
   STA $4E
   TDC
   RTL
-warnpc $EEB200+1
+warnpc $EEB200
 
 

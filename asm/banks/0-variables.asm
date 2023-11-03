@@ -1,4 +1,22 @@
 ; ========================================================================
+; Macros
+; ========================================================================
+
+macro safepad (offset, byte)
+  warnpc <offset>
+  padbyte <byte>
+  pad <offset>
+endmacro
+
+macro nop (offset)
+  %safepad(<offset>,$EA)
+endmacro
+
+macro free (offset)
+  %safepad(<offset>,$FF)
+endmacro
+
+; ========================================================================
 ; Battle RAM
 ; ========================================================================
 

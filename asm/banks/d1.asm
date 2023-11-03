@@ -290,9 +290,7 @@ BattleMsg:
 .FE db $00
 .FF db $00
 
-warnpc $D1F7A0+1
-padbyte $FF
-pad $D1F7A0
+%free($D1F7A0)
 
 BattleMsgPointers:
   dw BattleMsg_00
@@ -556,8 +554,7 @@ BattleMsgPointers:
 ; Leftover Wrexsoul dialogue and pointer. TODO: Remove ASAP
 
 org $D1F553
-  padbyte $00
-  pad $D1F5E2
+%safepad($D1F5E2,$00)
 
 org $D1F584
   db " `Mmmm",!ellip,"munch, munch!^",$00
