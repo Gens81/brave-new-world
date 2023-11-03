@@ -1283,7 +1283,57 @@ Gogo_commands:
 warnpc $C38385
 
 ; Gogo List command ptr
-org $c35f4a : lda #$28			; Palette: Grey
+org $c35f1C
+C35F1C:
+    BPL .gray          ; branch if no Runic support
+    BRA .white         ; display the command lit up
+.bushido
+    CMP #$07           ; "Bushido"
+    BNE .sketch        ; branch if not ^
+    LDA $11DA          ; right hand properties
+    ORA $11DB          ; left hand properties
+    BIT #$02           ; "Bushido Allowed"
+    BEQ .gray          ; branch to disable if no ^
+    BRA .white         ; else branch to show
+.sketch
+    CMP #$0D           ; "Sketch"
+    BNE .white         ; enable if not ^ (or other previous)
+    LDA $11C6          ; right hand equipment slot
+    JSL $C2FBFD        ; C: Not a brush
+    BCC .white         ; branch if is brush
+    LDA $11C7          ; left hand equipment slot
+    JSL $C2FBFD        ; C: Not a brush
+    BCS .gray          ; branch if ^
+.white
+    JMP C37D2B
+.gray
+    JMP $7D2F
+C35F4C:
+    STA $29
+    PLA                ; restore command ID
+    RTS
+warnpc $C35F50
+
+    
+ORG $C37D2B
+C37D2B:
+    LDA #$20        ; user color palette (white)
+    BRA .skip
+;C3752F:
+    LDA $26            ; Menu flag
+    CMP #$0B        ; Status?
+    BEQ .status        ; Branch if so
+    CMP #$6A        ; Status?
+    BEQ .status        ; Branch if so
+    LDA #$24        ; Palette grey (BG3)
+    bra .skip        ; Skip 1 line
+.status    
+    LDA #$28        ; Palette: Grey (BG1)
+.skip
+    JMP C35F4C        ; Go back
+    
+Warnpc $C37D43
+
 ORG $C35EB7		
 	LDY #$40C9      			; Tilemap ptr
 	
@@ -1341,4 +1391,3 @@ C3622A:
 org $C35F50  
 	LDX #$610A      ; Tilemap ptr
 	
-
