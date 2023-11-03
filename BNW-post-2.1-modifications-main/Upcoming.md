@@ -1,39 +1,20 @@
 # Upcoming
 
-### b21 (not yet released)
-
-Features/tweaks
-- Added elemental properties to the status menu
-- Cyan joins the party for Wrexsoul fight
-- Menu opens to equip party in place of auto-optimize routine (Before Cranes, Phunbaba 3, Tentacles and Wrexsoul)
-- Changed quote color and enemy flashing before any enemy "reaction"
-- New Locke scene when leaving Returners Hideout
-- Relm recruitable in Owzer's mansion directly after saving her in the Veldt Cave
-- Added blinking Y button to the status and shop screens
-- Changed Setzer's initial weapon from Darts to Butterfly
-
-Fixes
-- Cleanup of misc.ips patching
-- Removed splash screen
-- Elemental properties nomenclature and order changed to: Absorb, No Damage, Half Damage, Weakness
-- Added Cursed Shield/Auto-Regen interaction to the status screen
-- Added XP and EP to the "Next" line on status screen
-- Changed all "exp." references to "XP"
+### b22 (not yet released)
+- Press A on a Rage to show details: Elemental weaknesses/resistance, Statuses immunities/innate
 - Removed Y toggle to see rerise learning percentage (It's now shown by default)
 - Fixed dual wield penalty shown regardless of whether you're using a second weapon
 - Fixed "If Near Fatal causes Zinger to be removed from a target, any remaining strikes will target whoever is in the 2nd slot"
+- Added Brave New World subtitle to the ingame animated title
+- Command arrange menu accessible from the "normal" option too
+- Align hand cursor to text where needed
 
 ### 2.2 roadmap (ordered by priority):
 
-- Press A on a Rage to show details: Elemental weaknesses/resistance, Statuses immunities/innate
-- Added Brave New World subtitle to the ingame animated title
 - Import Snaphat compression algorythm
-- Customize command on the "normal" command window
-- Gray out null value in shop details screen 
 - Import Alphabetical Lore by Silent Enigma: useless for english version but useful for translations or future lores edits
 - Phoenix glitch fix
 - Disintegration animation for enemies that get petrified
-- Align hand cursor to text where needed
 
 ### Events
 - Restore Shadow cutscene during Soul train fight
@@ -72,6 +53,7 @@ Fixes
 - Remove 1 fight in IAF and/or Mine Cart
 - Magitek rided by humans are stealable
 - Remove Siren from BAR-BAR-BAR pool
+- Gray out null values on shop details menu
 
 ### Long-term goals (3.0?):
 - Colosseum overhaul
