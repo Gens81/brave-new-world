@@ -2131,7 +2131,7 @@ There do exist [restore points], which fully heal your party in addition to lett
 Save often because, should you die in battle, it's back to the title screen with you - there are no more mulligans.
 
 [caption #602]
-There's an option in the config menu to disable exp. gains if you don't want to overlevel. In return, GP gain will be doubled.<EOP>
+There's an option in the config menu to disable XP gains if you don't want to overlevel. In return, GP gains will be doubled.<EOP>
 Please don't just leave it on all the time and then bitch to us about how hard the game is.
 
 [caption #603]
@@ -2281,8 +2281,8 @@ Need esper info?
 
 [caption #627]
 Equipped espers may be summoned once per battle by pressing <$74> on the [Magic] menu.<EOP>
-Magic is learned from espers by spending [spell points], which characters earn from fighting battles with an esper equipped.<EOP>
-Characters also gain [esper points] (EP) when they earn spell points and exp. from the same battle.<EOP>
+Magic is learned from espers by spending [spell points] (SP), which characters earn from fighting battles with an esper equipped.<EOP>
+Characters also gain [esper points] (EP) when they earn spell points and [experience] (XP) from the same battle.<EOP>
 Esper points earn [esper levels] (EL), which are used to grant permanent stat boosts from espers.<EOP>
 Esper levels are not applied automatically after gaining them, but are rather [banked] just like spell points are.<EOP>
 Banked ELs are spent just like spell points - go to the esper menu and then click on the EL bonus for that esper.<EOP>
@@ -8582,7 +8582,7 @@ Bob: If you'd like to try, be my guest. He's loud, obnoxious, and he smells like
 We fight for rare items and equipment here. First, you're provided with a list of prizes for all the items you have.<EOP>
 After you choose an item to trade, your opponent will be shown. Choose someone from your party to fight them.<EOP>
 An automatic battle will then take place. Win, and you get the prize. Lose, and you get your item back instead.<EOP>
-Yellow bets are reversible. There's no risk, so don't reset the game if you lose.
+There's no risk, so don't reset the game if you lose.
 
 [caption #2428]
 The Colosseum only accepts rare items for betting. If it's not priceless, don't bother.
@@ -9173,7 +9173,7 @@ _or should we ask?
 [Come on, let's go.]
 
 [caption #2581]
-[_]
+
 
 [caption #2582]
 [Are you okay?]
@@ -9753,10 +9753,11 @@ Kefka: _and now the fun can really begin!
 
 
 [caption #2739]
-
+<A2>: I thank thee.<EOP>
+<A2>: There's no longer room in my soul for sadness, anger_<D> guilt.
 
 [caption #2740]
-
+<A2>: I'm free now and resolve alone dwells in my heart!
 
 [caption #2741]
 
@@ -9912,8 +9913,7 @@ Violet: I heard that! <E$05><OP$12>
 
 [caption #2786]
 Wrexsoul: He despairs in his powerlessness_ <D>his grief is so overpowering that he can't resist me!<EOP>
-Wrexsoul: I grow stronger every second with his sadness, anger, and guilt!<EOP>
-Wrexsoul: _and now I hunger for YOU!
+Wrexsoul: I grow stronger every second with his sadness, anger, and guilt!
 
 [caption #2787]
 <A2>: I give you thanks, my friends.
