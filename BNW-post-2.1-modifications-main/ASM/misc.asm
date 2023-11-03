@@ -673,3 +673,6 @@ org $ED7D75
 ;Brave New World data
 org $C33BB8
 	db $d1,$78,"Brave New World 2.2 b21",$00
+
+org $c35f4a 
+	lda #$24		; Unusable Gogo commands in Config menu Palette 
