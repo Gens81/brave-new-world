@@ -10,7 +10,8 @@ table "menu.tbl", ltr
 Org $C3F850
 	JSR C387EB      ; Draw evasions
 	JSR $C2F7
-	LDY #$8E12
+;	LDY #$8E12
+Org $C3F859
 	JSR $02F9
 	JMP C388A0
 
