@@ -6,7 +6,6 @@
 - Fixed dual wield penalty shown regardless of whether you're using a second weapon
 - Fixed "If Near Fatal causes Zinger to be removed from a target, any remaining strikes will target whoever is in the 2nd slot"
 - Added Brave New World subtitle to the ingame animated title
-- Command arrange menu accessible from the "normal" option too
 - Align hand cursor to text where needed
 
 ### 2.2 roadmap (ordered by priority):
