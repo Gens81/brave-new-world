@@ -217,36 +217,36 @@ MenuPalette_fft:
 ;   BCG  Shadow --- Colour
 ; 1st row
 dw $0000,$4210,$39CE,$0CA6		;User editable color 
-dw $0000,$0000,$2108,$3DEF		;Grey font for unavailable choiches
-dw $0000,$4210,$39CE,$3544		;Yellow font
+dw $35F0,$35F0,$256C,$256C		;Grey font for unavailable choiches
+dw $0000,$4210,$39CE,$3544		;Blue font
 dw $0000,$4210,$39ce,$10cd		;Dark Red font 
 
 ; 2nd row
 dw $0000,$4210,$39ce,$10cd		;Dark Red font
 dw $0000,$7fff,$4210,$7fff		;Should be white -> 7fff should be rplaced by user font in game. 3rd code is the VWF description shadow
 white_no_box:
-dw $0000,$0000,$39ce,$7fff		;White font
+dw $0000,$0000,$39ce,$77FF		;White font
 dw $0000,$0000,$39ce,$6f60		;Light blue font
 
 ; 3rd row
-dw $0000,$0000,$2108,$3def		;Gray font
-dw $0000,$0000,$2108,$3def		;Gray font
-dw $0000,$0000,$2108,$3def		;Gray font
-dw $0000,$0000,$2108,$3def		;Gray font
+dw $0000,$35F0,$256C,$256C		;Gray font
+dw $0000,$35F0,$256C,$256C		;Gray font
+dw $0000,$35F0,$256C,$256C		;Gray font
+dw $0000,$35F0,$256C,$256C		;Gray font
 
 ; 4th row
 
-dw $0000,$3c00,$2108,$3def		;Gray font with blue shadow (Esper equipped from other actor)
+dw $0000,$35F0,$256C,$10CD		;Gray font with blue shadow (Esper equipped from other actor)
 dw $0000,$3868,$39ce,$7fff		;Gray font with purple shadow
 dw $0000,$3868,$39ce,$7fff		;Gray font with purple shadow
 dw $0000,$3868,$39ce,$7fff		;Gray font with purple shadow
 
 ; 5th row
 Grey:
-dw $0000,$4210,$5294,$7fff		;White font with gray shadow
-dw $0000,$4210,$5294,$7fff		;White font with gray shadow
-dw $0000,$0000,$39ce,$7fff		;White font with black shadow
-dw $0000,$4210,$5294,$7fff		;White font with gray shadow
+dw $0000,$4210,$5294,$77FF		;White font with gray shadow
+dw $0000,$4210,$5294,$77FF		;White font with gray shadow
+dw $0000,$0000,$39ce,$77FF		;White font with black shadow
+dw $0000,$4210,$5294,$77FF		;White font with gray shadow
 
 ; 6th row
 Yellow_fft:
@@ -257,7 +257,7 @@ dw $ffff,$ffff,$ffff,$ffff		;Null
 
 ;7th row
 white_fft:
-dW $0000,$0000,$39ce,$7fff		;White font
+dW $0000,$0000,$39ce,$77FF		;White font
 
 ; Btl Palette
 org $EEB15F
@@ -413,3 +413,4 @@ org $C4A755
 
 org $C199B2
     LDX !textcolor    ; set custom text color
+
