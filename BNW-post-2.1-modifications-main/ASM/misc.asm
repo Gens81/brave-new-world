@@ -665,14 +665,20 @@ org $C349AC
 
 org $C3F453 
 	db "Wait Gauge",$00	;replace Show Delay
+
+; replace MP separator in lores menu
+org $C3529C : db $D3
+
+; replace Attack/Defense separator in sell menu
+org $C3C36D : db $D3
 	
 ;change Setzer's initial weapon
 org $ED7D75
 	db $03	;Butterfly
 
+; edit jump table to skip over Window/Short check
+org $C3234E : dw $236F
+
 ;Brave New World data
 org $C33BB8
 	db $d1,$78,"Brave New World 2.2 b21",$00
-
-org $c35f4a 
-	lda #$24		; Unusable Gogo commands in Config menu Palette 
