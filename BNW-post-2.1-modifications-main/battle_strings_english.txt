@@ -210,7 +210,7 @@ Got <VAR2> GP<END>
 //POINTER #39 @ $11F7EE - STRING #39 @ $11F1ED
 
 #W16($11F7EE)
-Got <VAR1> Exp. point(s)<wait for key><END>
+Got <VAR1> Experience (XP)<wait for key><END>
 
 //POINTER #40 @ $11F7F0 - STRING #40 @ $11F202
 
@@ -280,7 +280,7 @@ Level <VAR1><END>
 //POINTER #53 @ $11F80A - STRING #53 @ $11F2BF
 
 #W16($11F80A)
-Got <VAR1> Spell Point(s)<wait for key><END>
+Got <VAR1> Spell Point(s) (SP)<wait for key><END>
 
 //POINTER #54 @ $11F80C - STRING #54 @ $11F2D5
 
@@ -360,7 +360,7 @@ Ogre Nix was broken!<END>
 //POINTER #69 @ $11F82A - STRING #69 @ $11F367
 
 #W16($11F82A)
-Got <VAR1> EP<wait for key><END>
+Got <VAR1> Esper Points (EP)<wait for key><END>
 
 //POINTER #70 @ $11F82C - STRING #70 @ $11F371
 
