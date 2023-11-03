@@ -1,6 +1,6 @@
 # Changelog
 
-## [2.2 b20.2](https://github.com/Gens81/brave-new-world/releases) - 2023/10/25
+## [2.2 b21](https://github.com/Gens81/brave-new-world/releases) - 2023/11/03
 
 ### Features
 
@@ -21,23 +21,26 @@
 - Selecting an esper twice remove it, selecting an esper equipped on another char makes you choose if you want to "transfer" it (Ryo_Hazuki)
 - Enable esper batch spending (Fëanor)
 - Prevent using slim jim from field menu (Gens)
-- Battle quote box show enemy "reactions" in yellow (Fëanor)
+- Battle quote box show enemy "reactions" in yellow (Fëanor) and enemy flashes differently (Bropedio)
 - Double GP by default on Veldt and reward bonuses not showing at the end of a battle if exp gain is off (Fëanor)
 - Summon available even for chars with X-Magic active (Fëanor)
 - Rage checklist (Original hack by Novalia Spirit, ported to Bnw by Fëanor) 
 - "Native" dance shown in yellow (Fëanor)
-- More walkable beach tiles" in solitary island for faster fish_catching (Fëanor)
+- More walkable beach tiles in solitary island for faster fish_catching (Fëanor)
 - Item/hands battle menu will always arrange inventory to have respectively items/weapons-shields on top of the list (Ryo_Hazuki)
 - Press Start to leave the menu everywhere  (Fëanor) 
-- Colosseum reversible trades highlighted in yellow (Fëanor)
-- Rich status menu showing ailment immunities and inherent statuses (Ryo_Hazuki)
+- Colosseum reversible trades highlighted by a different icon (Fëanor, Bropedio)
+- Rich status menu showing ailment immunities, inherent statuses and elemental properties (Ryo_Hazuki)
 - Possession, charm and love token go away if near fatal (Sir Newton Fig)
 - Pressing/holding A will advance dialog text (Fëanor)
 - Added an option to trigger the banquet scene (Fëanor)
+- Menu opens in place of auto-optimize routine before Cranes, Phunbaba 3, Tentacles and Wrexsoul (Fëanor)
+- Cyan joins the party for Wrexsoul fight (Fëanor)
+- New Locke scene in Returners Hideout (Fëanor)
 
 ### Tweaks
 
-- Adds custom intro and title (Ryo_Hazuki)
+- Adds custom title (Ryo_Hazuki)
 - Cleaner coliseum "select a challenger" screen and consumable submenu screen (Ryo_Hazuki)
 - Deleted rare item counter (Ryo_Hazuki)
 - Added Tools attack values in shops. Edgar/Gogo cheering when selecting a tool (Ryo_Hazuki)
@@ -78,6 +81,11 @@
 - Descriptions on the equip menu without pressing Y (Ryo_Hazuki)
 - Final Kefka can't "dual-cast" Meteor anymore (Fëanor)
 - Equipment menu list sorted by value (Fëanor)
+- Relm recruitable in Owzer's mansion directly after saving her in the Veldt Cave (Fëanor)
+- Added blinking Y button to the status and shop screens (Ryo_Hazuki)
+- Changed Setzer's initial weapon from Darts to Butterfly (BTB)
+- Elemental properties nomenclature and order changed to: Absorb, No Damage, Half Damage, Weakness (Ryo_Hazuki)
+- Changed all "exp." references to "XP" (Gens)
 
 ### Bugfixes
 
