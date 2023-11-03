@@ -224,11 +224,11 @@ learnlabel:	dw $4435 : db " Learn",$00
 thirty:		dw $463B : db "/30",$00
 EL_Bonus:	db "EL Bonus ",$00				;fd86
 
-;org $C3F41A 
-;	LDY #$47b5	; Unspent EL quantity coordinates
-;	
-;org $c3f751
-;	ldx #$4637	; unspent SP quantity coordinates
+org $C3F41A 
+	LDY #$47b5	; Unspent EL quantity coordinates
+	
+org $c3f751
+	ldx #$4637	; unspent SP quantity coordinates
 	
 ; Navigation data for esper data menu
 org $C3598C
