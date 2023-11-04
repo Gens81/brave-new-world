@@ -67,7 +67,7 @@ PortraitPlace:
 	LDA #$0038				; Y-Pos
 	RTS
 .high
-	LDA #$001A				; Y-Pos
+	LDA #$001b				; Y-Pos
 	RTS
 
 ELStuff:
@@ -78,7 +78,7 @@ ELStuff:
   BEQ .exit				  ; Branch if so and keep the screen clean
   JSR Char_Chk     		  ; check if Gogo or above
   BCS .exit        		  ; exit if ^  
-  LDX #$7A61              ; next EL number coords
+  LDX #$7A61+64           ; next EL number coords
   JSR $049A               ; draw 5 digits
   REP #$20                ; 16-bit A
 .exit
@@ -89,20 +89,11 @@ DrawEPLabel:
   LDY #EPLabel            ; pointer to EP Label text
   JMP $02F9               ; draw text at pointer
 
-ClearEPLabel:
-  JSR $02F9               ; draw text at pointer
-  LDY #EmptyEPLabel       ; pointer to EP Label text
-  JSR $02F9               ; draw text at pointer
-  LDY #EmptyEPText        ; pointer to EP Label text
-  JMP $02F9               ; draw text at pointer
-
 EPLabel:
-  dw $7A6B : db "EP",$00     ; EP label
-EmptyEPLabel:
-  dw $7AEB : db "  ",$00     ; EP label
-EmptyEPText:
-  dw $7AFB : db "     ",$00  ; EP label
-
+  dw $7A6B+64 : db "EP",$00     ; EP label
+padbyte $FF
+pad $C3FCA0
+WARNpc $C3FCA0
 ; ------------------------------------------------------------------------
 ; EL/EP/Spell bank text data and helpers
 ; Many new label and text positions and tiles
@@ -110,7 +101,7 @@ EmptyEPText:
 
 org $C3F277
 EPUpTxt:
-	dw $7A27 : db "Next",$00  ; Next EL label
+	dw $7A27+64 : db "Next",$00  ; Next EL label
 
 ; Many "EL" text positions, plus extra $FF buffer for indexing purposes
 EL_TXT:
@@ -119,7 +110,7 @@ EL_TXT:
   dw $3CAB : db "EL",$00,$FF,$FF,$FF    ; Actor 3 Main
   dw $3E2B : db "EL",$00,$FF,$FF,$FF    ; Actor 4 Main
   dw $423B : db "EL",$00,$FF,$FF,$FF    ;
-  dw $7A19 : db "EL",$00,$FF,$FF,$FF    ;
+  dw $7A19+64 : db "EL",$00,$FF,$FF,$FF    ;
   dw $3A7B : db "EL",$00,$FF,$FF,$FF    ; Status
 
 UnspentTxt:
