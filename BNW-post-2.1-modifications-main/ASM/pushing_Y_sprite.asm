@@ -91,9 +91,14 @@ EDFD1B:  LDX $2D         ; Queue index
          STA $364A,X     ; Set sprite flags
 		 
 ; Mode 1: Sustain Y
-EDFD2B:  LDA $47         ; Menu flags
-         AND #$01        ; Actors shown?
+EDFD2B:  LDA $47          ; Menu flags
+         AND #$01         ; Actors shown?
          BEQ .DELETE      ; Delete if not
+		 LDA $26		  ; Sub-flag
+		 CMP #$28		  ; Buying item?
+		 BEQ .DELETE	  ; Delete if it is
+		 CMP #$27         ; Buying item?
+		 BEQ .DELETE      ; Delete if it is
 		 LDX $2D
 		 LDA #$E8         ; Cursor's X
          STA $33CA,X      ; Set sprite's
