@@ -318,8 +318,6 @@ ELavlbl: db "EL",$00
 
 
 warnpc $C3F43B+1
-padbyte $FF
-pad $C3F43B
 
 
 org $C3F49E

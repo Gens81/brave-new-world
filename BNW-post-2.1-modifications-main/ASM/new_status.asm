@@ -118,13 +118,15 @@ org $C35f79
 	dw $58c7,$1200			; (Gogo, L part)
 	dw $6087,$1207			; (Gogo, R part)
 	
-org $C38750     
+org $C3F3FF     
 Print_EL_Value: 
 	SEP #$20    ; 8 bit-A
 	LDA $26     ; Menu flag
 	CMP #$0B    ; Init Status?
 	BEQ .status ; Branch if so
 	CMP #$0C    ; Sustain Status?
+	BEQ .status ; Branch if so
+	CMP #$42	; Airship Status?
 	BEQ .status ; Branch if so
 	REP #$20    ; 16 bit-A
 	lda [$ef]   ; Tilemap position for level display 
@@ -137,7 +139,9 @@ Print_EL_Value:
 	ADC #$00B4  ; ADC
 	RTS
 	
-padbyte $FF : pad $C3876B
+warnpc $C3F43B
+padbyte $FF
+pad $C3F43B
 
 
 
@@ -243,6 +247,36 @@ org $C30AF1
 ;                        							 ;
 ;****************************************************;
 
+; 42: Initialize Lineup's Status menu
+org $C3631D
+C3631D:  JSR $352F       ; Reset/Stop stuff
+         LDA $0200       ; Menu number
+         STA $22         ; Memorize it
+         STZ $0200       ; Actor arrows: Off...
+         STZ $25         ; Never read...
+         LDA #$40        ; Channel: 6
+         TRB $43         ; Halt HDMA-6...
+         JSR $620B       ; Set to shift text
+         JSR $6354       ; Draw menu; portrait
+         LDA #$01        ; C3/1D7E
+         STA $26         ; Next: Fade-in
+         LDA #$43        ; C3/633F
+         STA $27         ; Queue: Sustain menu
+         JMP C36102      ; BRT:1 + NMI
+
+; 43: Sustain Lineup's Status menu
+C3633F:  LDA $09         ; No-autofire keys
+         BIT #$80        ; Pushing B?
+         BEQ C36353      ; Exit if not
+         JSR $0EA9      ; Sound: Cursor
+         LDA $4C         ; Menu return cmd
+         STA $27         ; Queue menu exit
+         STZ $26         ; Next: Fade-out
+         LDA $22         ; Former menu
+         STA $0200       ; Set as current
+C36353:  RTS
+
+WARNpc $C36354
 
 ; Queue pushing Y OAM function
 org $C36102
@@ -277,11 +311,11 @@ C31C46:  JSR $352F      				; Reset/Stop stuff
 org $C321F5
 	JSR C3F646
 ; Handle R
-org $C32202
+org $C32218
 	jsr Clear_BG_L_R
 
 ;Handle L
-org $C32228
+org $C3223E
 	jsr Clear_BG_L_R
 		 
 ;[...]
@@ -311,10 +345,9 @@ clear_flags:
 	JMP $5D05      						; Draw menu; portrait
 
 Clear_BG_L_R:
-	JSR $0Eb2							; Sound: click
 	DEC $C5
-	JSR $6A3C							; Jump to clear BG3 A	
-	LDA $28 					        ; Member slot
+	JSR $6A3C                           ; Jump to clear BG3 A
+	JSR $1C5D     						; Init cursor data								
 	RTS
 	
 Handle_Y:		 				
