@@ -181,8 +181,8 @@ statusspeed:		dw $3ccd+128	: db "Speed",$00
 statusstamina:		dw $3D4d+128	: db "Stamina",$00
 statusattack:		dw $3dcd+128	: db "Attack",$00
 statusdefense:		dw $3e4d+128	: db "Defense",$00
-statusmagicdefense:	dw $3ecd+128	: db "M.Defense",$00
-statusevade:		dw $3f4d+128	: db "Evade",$00
+statusevade:		dw $3ecd+128	: db "Evade",$00
+statusmagicdefense:	dw $3f4d+128	: db "M.Defense",$00
 statusmagicevade:	dw $484D		: db "M.Evade",$00
 Xp:					dw $79AB		: db "XP",$00
 ;Command:			dw $3935		: db "Command",$00
@@ -1008,7 +1008,7 @@ org $C3FDD1
 	dw $3D5F+128					; stamina   (11A2)
 	dw $3CDF+128					; speed     (11A4)
 	dw $3BDF+128					; vigor     (11A6)
-	dw $3F5F+128					; evade     (11A8)
+	dw $3edF+128					; evade     (11A8)
 	dw $485F						; m.evade   (11AA)
 
 org $C3FDE0
@@ -1204,7 +1204,7 @@ PrintValueRoutine:
 		JSR !Draw3Digits	
 		LDA $11BB				; M.Defense Value
 		JSR !TurnIntoText8bit
-		LDX #$3edF+128			; M.Defense stat position
+		LDX #$3F5F+128			; M.Defense stat position
 		JSR !Draw3Digits
 		JSR $9371				; Define Attack
 		BRA Skip				; skip over unused code, now freespace for helper function
