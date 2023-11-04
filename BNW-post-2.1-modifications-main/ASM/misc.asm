@@ -671,6 +671,9 @@ org $C3529C : db $D3
 
 ; replace Attack/Defense separator in sell menu
 org $C3C36D : db $D3
+
+; replace spell progress separator in magic menu
+org $C3506B : db $D3
 	
 ;change Setzer's initial weapon
 org $ED7D75
