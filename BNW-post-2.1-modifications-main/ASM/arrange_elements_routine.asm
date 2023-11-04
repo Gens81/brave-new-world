@@ -263,22 +263,22 @@ C38959:  LDX $2134       ; Item index
          JMP C388F2      ; Draw list
 		 
 ; Build and draw list of halved absorbed, nulled, and weak elements from C4B6EE new status routine
-C38936:	 LDX #$7C2F		 ; 1st Row ptr
+C38936:	 LDX #$7C6F		 ; 1st Row ptr
 		 LDA $D9		 ; Absorb
 		 JSR C388AE      ; Build list
          JSR C388F8      ; Draw list	
 		 
-		 LDX #$7CEF		 ; 2nd Row ptr
+		 LDX #$7D2F		 ; 2nd Row ptr
 		 LDA $DA		 ; No DMG
 		 JSR C388AE      ; Build list
          JSR C388F8      ; Draw list
 		 
-		 LDX #$7DAF		 ; 3rd Row ptr
+		 LDX #$7DEF		 ; 3rd Row ptr
  		 LDA $D8		 ; Half DMG
 		 JSR C388AE      ; Build list
          JSR C388F8      ; Draw list		
 		 
-		 LDX #$7E6F		 ; 4th Row ptr
+		 LDX #$7EAF		 ; 4th Row ptr
 		 LDA $DB		 ; Weakness	
 		 JSR C388AE      ; Build list
          JSR C388F8      ; Draw list
