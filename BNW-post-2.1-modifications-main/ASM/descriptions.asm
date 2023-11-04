@@ -569,7 +569,7 @@ LeoSpirits:
     db "A bottle of Leo's favorite booze",$00
 Blank3: db $00
 Pendant:
-    db "Some things you just can't get rid|of_",$00
+    db "Some things you",$03,"just can't get rid of_",$00
     
 warnpc $CEFFFF
 
