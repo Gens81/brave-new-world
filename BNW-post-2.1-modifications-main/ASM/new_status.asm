@@ -507,6 +507,7 @@ Elements_routine:
 
 	
 light_up_statuses:
+	STZ $CB
 	LDX $00								; Clear X
 	STX $DE                             ;   ^   $DE Item Value Index Counter
 	STX $DC                             ;   ^   $DC Check Byte counter
