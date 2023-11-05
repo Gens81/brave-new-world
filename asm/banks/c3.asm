@@ -2689,6 +2689,7 @@ EPClear:
 
 ; TODO: Lots of duplicated code here
 ; Many "EL" text positions, plus extra $FF buffer for indexing purposes
+EL01:
   dw $39AB : db "EL",$00,$FF,$FF,$FF
   dw $3B2B : db "EL",$00,$FF,$FF,$FF
   dw $3CAB : db "EL",$00,$FF,$FF,$FF
@@ -2699,6 +2700,7 @@ EPClear:
 
 ; TODO: Lots of duplicated code here
 ; Many "EL" text positions, but with spaces instead, to overwrite
+NoEL01:
   dw $39AB : db "     ",$00
   dw $3B2B : db "     ",$00
   dw $3CAB : db "     ",$00
@@ -2839,7 +2841,7 @@ Stat_Skill_Ent:
   PHP               ; store flags
   REP #$20          ; 16-bit A
   BCS Gogo          ; branch if Gogo or higher
-  ADC #$F29F        ; else, add "EL" text location
+  ADC #EL01         ; else, add "EL" text location
   BRA Write_EL      ; branch to write ^
 
 No_Ramuh:
@@ -2849,7 +2851,7 @@ No_Ramuh:
 
 Gogo:
   CLC               ; clear carry
-  ADC #$F2D7        ; add black spaces text location
+  ADC #NoEL01       ; add black spaces text location
 
 Write_EL:
   TAY               ; index text source
