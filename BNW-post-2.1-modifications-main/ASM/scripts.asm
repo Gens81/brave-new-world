@@ -31,3 +31,14 @@ org $D0D000
 	incbin "../scripts/long_battle_dialog.bin"
 
 warnpc $D0FD00
+
+;-------------------------------------------------------------------
+;Battle enemy scripts
+;------------------------------------------------------------------
+
+org $CF8400
+
+	incbin "../scripts/monster_scripts.bin"
+	
+warnpc $CFC050
+
