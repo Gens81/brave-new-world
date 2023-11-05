@@ -1,6 +1,6 @@
 @echo off
 rem ----------------------------------------------------------------------------
-set ROM="scripts\Bnw_2.1.smc"
+set ROM="scripts\bnw_2.2.smc"
 rem ----------------------------------------------------------------------------
 set SCRIPTS="scripts"
 set GFX="gfx"
@@ -20,3 +20,4 @@ echo Extracting Scripts...
 %DD% skip=845824 count=133887 if=%ROM% of=%SCRIPTS%\town_dialog.bin bs=1 2>NUL
 %DD% skip=1040864 count=5231 if=%ROM% of=%SCRIPTS%\short_battle_dialog.bin bs=1 2>NUL
 %DD% skip=1102336 count=11519 if=%ROM% of=%SCRIPTS%\long_battle_dialog.bin bs=1 2>NUL
+%DD% skip=1017344 count=15440 if=%ROM% of=%SCRIPTS%\monster_scripts.bin bs=1 2>NUL
