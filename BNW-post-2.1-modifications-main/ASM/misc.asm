@@ -460,11 +460,6 @@ org $c3918c
 org $c391a9
 	jmp $947f
 
-;Fixed Dumpty script (conditional Safe>Shell)
-
-org $CF95C0
-db $15
-
 ;Wounded
 org $C3371B
 	db " KO    "
