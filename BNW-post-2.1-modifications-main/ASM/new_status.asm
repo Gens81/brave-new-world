@@ -249,37 +249,63 @@ org $C30AF1
 
 ; 42: Initialize Lineup's Status menu
 org $C3631D
-C3631D:  JSR $352F       ; Reset/Stop stuff
-         LDA $0200       ; Menu number
-         STA $22         ; Memorize it
-         STZ $0200       ; Actor arrows: Off...
-         STZ $25         ; Never read...
-         LDA #$40        ; Channel: 6
-         TRB $43         ; Halt HDMA-6...
-         JSR $620B       ; Set to shift text
-         JSR $6354       ; Draw menu; portrait
-         LDA #$01        ; C3/1D7E
-         STA $26         ; Next: Fade-in
-         LDA #$43        ; C3/633F
-         STA $27         ; Queue: Sustain menu
-         JMP C36102      ; BRT:1 + NMI
+C3631D:  JSR $352F       		; Reset/Stop stuff
+         LDA $0200       		; Menu number
+         STA $22         		; Memorize it
+         STZ $0200       		; Actor arrows: Off...
+         STZ $25         		; Never read...
+         LDA #$40        		; Channel: 6
+         TRB $43         		; Halt HDMA-6...
+         JSR $620B       		; Set to shift text
+         JSR $6354       		; Draw menu; portrait
+         LDA #$01        		; C3/1D7E
+         STA $26         		; Next: Fade-in
+         LDA #$43        		; C3/633F
+         STA $27         		; Queue: Sustain menu
+         JMP C36100      		; BRT:1 + NMI
 
 ; 43: Sustain Lineup's Status menu
-C3633F:  LDA $09         ; No-autofire keys
-         BIT #$80        ; Pushing B?
-         BEQ C36353      ; Exit if not
-         JSR $0EA9      ; Sound: Cursor
-         LDA $4C         ; Menu return cmd
-         STA $27         ; Queue menu exit
-         STZ $26         ; Next: Fade-out
-         LDA $22         ; Former menu
-         STA $0200       ; Set as current
-C36353:  RTS
-
+C3633F:	LDA $09         		; No-autofire keys
+		BIT #$80        		; Pushing B?
+		BEQ C36353      		; Exit if not
+		JSR $0EA9       		; Sound: Cursor
+		LDA $4C         		; Menu return cmd
+		STA $27         		; Queue menu exit
+		STZ $26         		; Next: Fade-out		
+		JMP EndRtn
+C36353: JMP Handle_Y_Handle_Y
 WARNpc $C36354
 
+ORG $C3650A
+EndRtn:	STZ $C5					; Clear status/elements Flag
+		LDA $22         		; Former menu
+		STA $0200       		; Set as current
+		RTS       
+	
+warnpc $C3651A
+; Set portrait's X position for Lineup's Status menu
+org $C3638E
+C3638E:  LDA $1850,Y     		; Actor info
+         BIT #$20        		; Back row?
+         BEQ C3639C      		; Branch if not
+         REP #$20        		; 16-bit A
+         LDA #$0010      		; X: 16
+         BRA C363A1      		; Skip 2 lines
+C3639C:  REP #$20        		; 16-bit A
+         LDA #$0010      		; X: 16
+C363A1:  STA $33CA,X     		; Set sprite's
+         SEP #$20        		; 8-bit A
+         RTS
+; Set portrait's X position for Lineup menu		 
+org $C37AF7
+	LDA #$0010			 ; X: 16
+	
 ; Queue pushing Y OAM function
 org $C36102
+C36100:
+	JSR $a9a9							; Load Elements GFX
+	LDA #$05							; Cursor and unfreeze CGRAM
+	TSB $45								; Set
 C36102:
 	JSR $0e44							; Upload BG1 C+D -> Due to clear BG1 VRAM and condense text 
 	JSL Condense_Status_txt				; Draw menu; portrait
@@ -365,20 +391,29 @@ Handle_Y:
 	BRA .elements
 .status				
 	JSR $0Eb2							; Sound: click
-	LDX #$4400							; $7E7B49
-	JSR $6A4E							; Jump to clear BG3 A
+	JSR ClearBg3Status					; Jump to clear BG3 A
 	JSL C4B6EE							; Reprint Statuses
 	JSL light_up_statuses				; Light_up statuses
 	bra .not
 .elements	
 	JSR $0Eb2							; Sound: click
-	LDX #$4400							; $7E7B49
-	JSR $6A4E							; Jump to clear BG3 A
+	JSR ClearBg3Status					; Jump to clear BG3 A
 	JSL Elements_routine				; Loads Element Glyph
 
 .not 				
+	LDA $26								; menu flag
+	CMP #$43							; Lineup status?
+	BEQ .lineup							; Branch if so
 	JMP $2254							; Go to handle GOGO
+.lineup
+	JSR $0F39					        ; Set to redraw cmds
+	RTS
 
+ClearBg3Status:
+	LDX #$4400							; $7E7B49
+	JSR $6A4E							; Jump to clear BG3 A
+	rts
+	
 warnpc $C3F6B0
 
 
