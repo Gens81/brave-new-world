@@ -401,6 +401,10 @@ EventScriptFreespace_2:
 
 warnpc $CB5EC5
 
+; trigger "Shadow arrives" event when a player chooses to wait for Shadow the
+; second time at end of FC
+org $CA57AF : db $BB,$57,$00
+
 ; -----------------------------------------------------------------------------
 ; TEMPORARILY DISABLED EDITS
 ; -----------------------------------------------------------------------------
