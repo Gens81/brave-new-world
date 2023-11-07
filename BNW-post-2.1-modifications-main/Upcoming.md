@@ -1,15 +1,12 @@
 # Upcoming
 
-### b22 (not yet released)
+### 2.2 roadmap (ordered by priority):
 - Press A on a Rage to show details: Elemental weaknesses/resistance, Statuses immunities/innate
-- Removed Y toggle to see rerise learning percentage (It's now shown by default)
+- Compact spells list on field menu
 - Fixed dual wield penalty shown regardless of whether you're using a second weapon
 - Fixed "If Near Fatal causes Zinger to be removed from a target, any remaining strikes will target whoever is in the 2nd slot"
 - Added Brave New World subtitle to the ingame animated title
 - Align hand cursor to text where needed
-
-### 2.2 roadmap (ordered by priority):
-
 - Import Snaphat compression algorythm
 - Import Alphabetical Lore by Silent Enigma: useless for english version but useful for translations or future lores edits
 - Phoenix glitch fix
