@@ -1,6 +1,6 @@
 # Changelog
 
-## [2.2 b21](https://github.com/Gens81/brave-new-world/releases) - 2023/11/03
+## [2.2 b21](https://github.com/Gens81/brave-new-world/releases) - unreleased
 
 ### Features
 
@@ -29,7 +29,7 @@
 - More walkable beach tiles in solitary island for faster fish_catching (Fëanor)
 - Item/hands battle menu will always arrange inventory to have respectively items/weapons-shields on top of the list (Ryo_Hazuki)
 - Press Start to leave the menu everywhere  (Fëanor) 
-- Colosseum reversible trades highlighted by a different icon (Fëanor, Bropedio)
+- Colosseum reversible bets highlighted by a different icon (Fëanor, Bropedio, Gens)
 - Rich status menu showing ailment immunities, inherent statuses and elemental properties (Ryo_Hazuki)
 - Possession, charm and love token go away if near fatal (Sir Newton Fig)
 - Pressing/holding A will advance dialog text (Fëanor)
@@ -37,7 +37,7 @@
 - Menu opens in place of auto-optimize routine before Cranes, Phunbaba 3, Tentacles and Wrexsoul (Fëanor)
 - Cyan joins the party for Wrexsoul fight (Fëanor)
 - New Locke scene in Returners Hideout (Fëanor)
-- Command arrange menu accessible from the "normal" option too (Fëanor)
+- The second dialogue while escaping from FC directly trigger Shadow's scene
 
 ### Tweaks
 
@@ -85,8 +85,10 @@
 - Relm recruitable in Owzer's mansion directly after saving her in the Veldt Cave (Fëanor)
 - Added blinking Y button to the status and shop screens (Ryo_Hazuki)
 - Changed Setzer's initial weapon from Darts to Butterfly (BTB)
+- Command arrange menu accessible from "normal" option
 - Elemental properties nomenclature and order changed to: Absorb, No Damage, Half Damage, Weakness (Ryo_Hazuki)
 - Changed all "exp." references to "XP" (Gens)
+- Removed Y toggle to see rerise learning percentage (It's now shown by default)
 
 ### Bugfixes
 
@@ -112,5 +114,6 @@
 - Ghost ring fix : preserves the Undead status when raging a non-undead monster (Fëanor)
 - Clears invisible Red-D (Fëanor)
 - Fix sprite priority bug after covering (Bropedio)
+- Fixed Sand Devil battle script
 
 ## Previous Versions are not tracked by this Doc
