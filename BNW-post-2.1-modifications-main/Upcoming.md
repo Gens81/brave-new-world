@@ -1,11 +1,13 @@
 # Upcoming
 
-### 2.2 roadmap (ordered by priority):
+### 2.2 roadmap:
 - Press A on a Rage to show details: Elemental weaknesses/resistance, Statuses immunities/innate
 - Compact spells list on field menu
 - Fixed dual wield penalty shown regardless of whether you're using a second weapon
 - Fixed "If Near Fatal causes Zinger to be removed from a target, any remaining strikes will target whoever is in the 2nd slot"
 - Added Brave New World subtitle to the ingame animated title
+- Allow Esper menu to open "Curative Ally Targeting" submenu
+- No longer show damage on Interceptor
 - Align hand cursor to text where needed
 - Import Snaphat compression algorythm
 - Import Alphabetical Lore by Silent Enigma: useless for english version but useful for translations or future lores edits
@@ -21,8 +23,6 @@
 - Add Esper portrait to the menu before Phunbaba 3rd fight
 
 ### "Bro new world" features candidates for porting:
-- Allow Esper menu to open "Curative Ally Targeting" submenu
-- No longer show damage on Interceptor
 - If "Fight" will yield a desperation attack, the text is yellow 
 - Scan anytime (HP/MP accessible via X, Status via Y, weaknesses and AI hints via scan)
 - Enemy script changes shown in message boxes (eg. "Disabled")
@@ -50,6 +50,7 @@
 - Magitek rided by humans are stealable
 - Remove Siren from BAR-BAR-BAR pool
 - Gray out null values on shop details menu
+- Raise Slow accuracy
 
 ### Long-term goals (3.0?):
 - Colosseum overhaul
