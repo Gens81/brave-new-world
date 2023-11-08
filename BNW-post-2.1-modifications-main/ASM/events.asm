@@ -180,12 +180,8 @@ org $CB7D1C : padbyte $FE : pad $CB7D24
 ; clear event script for Relm's initial response ("…")
 org $CB7D58 : padbyte $FE : pad $CB7D5C
 
-; -----------------------------------------------------------------------------
-; EVENT EDITS THAT REQUIRE FREESPACE
-; -----------------------------------------------------------------------------
-
 ; used to calculate relative offsets for jumps and subroutine calls
-!base = $CA0000
+org $CA0000 : EventBase:
 
 ; points to a large chunk of freespace within the event script block gained by
 ; getting rid of the event code for the Auction House.
@@ -203,13 +199,13 @@ org $CB5790 : EventScriptFreespace_0:
 ; slice into event script of left door
 org $CC85E3
     db $C0,$27,$01              ; always jump to target
-    dl LeftDoor-!base           ; ^ continued
+    dl LeftDoor-EventBase       ; ^ continued
 padbyte $FE : pad $CC85EB
 
 ; slice into event script of right door
 org $CC860D
     db $C0,$27,$01              ; always jump to target
-    dl RightDoor-!base          ; ^ continued
+    dl RightDoor-EventBase      ; ^ continued
 padbyte $FE : pad $CC8615
 
 org $CC8A96 : Banquet:          ; entry point when timer expires
@@ -222,18 +218,18 @@ LeftDoor:
     db $5E,$00                  ; [displaced] ^ continue
     db $C0,$7C,$00,$EB,$85,$02  ; if $07C==Off jump to $CC85EB else continue
     db $C0,$27,$01              ; always jump to target
-    dl Choice-!base             ; ^ continued
+    dl Choice-EventBase         ; ^ continued
 RightDoor:
     db $C1,$3C,$81,$F1,$81,$B3  ; [displaced] if $13C==On || $1F1==On return else
     db $5E,$00                  ; [displaced] ^ continue
     db $C0,$7C,$00,$15,$86,$02  ; if $07C==Off jump to $CC8615 else continue
     db $C0,$27,$01              ; always jump to target
-    dl Choice-!base             ; ^ continued
+    dl Choice-EventBase         ; ^ continued
 Choice:
     db $4B,$DD,$06              ; display caption $06DD
     db $B6                      ; jump based on choice
-    dl StepBack-!base           ; ^ continued
-    dl Banquet-!base            ; ^ continued
+    dl StepBack-EventBase       ; ^ continued
+    dl Banquet-EventBase        ; ^ continued
     db $FE                      ; return
 StepBack:
     db $31,$82,$82,$FF          ; action queue for player character
@@ -245,6 +241,7 @@ EventScriptFreespace_1:
 ; menu as part of the event script. This new feature is used at various points
 ; in the game, namely
 ; - before Cranes battle
+; - before first IAF battle
 ; - before Tentacles battle
 ; - before Phunbaba 3 battle
 ; - before Wrexsoul battle
@@ -269,13 +266,22 @@ warnpc !warn
 ; slice into event before Cranes battle
 org $CB40E1
     db $B2                      ; jump to new event code
-    dl Cranes-!base             ; ^ continued
+    dl Cranes-EventBase         ; ^ continued
 warnpc $CB40E5
+
+; insert main menu loop before IAF sequence
+org $CA5840
+    db $B2                      ; jump to new event code
+    dl MainMenu-EventBase       ; ^ continued
+    db $F0,$1A                  ; play song $1A
+    db $D2,$CC                  ; set event bit $1CC = Song Override
+    db $39                      ; unlock screen (scroll when character moves)
+warnpc $CA584A : padbyte $FD : pad $CA584A
 
 ; slice into event before Tentacles battle
 org $CA6AE4
     db $B2                      ; jump to new event code
-    dl Tentacles-!base          ; ^ continued
+    dl Tentacles-EventBase      ; ^ continued
 warnpc $CA6AE8
 
 ; make some adjustments to event script after Tentacles battle to compensate
@@ -305,7 +311,7 @@ org $CC4CD6 : db $FD,$FD        ; replace event command with NOPs
 ; slice into event before Phunbaba 3 battle
 org $CC4CE8
     db $B2                      ; jump to new event code
-    dl BeforePhunbaba-!base     ; ^ continued
+    dl BeforePhunbaba-EventBase ; ^ continued
 warnpc $CC4CEC
 
 ; set correct battle background for Phunbaba 3 battle since battle is invoked
@@ -315,13 +321,13 @@ org $CC4CEE : db $05            ; set battle bg $05 = Field (WoR)
 ; slice into event after Phunbaba 3 battle
 org $CC4CEF
     db $B2                      ; jump to new event code
-    dl AfterPhunbaba-!base      ; ^ continued
+    dl AfterPhunbaba-EventBase  ; ^ continued
 warnpc $CC4CF3
 
 ; slice into event before Wrexsoul battle
 org $CB97EA
     db $B2                      ; jump to new event code
-    dl Wrexsoul-!base           ; ^ continued
+    dl Wrexsoul-EventBase       ; ^ continued
     db $4D,$5C,$1A              ; Battle Enemy Set $5C, Background Scenery $1A
     db $F0,$00                  ; play song $00 = Silence
     db $B2,$A9,$5E,$00          ; call subroutine $CA5EA9 (post-battle)
@@ -341,24 +347,24 @@ MainMenu:
     db $96,$5C                  ; fade screen back in (wait until complete)
     db $4B,$69,$0A              ; display caption $A69 (#2664)
     db $B6                      ; jump based on choice
-    dl .exit-!base              ; ^ continued
-    dl .open-!base              ; ^ continued
+    dl .exit-EventBase          ; ^ continued
+    dl .open-EventBase          ; ^ continued
 .exit
     db $FE                      ; return
 
 Cranes:
     db $B2                      ; run main menu loop
-    dl MainMenu-!base           ; ^ continued
+    dl MainMenu-EventBase       ; ^ continued
     db $FE                      ; return
 
 Tentacles:
     db $B2                      ; run main menu loop
-    dl MainMenu-!base           ; ^ continued
+    dl MainMenu-EventBase       ; ^ continued
     db $C0,$8A,$02              ; if $28A==Off jump to target else continue
-    dl .no_sabin-!base          ; ^ continue
+    dl .no_sabin-EventBase      ; ^ continue
     db $4D,$54,$37              ; Battle Enemy Set $54, Background Scenery $37
     db $C0,$27,$01              ; always jump to target
-    dl .continue-!base          ; ^ continue
+    dl .continue-EventBase      ; ^ continue
 .no_sabin
     db $4D,$53,$37              ; Battle Enemy Set $53, Background Scenery $37
 .continue
@@ -376,7 +382,7 @@ BeforePhunbaba:
     db $B8,$3A                  ; [displaced] set bit $1E03
     ; db $37,$00,$0F              ; assign graphic set "Imp" to Terra
     db $B2                      ; run main menu loop
-    dl MainMenu-!base           ; ^ continued
+    dl MainMenu-EventBase       ; ^ continued
     db $FE                      ; return
 AfterPhunbaba:
     db $B2,$A9,$5E,$00          ; [displaced] call subroutine $CA5EA9 (post-battle)
@@ -395,14 +401,14 @@ Wrexsoul:
     db $3F,$02,$01              ; assign Cyan to party $01
     db $47                      ; make character in slot 0 the lead character
     db $B2                      ; run main menu loop
-    dl MainMenu-!base           ; ^ continued
+    dl MainMenu-EventBase       ; ^ continued
     db $FE                      ; return
 EventScriptFreespace_2:
 
 warnpc $CB5EC5
 
-; trigger "Shadow arrives" event when a player chooses to wait for Shadow the
-; second time at end of FC
+; trigger Shadow's arrival when a player chooses to wait for him the second
+; time at end of Floating Continent
 org $CA57AF : db $BB,$57,$00
 
 ; -----------------------------------------------------------------------------
