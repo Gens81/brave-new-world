@@ -162,10 +162,8 @@ load_item_desc:
 Set_Arrow:
     LDA #$75				; load new colosseum limit 
 	STA $5C					; set
-	REP #$20
-    lda #$00FF             
-	sta $7e357a
-	SEP #$20
+    lda #$FF             
+	sta $357a
 	JMP check_reward_item
 ;-------------------------------------------------------------------------;
 ;   This routine make a kind of "mirroring" effect on the items that      ;
@@ -237,28 +235,28 @@ Col_Navi_Data:
     db $02              ; 1 column
     db $0B              ; 11 rows
 Col_Curs_Pos: 
-    dw $4a08            ; Item 1
-    dw $4a6F			; Reward 1	
-    dw $5608            ; Item 2
-    dw $566F			; Reward 2	
-    dw $6208            ; Item 3
-    dw $626F			; Reward 3	
-    dw $6e08            ; Item 4
-    dw $6e6F			; Reward 4	
-    dw $7a08            ; Item 5
-    dw $7a6F			; Reward 5	
-    dw $8608            ; Item 6
-    dw $866F			; Reward 6	
-    dw $9208            ; Item 7z
-    dw $926F			; Reward 7	
-    dw $9e08            ; Item 8
-    dw $9e6F			; Reward 8	
-    dw $aa08            ; Item 9
-    dw $aa6F			; Reward 9	
-    dw $b608            ; Item 10
-    dw $b66F			; Reward 10	
-    dw $c208            ; Item 11
-	dw $c26F			; Reward 11
+    dw $4a08+$400            ; Item 1
+    dw $4a6F+$400			; Reward 1	
+    dw $5608+$400            ; Item 2
+    dw $566F+$400			; Reward 2	
+    dw $6208+$400            ; Item 3
+    dw $626F+$400			; Reward 3	
+    dw $6e08+$400            ; Item 4
+    dw $6e6F+$400			; Reward 4	
+    dw $7a08+$400            ; Item 5
+    dw $7a6F+$400			; Reward 5	
+    dw $8608+$400            ; Item 6
+    dw $866F+$400			; Reward 6	
+    dw $9208+$400            ; Item 7z
+    dw $926F+$400			; Reward 7	
+    dw $9e08+$400            ; Item 8
+    dw $9e6F+$400			; Reward 8	
+    dw $aa08+$400            ; Item 9
+    dw $aa6F+$400			; Reward 9	
+    dw $b608+$400            ; Item 10
+    dw $b66F+$400			; Reward 10	
+    dw $c208+$400            ; Item 11
+	dw $c26F+$400			; Reward 11
 ; New code if pushing A in colosseum menu
 Handle_A:
 	TDC				; Clear A

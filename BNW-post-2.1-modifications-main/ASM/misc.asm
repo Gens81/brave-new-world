@@ -14,8 +14,8 @@ table "menu.tbl", ltr ; Tabella per le stringhe di testo
 org $C37E13
 	db $8B,$58,$04,$01	;Item window
 	db $97,$58,$16,$01	;Use_Arrange_Rare window
-	db $4b,$59,$1c,$02	;Description window
-	db $4b,$5a,$1c,$11	;Item List window
+	db $4b,$59,$1c,$03	;Description window
+	db $8b,$5a,$1c,$10	;Item List window
 	
 ;;--------------------------------------------------
 ;;Cursor position
@@ -75,53 +75,53 @@ org $C37D58
 
 ; BG1 H-Shift table for inventory-style menus
 org $C37EDA
-	db $1C,$00,$01  ; Value to change for moving up the scroll menu
-	db $2F,$00,$01  ; Value to change for moving up the scroll menu
+	db $20,$00,$01  ; Value to change for moving up the scroll menu
+	db $2f,$00,$01  ; Value to change for moving up the scroll menu
 	db $80,$00,$00  ; Items
 	db $1E,$00,$01  ; Nothing
 	db $00          ; End
 
 ; BG1 V-Shift table for inventory-style menus
 ;org $C37EE7
-	db $17,$80,$00  ; Value to change for moving up the scroll menu
+	db $1F,$80,$00  ; Value to change for moving up the scroll menu
 	db $08,$00,$00  ; Nothing?
 	db $0C,$04,$00  ; Nothing?
 	db $0C,$08,$00  ; Nothing?
 	db $08,$80,$00  ; Nothing?
 	db $08,$00,$00  ; Nothing?
-	db $04,$bC,$FF  ; Item row 1
-	db $04,$bC,$FF  ; 
-	db $04,$bC,$FF  ; 
-	db $04,$c0,$FF  ; Item row 2
-	db $04,$c0,$FF  ; 
-	db $04,$c0,$FF  ; 
-	db $04,$c4,$FF  ; Item row 3
-	db $04,$c4,$FF  ; 
-	db $04,$c4,$FF  ; 
-	db $04,$c8,$FF  ; Item row 4
-	db $04,$c8,$FF  ; 
-	db $04,$c8,$FF  ; 
-	db $04,$cC,$FF  ; Item row 5
-	db $04,$cC,$FF  ; 
-	db $04,$cC,$FF  ; 
-	db $04,$d0,$FF  ; Item row 6
-	db $04,$d0,$FF  ; 
-	db $04,$d0,$FF  ; 
-	db $04,$d4,$FF  ; Item row 7
-	db $04,$d4,$FF  ; 
-	db $04,$d4,$FF  ; 
-	db $04,$d8,$FF  ; Item row 8
-	db $04,$d8,$FF  ; 
-	db $04,$d8,$FF  ; 
-	db $04,$dC,$FF  ; Item row 9
-	db $04,$dC,$FF  ; 
-	db $04,$dC,$FF  ; 
-	db $04,$e0,$FF  ; Item row 10
+	db $04,$b8,$FF  ; Item row 1
+	db $04,$b8,$FF  ;    
+	db $04,$b8,$FF  ; 
+	db $04,$bC,$FF  ; Item row 2 
+	db $04,$bC,$FF  ;   
+	db $04,$bC,$FF  ;   
+	db $04,$c0,$FF  ; Item row 3 
+	db $04,$c0,$FF  ;   
+	db $04,$c0,$FF  ;   
+	db $04,$c4,$FF  ; Item row 4 
+	db $04,$c4,$FF  ;   
+	db $04,$c4,$FF  ;   
+	db $04,$c8,$FF  ; Item row 5 
+	db $04,$c8,$FF  ;   
+	db $04,$c8,$FF  ;   
+	db $04,$cC,$FF  ; Item row 6 
+	db $04,$cC,$FF  ;   
+	db $04,$cC,$FF  ;   
+	db $04,$d0,$FF  ; Item row 7 
+	db $04,$d0,$FF  ;   
+	db $04,$d0,$FF  ;   
+	db $04,$d4,$FF  ; Item row 8 
+	db $04,$d4,$FF  ;   
+	db $04,$d4,$FF  ;   
+	db $04,$d8,$FF  ; Item row 9 
+	db $04,$d8,$FF  ;   
+	db $04,$d8,$FF  ;   
+	db $04,$dC,$FF  ; Item row 10
+	db $04,$dC,$FF  ;    
+	db $04,$dC,$FF  ;    
+	db $04,$e0,$FF  ; Item row 11
 	db $04,$e0,$FF  ; 
 	db $04,$e0,$FF  ; 
-	db $04,$e4,$FF  ; Item row 11
-	db $04,$e4,$FF  ; 
-	db $04,$e4,$FF  ; 
 ;Closing table data
 	db $1E,$00,$00  ; Nothing
 	db $00          ; End
@@ -138,17 +138,17 @@ Navigation_Data:
 	db $0B          ; 11 rows
 ;C37D30: 
 Cursor_Position: 
-	dw $4a08        ; Item 1
-	dw $5608        ; Item 2
-	dw $6208        ; Item 3
-	dw $6e08        ; Item 4
-	dw $7a08        ; Item 5
-	dw $8608        ; Item 6
-	dw $9208        ; Item 7
-	dw $9e08        ; Item 8
-	dw $aa08        ; Item 9
-	dw $b608        ; Item 10
-	dw $c208		; Item 11
+	dw $4E08        ; Item 1
+	dw $5A08        ; Item 2
+	dw $6608        ; Item 3
+	dw $7208        ; Item 4
+	dw $7E08        ; Item 5
+	dw $8A08        ; Item 6
+	dw $9608        ; Item 7
+	dw $A208        ; Item 8
+	dw $AE08        ; Item 9
+	dw $BA08        ; Item 10
+	dw $C608		; Item 11
 	
 padbyte $FF
 pad $C37f87
@@ -160,6 +160,12 @@ org $c30854
 org $c37e35
 	ldy #Item_Description	; Moving item descritpion HDMA data table in another section
 
+;org $C37fb1
+;	ldx #$0031				; Item type 1st row -> The code perform a TXA, ASL and the added to BG1 base address $7E3849
+;
+;org $c37fbd
+;	ldx #$0023				; Item name ist row -> Same as above
+	
 org $c37f8b
 	ldy #$000b				; How many lines must be loaded in the BG1 Tilemap
 
@@ -201,8 +207,8 @@ org $c309b1
 org $C3AD8A
 	dw $588B,$0109  ; 11x04 at $588B (Title)
 	dw $58A1,$0111  ; 19x04 at $58A1 ("Select...")
-	dw $594B,$021C  ; 30x05 at $598B (Description)
-	dw $5A4B,$111C  ; 30x17 at $5ACB (Items)
+	dw $594B,$031C  ; 30x05 at $598B (Description)
+	dw $5A8B,$101C  ; 30x17 at $5ACB (Items)
 
 ; Positioned text for Colosseum
 org $C3AD9A

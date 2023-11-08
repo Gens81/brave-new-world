@@ -51,7 +51,7 @@ C3879C:  TDC             ; Clear A
          BEQ C387C0      ; Hide if so
          LDA $D85014,X   ; Bat.Pwr
          JSR $04E0       ; Turn into text
-         LDX #$8603      ; Text position
+         LDX #$8643      ; Text position
          JMP $04C0       ; Draw 3 digits
 
 ; Fork: Hide power
@@ -62,7 +62,7 @@ C387C0:  LDY #$8D71      ; Text pointer
 ; Draw Evade and MBlock modifiers for gear data menu
 
 C387EB:  REP #$20        ; 16-bit A
-         LDA #$8703      ; Tilemap ptr
+         LDA #$8743      ; Tilemap ptr
          STA $7E9E89     ; Set position
          SEP #$20        ; 8-bit A
          LDX $2134       ; Item index
@@ -74,7 +74,7 @@ C387EB:  REP #$20        ; 16-bit A
          ASL A           ; x4
          JSR C3881A      ; Draw modifier
          REP #$20        ; 16-bit A
-         LDA #$8803      ; Tilemap ptr
+         LDA #$8843      ; Tilemap ptr
          STA $7E9E89     ; Set position
          SEP #$20        ; 8-bit A
          LDX $2134       ; Item index
@@ -169,19 +169,19 @@ C388CX:	LDA $26
 		BEQ C388F8
 		
 ; Draw list of attack or halved elements
-C388CE:	LDX #$7B2D       ; Tilemap ptr
+C388CE:	LDX #$7BED       ; Tilemap ptr
 		BRA C388F8		 ; Draw Element
 ; Draw list of Halved Elements
-C388XX: LDX #$7C2D       ; Tilemap ptr
+C388XX: LDX #$7CED       ; Tilemap ptr
 		BRA C388F8       ; Draw Element
 ; Draw list of absorbed elements
-C388DA: LDX #$7B2D       ; Tilemap ptr
+C388DA: LDX #$7BED       ; Tilemap ptr
 		BRA C388F8		 ; Draw Element
 ; Draw list of nulled elements
-C388E6: LDX #$7BA9       ; Tilemap ptr
+C388E6: LDX #$7BE9       ; Tilemap ptr
 		BRA C388F8		 ; Draw Element
 ; Draw list of elemental weaknesses
-C388F2: LDX #$7CA9       ; Tilemap ptr
+C388F2: LDX #$7CE9       ; Tilemap ptr
 
 C388F8:	STX $EB          ; Set dest LBs
         LDA #$7E         ; Bank: 7E
@@ -283,10 +283,10 @@ C38936:	 LDX #$7C6F		 ; 1st Row ptr
 		 JSR C388AE      ; Build list
          JSR C388F8      ; Draw list
 		 RTL
-		 
-padbyte $FF
-pad $C38982
-Warnpc $C38983
+warnpc $c38973		 
+;padbyte $FF
+;pad $C38982
+;Warnpc $C38983
 
 org $C3f96c
 	jsr C38836

@@ -5,69 +5,63 @@ table "menu.tbl", ltr ; Tabella per le stringhe di testo
 
 ; Window layout for Sell menu and main shop menu
 org $C3BC1B
-	dw $588B,$0107  ; 09x04 at $588B (Title)
-	dw $589D,$0113  ; 21x04 at $589D (Dialogue)
-	dw $594B,$0210  ; 18x04 at $598B (Options)
-	dw $596F,$020A  ; 12x04 at $59AF (GP)
-	dw $5A4B,$111C  ; 30x18 at $5A8B (Items)
+	dw $588B,$0207  ; 09x04 at $588B (Title)
+	dw $589D,$0213  ; 21x04 at $589D (Dialogue)
+	dw $598B,$0210  ; 18x04 at $598B (Options)
+	dw $59aF,$020A  ; 12x04 at $59AF (GP)
+	dw $5A8B,$101C  ; 30x18 at $5A8B (Items)
 
 ; Window layout for Buy menu
-	dw $608B,$0107  ; 09x04 at $608B (Title)
-	dw $609D,$0113  ; 21x04 at $609D (Dialogue)
-	dw $614B,$0d1c  ; 30x14 at $618B (Items)
+	dw $608B,$0207  ; 09x04 at $608B (Title)
+	dw $609D,$0213  ; 21x04 at $609D (Dialogue)
+	dw $618B,$0c1c  ; 30x14 at $618B (Items)
 	dw $650B,$061c  ; 30x08 at $650B (Actors)
 
 ; Window layout for shop order menus
-	dw $688B,$0107  ; 09x04 at $688B (Title)
-	dw $689D,$0113  ; 21x04 at $689D (Dialogue)
-	dw $694B,$0711  ; 19x09 at $698B (Item)
-	dw $6B8B,$041C  ; 30x05 at $6BCB (Description)
+	dw $688B,$0207  ; 09x04 at $688B (Title)
+	dw $689D,$0213  ; 21x04 at $689D (Dialogue)
+	dw $698B,$0711  ; 19x09 at $698B (Item)
+	dw $6BCB,$031C  ; 30x05 at $6BCB (Description)
 	dw $6D0B,$061C  ; 30x08 at $6D0B (Actors)
-	dw $6971,$0709  ; 11x09 at $69B1 (Amounts)
-
-; Window layout for shop "Hold Y" menu
-org $C3fbb4
-	dw $714b,$071c	; Title
-	dw $750b,$061c	; Values
-	dw $708b,$011c	; Description
-	dw $738b,$041c	; Actors
+	dw $69b1,$0709  ; 11x09 at $69B1 (Amounts)
 
 ; BG3 text shifting table for shop
 Org $C3C037
-	db $1F,$08,$00  ; Title
-	db $08,$08,$00  ; Item 1
-	db $0C,$0C,$00  ; Item 2
-	db $0C,$10,$00  ; Item 3
-	db $0C,$14,$00  ; Item 4
-	db $0C,$18,$00  ; Item 5
-	db $0C,$1C,$00  ; Item 6
-	db $0C,$20,$00  ; Item 7
-	db $0C,$24,$00  ; Item 8
+	db $2F,$04,$00  ; Title
+	db $0c,$04,$00  ; Item 1
+	db $0C,$08,$00  ; Item 2
+	db $0C,$0C,$00  ; Item 3
+	db $0C,$10,$00  ; Item 4
+	db $0C,$14,$00  ; Item 5
+	db $0C,$18,$00  ; Item 6
+	db $0C,$1C,$00  ; Item 7
+	db $0C,$20,$00  ; Item 8
+	db $0C,$24,$00  ; Nothing
 	db $0C,$28,$00  ; Nothing
 	db $0C,$2C,$00  ; Nothing
 	db $0C,$30,$00  ; Nothing
 	db $0C,$34,$00  ; Nothing
 	db $0C,$38,$00  ; Nothing
 	db $0C,$3C,$00  ; Nothing
-	db $0C,$40,$00  ; Nothing
 	db $00          ; End
+
 	
 ;Buy_Sell_Exit Cursor value	
 org $C3B89a
-	dw $2a08	;Buy
-	dw $2a30	;Sell
-	dw $2a60	;Exit	
+	dw $3208	;Buy
+	dw $3230	;Sell
+	dw $3260	;Exit	
 
 ;Weapon cursor value
 org $C3b8b4
-	dw $2a00
-	dw $3600
-	dw $4200
-	dw $4e00
-	dw $5a00
-	dw $6600
-	dw $7200
-	dw $7e00
+	dw $2a00+$800
+	dw $3600+$800
+	dw $4200+$800
+	dw $4e00+$800
+	dw $5a00+$800
+	dw $6600+$800
+	dw $7200+$800
+	dw $7e00+$800
 
 ;Rows in sell menu
 org $C3BBe9
@@ -75,9 +69,9 @@ org $C3BBe9
 	
 
 org $C3b858
-	LDX #$0029	; Cursor in selling item sub menu
+	LDX #$0032	; Cursor in selling item sub menu
 org $c3b65a
-	LDX #$0029	; Cursor in selling item sub menu
+	LDX #$0032	; Cursor in selling item sub menu
 
 ;shop fixes to tools and scrolls value
 
@@ -162,11 +156,11 @@ shopdefhyphens:
 shopmdefhyphens:
 	db $3f,$83,"  -",$00				;M.Defense hyphens
 shopynamebox: 
-	db $4b,$71,$1c,$07				;BCG
+	db $8b,$71,$1c,$06				;BCG
 shopystatbox:
 	db $0b,$75,$1c,$06				;BCG
 shopydescritionbox:
-	db $8b,$70,$1c,$01				;BCG
+	db $8b,$70,$1c,$02				;BCG
 shopycharabox:
 	db $8b,$73,$1c,$04				;BCG	
 	
@@ -352,26 +346,25 @@ org $d86482+20 : db $00		;Ninja scroll smoke
 ;;-----------------------------------------------------
 
 org $C3F8AC
-lda #$10        ; reset/stop desc
+		lda #$10           ; reset/stop desc
         tsb $45            ; set menu flags
         lda $0D
-        bit #$40        ; holding Y?
-        bne shop_handle_y ; branch if not
-        jsr $0f39        ; queue text upload
-        ;jsr $1368
-        jsr $b8a6        ; handle d-pad
+        bit #$40           ; holding Y?
+        bne shop_handle_y  ; branch if not
+        jsr $0f39          ; queue text upload
+        jsr $b8a6          ; handle d-pad
         jsr check_stats
-        jsr $bc84        ; draw quantity owned
-        jsr $bca8        ; draw quantity worn
+        jsr $bc84          ; draw quantity owned
+        jsr $bca8          ; draw quantity worn
         bra shop_handle_b
 ;Handle hold Y
 shop_handle_y:
-        jsr $b8a6        ; handle d-pad
+        jsr $b8a6          ; handle d-pad
         jsr check_stats
-        jsr $0f4d        ; queue text upload 2
+        jsr $0f4d          ; queue text upload 2
 		jsr BG_Scroll
-        sep #$20        ; 8-bit A
-        lda #$04        ; bit 2
+        sep #$20           ; 8-bit A
+        lda #$04           ; bit 2
         trb $45            ; set bit in menu flags A
         jsr gear_desc
 not_press_y_this_frame:
@@ -382,18 +375,18 @@ shop_handle_b:
         stz $3e
         lda #$04
         tsb $45
-		LDA $09        ; No-autofire keys
-		BIT #$80       ; Pushing B?
-		BEQ shop_handle_a     ; Branch if not
-		JSR $0EA9      ; Sound: Cursor
-		JMP $B760      ; Exit submenu
+		LDA $09            ; No-autofire keys
+		BIT #$80           ; Pushing B?
+		BEQ shop_handle_a  ; Branch if not
+		JSR $0EA9          ; Sound: Cursor
+		JMP $B760          ; Exit submenu
 ;Fork: Handle A
 shop_handle_a:
-		LDA $08        ; No-autofire keys
-		BIT #$80       ; Pushing A?
+		LDA $08            ; No-autofire keys
+		BIT #$80           ; Pushing A?
         beq not_pushing_a
-		JSR $B82F      ; Set buy limit
-		JSR $B7E6      ; Test GP, stock
+		JSR $B82F          ; Set buy limit
+		JSR $B7E6          ; Test GP, stock
 not_pushing_a:
         rts
 		
@@ -442,3 +435,5 @@ C3B4D2:
 C3B4DA:
 	JSL EDFD12
 	RTS
+	
+;$B4C1 - $B4D1

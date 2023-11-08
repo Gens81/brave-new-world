@@ -3,7 +3,7 @@ hirom
 table "menu.tbl", ltr
 
 !freeBank = #$C0
-!initXY = #$812F-64		; tilemap coords for first property string
+!initXY = #$812F+128		; tilemap coords for first property string
 !numProps = #$0014		; how many properties to check for (should match size of tables at the bottom)
 !maxProps = #$0005		; how many properties are we willing to display?
 !overwriteRow = $C0DC6E
@@ -21,7 +21,6 @@ org $C3874C				; display properties for weapons
   JSR OffensiveProps2
   RTS
 
-
 ;;######################################################################################################;;
 ;;                                                                                                      ;;
 ;;  The first half asm file is necessary to arrange all the bg3 tiles to make the better spacing view   ;;
@@ -31,12 +30,12 @@ org $C3874C				; display properties for weapons
 
 ; Description text pos.
 org $c3a73d		
-	ldx #$7849-64
+	ldx #$7849
 
 ; Item can be used by:
 ; item pos
 org $c38553
-	lda #$7D8D+64
+	lda #$7D8D+128
 	
 ; _can be used by:
 org $C385BD	
@@ -44,25 +43,25 @@ org $C385BD
 
 ; Charachter Pos.
 org $C38653				
-	dw $7e0f+64
-	dw $7e23+64
-	dw $7e37+64
-	dw $7e8f+64
-	dw $7ea3+64
-	dw $7eb7+64
-	dw $7f0f+64
-	dw $7f23+64
-	dw $7f37+64
-	dw $7f8f+64
-	dw $7fa3+64
-	dw $7fb7+64
-	dw $800f+64
-	dw $8023+64
-	dw $8037+64
+	dw $7e0f+128
+	dw $7e23+128
+	dw $7e37+128
+	dw $7e8f+128
+	dw $7ea3+128
+	dw $7eb7+128
+	dw $7f0f+128
+	dw $7f23+128
+	dw $7f37+128
+	dw $7f8f+128
+	dw $7fa3+128
+	dw $7fb7+128
+	dw $800f+128
+	dw $8023+128
+	dw $8037+128
 	
 ;Move quantity 1 line up
 org $C38A7C
-	dw $7A13+64
+	dw $7A93
  
 ; Text in item menu (stats and element)
 ; pointer manager
@@ -132,44 +131,44 @@ DefElement:
 
 ; Text 
 org $C38D71
-itemquestionmark:	dw $8643-64 : db $bf,$bf,$bf,$00
-itemvigor:			dw $842F-64 : db "Vigor",$00
-itemstamina:		dw $85AF-64 : db "Stamina",$00
-itemmagic:			dw $84AF-64 : db "Magic",$00
-itemevade:			dw $872F-64 : db "Evade",$00
-itemmevade:			dw $882F-64 : db "M.Evade",$00
-item2points:		dw $843f-64 : db $d3,$00	; ".."
-item2points2:		dw $84bf-64 : db $d3,$00	; ".."
-item2points3:		dw $853f-64 : db $d3,$00	; ".."
-item2points4:		dw $85bf-64 : db $d3,$00	; ".."
-item2points5:		dw $863f-64 : db $d3,$00	; ".."
-item2points6:		dw $86bf-64 : db $d3,$00	; ".."
-item2points7:		dw $873f-64 : db $d3,$00	; ".."
-item2points8:		dw $87bf-64 : db $d3,$00	; ".."
-item2points9:		dw $883f-64 : db $d3,$00	; ".."	
-itemspeed:			dw $852f-64 : db "Speed",$00
-itemattack:			dw $862f-64 : db "Attack",$00
-itemdefense:		dw $86af-64 : db "Defense",$00
-itemmdefense:		dw $87af-64 : db "M.Def.",$00
-itemresist:			dw $7C8D-64 : db "Half Damage",$00
-itemabsorb:			dw $7B8D-64 : db "Absorb",$00
-itemnullify:		dw $7C0D-64 : db "No Damage",$00
-itemweakness:		dw $7d0d-64 : db "Weakness",$00
-elementattack:		dw $7B8D-64 : db "Damage Type",$00
-itemowned:			dw $79CD    : db "Owned:",$00
+itemquestionmark:	dw $8643 : db $bf,$bf,$bf,$00
+itemvigor:			dw $842F : db "Vigor",$00
+itemstamina:		dw $85AF : db "Stamina",$00
+itemmagic:			dw $84AF : db "Magic",$00
+itemevade:			dw $872F : db "Evade",$00
+itemmevade:			dw $882F : db "M.Evade",$00
+item2points:		dw $843f : db $d3,$00	; ".."
+item2points2:		dw $84bf : db $d3,$00	; ".."
+item2points3:		dw $853f : db $d3,$00	; ".."
+item2points4:		dw $85bf : db $d3,$00	; ".."
+item2points5:		dw $863f : db $d3,$00	; ".."
+item2points6:		dw $86bf : db $d3,$00	; ".."
+item2points7:		dw $873f : db $d3,$00	; ".."
+item2points8:		dw $87bf : db $d3,$00	; ".."
+item2points9:		dw $883f : db $d3,$00	; ".."	
+itemspeed:			dw $852f : db "Speed",$00
+itemattack:			dw $862f : db "Attack",$00
+itemdefense:		dw $86af : db "Defense",$00
+itemmdefense:		dw $87af : db "M.Def.",$00
+itemresist:			dw $7C8D : db "Half Damage",$00
+itemabsorb:			dw $7B8D : db "Absorb",$00
+itemnullify:		dw $7C0D : db "No Damage",$00
+itemweakness:		dw $7d0d : db "Weakness",$00
+elementattack:		dw $7B8D : db "Damage Type",$00
+itemowned:			dw $7a0D : db "Owned:",$00
 
 warnpc $C38E35
 
 ; stats value	
-org $C386AA : LDA #$8445-64	; vigor
-org $C386C1 : LDA #$8545-64	; speed
-org $C386D6 : LDA #$85c5-64	; stamina
-org $C386F0 : LDA #$84C5-64	; magic 
-org $c38717 : LDX #$86C3-64	; m.def.
-org $c38727 : LDX #$87C3-64	; defense
-org $c387ba : LDX #$8643-64	; attack
-org $c387ed : LDA #$8743-64	; evade 
-org $c38808 : LDA #$8843-64	; m.evade
+org $C386AA : LDA #$8445	; vigor
+org $C386F0 : LDA #$84C5	; magic
+org $C386C1 : LDA #$8545	; speed
+org $C386D6 : LDA #$85c5	; stamina
+;org $c3879D : LDX #$8643	; attack	-> in arrange elements routine 
+org $c38727 : LDX #$86C3	; defense
+;org $c387AC : LDA #$8743	; evade		->				^
+org $c38717 : LDX #$87C3	; m.def.
+;org $c387C7 : LDA #$8843	; m.evade	->				^
 
 
 ;;######################################################################################################;;
@@ -192,22 +191,22 @@ org $c38808 : LDA #$8843-64	; m.evade
 
 org $C3FBEF
 Item_Description:
-	db $17,$00,$00		; row 1
-	db $0c,$04,$00      ; row 2
-	db $0c,$08,$00      ; row 3
-	db $0c,$0c,$00      ; row 4
-	db $0c,$10,$00      ; row 5
-	db $0c,$14,$00      ; row 6
-	db $0c,$18,$00      ; row 7
-	db $0c,$1c,$00      ; row 8
-	db $0c,$20,$00      ; row 9
-	db $0c,$24,$00      ; row 10
-	db $0c,$28,$00      ; row 11
-	db $0c,$2c,$00      ; row 12
-	db $0c,$30,$00      ; row 13
-	db $0c,$34,$00      ; row 14
-	db $0c,$38,$00      ; row 15
-	db $0c,$3c,$00      ; row 16
+	db $1F,$00,$00		; row 1
+	db $08,$08,$00      ; row 2
+	db $0c,$0c,$00      ; row 3
+	db $0c,$10,$00      ; row 4
+	db $0c,$14,$00      ; row 5
+	db $0c,$18,$00      ; row 6
+	db $0c,$1c,$00      ; row 7
+	db $0c,$20,$00      ; row 8
+	db $0c,$24,$00      ; row 9
+	db $0c,$28,$00      ; row 10
+	db $0c,$2c,$00      ; row 11
+	db $0c,$30,$00      ; row 12
+	db $0c,$34,$00      ; row 13
+	db $0c,$38,$00      ; row 14
+	db $0c,$3c,$00      ; row 15
+	db $0c,$40,$00      ; row 16
 	db $00              ; end
 
 ; clear map when push B
