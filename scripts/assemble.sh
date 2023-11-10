@@ -18,6 +18,7 @@ assemble_batch () {
   cd ../../scripts
 }
 
+echo -n "Assembling asm/banks..."
 # Assemble asm by bank
 # Instead of using a master asm with incsrc, we concatenate all banks
 # together to ensure cross-bank labels are functional
@@ -26,7 +27,11 @@ cd ../asm/banks
 cat *.asm > "$allbanks"
 assemble "$allbanks"
 rm "$allbanks"
+echo "done"
+
 cd ../../scripts
 
 # Assemble private (hidden) assembly
+echo -n "Assembling asm/private..."
 assemble_batch private
+echo "done"

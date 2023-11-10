@@ -12,10 +12,11 @@ patch () {
 }
 
 # Patch all ips patches one at a time
+echo -n "Applying IPS patches..."
 cd ../ips
 for file in *.ips
 do
-  echo "Applying patch $file"
-  patch $file
+  patch $file > /dev/null
 done
+echo "done"
 cd ../scripts

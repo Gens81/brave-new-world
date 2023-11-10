@@ -1,5 +1,5 @@
 hirom
-table vwf.tbl,rtl
+incsrc vwf.tbl
 
 ; C3 Bank
 
