@@ -304,3 +304,15 @@ refresh_bg3:
 padbyte $FF
 pad $C3652C
 warnpc $C3652D
+
+; Patch bug in merged equip menu descriptions (taken from bropedio-2.1/random-party-2.asm)
+
+org $C39F70
+DescripBug:
+  LDA $4B     ; slot index
+.loop
+  BEQ .done   ; branch if done adding
+  INY         ; add to offset
+  DEC         ; reduce slot index left
+  BRA .loop   ; loop
+.done
