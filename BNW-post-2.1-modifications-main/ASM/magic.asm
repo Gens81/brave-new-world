@@ -32,10 +32,8 @@ C34FC4:	LDA $E6			; BG1 write row
 ; Fork: Draw spell plus MP cost
 C34FEB:	JSR $50EC			; Spell
 		JSR $8467			; Load name
-		LDX #$9E92			; 7E/9E92
+		LDX #$9E93			; 7E/9E92
 		STX $2181 			; Set WRAM LBs
-		LDA #$FF			; Space char	
-		STA $2180  			; Add to string
 		JSR $50EC 			; Spell
 		JSR $510D 			; Define MP cost
 		JSR $04E0 			; Turn into text
@@ -121,6 +119,9 @@ C350AE: STA $4202       ; Set multiplicand
         LDA $1A6E,X     ; Spell mastery
         RTS
 
+warnpc $C350C5
+
+org $c3f592
 CanLrn:	JSR $50EC		; Spell
 		CMP #$32		; Rerise?
 		BEQ .rerise		; Branch if so
@@ -139,21 +140,14 @@ CanLrn:	JSR $50EC		; Spell
 
 
 
-PADBYTE $FF
-PAD $C350C5
-
 ORG $C350C5
 C350C5:					; Placeholder to avoid compiling issues
 
-ORG $C350DB
-	JSR C350AE
-	
-org $C3F700
-PADBYTE $FF	:	PAD $C3F721
-
 ; Erase Fork: Handle Y, moving down 1A: Sustain Magic Menu
 org $C327E2
+
 PADBYTE $FF :	PAD $C327FE
+warnpc $C327FE
 
 org $C3020F
 	dw C327E2
@@ -179,3 +173,10 @@ C327FB:  JSR $1F64      ; Handle L and R
 warnpc $C32822		 
 org $C32861
 C32861:
+
+
+ORG $C350DB
+	JSR C350AE
+	
+org $C3F700
+PADBYTE $FF	:	PAD $C3F721
