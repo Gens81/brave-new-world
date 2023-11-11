@@ -28,6 +28,12 @@ org $C3874C				; display properties for weapons
 ;;                                                                                                      ;;
 ;;######################################################################################################;;
 
+; Allow to upload BG3 Map D in Weapon icon menu
+org $C38983
+	JSR UploadBg3D
+	nop
+
+
 ; Description text pos.
 org $c3a73d		
 	ldx #$7849
@@ -57,7 +63,7 @@ org $C38653
 	dw $7fb7+128
 	dw $800f+128
 	dw $8023+128
-	dw $8037+128
+	dw $9037+128
 	
 ;Move quantity 1 line up
 org $C38A7C
@@ -118,6 +124,7 @@ Stats:
 	dw #item2points7
 	dw #item2points8
 	dw #item2points9
+	dw #details
 Stats2:	
 	dw #itemspeed	
 	dw #itemattack
@@ -130,26 +137,27 @@ DefElement:
 	dw #itemweakness
 
 ; Text 
-org $C38D71
+
 itemquestionmark:	dw $8643 : db $bf,$bf,$bf,$00
-itemvigor:			dw $842F : db "Vigor",$00
-itemstamina:		dw $85AF : db "Stamina",$00
-itemmagic:			dw $84AF : db "Magic",$00
-itemevade:			dw $872F : db "Evade",$00
-itemmevade:			dw $882F : db "M.Evade",$00
-item2points:		dw $843f : db $d3,$00	; ".."
-item2points2:		dw $84bf : db $d3,$00	; ".."
-item2points3:		dw $853f : db $d3,$00	; ".."
-item2points4:		dw $85bf : db $d3,$00	; ".."
-item2points5:		dw $863f : db $d3,$00	; ".."
-item2points6:		dw $86bf : db $d3,$00	; ".."
-item2points7:		dw $873f : db $d3,$00	; ".."
-item2points8:		dw $87bf : db $d3,$00	; ".."
-item2points9:		dw $883f : db $d3,$00	; ".."	
-itemspeed:			dw $852f : db "Speed",$00
-itemattack:			dw $862f : db "Attack",$00
-itemdefense:		dw $86af : db "Defense",$00
-itemmdefense:		dw $87af : db "M.Def.",$00
+itemvigor:			dw $842F+128 : db "Vigor",$00
+itemstamina:		dw $85AF+128 : db "Stamina",$00
+itemmagic:			dw $84AF+128 : db "Magic",$00
+itemevade:			dw $872F+128 : db "Evade",$00
+itemmevade:			dw $90AF : db "M.Evade",$00
+item2points:		dw $843f+128 : db $d3,$00	; ".."
+item2points2:		dw $84bf+128 : db $d3,$00	; ".."
+item2points3:		dw $853f+128 : db $d3,$00	; ".."
+item2points4:		dw $85bf+128 : db $d3,$00	; ".."
+item2points5:		dw $863f+128 : db $d3,$00	; ".."
+item2points6:		dw $86bf+128 : db $d3,$00	; ".."
+item2points7:		dw $873f+128 : db $d3,$00	; ".."
+item2points8:		dw $87bf+128 : db $d3,$00	; ".."
+item2points9:		dw $90bf : db $d3,$00	; ".."	
+details:			dw $80ef : db "Details",$00
+itemspeed:			dw $852F+128 : db "Speed",$00
+itemattack:			dw $862f+128 : db "Attack",$00
+itemdefense:		dw $86af+128 : db "Defense",$00
+itemmdefense:		dw $87af+128 : db "M.Def.",$00
 itemresist:			dw $7C8D : db "Half Damage",$00
 itemabsorb:			dw $7B8D : db "Absorb",$00
 itemnullify:		dw $7C0D : db "No Damage",$00
@@ -157,18 +165,34 @@ itemweakness:		dw $7d0d : db "Weakness",$00
 elementattack:		dw $7B8D : db "Damage Type",$00
 itemowned:			dw $7a0D : db "Owned:",$00
 
-warnpc $C38E35
+UploadBg3D:
+	LDY #$4C00      ; $9000
+	STY $14         ; Set VRAM ptr
+	LDY #$9049      ; 7E/9049	
+	JSR $0F41		; Use $C30F39 Routine to complete Upload BG3 Map D
+	LDA $08			; Pushing A?
+	BIT #$80		; Branch if so
+	RTS
+
+warnpc $C38E50
+
+org $C37F7B
+
+	
+padbyte $FF
+pad $C37f88
+warnpc $C37f88
 
 ; stats value	
-org $C386AA : LDA #$8445	; vigor
-org $C386F0 : LDA #$84C5	; magic
-org $C386C1 : LDA #$8545	; speed
-org $C386D6 : LDA #$85c5	; stamina
-;org $c3879D : LDX #$8643	; attack	-> in arrange elements routine 
-org $c38727 : LDX #$86C3	; defense
-;org $c387AC : LDA #$8743	; evade		->				^
-org $c38717 : LDX #$87C3	; m.def.
-;org $c387C7 : LDA #$8843	; m.evade	->				^
+org $C386AA : LDA #$8445+128	; vigor
+org $C386F0 : LDA #$84C5+128	; magic
+org $C386C1 : LDA #$8545+128	; speed
+org $C386D6 : LDA #$85c5+128	; stamina
+;org $c3879D : LDX #$8643		; attack	-> in arrange elements routine 
+org $c38727 : LDX #$86C3+128	; defense
+;org $c387AC : LDA #$8743		; evade		->				^
+org $c38717 : LDX #$87C3+128	; m.def.
+;org $c387C7 : LDA #$8843		; m.evade	->				^
 
 
 ;;######################################################################################################;;

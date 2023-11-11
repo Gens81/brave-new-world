@@ -317,7 +317,7 @@ Unspent_EL:
 ELavlbl: db "EL",$00
 
 
-warnpc $C3F43B+1
+warnpc $C3F3FF
 
 
 org $C3F49E

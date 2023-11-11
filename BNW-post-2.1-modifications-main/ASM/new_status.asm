@@ -139,9 +139,8 @@ Print_EL_Value:
 	ADC #$00B4  ; ADC
 	RTS
 	
-warnpc $C3F43B
-padbyte $FF
-pad $C3F43B
+warnpc $C3F41E
+
 
 
 
@@ -335,7 +334,7 @@ C31C46:  JSR $352F      				; Reset/Stop stuff
 
 ; 0C Sustain Status menu
 org $C321F5
-	JSR C3F646
+
 ; Handle R
 org $C32218
 	jsr Clear_BG_L_R
@@ -361,9 +360,9 @@ warnpc $C32254
 
 ; Fork: Handle Y
 org $C3F646
-C3F646:
-	JSR $0F39					        ; Set to redraw cmds
-	JMP $0F25							; Refresh
+;C3F646:
+;	JSR $0F39					        ; Set to redraw cmds
+;	JMP $0F25							; Refresh BG3 Tilemap A
 	
 clear_flags:
 	STZ $C5								; Clear Elements/Status Flag
@@ -990,7 +989,7 @@ org $C31A8A
     sta $26         		; Next: Fade-in
 	JMP BRT					; Go to set white palette on BG1 $3C
 
-org $C38E35
+org $C3F577
 BRT:
 glyphs:
 	phx                     ; Push X

@@ -274,10 +274,8 @@ C396AE:	 lda $001f,y
 		 dex
 		 bpl C396AE
          RTS
-		 
-padbyte $FF
-pad $C396BD		 
-warnpc $C396BE
+		 	 
+warnpc $C396AA
 
 org $C396C4
 	BRA C396AE

@@ -150,9 +150,7 @@ Cursor_Position:
 	dw $BA08        ; Item 10
 	dw $C608		; Item 11
 	
-padbyte $FF
-pad $C37f87
-warnpc $C37f87
+warnpc $C37F7B
 
 org $c30854
 	adc #$0A				; Extend blinking finger to 1 up line	
@@ -355,9 +353,7 @@ C38339:  LDX #$FB60      ; CE/FB60
          STA $29         ; Color: User's
          RTS
 
-padbyte $FF
-PAD $C38385
-warnpc $C38385
+warnpc $C38351
 
 
 ;------------------------------------------------------------------

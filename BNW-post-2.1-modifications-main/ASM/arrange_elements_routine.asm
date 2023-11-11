@@ -55,14 +55,14 @@ C3879C:  TDC             ; Clear A
          JMP $04C0       ; Draw 3 digits
 
 ; Fork: Hide power
-C387C0:  LDY #$8D71      ; Text pointer
+C387C0:  LDY #$8D71+128  ; Text pointer
          JSR $02F9       ; Draw "???"
          RTS
 	
 ; Draw Evade and MBlock modifiers for gear data menu
 
 C387EB:  REP #$20        ; 16-bit A
-         LDA #$8743      ; Tilemap ptr
+         LDA #$8743+128  ; Tilemap ptr
          STA $7E9E89     ; Set position
          SEP #$20        ; 8-bit A
          LDX $2134       ; Item index
@@ -74,7 +74,7 @@ C387EB:  REP #$20        ; 16-bit A
          ASL A           ; x4
          JSR C3881A      ; Draw modifier
          REP #$20        ; 16-bit A
-         LDA #$8843      ; Tilemap ptr
+         LDA #$90c3      ; Tilemap ptr
          STA $7E9E89     ; Set position
          SEP #$20        ; 8-bit A
          LDX $2134       ; Item index
