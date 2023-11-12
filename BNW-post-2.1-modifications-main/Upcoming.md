@@ -7,12 +7,10 @@
 - Fixed "If Near Fatal causes Zinger to be removed from a target, any remaining strikes will target whoever is in the 2nd slot"
 - Added Brave New World subtitle to the ingame animated title
 - Allow Esper menu to open "Curative Ally Targeting" submenu
-- No longer show damage on Interceptor
-- Align hand cursor to text where needed
-- Import Snaphat compression algorythm
 - Import Alphabetical Lore by Silent Enigma: useless for english version but useful for translations or future lores edits
 - Phoenix glitch fix
 - Disintegration animation for enemies that get petrified
+- Import Snaphat compression algorythm
 
 ### Events
 - Restore Shadow cutscene during Soul train fight
