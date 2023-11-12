@@ -306,3 +306,7 @@ org $C3Fa56
 	LDA.l C38854+2,X  ; Ones digit
 	STA $7E9E8D    ; Add to string
 	jsr C38847
+
+;details menu blinking indicator position
+org $C385a1
+LDA #$7A
