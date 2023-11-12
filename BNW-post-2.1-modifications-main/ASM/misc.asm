@@ -48,26 +48,26 @@ pad $c37d43
 
 ; Cursor positions for rare item menu
 org $C37D58
-	dw $4a08        ; Item 1
-	dw $4a78        ; Item 2
-	dw $5608        ; Item 3
-	dw $5678        ; Item 4
-	dw $6208        ; Item 5
-	dw $6278        ; Item 6
-	dw $6e08        ; Item 7
-	dw $6e78        ; Item 8
-	dw $7a08        ; Item 9
-	dw $7a78        ; Item 10
-	dw $8608        ; Item 11
-	dw $8678        ; Item 12
-	dw $9208        ; Item 13
-	dw $9278        ; Item 14
-	dw $9e08        ; Item 15
-	dw $9e78        ; Item 16
-	dw $aa08        ; Item 17
-	dw $aa78        ; Item 18
-	dw $b608        ; Item 19
-	dw $b678        ; Item 20
+	dw $4a08+$400        ; Item 1
+	dw $4a78+$400        ; Item 2
+	dw $5608+$400        ; Item 3
+	dw $5678+$400        ; Item 4
+	dw $6208+$400        ; Item 5
+	dw $6278+$400        ; Item 6
+	dw $6e08+$400        ; Item 7
+	dw $6e78+$400        ; Item 8
+	dw $7a08+$400        ; Item 9
+	dw $7a78+$400        ; Item 10
+	dw $8608+$400        ; Item 11
+	dw $8678+$400        ; Item 12
+	dw $9208+$400        ; Item 13
+	dw $9278+$400        ; Item 14
+	dw $9e08+$400        ; Item 15
+	dw $9e78+$400        ; Item 16
+	dw $aa08+$400        ; Item 17
+	dw $aa78+$400        ; Item 18
+	dw $b608+$400        ; Item 19
+	dw $b678+$400        ; Item 20
 	
 	
 ; HDMA Tables

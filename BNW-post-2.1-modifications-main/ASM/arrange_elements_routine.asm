@@ -169,16 +169,16 @@ C388CX:	LDA $26
 		BEQ C388F8
 		
 ; Draw list of attack or halved elements
-C388CE:	LDX #$7BED       ; Tilemap ptr
+C388CE:	LDX #$7BED-128       ; Tilemap ptr
 		BRA C388F8		 ; Draw Element
 ; Draw list of Halved Elements
-C388XX: LDX #$7CED       ; Tilemap ptr
+C388XX: LDX #$7CED-128       ; Tilemap ptr
 		BRA C388F8       ; Draw Element
 ; Draw list of absorbed elements
-C388DA: LDX #$7BED       ; Tilemap ptr
+C388DA: LDX #$7BEB-128       ; Tilemap ptr
 		BRA C388F8		 ; Draw Element
 ; Draw list of nulled elements
-C388E6: LDX #$7BE9       ; Tilemap ptr
+C388E6: LDX #$7BEB       ; Tilemap ptr
 		BRA C388F8		 ; Draw Element
 ; Draw list of elemental weaknesses
 C388F2: LDX #$7CE9       ; Tilemap ptr

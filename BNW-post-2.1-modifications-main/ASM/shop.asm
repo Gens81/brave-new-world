@@ -29,12 +29,12 @@ org $C3BC1B
 Org $C3C037
 	db $2F,$04,$00  ; Title
 	db $0c,$04,$00  ; Item 1
-	db $0C,$08,$00  ; Item 2
-	db $0C,$0C,$00  ; Item 3
-	db $0C,$10,$00  ; Item 4
-	db $0C,$14,$00  ; Item 5
-	db $0C,$18,$00  ; Item 6
-	db $0C,$1C,$00  ; Item 7
+	db $0C,$09,$00  ; Item 2
+	db $0C,$0e,$00  ; Item 3
+	db $0C,$13,$00  ; Item 4
+	db $08,$18,$00  ; Item 5
+	db $0b,$1d,$00  ; Item 6
+	db $1C,$22,$00  ; Item 7
 	db $0C,$20,$00  ; Item 8
 	db $0C,$24,$00  ; Nothing
 	db $0C,$28,$00  ; Nothing
@@ -54,14 +54,14 @@ org $C3B89a
 
 ;Weapon cursor value
 org $C3b8b4
-	dw $2a00+$800
-	dw $3600+$800
-	dw $4200+$800
-	dw $4e00+$800
-	dw $5a00+$800
-	dw $6600+$800
-	dw $7200+$800
-	dw $7e00+$800
+	dw $3200
+	dw $3D00
+	dw $4800
+	dw $5300
+	dw $5E00
+	dw $6900
+	dw $7400
+	dw $7F00
 
 ;Rows in sell menu
 org $C3BBe9
