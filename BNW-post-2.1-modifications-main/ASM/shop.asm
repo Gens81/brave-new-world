@@ -58,13 +58,13 @@ org $C3B89a
 ;Weapon cursor value
 org $C3b8b4
 	dw $3200
-	dw $3D00
-	dw $4800
-	dw $5300
-	dw $5E00
-	dw $6900
-	dw $7400
-	dw $7F00
+	dw $3E00
+	dw $4A00
+	dw $5600
+	dw $6200
+	dw $6E00
+	dw $7A00
+	dw $8600
 
 ;Rows in sell menu
 org $C3BBe9
