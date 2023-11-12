@@ -1,6 +1,6 @@
 # Changelog
 
-## [2.2 b21](https://github.com/Gens81/brave-new-world/releases) - unreleased
+## [2.2 b21](https://github.com/Gens81/brave-new-world/releases) - 11/12/2023
 
 ### Features
 
@@ -34,7 +34,7 @@
 - Possession, charm and love token go away if near fatal (Sir Newton Fig)
 - Pressing/holding A will advance dialog text (Fëanor)
 - Added an option to trigger the banquet scene (Fëanor)
-- Menu opens in place of auto-optimize routine before Cranes, Phunbaba 3, Tentacles and Wrexsoul (Fëanor)
+- Menu opens in place of auto-optimize routine before Cranes, Phunbaba 3, Tentacles and Wrexsoul (Fëanor) and after selecting "Go to the Floating Continent"
 - Cyan joins the party for Wrexsoul fight (Fëanor)
 - New Locke scene in Returners Hideout (Fëanor)
 - The second dialogue while escaping from FC directly trigger Shadow's scene
@@ -89,6 +89,9 @@
 - Elemental properties nomenclature and order changed to: Absorb, No Damage, Half Damage, Weakness (Ryo_Hazuki)
 - Changed all "exp." references to "XP" (Gens)
 - Removed Y toggle to see rerise learning percentage (It's now shown by default)
+- Detailed spells descriptions
+- Prelude plays during first visit to Beginner Classroom
+- Skip showing damage on Interceptor when he blocks
 
 ### Bugfixes
 
