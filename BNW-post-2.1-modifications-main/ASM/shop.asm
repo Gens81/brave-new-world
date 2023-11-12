@@ -27,22 +27,25 @@ org $C3BC1B
 
 ; BG3 text shifting table for shop
 Org $C3C037
+C3C037:
 	db $2F,$04,$00  ; Title
 	db $0c,$04,$00  ; Item 1
-	db $0C,$09,$00  ; Item 2
-	db $0C,$0e,$00  ; Item 3
-	db $0C,$13,$00  ; Item 4
-	db $08,$18,$00  ; Item 5
-	db $0b,$1d,$00  ; Item 6
-	db $1C,$22,$00  ; Item 7
+	db $0C,$08,$00  ; Item 2
+	db $0C,$0c,$00  ; Item 3
+	db $0C,$10,$00  ; Item 4
+	db $0c,$14,$00  ; Item 5
+	db $0c,$18,$00  ; Item 6
+	db $0C,$1C,$00  ; Item 7
 	db $0C,$20,$00  ; Item 8
-	db $0C,$24,$00  ; Nothing
-	db $0C,$28,$00  ; Nothing
-	db $0C,$2C,$00  ; Nothing
-	db $0C,$30,$00  ; Nothing
-	db $0C,$34,$00  ; Nothing
-	db $0C,$38,$00  ; Nothing
-	db $0C,$3C,$00  ; Nothing
+	db $00
+	
+C3C053:
+	db $1F,$04,$00  ; Title
+	db $1C,$08,$00  ; Stat 1
+	db $0C,$0a,$00  ; Stat 2
+	db $0C,$0c,$00  ; Stat 3
+	db $10,$0e,$00  ; Stat 4
+	db $0C,$22,$00  ; Desc
 	db $00          ; End
 
 	
@@ -351,7 +354,7 @@ org $C3F8AC
         lda $0D
         bit #$40           ; holding Y?
         bne shop_handle_y  ; branch if not
-        jsr $0f39          ; queue text upload
+        jsr CndnsShop
         jsr $b8a6          ; handle d-pad
         jsr check_stats
         jsr $bc84          ; draw quantity owned
@@ -366,7 +369,7 @@ shop_handle_y:
         sep #$20           ; 8-bit A
         lda #$04           ; bit 2
         trb $45            ; set bit in menu flags A
-        jsr gear_desc
+        jsr CndnsHoldY
 not_press_y_this_frame:
         rts
 ;Fork: Handle B
@@ -396,12 +399,47 @@ warnpc $C3F8FF
 
 ORG $C3B4C8
 BG_Scroll:
-	rep #$20        ; 16-bit A
-	lda #$0100        ; BG2 scroll position
-    sta $3b            ; BG2 Y position
-    sta $3d            ; BG3 X position
-	rts
+	rep #$20        	; 16-bit A
+	lda #$0100        	; BG2 scroll position
+    sta $3b          	; BG2 Y position
+    sta $3d            	; BG3 X position
+	RTS
+; Holding Y sprite function
+
+C3B4D2:
+    STA $26         ; Next: Buy list
+    LDY #C3B4DA		; C3/B4DA
+	JMP $1173		; Queue OAM fn
+C3B4DA:
+	JSL EDFD12
+	RTS	
+
+CndnsShop:
+	jsr $C018
+	jmp $0f39          ; queue text upload
+	
 warnpc $C3B4E6
+
+org $C3f6ff
+CndnsHoldY:
+	LDA #$02        ; 1Rx2B to PPU
+	STA $4350       ; Set DMA mode
+	LDA #$12        ; $2112
+	STA $4351       ; To BG3 V-Scroll
+	LDY #C3C053     ; C3/C037
+	STY $4352       ; Set src LBs
+	LDA #$C3        ; Bank: C3
+	STA $4354       ; Set src HB
+	LDA #$C3        ; ...
+	STA $4357       ; Set indir HB
+	LDA #$20        ; Channel: 5
+	TSB $43         ; Queue HDMA-5
+	JMP gear_desc
+
+
+PADBYTE $FF	:	PAD $C3F721
+
+
 
 org $C3F93F
 check_stats:
@@ -426,14 +464,7 @@ C3B7B3:  LDY #$0100      ; X: 256
          JSR $BCFD      ; Build sign list
          LDA #$26        ; C3/B4BD
 		 JMP C3B4D2		; Go to queue Hold Y sprite
-	
-org $C3B4D2
-C3B4D2:
-    STA $26         ; Next: Buy list
-    LDY #C3B4DA		; C3/B4DA
-	JMP $1173		; Queue OAM fn
-C3B4DA:
-	JSL EDFD12
-	RTS
+
+
 	
 ;$B4C1 - $B4D1
