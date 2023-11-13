@@ -15,8 +15,7 @@ Changes window style 2>7 in config menu. Note: to set the default palette, press
 -black-d, dadaluma, dryad terra
 alt sprites patches included in bnw zip from version 2.0
 
--choreography (Sir Fig Newton)
-
+-choreography (Sir Newton Fig)
 Restructures the Dance command, breaking each biome's list of steps up into two categories: transition steps and sustain steps.
 Transition steps are those that can be chosen from when you dance a new background.
 Sustain steps are those that can be chosen when you choose a dance that matches the current background
@@ -24,9 +23,6 @@ There are 2 steps in each category, with probabilities as follows:
 Transition steps: 75%/25%
 Sustain steps: 60%/40%
 Dance status is no longer persistent under any circumstances. Instead, the Moogle Charm removes stumble rates entirely.
-
--eddie_splash
-Splash screen based on Iron Maiden album "Brave New World"
 
 -fast_anim (Sarah Shinespark)
 Replace Sap, Break, Holy, Flare, Dark and Rasp animation with faster alternatives.
@@ -88,7 +84,4 @@ Portraits based on the original pixel art by abysswolf from deviantart.
 \- smaller tweaks like short resting animations
 
 - speedrun
-It's a combination of abridged+notext+fast_anim+accurate_descriptions. It's a way to sail fast in a bnw playtrough for your replays.
-
-- advance_font (Seibaby, Gens)
-Alternative Menu and dialogue font largely inspired to GBA font
+It's a combination of abridged+notext+fast_anim. It's a way to sail fast in a bnw playtrough for your replays.
