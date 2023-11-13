@@ -162,8 +162,10 @@ load_item_desc:
 Set_Arrow:
     LDA #$75				; load new colosseum limit 
 	STA $5C					; set
-    lda #$FF             
-	sta $357a
+	REP #$20
+    lda #$00FF             
+	sta $7e357a
+	SEP #$20
 	JMP check_reward_item
 ;-------------------------------------------------------------------------;
 ;   This routine make a kind of "mirroring" effect on the items that      ;
@@ -247,7 +249,7 @@ Col_Curs_Pos:
     dw $7a6F+$400			; Reward 5	
     dw $8608+$400            ; Item 6
     dw $866F+$400			; Reward 6	
-    dw $9208+$400            ; Item 7z
+    dw $9208+$400            ; Item 7
     dw $926F+$400			; Reward 7	
     dw $9e08+$400            ; Item 8
     dw $9e6F+$400			; Reward 8	
