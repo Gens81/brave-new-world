@@ -366,7 +366,7 @@ RageDescs:
   db "Attack (2x dmg)",$00
 .ninja
   db "Wave Scroll (",$FD,")",$01
-  db "Vanish (Sets Clear)",$00
+  db "Vanish (sets [Clear])",$00
 .shokan
   db !b,"Dark",$01
   db !l,"Raze",$00
@@ -377,7 +377,7 @@ RageDescs:
   db "Attack (2x dmg)",$01
   db "Chakra",$00
 .gargoyle
-  db "Sun Bath (Cures HP)",$01
+  db "Sun Bath (cures HP)",$01
   db !b,"Quake",$00
 .spirit
   db !b,"Demi",$01
@@ -390,24 +390,24 @@ RageDescs:
   db "Attack (Poison)",$00
 .leafer
   db "Wind Slash (",$F9,")",$01
-  db "Air Blast (",$F9," = HP * 1/2)",$00
+  db "Air Blast (",$F9," = HP*1/2)",$00
 .stray_cat
-  db "Snowball (",$FB," - May set Slow)",$01
+  db "Snowball (",$FB,", may set [Slow])",$01
   db "Attack (3x dmg)",$00
 .adamantite
   db "Attack (2x dmg)",$01
   db !l,"Holy Wind",$00
 .chimera
   db !l,"Aqualung",$01
-  db "Fireball (",$FC," - May set Sap)",$00
+  db "Fireball (",$FC,", may set [Sap])",$00
 .behemoth
   db "Attack (2x dmg)",$01
-  db "Meteo (Ignores def.)",$00
+  db "Meteo (ignores def.)",$00
 .mesosaur
   db !l,"Holy Wind",$01
-  db "Magnitude (",$FA,", ground dmg)",$00
+  db "Magnitude (",$FA," ground dmg)",$00
 .albatross
-  db "Fireball (",$FC," - May set Sap)",$01
+  db "Fireball (",$FC,", may set [Sap])",$01
   db "Attack (2x dmg)",$00
 .tyrano
   db "Attack (3x dmg)",$01
@@ -417,21 +417,21 @@ RageDescs:
   db "Attack (Sleep)",$00
 .hornet
   db "Attack (3x dmg)",$01
-  db "Blink (Sets Image/Haste)",$00
+  db "Blink (sets [Image]/[Haste])",$00
 .tumbleweed
   db !w,"Cure 3",$01
-  db "Attack (Steal HP)",$00
+  db "Attack (steal HP)",$00
 .exocite
-  db "Rock (Stamina, may set Muddle)",$01
+  db "Rock (stamina, may set [Muddle])",$01
   db "Attack (2x dmg)",$00
 .chickenlip
   db "Attack (Muddle)",$01
-  db "Net (Sets Slow/Stop)",$00
+  db "Net (sets [Slow]/[Stop])",$00
 .onion_kid
-  db "Brown Note (Random bad status)",$01
+  db "Brown Note (random bad status)",$01
   db "Attack (Berserk)",$00
 .tek_armor
-  db "Barrier (Sets Shell/Reflect)",$01
+  db "Barrier (sets [Shell]/[Reflect])",$01
   db "Attack (2x dmg)",$00
 .vaporite
   db "Plasma (",$FD,")",$01
@@ -446,65 +446,65 @@ RageDescs:
   db !l,"Blow Fish",$01
   db !w,"Rerise",$00
 .bomb
-  db "Exploder (dmg = Caster's HP * 2.5)",$01
+  db "Exploder (dmg = caster's HP*2.5)",$01
   db "Exploder",$00
 .magic_pot
   db !w,"Cure",$01
   db "Attack (4x dmg)",$00
 .buffalax
-  db "Landslide (",$FA," - May set Slow)",$01
+  db "Landslide (",$FA,", may set [Slow])",$01
   db "Attack (3x dmg)",$00
 .troll
   db "Attack (3x dmg)",$01
   db !l,"Refract",$00
 .sand_ray
-  db "Sand Storm (",$FA,"/",$F9," - May set Blind)",$01
+  db "Sand Storm (",$FA,"/",$F9,",",$03,"may set [Blind])",$01
   db "Attack (2x dmg)",$00
 .antlion
   db "Attack (Stop - no dmg)",$01
-  db "Snare (Instant Death)",$00
+  db "Snare (instant death)",$00
 .marlboro
-  db "Bio Blast (",$EF," - May set Poison)",$01
+  db "Bio Blast (",$EF,", may set [Poison])",$01
   db !l,"Bad Breath",$00
 .crawler
-  db "Magnitude (",$FA,", ground dmg)",$01
-  db "Attack (Steal HP)",$00
+  db "Magnitude (",$FA," ground dmg)",$01
+  db "Attack (steal HP)",$00
 .eye_goo
-  db "Lode Stone (",$FA,$03,"= HP*5/8, may slow)",$01
-  db "Glare (Sets Petrify)",$00
+  db "Lode Stone",$03,"(",$FA,$03,"=",$03,"HP*5/8,",$03,"may slow)",$01
+  db "Glare (sets [Petrify])",$00
 .templar
   db "Attack (3x dmg)",$01
   db !w,"Remedy",$00
 .rain_man
-  db "Acid Rain (",$FD," - May set Sap)",$01
+  db "Acid Rain (",$FD,", may set [Sap])",$01
   db !b,"Bolt 2",$00
 .osteosaur
   db !b,"Doom",$01
   db "Attack (Petrify - no dmg)",$00
 .rocky
-  db "Harvester",$03,"(Cures HP/bad statuses)",$01
-  db "Rock (Stamina, may set Muddle)",$00
+  db "Harvester",$03,"(cures HP/bad statuses)",$01
+  db "Rock (stamina, may set [Muddle])",$00
 .rhydon
   db "Attack (2x dmg)",$01
-  db "Sun Bath (Cures HP)",$00
+  db "Sun Bath (cures HP)",$00
 .doggo
   db "Attack (3x dmg)",$01
-  db "Step Mine (Dmg rises w/ steps)",$00
+  db "Step Mine (dmg rises w/ steps)",$00
 .zombone
-  db "Cave In (",$FA," = HP * 3/4, sets Sap)",$01
+  db "Cave In (",$FA," = HP*3/4, sets [Sap])",$01
   db "Attack (Zombie - no dmg)",$00
 .windrunner
-  db "Aero (",$F9," - May set Sap)",$01
-  db "Blight (",$EF,"/",$F9," - May set Poison)",$00
+  db "Aero (",$F9,", may set [Sap])",$01
+  db "Blight (",$EF,"/",$F9,", may set [Poison])",$00
 .vulture
   db "Razor Leaf (",$FA,"/",$F9,")",$01
-  db "Harvester",$03,"(Cures HP/bad statuses)",$00
+  db "Harvester",$03,"(cures HP/bad statuses)",$00
 .griffin
-  db "Giga Volt (",$F8,"/",$F9," - May set Sap)",$01
-  db "Air Blast (",$F9," = HP * 1/2)",$00
+  db "Giga Volt (",$F8,"/",$F9,", may set [Sap])",$01
+  db "Air Blast (",$F9," = HP*1/2)",$00
 .scarab
-  db "Starlight (May set Blind)",$01
-  db "Mega Volt (",$F8,"/",$F9," - May set Sap)",$00
+  db "Starlight (may set [Blind])",$01
+  db "Mega Volt (",$F8,"/",$F9,", may set [Sap])",$00
 .belladonna
   db "Moonlight (",$F6,")",$01
   db !l,"Raid",$00
@@ -512,26 +512,26 @@ RageDescs:
   db !b,"Quake",$01
   db "Razor Leaf (",$FA,"/",$F9,")",$00
 .cephalid
-  db "Tentacle (Stamina)",$01
+  db "Tentacle (stamina-based)",$01
   db "Attack (Slow)",$00
 .nastidon
-  db "Snowball (",$FB," - May set Slow)",$01
+  db "Snowball (",$FB,", may set [Slow])",$01
   db "Absolute 0 (",$FB,$FB,$FB,")",$00
 .locust
   db "Gale Cut (",$F9,")",$01
-  db "Mirage (Randomly sets Image)",$00
+  db "Mirage (randomly sets [Image])",$00
 .mantodea
-  db "Shrapnel (Stamina)",$01
+  db "Shrapnel (stamina-based)",$01
   db "Attack (Sap)",$00
 .grizzly
-  db "Cave In (",$FA," = HP * 3/4, sets Sap) ",$01
+  db "Cave In (",$FA," = HP*3/4, sets [Sap]) ",$01
   db "Attack (3x dmg)",$00
 .vagrant
   db "Flash Rain (",$F8,"/",$FD,")",$01
   db "Attack (2x dmg)",$00
 .repo_man
   db "Step Mine (dmg rises w/ steps)",$01
-  db "Vanish (Sets Clear)",$00
+  db "Vanish (sets [Clear])",$00
 .anemone
   db "Discharge (",$F8,")",$01
   db "Attack (Poison)",$00
@@ -542,7 +542,7 @@ RageDescs:
   db !b,"Holy",$01
   db !l,"Blaze",$00
 .titan
-  db "Avalanche (",$FA," - Ignores def.)",$01
+  db "Avalanche (",$FA,", ignores def.)",$01
   db "Attack (3x dmg)",$00
 .witch
   db !l,"Refract",$01
@@ -551,7 +551,7 @@ RageDescs:
   db "Attack (3x dmg)",$01
   db !w,"Regen",$00
 .io
-  db "Atomic Ray (Unreflectable)",$01
+  db "Atomic Ray (unreflectable)",$01
   db "Diffuser (",$F8,")",$00
 
 PrefixA:
@@ -600,7 +600,7 @@ DanceDescs:
   db "Blizzard: 7/16, Surge: 5/16",$01
   db "Mirage: 3/16, Ice Rabbit: 1/16",$00
 
-warnpc $C4B9D1
+warnpc $C4B520
 
 ;.wind_song
 ;  db "T: 75% Sun Bath, 25% Cockatrice",$01
