@@ -28,6 +28,7 @@ echo Applying ips...
 %FLIPS% --apply "minimap.ips" %EDITED_ROM%
 %FLIPS% --apply "docileNPCs.ips" %EDITED_ROM%
 %FLIPS% --apply "newnarshe.ips" %EDITED_ROM%
+%FLIPS% --apply "improved_portraits.ips" %EDITED_ROM%
 
 echo Applying hacks...
 %ASAR% --pause-mode=on-error %PATCHES%\main.asm %EDITED_ROM%
