@@ -174,7 +174,7 @@ spell:
 	db $E9,"Demi   "
 	db $E9,"Quartr "
 	db $E9,"Drain  "
-	db $E9,"Osmose "
+	db $EA,"Osmose "
 	db $EA,"Rasp   "
 	db $EA,"Muddle "
 	db $EA,"Mute   "
