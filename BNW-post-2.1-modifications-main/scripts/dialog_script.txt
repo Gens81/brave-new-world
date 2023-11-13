@@ -9479,7 +9479,6 @@ Are you ready?
 <C> Yes
 <C> No
 
-
 [caption #2665]
 
 
@@ -9627,7 +9626,7 @@ Keep reading?
 
 [caption #2706]
 Bought a new stairway lamp at the item shop. Expensive, but it really lights up the place.<EOP>
-I also aquired a strange, glowing rock from the owner of the colosseum up north to settle his debt.<EOP>
+I also acquired a strange, glowing rock from the owner of the colosseum up north to settle his debt.<EOP>
 It was against my better judgment, but I grow weary of threatening him and he assured me it has great value.<EOP>
 He tells me that it houses the spirit of a goddess. I intend to use it as a paperweight.
 
