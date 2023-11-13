@@ -1,7 +1,6 @@
 arch 65816
 hirom
 
-
 ; Draw info for member 1
 org $C33309
 	ldx #$1078
@@ -21,12 +20,12 @@ org $C333ED
 ; Status icon in Skill menu
 
 org $c34ef0
-	ldx #$4050		; Y-X axis 
-	
+	ldx #$4050	; Y-X axis 
+
 ; Display status effects in Status menu
 org $C3625E
-	LDX #$0A78      ; Icon position
+	LDX #$0A78	; Icon position
 
-; Display status effects in lineup menu	
+; Display status effects in lineup menu
 org $C37983
 	ldx #$2A48
