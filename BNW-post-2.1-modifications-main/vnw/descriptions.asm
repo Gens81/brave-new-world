@@ -885,7 +885,7 @@ Ifrit: db "Inferno:|",$FC," - all foes",$00
 Shiva: db "Gem Dust:|",$FB," - all foes",$00
 Siren: db "Siren Song:|Sets [Muddle]/[Berserk] - all foes",$00
 Terrato: db "Earth Rage:|",$FA," - all foes",$00
-Shoat: db "Hurricane:|Sets [Petrify] - all foes",$00
+Shoat: db "Demon Eye:|Sets [Petrify] - all foes",$00
 Maduin: db "Chaos Wing:|",$F9," - all foes, ignores def.",$00
 Bismark: db "Sea Song:|",$FD," - all foes",$00
 Stray: db "Cait Sith: Sets [Regen]|Stamina-based cure - party",$00
