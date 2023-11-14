@@ -808,7 +808,6 @@ Was this trip really necessary? <D>Seriously, there was no good reason to come b
 [caption #236]
 <A4>: _what's that smell?
 
-
 [caption #237]
 <A4>: These flowers_ <D>did he have favorite flowers?
 
@@ -1264,13 +1263,13 @@ This is an escort mission: Protect Banon at all costs.
     <C> (Go Left)      <C> (Go Right)
 
 [caption #362]
-
+<A4>: Uh, <A1>_
 
 [caption #363]
-
+<A1>: Right.
 
 [caption #364]
-
+<A5>: What do you see in that guy?
 
 [caption #365]
 
@@ -2127,7 +2126,7 @@ There do exist [restore points], which fully heal your party in addition to lett
 Save often because, should you die in battle, it's back to the title screen with you - there are no more mulligans.
 
 [caption #602]
-There's an option in the config menu to disable exp. gains if you want to farm GP or spell points without overleveling.<EOP>
+There's an option in the config menu to disable XP gains if you don't want to overlevel. In return, GP gains will be doubled.<EOP>
 But remember to turn it off afterwards!
 
 [caption #603]
@@ -2276,9 +2275,9 @@ Need esper info?
 <C> No
 
 [caption #627]
-Equipped espers may be summoned once per battle by pressing <$74> in the [Magic] menu.<EOP>
-Magic is learned from espers by spending [spell points], which characters earn from fighting battles with an esper equipped.<EOP>
-Characters also gain [esper points] (EP) when they earn spell points and exp. from the same battle.<EOP>
+Equipped espers may be summoned once per battle by pressing <$74> on the [Magic] menu.<EOP>
+Magic is learned from espers by spending [spell points] (SP), which characters earn from fighting battles with an esper equipped.<EOP>
+Characters also gain [esper points] (EP) when they earn spell points and [experience] (XP) from the same battle.<EOP>
 Esper points earn [esper levels] (EL), which are used to grant permanent stat boosts from espers.<EOP>
 Esper levels are not applied automatically after gaining them, but are rather [banked] just like spell points are.<EOP>
 Banked ELs are spent just like spell points - go to the esper menu and then click on the EL bonus for that esper.<EOP>
@@ -6183,6 +6182,9 @@ Unequip anyone?
 <C> No
 
 [caption #1756]
+Are you done talking to the soldiers?
+<C>No
+<C>Yes
 
 
 [caption #1757]
@@ -9133,7 +9135,7 @@ _or should we ask?
 [Come on, let's go.]
 
 [caption #2581]
-[_]
+
 
 [caption #2582]
 [Are you okay?]
@@ -9383,7 +9385,8 @@ Bob: Whaddaya say?
 
 [caption #2650]
 Ultros: Bwa ha ha! Ever made a commitment that you wanted to take back? Haven't we all!<EOP>
-Ultros: Not to worry, 'cause for the one-time cost of 25,000 GP, Uncle Ulty will turn your active party's [I do]s into [I don't]s!<EOP>
+Ultros: Not to worry, 'cause for the one-time cost of 25,000 GP, Uncle Ulty will turn your active party's
+[I do]s into [I don't]s!<EOP>
 Ultros: In other words, I'll reset everyone's ELs so you can build them with different espers.
 
 [caption #2651]
@@ -9431,7 +9434,9 @@ Kefka: Oh dear_ you want to fight, don't you? <D>This is just dreadful!
 
 
 [caption #2664]
-
+Are you ready?
+<C> Yes
+<C> No
 
 [caption #2665]
 
@@ -9579,7 +9584,7 @@ Keep reading?
 
 [caption #2706]
 Bought a new stairway lamp at the item shop. Expensive, but it really lights up the place.<EOP>
-I also aquired a strange, glowing rock from the owner of the colosseum up north to settle his debt.<EOP>
+I also acquired a strange, glowing rock from the owner of the colosseum up north to settle his debt.<EOP>
 It was against my better judgment, but I grow weary of threatening him and he assured me it has great value.<EOP>
 He tells me that it houses the spirit of a goddess. I intend to use it as a paperweight.
 
@@ -9705,10 +9710,11 @@ Kefka: _and now the fun can really begin!
 
 
 [caption #2739]
-
+<A2>: I thank thee.<EOP>
+<A2>: There's no longer room in my soul for sadness, anger_<D> guilt.
 
 [caption #2740]
-
+<A2>: I'm free now and resolve alone dwells in my heart!
 
 [caption #2741]
 
@@ -9864,8 +9870,7 @@ Violet: I heard that! <E$05><OP$12>
 
 [caption #2786]
 Wrexsoul: He despairs in his powerlessness_ <D>his grief is so overpowering that he can't resist me!<EOP>
-Wrexsoul: I grow stronger every second with his sadness, anger, and guilt!<EOP>
-Wrexsoul: _and now I hunger for YOU!
+Wrexsoul: I grow stronger every second with his sadness, anger, and guilt!
 
 [caption #2787]
 <A2>: I give you thanks, my friends.
@@ -10739,11 +10744,11 @@ Kefka: I, Kefka, will knock you all down!
 
 [caption #3036]
 
-          _is *******. <E$08><OP$12>
+          _is ******. <E$08><OP$12>
 
 [caption #3037]
 
-     Got it? It's *******. <E$08><OP$12>
+     Got it? It's ******. <E$08><OP$12>
 
 [caption #3038]
 <A6>: Ugh_ <E$08><OP$12>
