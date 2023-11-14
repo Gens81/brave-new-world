@@ -178,3 +178,5 @@ C32861:
 ORG $C350DB
 	JSR C350AE
 	
+org $c3f7d1 
+	jsr C350A2
