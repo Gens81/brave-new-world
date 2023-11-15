@@ -32,16 +32,26 @@ hirom
 ; Changing HDMA table and rearrange text position
 
 ; Initialize variables for Equip menu
+; Last 3 routines are included from C3/A1C3 offset relic routine
+; originally in Equip Menu area
+
 org $C31BDD
 C31BDD:
-	JMP $fff0	   ; Set new HDMA TABLE
+	JMP $FC74	   ; Set new HDMA TABLE
 
-org $C3fff0
+org $C3FC74
 	LDY #C395D8
 	STY $4352
 	LDA #$C0
 	STA $4354
-	JMP $A1C3		; Load item description for equipped relic
+	JSR $8E50      ; Load navig data
+	JSR $8E59      ; Relocate cursor
+	JMP $07B0      ; Queue cursor OAM
+
+padbyte $FF
+pad $C3FCA0
+
+warnpc $C3FCA0 	
 	
 ;New HDMA table
 

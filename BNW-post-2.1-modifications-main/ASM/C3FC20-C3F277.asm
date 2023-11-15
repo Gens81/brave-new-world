@@ -91,9 +91,8 @@ DrawEPLabel:
 
 EPLabel:
   dw $7A6B+64 : db "EP",$00     ; EP label
-padbyte $FF
-pad $C3FCA0
-WARNpc $C3FCA0
+
+WARNpc $C3FC74
 ; ------------------------------------------------------------------------
 ; EL/EP/Spell bank text data and helpers
 ; Many new label and text positions and tiles

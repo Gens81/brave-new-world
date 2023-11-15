@@ -433,7 +433,7 @@ C4B6EE:
 	lda #$24							; Grey text
 	sta $29                             ; Set
 	ldx #statuses                       ; Statuses pointer
-	ldy #$003A                          ; Pointers q.ty
+	ldy #$0038                          ; Pointers q.ty
 	jsr C369BA                          ; Prepare print
 	ldx #Info                       	; statuses pointer	
 	ldy #$0006                          ; Pointers q.ty
@@ -650,17 +650,17 @@ check_byte:
 	BEQ .Block_Slow                     ; Haste Bit true? branch if so
 .not_active                                 
 	inx                                 ; Increment index
-	CPX #$0005							; Compare index
+	CPX #$0004							; Compare index
 	BEQ .next_status                    ; Branch if so
-	CPX #$000a                          ; Compare index
+	CPX #$0009                          ; Compare index
 	BEQ .next_status                    ; Branch if so
-	CPX #$0010                          ; Compare index
+	CPX #$00010                          ; Compare index
 	BEQ .next_status                    ; Branch if so
-	CPX #$0018                          ; Compare index
+	CPX #$0018							; Compare index
 	BEQ .next_status	                ; Branch if so
 	CPX #$001a                          ; Compare index
 	BEQ .next_status                    ; Branch if so
-	CPX #$001b                          ; Compare index
+	CPX #$001B                          ; Compare index
 	BEQ .next_status                    ; Branch and check new cycle bit
 	bra .next_bit                       ; Branch to another bit in the same cycle
 .next_status
@@ -730,7 +730,7 @@ MP_label:   dw $7EEF+64+6	 : db $47,$4F,$00
 plus_MP_1:  dw $7EEF+64+6	 : db $47,$4F,$ca,$00
 plus_MP_2:	dw $7EEF+64+6	 : db $47,$4F,$ca,$d1,$00
 cover:      dw $7EEF+64+14	 : db $57,$58,$59,$00
-
+empty_stat:	dw $7EEF		 : db $00
 padbyte $FF
 pad $C4B9CF
 
@@ -743,18 +743,21 @@ statuses_bitmask:
 	db $04   ; Poison
 	db $20   ; Imp
 	db $40   ; Petrify
-	db $80	 ; Death
+	
 	db $01   ; Death (repel condemned)
 	db $08   ; Mute
 	db $10   ; Berserk
 	db $20   ; Muddle
 	db $80   ; Sleep
+	
+	db $10	 ; Stop
 	db $02   ; Regen (Block Sap)
 	db $08   ; Haste (Block Slow)
-	db $10   ; Stop
+	db $01	 ; Float 
 	db $20   ; Shell
 	db $40   ; Safe
 	db $80   ; Reflect
+	
 	db $01   ; ATK +
 	db $02   ; Mag +
 	db $10   ; HP/MP +
@@ -773,15 +776,14 @@ statuses:
 	dw #poison
 	dw #imp
 	dw #petrify
-	dw #death
 	dw #death	
 	dw #mute
 	dw #berserk
 	dw #muddle	
 	dw #sleep
+	dw #stop
 	dw #regen
 	dw #haste
-	dw #stop	
 	dw #shell
 	dw #safe
 	dw #reflect
@@ -1373,7 +1375,7 @@ C35F1C:
 .white
     JMP C37D2B
 .gray
-    JMP $7D2F
+    JMP $A20F
 C35F4C:
     STA $29
     PLA                ; restore command ID
@@ -1381,24 +1383,28 @@ C35F4C:
 warnpc $C35F50
 
     
-ORG $C37D2B
+ORG $C3A20b
 C37D2B:
     LDA #$20        ; user color palette (white)
     BRA .skip
-;C3752F:
-    LDA $26            ; Menu flag
+; C4A20F
+    LDA $26         ; Menu flag
     CMP #$0B        ; Status?
-    BEQ .status        ; Branch if so
+    BEQ .status     ; Branch if so
+	CMP #$0C        ; Status?
+    BEQ .status     ; Branch if so
     CMP #$6A        ; Status?
-    BEQ .status        ; Branch if so
+    BEQ .status     ; Branch if s
     LDA #$24        ; Palette grey (BG3)
-    bra .skip        ; Skip 1 line
+    bra .skip       ; Skip 1 line
 .status    
     LDA #$28        ; Palette: Grey (BG1)
 .skip
-    JMP C35F4C        ; Go back
+    JMP C35F4C      ; Go back
     
-Warnpc $C37D43
+PADBYTE $FF
+PAD $C3A226
+warnpc $C3A226
 
 ORG $C35EB7		
 	LDY #$40C9      			; Tilemap ptr
