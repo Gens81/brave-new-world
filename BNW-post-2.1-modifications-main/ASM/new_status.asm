@@ -766,6 +766,7 @@ statuses_bitmask:
 	db $08   ; HP +++
 	db $20   ; MP ++
 	db $40	 ; MP +++
+	
 	db $02	 ; Counter
 	db $40	 ; Cover	
 	db $10	 ; Auto Berserk
@@ -776,17 +777,21 @@ statuses:
 	dw #poison
 	dw #imp
 	dw #petrify
+	
 	dw #death	
 	dw #mute
 	dw #berserk
 	dw #muddle	
 	dw #sleep
+	
 	dw #stop
 	dw #regen
 	dw #haste
+	dw #empty_stat
 	dw #shell
 	dw #safe
 	dw #reflect
+	
 	dw #atk
 	dw #mag
 	dw #HP_label
@@ -794,7 +799,8 @@ statuses:
 	dw #plus_HP_1
 	dw #plus_HP_2
 	dw #plus_MP_1
-	dw #plus_MP_2	
+	dw #plus_MP_2
+	
 	dw #counter
 	dw #cover	
 	dw #brsrk_auto
