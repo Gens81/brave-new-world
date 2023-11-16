@@ -51,7 +51,7 @@ C3879C:  TDC             ; Clear A
          BEQ C387C0      ; Hide if so
          LDA $D85014,X   ; Bat.Pwr
          JSR $04E0       ; Turn into text
-         LDX #$8643      ; Text position
+         LDX #$8643+128  ; Text position
          JMP $04C0       ; Draw 3 digits
 
 ; Fork: Hide power
@@ -306,7 +306,7 @@ org $C3Fa56
 	LDA.l C38854+2,X  ; Ones digit
 	STA $7E9E8D    ; Add to string
 	jsr C38847
-
-;details menu blinking indicator position
+	
+;details menu indicator position
 org $C385a1
 LDA #$7A
