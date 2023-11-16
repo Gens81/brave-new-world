@@ -390,7 +390,7 @@ RageDescs:
   db "Attack (Poison)",$00
 .leafer
   db "Wind Slash (",$F9,")",$01
-  db "Air Blast (",$F9," = HP*1/2)",$00
+  db "Air Blast (",$F9," HP*1/2)",$00
 .stray_cat
   db "Snowball (",$FB,", may set [Slow])",$01
   db "Attack (3x dmg)",$00
@@ -470,7 +470,7 @@ RageDescs:
   db "Magnitude (",$FA," ground dmg)",$01
   db "Attack (steal HP)",$00
 .eye_goo
-  db "Lode Stone",$03,"(",$FA,$03,"=",$03,"HP*5/8,",$03,"may slow)",$01
+  db "Lode Stone",$03,"(",$FA," HP*5/8, may slow)",$01
   db "Glare (sets [Petrify])",$00
 .templar
   db "Attack (3x dmg)",$01
@@ -491,7 +491,7 @@ RageDescs:
   db "Attack (3x dmg)",$01
   db "Step Mine (dmg rises w/ steps)",$00
 .zombone
-  db "Cave In (",$FA," = HP*3/4, sets [Sap])",$01
+  db "Cave In (",$FA," HP*3/4, sets [Sap])",$01
   db "Attack (Zombie - no dmg)",$00
 .windrunner
   db "Aero (",$F9,", may set [Sap])",$01
@@ -501,7 +501,7 @@ RageDescs:
   db "Harvester",$03,"(cures HP/bad statuses)",$00
 .griffin
   db "Giga Volt (",$F8,"/",$F9,", may set [Sap])",$01
-  db "Air Blast (",$F9," = HP*1/2)",$00
+  db "Air Blast (",$F9," HP*1/2)",$00
 .scarab
   db "Starlight (may set [Blind])",$01
   db "Mega Volt (",$F8,"/",$F9,", may set [Sap])",$00
@@ -524,7 +524,7 @@ RageDescs:
   db "Shrapnel (stamina-based)",$01
   db "Attack (Sap)",$00
 .grizzly
-  db "Cave In (",$FA," = HP*3/4, sets [Sap]) ",$01
+  db "Cave In (",$FA," HP*3/4, sets [Sap]) ",$01
   db "Attack (3x dmg)",$00
 .vagrant
   db "Flash Rain (",$F8,"/",$FD,")",$01
