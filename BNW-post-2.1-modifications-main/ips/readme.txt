@@ -6,6 +6,9 @@ Aurabolt    ↓		Fire Dance  →
 Mantra      R		Chakra      L
 Sonic Boom  Y		Bum Rush    x
 
+-advance_font
+Change large and small font with a ff6 advance inspired font
+
 -altportraits (Gens)
 Replace vanilla portraits with portraits ported from "Edgar's new look - Redrawn menu portraits" by Laurel aka LLama and Orgaz
 
