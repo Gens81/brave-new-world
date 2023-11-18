@@ -653,8 +653,8 @@ XZone: db "Ins",$F0,"nt",$EB,"eath",$0E,$F7,$E7,"group",$00 ; Instant death - fo
 Meteor: db "Non-e",$E1,"ment",$E2,$EB,"m",$EE,$07,"",$E2,"l ",$F7,"es",$00 ; Non-elemental dmg - all foes
 Ultima: db "U",$09,"imat",$E7,"magic at",$F0,"ck",$00 ; Ultimate Magic Attack
 Merton: db $FC,"/",$EF,$0E,$E2,"l",$00 ; Fire/Dark - all
-Demi: db $FA,$EB,"m",$EE,"= (HP*1/2)",$0E,"s",$E4,"g",$E1,$00 ; Earth dmg = (HP*1/2) - single
-Quartr: db $FA,$EB,"m",$EE,"= (HP*3/4)",$0E,$F7,$E7,"group",$00; Earth dmg = (HP*3/4) - foe group
+Demi: db $FA," (HP * 1/2)",$0E,"s",$E4,"g",$E1,$00 ; Earth (HP * 1/2) - single
+Quartr: db $FA," (HP * 3/4)",$0E,$F7,$E7,"group",$00; Earth (HP * 3/4) - foe group
 Drain: db "Ste",$E2,$E0,"HP",$0E,"s",$E4,"g",$E1,$00 ; Steals HP - single
 Osmose: db "Ste",$E2,$E0,"MP",$0E,"s",$E4,"g",$E1,$00 ; Steals MP - single
 Rasp: db "MP",$EB,"m",$EE,$07,"s",$E4,"g",$E1,$00 ; MP dmg - single
