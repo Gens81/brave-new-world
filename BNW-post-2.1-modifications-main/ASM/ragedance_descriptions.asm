@@ -358,6 +358,26 @@ RageDescs:
 
 ; #####################################
 ; Rage description text
+; #####################################
+
+;fractions
+;2/3  $0F      
+;1/3  $10      
+;1/2  $11      
+;3/4  $12      
+;5/8  $13      
+;1/16 $14      
+;3/16 $15      
+;5/16 $16      
+;7/16 $17
+;blanks
+;$03  3 pixel
+;$05  5 pixel
+;$06  6 pixel
+;$19  7 pixel
+;$04  10 pixel
+;$02  11 pixel
+;$18  12 pixel   
 
 .empty
   db $00
@@ -390,7 +410,7 @@ RageDescs:
   db "Attack (Poison)",$00
 .leafer
   db "Wind Slash (",$F9,")",$01
-  db "Air Blast (",$F9," HP*1/2)",$00
+  db "Air Blast (",$F9," HP * ",$11,")",$00
 .stray_cat
   db "Snowball (",$FB,", may set [Slow])",$01
   db "Attack (3x dmg)",$00
@@ -446,7 +466,7 @@ RageDescs:
   db !l,"Blow Fish",$01
   db !w,"Rerise",$00
 .bomb
-  db "Exploder (dmg = caster's HP*2.5)",$01
+  db "Exploder (dmg = caster's HP * 2.5)",$01
   db "Exploder",$00
 .magic_pot
   db !w,"Cure",$01
@@ -470,7 +490,7 @@ RageDescs:
   db "Magnitude (",$FA," ground dmg)",$01
   db "Attack (steal HP)",$00
 .eye_goo
-  db "Lode Stone",$03,"(",$FA," HP*5/8, may slow)",$01
+  db "Lode Stone",$03,"(",$FA," HP * ",$13,", may slow)",$01
   db "Glare (sets [Petrify])",$00
 .templar
   db "Attack (3x dmg)",$01
@@ -491,7 +511,7 @@ RageDescs:
   db "Attack (3x dmg)",$01
   db "Step Mine (dmg rises w/ steps)",$00
 .zombone
-  db "Cave In (",$FA," HP*3/4, sets [Sap])",$01
+  db "Cave In (",$FA," HP * ",$12,", sets [Sap])",$01
   db "Attack (Zombie - no dmg)",$00
 .windrunner
   db "Aero (",$F9,", may set [Sap])",$01
@@ -501,7 +521,7 @@ RageDescs:
   db "Harvester",$03,"(cures HP/bad statuses)",$00
 .griffin
   db "Giga Volt (",$F8,"/",$F9,", may set [Sap])",$01
-  db "Air Blast (",$F9," HP*1/2)",$00
+  db "Air Blast (",$F9," HP * ",$11,")",$00
 .scarab
   db "Starlight (may set [Blind])",$01
   db "Mega Volt (",$F8,"/",$F9,", may set [Sap])",$00
@@ -524,7 +544,7 @@ RageDescs:
   db "Shrapnel (stamina-based)",$01
   db "Attack (Sap)",$00
 .grizzly
-  db "Cave In (",$FA," HP*3/4, sets [Sap]) ",$01
+  db "Cave In (",$FA," HP * ",$12,", sets [Sap]) ",$01
   db "Attack (3x dmg)",$00
 .vagrant
   db "Flash Rain (",$F8,"/",$FD,")",$01
@@ -555,9 +575,9 @@ RageDescs:
   db "Diffuser (",$F8,")",$00
 
 PrefixA:
-  db "66% ",$00
+  db $0F," ",$00
 PrefixB:
-  db "33% ",$00
+  db $10," ",$00
 
 ; #####################################
 ; Dance description pointers
@@ -576,29 +596,29 @@ DanceDescs:
 ; Dance description text
 
 .wind_song
-  db "Sun Bath: 7/16, Wind Slash: 5/16",$01
-  db "Razor Leaf: 3/16, Cockatrice: 1/16",$00
+  db $17," Sun Bath",$18,$18,$18,$04,$16," Wind Slash",$01
+  db $15," Razor Leaf",$18,$18,"  ",$14," Cockatrice",$00
 .forest_suite
-  db "Harvester: 7/16, Razor Leaf: 5/16",$01
-  db "Elf Fire: 3/16, Raccoon: 1/16",$00
+  db $17," Harvester",$18,$18,$04," ",$16," Razor Leaf",$01
+  db $15," Elf Fire",$18,$18,$18,$18,$19,$14," Raccoon",$00
 .desert_aria
-  db "Sand Storm: 7/16, Mirage: 5/16",$01
-  db "Sun Bath: 3/16, Meercat: 1/16",$00
+  db $17," Sand Storm",$18,$18,$06,$16," Mirage",$01
+  db $15," Sun Bath",$18,$18,$18,$04,$14," Meerkat",$00
 .love_sonata
-  db "Bedevil: 7/16, Moonlight: 5/16",$01
-  db "Elf Fire: 3/16, Tapir: 1/16",$00
+  db $17," Bedevil",$18,$18,$18,$18,$19,$16," Moonlight",$01
+  db $15," Elf Fire",$18,$18,$18,$18,$19,$14," Tapir",$00
 .earth_blues
-  db "Avalanche: 7/16, Sun Bath: 5/16",$01
-  db "Wind Slash: 3/16, Wild Boars: 1/16",$00
+  db $17," Avalanche ",$18,$02,$02,$16," Sun Bath",$01
+  db $15," Wind Slash",$18,$18,$02,$14," Wild Boars",$00
 .water_rondo
-  db "El Nino: 7/16, Plasma: 5/16",$01
-  db "Surge: 3/16, Toxic Frog: 1/16",$00
+  db $17," El Nino",$18,$18,$18,$18,$04,$16," Plasma",$01
+  db $15," Surge",$18,$18,$18,$18,$18,$03,$14," Toxic Frog",$00
 .dusk_requiem
-  db "Cave In: 7/16, Snare: 5/16",$01
-  db "Moonlight: 3/16, Wombat: 1/16",$00
+  db $17," Cave In",$18,$18,$18,$18," ",$16," Snare",$01
+  db $15," Moonlight ",$18,$18,$19,$06,$14," Wombat",$00
 .snowman_jazz
-  db "Blizzard: 7/16, Surge: 5/16",$01
-  db "Mirage: 3/16, Ice Rabbit: 1/16",$00
+  db $17," Blizzard",$18,$18,$18,$19,$06,$16," Surge",$01
+  db $15," Mirage",$18,$18,$18,$02,$04,$14," Ice Rabbit",$00
 
 warnpc $C4B520
 
