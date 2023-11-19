@@ -1,8 +1,7 @@
 # Upcoming
 
 ### 2.2 roadmap:
-- Press A on a Rage to show details: Elemental weaknesses/resistance, Statuses immunities/innate
-- Compact spells list on field menu
+- Power/target alt description 
 - Fixed dual wield penalty shown regardless of whether you're using a second weapon
 - Fixed "If Near Fatal causes Zinger to be removed from a target, any remaining strikes will target whoever is in the 2nd slot"
 - Added Brave New World subtitle to the ingame animated title
@@ -40,6 +39,7 @@
 - Imperial camp dialogue fix (sabin aware of doma without speaking to Shadow)
 - Bottom shadow for menu letters q,p,g,y,j
 - Oceanic line anomaly
+- Good doggy by Bropedio (no dmg numbers on dog block)
 
 ### BIB ideas:
 - Rods consume MP only when procs spells
