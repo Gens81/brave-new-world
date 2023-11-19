@@ -1,6 +1,6 @@
 # Changelog
 
-## [2.2 b21](https://github.com/Gens81/brave-new-world/releases) - 11/12/2023
+## [2.2 b22](https://github.com/Gens81/brave-new-world/releases) - 11/19/2023
 
 ### Features
 
@@ -37,7 +37,8 @@
 - Menu opens in place of auto-optimize routine before Cranes, Phunbaba 3, Tentacles and Wrexsoul (Fëanor) and after selecting "Go to the Floating Continent"
 - Cyan joins the party for Wrexsoul fight (Fëanor)
 - New Locke scene in Returners Hideout (Fëanor)
-- The second dialogue while escaping from FC directly trigger Shadow's scene
+- The second dialogue while escaping from FC directly trigger Shadow's scene (Fëanor)
+- New rage details menu that shows status resistances and elemental properties (Ryo_Hazuki)
 
 ### Tweaks
 
@@ -91,7 +92,7 @@
 - Removed Y toggle to see rerise learning percentage (It's now shown by default)
 - Detailed spells descriptions
 - Prelude plays during first visit to Beginner Classroom
-- Skip showing damage on Interceptor when he blocks
+- Fraction icons used in rage and dance descriptions
 
 ### Bugfixes
 
