@@ -5,83 +5,84 @@ table "menu.tbl",ltr
 org $C3028B
 	dw rage_stats_init		; 58: unused duplicate
 	dw rage_stats_sustain	; 59: bogus
-	dw C328BA				; 5A: Sustain Rage Menu
 
-org $C321D9
-	LDA #$5A				; New loop menu code for sustain rage menu
 
-;; 1D: Sustain Rage menu
-;org $C328BA
-;C328BA:  LDA #$03        ; List type: Rages
-;         STA $2A         ; Set redraw mode
-;         JSR $FCBE
-;         JSR $1F64       ; Handle L and R
-;         BCS C328D2      ; Exit if pushed
-;         JSR $4C52       ; Handle D-Pad
-;         LDA $09         ; No-autofire keys
-;         BIT #$80        ; Pushing B?
-;         BEQ C328D2      ; Exit if not
-;         JSR $29A5       ; Leave submenu
-;C328D2:  RTS
-;
-;warnpc $C328D3
+
+; 1D: Sustain Rage menu
+org $C328BA
+C328BA: LDA #$03        ; List type: Rages
+        STA $2A         ; Set redraw mode
+        JSR $FCBE
+		JSR $0EFD	    ; Queue list upload
+        JSR $1F64       ; Handle L and R
+        BCS C328D2      ; Exit if pushed
+        JSR $4C52       ; Handle D-Pad
+		JSR C39FA7		; Handle Pad
+C328D2: RTS
+
+warnpc $C328D3
 	
 org $C39FA7
-; 5A: Sustain Rage menu
-C328BA:  LDA #$03        ; List type: Rages
-         STA $2A         ; Set redraw mode
-         JSR $fcbe       ; 
-		 JSR $0EFD		 ; qUEUE LIST UPLOAD
-         JSR $1F64       ; Handle L and R
-         BCS C328D2      ; Exit if pushed
-         JSR $4C52       ; Handle D-Pad
-HndleA:	 LDA $08		 ; No autofire keys	 
-		 BIT #$80		 ; Pushing A?
-		 BEQ HandleB      ; Exit if not
-		 LDA #$58		 ; 58: init Rage sub-menu
-		 STA $26		 ; Queue 
-C328D2:  RTS
-HandleB: LDA $09         ; No-autofire keys
-         BIT #$80        ; Pushing B?
-         BEQ C328D2      ; Check A if not	 
-         JMP $29A5       ; Leave submenu			 
+; Sustain Rage menu - Handle Pad
+; Handle B
+C39FA7: LDA $09         ; No-autofire keys
+        BIT #$80        ; Pushing B?
+        BEQ C39FB0      ; Exit if not	 
+        JMP $29A5       ; Leave submenu		
 
+; Handle A
+C39FB0:	LDA $08			; No autofire keys	 
+		BIT #$80		; Pushing A?
+		BEQ C39FBA      ; Exit if not
+		LDA $4B			; Rage slot
+		TAX				; index
+		LDA $7E9D89,X	; Rage
+		CMP #$FF		; 
+		BNE .learned    
+		JMP $2862		; Unusable
+.learned		        
+		jsr $0eb2		; click noise
+		LDA #$58		; 58: init Rage sub-menu
+		STA $26			; Queue 
+C39FBA: RTS
 
+ 
+        
 ; 58: Init Rage sub-menu
 rage_stats_init: 
-		lda #$04					; cursor: blank
-		trb $45						; set menu flag	
-		lda #$c0					; scrollbar: off
-		trb $46						; set anim index
-		JSR $6a15					; clear bg1 map A
-		LDX #$4A00					; $7E/8249
-		JSR $6A4E					; clear bg3 map b	
-		jsr draw_rage				; print rage name
-		jsr title_rage				; print title and laber text
-		jsr rage_light_up			; light up label and print elements
-		jsr $0E28					; Upload BG1 tilemaps A and B
-		jsr $0E36					; Upload BG1 tilemaps B and C
-		lda #$59					; 59: Rage Stats sustain
-		sta $26						; Set
-		RTS	
-
-rage_stats_sustain:			
-		jsr $0F4D					; Upload BG3 tilemaps A and B
-		lda $09						; no-autofire
-		bit #$80					; pushing B?
-		beq sustain_b				; exit if not
-		JSR $6A15     				; Clear BG1 map A
-		LDX #$4A00					; $7E/8249
-		JSR $6A4E					; clear bg3 map b	        
-		JSR $53A7      				; Draw Rage list
-		jsr $0eb2					; click noise
-        JSR $091F   		    	; Create scrollbar		
-		lda #$04					; Cursor & Desc.
-		TSB $45						; On
-		lda #$5A					; 5A: sustain rage menu
+		lda #$20					; cursor: blank and Inactive D-PAD effect on refreshing Desc.
+		STA $45						; set menu flag------------------------|
+		lda #$C0					; scrollbar: off                       |
+		trb $46						; set anim index                       |
+		JSR $6a15					; clear bg1 map A                      |
+		LDX #$4A00					; $7E/8249                             |
+		JSR $6A4E					; clear bg3 map b	                   |
+		jsr draw_rage				; print rage name                      |
+		jsr title_rage				; print title and laber text           |
+		jsr rage_light_up			; light up label and print elements    |
+		jsr $0E28					; Upload BG1 tilemaps A and B          |
+		jsr $0E36					; Upload BG1 tilemaps B and C          |
+		lda #$59					; 59: Rage Stats sustain               |
+		sta $26						; Set                                  |
+		RTS	                        ;                                      |=> Usually it should be used TRS or TSB
+									;									   |=> With STA we waste less byte
+rage_stats_sustain:			        ;                                      |
+		jsr $0F4D					; Upload BG3 tilemaps A and B          |
+		lda $09						; no-autofire                          |
+		bit #$80					; pushing B?                           |
+		beq sustain_b				; exit if not                          |
+		JSR $6A15     				; Clear BG1 map A                      |
+		LDX #$4A00					; $7E/8249                             |
+		JSR $6A4E					; clear bg3 map b	                   |
+		JSR $53A7      				; Draw Rage list                       |
+		jsr $0eb2					; click noise                          |
+        JSR $091F   		    	; Create scrollbar		               |
+		lda #$04					; Cursor & Desc.                       |
+		STA $45						; On---------------------------------- |
+		lda #$1D					; 1D: sustain rage menu
 		sta $26						; Set
 sustain_b:
-		rts
+        rts
 
 title_rage:
 		lda #$2c					; palette
@@ -307,5 +308,5 @@ check_rage:
 
 
 PADBYTE $FF
-PAD $C3A20B
-warnpc $C3A20B
+PAD $C3A226
+warnpc $C3A226

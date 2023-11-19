@@ -1381,7 +1381,7 @@ C35F1C:
 .white
     JMP C37D2B
 .gray
-    JMP $A20F
+    JMP $7D2F
 C35F4C:
     STA $29
     PLA                ; restore command ID
@@ -1389,28 +1389,23 @@ C35F4C:
 warnpc $C35F50
 
     
-ORG $C3A20b
+ORG $C37D2B
 C37D2B:
     LDA #$20        ; user color palette (white)
     BRA .skip
-; C4A20F
-    LDA $26         ; Menu flag
-    CMP #$0B        ; Status?
-    BEQ .status     ; Branch if so
-	CMP #$0C        ; Status?
-    BEQ .status     ; Branch if so
-    CMP #$6A        ; Status?
-    BEQ .status     ; Branch if s
+; C37D2F
+    LDA $27         ; Menu flag
+    CMP #$48        ; Short?
+    BNE .short      ; Branch if so
     LDA #$24        ; Palette grey (BG3)
     bra .skip       ; Skip 1 line
-.status    
+.short    
     LDA #$28        ; Palette: Grey (BG1)
 .skip
     JMP C35F4C      ; Go back
     
-PADBYTE $FF
-PAD $C3A226
-warnpc $C3A226
+
+warnpc $C37d43
 
 ORG $C35EB7		
 	LDY #$40C9      			; Tilemap ptr
