@@ -372,8 +372,8 @@ org $C326E3
 	rts         ; return
 	
 padbyte $FF
-pad $C32706
-warnpc $C32706
+pad $C326F5
+warnpc $C326F5
 
 org $C0FF9A
 icon:

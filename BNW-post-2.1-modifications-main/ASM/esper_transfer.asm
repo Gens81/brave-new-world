@@ -77,6 +77,21 @@ padbyte $FF
 Pad $C32966
 warnpc $C32966
 
+org $C31ff4
+	JSR clear_bg1_skill
+	
+ORG $C326F5
+clear_bg1_skill:
+	lda #$10  
+	tsb $45   
+	ldx #$0b00
+	jsr $6a4e 
+	jmp $0f11
+	
+padbyte $FF
+pad $C32706
+
+
 ; Draw "<actor> has it!" in esper data menu (20 free bytes)
 org $C3559A
 rmv_from_actor:  
