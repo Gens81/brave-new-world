@@ -360,25 +360,6 @@ RageDescs:
 ; Rage description text
 ; #####################################
 
-;fractions
-;2/3  $0F      
-;1/3  $10      
-;1/2  $11      
-;3/4  $12      
-;5/8  $13      
-;1/16 $14      
-;3/16 $15      
-;5/16 $16      
-;7/16 $17
-;blanks
-;$03  3 pixel
-;$05  5 pixel
-;$06  6 pixel
-;$19  7 pixel
-;$04  10 pixel
-;$02  11 pixel
-;$18  12 pixel   
-
 .empty
   db $00
 .soldier
@@ -619,32 +600,52 @@ DanceDescs:
 .snowman_jazz
   db $17," Blizzard",$18,$18,$18,$19,$06,$16," Surge",$01
   db $15," Mirage",$18,$18,$18,$02,$04,$14," Ice Rabbit",$00
+  
+;.wind_song
+;  db "T:",$03,$12," Sun Bath",$18,$02,$04,$1A," Cockatrice",$01
+;  db "S: ",$05," Razor Leaf",$18,$19,$1F," Wind Slash",$00
+;.forest_suite
+;  db "T:",$03,$12," Razor Leaf",$18,$19,$1A," Raccoon",$01
+;  db "S: ",$05," Harvester",$02,$02,$03,$1F," Elf Fire",$00
+;.desert_aria
+;  db "T:",$03,$12," Mirage",$02,$02,$02,$02,$1A," Meerkat",$01
+;  db "S: ",$05," Sun Bath",$02,$02,$02,$1F," Sand Storm",$00
+;.love_sonata
+;  db "T:",$03,$12," Elf Fire",$18,$18,$18,$06,$1A," Tapir",$01
+;  db "S: ",$05," Bedevil",$18,$18,$18,$06,$1F," Moonlight",$00
+;.earth_blues
+;  db "T:",$03,$12," Avalanche",$02,$02,$03,$1A," Wild Boars",$01
+;  db "S: ",$05," Landslide",$04,$04,$04,$1F," Sun Bath",$00
+;.water_rondo
+;  db "T:",$03,$12," El Nino",$18,$02,$02,$02,$1A," Toxic Frog",$01
+;  db "S: ",$05," Plasma",$18,$18,$18,$06,$1F," Surge",$00
+;.dusk_requiem
+;  db "T:",$03,$12," Moonlight ",$18,$18,$1A," Wombat",$01
+;  db "S: ",$05," Snare",$02,$02,$02,$02,$06,$1F," Cave In",$00
+;.snowman_jazz
+;  db "T:",$03,$12," Blizzard",$18,$18,$18,$1A," Ice Rabbit",$01
+;  db "S: ",$05," Surge",$02,$02,$02,$02,$06,$1F," Mirage",$00
 
 warnpc $C4B520
 
-;.wind_song
-;  db "T: 75% Sun Bath, 25% Cockatrice",$01
-;  db "S: 60% Razor Leaf, 40% Wind Slash",$00
-;.forest_suite
-;  db "T: 75% Razor Leaf, 25% Raccoon",$01
-;  db "S: 60% Harvester, 40% Elf Fire",$00
-;.desert_aria
-;  db "T: 75% Mirage, 25% Meerkat",$01
-;  db "S: 60% Sun Bath, 40% Sand Storm",$00
-;.love_sonata
-;  db "T: 75% Elf Fire, 25% Tapir",$01
-;  db "S: 60% Bedevil, 40% Moonlight",$00
-;.earth_blues
-;  db "T: 75% Avalanche, 25% Wild Boars",$01
-;  db "S: 60% Landslide, 40% Sun Bath",$00
-;.water_rondo
-;  db "T: 75% El Nino, 25% Toxic Frog",$01
-;  db "S: 60% Plasma, 40% Surge",$00
-;.dusk_requiem
-;  db "T: 75% Moonlight, 25% Wombat",$01
-;  db "S: 60% Snare, 40% Cave In",$00
-;.snowman_jazz
-;  db "T: 75% Blizzard, 25% Ice Rabbit",$01
-;  db "S: 60% Surge, 40% Mirage",$00
-;  
-;warnpc $C4B9D1
+;fractions
+;3/5  $05
+;2/3  $0F      
+;1/3  $10      
+;1/2  $11      
+;3/4  $12
+;1/4  $1A      
+;5/8  $13      
+;1/16 $14      
+;3/16 $15      
+;5/16 $16      
+;7/16 $17
+;2/5  $1F
+
+;blanks
+;$03  3 pixel
+;$06  6 pixel
+;$19  7 pixel
+;$04  10 pixel
+;$02  11 pixel
+;$18  12 pixel
