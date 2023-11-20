@@ -54,7 +54,7 @@ Meant to restore dialogues on a notext rom.
 -random_battle_songs (Madsiur)
 Randomly plays between 8 battle fight themes and 4 victory fanfares from final fantasy saga.
 
--t-edition_style (Gens)
+-t-edition_sprites (Gens)
 Change the whole cast appearance with sprites matching or heavily inspired from those used on t-edition hack.
 
 -DoubleSpeedEnemies, SlowerPlayer or Both (Nowea)
