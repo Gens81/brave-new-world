@@ -9,8 +9,10 @@ Sonic Boom  Y		Bum Rush    x
 -advance_font
 Change large and small font with a ff6 advance inspired font
 
--altportraits (Gens)
-Replace vanilla portraits with portraits ported from "Edgar's new look - Redrawn menu portraits" by Laurel aka LLama and Orgaz
+-laurel_portraits, abysswolf_portraits, fft_portraits (Gens)
+1)Replace vanilla portraits with portraits ported from "Edgar's new look - Redrawn menu portraits" by Laurel aka Stig
+2)portraits based on abysswolf drawings in deviantart
+3)portraits in final fantasy tactics style (principal authot is Liji from FFhacktics forum)
 
 -altwindows, altwindows2 (Gens)
 Changes window style 2>7 in config menu. Note: to set the default palette, press A while selecting "window".
@@ -30,9 +32,8 @@ Dance status is no longer persistent under any circumstances. Instead, the Moogl
 -fast_anim (Sarah Shinespark)
 Replace Sap, Break, Holy, Flare, Dark and Rasp animation with faster alternatives.
 
-- fft_portraits / fft_skin
-the former changes portraits with superb fft-like portraits by Liji
-the latter is a fft theme that alters the window and font style and color to look like fft
+-fft_skin (Gens, Ryo_Hazuki)
+full fft theme that alters the window and and color to look like fft (includes fft_portraits)
 
 -graphical_signs (Gens)
 replace inn and pub text signs with pictures (the graphic is, by accident, very similar to pixel remaster)
@@ -46,7 +47,7 @@ Adds multitap (up to 4 players) support. Overwrites "controller" option into the
 -new_game_plus (Bropedio)
 Randomizes the player's party whenever the option to select characters is present. Only a single party leader is selectable.
 
--notext (Sir Fig Newton)
+-notext (Sir Newton Fig)
 Removes all dialogue from the game except when a choice need to be made and contents of chests. (not recommended for a first playtrough).
 -anti_notext
 Meant to restore dialogues on a notext rom.
@@ -88,3 +89,6 @@ Portraits based on the original pixel art by abysswolf from deviantart.
 
 - speedrun
 It's a combination of abridged+notext+fast_anim. It's a way to sail fast in a bnw playtrough for your replays.
+
+-selectable_blitz_bushido (Fëanor)
+Convert Blitz and Bushido in a simple selectable menu
