@@ -602,29 +602,29 @@ DanceDescs:
   db $15," Mirage",$18,$18,$18,$02,$04,$14," Ice Rabbit",$00
   
 ;.wind_song
-;  db "T:",$03,$1E," Sun Bath",$18,$02,$04,$1A," Cockatrice",$01
-;  db "S: ",$05," Razor Leaf",$18,$19,$1F," Wind Slash",$00
+;  db "Shift: ",$18,$1E," Sun Bath",$02,$02,$1A," Cockatrice",$01
+;  db "Repeat:",$03,$05," Razor Leaf",$04,$1F," Wind Slash",$00
 ;.forest_suite
-;  db "T:",$03,$1E," Razor Leaf",$18,$19,$1A," Raccoon",$01
-;  db "S: ",$05," Harvester",$02,$02,$03,$1F," Elf Fire",$00
+;  db "Shift :",$18,$1E," Razor Leaf",$04,$1A," Raccoon",$01
+;  db "Repeat:",$03,$05," Harvester",$18," ",$1F," Elf Fire",$00
 ;.desert_aria
-;  db "T:",$03,$1E," Mirage",$02,$02,$02,$02,$1A," Meerkat",$01
-;  db "S: ",$05," Sun Bath",$02,$02,$02,$1F," Sand Storm",$00
+;  db "Shift :",$18,$1E," Mirage",$18,$18,$02,$1A," Meerkat",$01
+;  db "Repeat:",$03,$05," Sun Bath",$18,$18,$1F," Sand Storm",$00
 ;.love_sonata
-;  db "T:",$03,$1E," Elf Fire",$18,$18,$18,$06,$1A," Tapir",$01
-;  db "S: ",$05," Bedevil",$18,$18,$18,$06,$1F," Moonlight",$00
+;  db "Shift :",$18,$1E," Elf Fire",$02,$02,$02,$1A," Tapir",$01
+;  db "Repeat:",$03,$05," Bedevil",$02,$02,$02,$1F," Moonlight",$00
 ;.earth_blues
-;  db "T:",$03,$1E," Avalanche",$02,$02,$03,$1A," Wild Boars",$01
-;  db "S: ",$05," Landslide",$04,$04,$04,$1F," Sun Bath",$00
+;  db "Shift :",$18,$1E," Avalanche",$18," ",$1A," Wild Boars",$01
+;  db "Repeat:",$03,$05," Landslide",$04,$02,$1F," Sun Bath",$00
 ;.water_rondo
-;  db "T:",$03,$1E," El Nino",$18,$02,$02,$02,$1A," Toxic Frog",$01
-;  db "S: ",$05," Plasma",$18,$18,$18,$06,$1F," Surge",$00
+;  db "Shift :",$18,$1E," El Nino",$18,$18,$18,$1A," Toxic Frog",$01
+;  db "Repeat:",$03,$05," Plasma",$02,$02,$02,$1F," Surge",$00
 ;.dusk_requiem
-;  db "T:",$03,$1E," Moonlight ",$18,$18,$1A," Wombat",$01
-;  db "S: ",$05," Snare",$02,$02,$02,$02,$06,$1F," Cave In",$00
+;  db "Shift :",$18,$1E," Moonlight",$18,$19,$1A," Wombat",$01
+;  db "Repeat:",$03,$05," Snare",$02,$02,$02,$04,$1F," Cave In",$00
 ;.snowman_jazz
-;  db "T:",$03,$1E," Blizzard",$18,$18,$18,$1A," Ice Rabbit",$01
-;  db "S: ",$05," Surge",$02,$02,$02,$02,$06,$1F," Mirage",$00
+;  db "Shift :",$18,$1E," Blizzard",$02,$02,$03,$1A," Ice Rabbit",$01
+;  db "Repeat:",$03,$05," Surge",$02,$04,$04,$04,$1F," Mirage",$00
 
 warnpc $C4B520
 
