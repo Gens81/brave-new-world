@@ -303,6 +303,7 @@ org $C37AF7
 org $C36102
 C36100:
 	JSR $a9a9							; Load Elements GFX
+	STZ $8D								; Reset $8D - should be always $00 in status lineup menu
 	LDA #$05							; Cursor and unfreeze CGRAM
 	TSB $45								; Set
 C36102:
