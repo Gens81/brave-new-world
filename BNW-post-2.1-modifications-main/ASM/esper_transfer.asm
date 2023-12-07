@@ -83,7 +83,9 @@ org $C31ff4
 ORG $C326F5
 clear_bg1_skill:
 	lda #$10  
-	tsb $45   
+	tsb $45 
+	lda #$C0
+	trb $46
 	ldx #$0b00
 	jsr $6a4e 
 	jmp $0f11
