@@ -20,9 +20,3 @@ org $C23AC5 : pad $C23AEE ; 41 bytes
 ; new_game_plus (Bropedio's randomizer)
 
 org $C3F612 : pad $C3F646 ; 52 bytes
-
-; nowea_hard_selector
-
-org $C28A60: pad $C3F627 ; 15 bytes
-
-org $C3F68E: pad $C3F6A0 ; 12 bytes
