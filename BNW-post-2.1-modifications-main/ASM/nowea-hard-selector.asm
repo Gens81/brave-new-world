@@ -20,7 +20,7 @@ hirom         ;don't change this
 !bonus = 51
 
 !freespace = $C28A60
-!freespaceC3 = $C3F68E
+!freespaceC3 = $C3F694
 org $C209D2
 atb:
 ;Set ATB multipliers
