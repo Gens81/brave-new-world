@@ -31,7 +31,7 @@ Any time you select a Dance, there will only be 2 possible outcomes, one of whic
 
 ### "Bro new world" features to port:
 - If "Fight" will yield a desperation attack, the text is yellow 
-- Scan anytime (HP/MP accessible via X, Status via Y, weaknesses and AI hints via scan)
+- Scan anytime (HP/MP accessible via X, Status via Y, elemental properties and AI hints via Scan)
 - Status tick rate not affected by speed/haste/slow
 - Defend work against piercing (ignore defense) attacks
 - Dog Block and Golem preempt check for cover
