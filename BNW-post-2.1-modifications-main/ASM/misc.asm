@@ -657,8 +657,8 @@ padbyte $FF
 pad $C3F4AA
 
 ;config screen modifications
-org $C349AC 
-	db "XP gain ",$00	;changed Exp. to XP
+org $C349AC
+	db "XP Gain ",$00	;changed Exp. to XP
 
 org $C3F453 
 	db "Wait Gauge",$00	;replace Show Delay
@@ -703,4 +703,4 @@ warnpc !warn
 
 ;Brave New World data
 org $C33BB8
-	db $d1,$78,"Brave New World 2.2 b22",$00
+	db $d1,$78,"Brave New World 2.2 b23",$00
