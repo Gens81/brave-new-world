@@ -405,6 +405,73 @@ Wrexsoul:
     db $FE                      ; return
 EventScriptFreespace_2:
 
+; -----------------------------------------------------------------------------
+; Adds a short tutorial for Mog's new "choreography" dance mechanics at the end
+; of the initial recruitment event (either WoB or WoR). The tutorial is a copy
+; of the relics tutorial with new dialog.
+; -----------------------------------------------------------------------------
+
+; slice into event script of Mog's recruitment in WoB
+org $CCD6D6
+    db $DD,$40                  ; clear event bit $640 = Lone Wolf/Mog (Cliffs)
+    db $DD,$41                  ; clear event bit $641 = Blocked Bridge (Cliffs)
+    db $B2                      ; run subroutine with new event code
+    dl RecruitMogWoB-EventBase  ; ^ continued
+    db $D3,$CC                  ; clear event bit $1CC = Song Override
+    db $D4,$9F                  ; set event bit $29F = Named Mog
+    db $FE                      ; return
+warnpc $CCD6E3
+
+; slice into event script of Mog's recruitment in WoR
+org $CC3AE8 
+    db $DD,$8D                  ; clear event bit $68D = Narshe: Mog (WoR)
+    db $B2                      ; run subroutine with new event code
+    dl RecruitMogWoR-EventBase  ; ^ continued
+    db $D3,$CC                  ; clear event bit $1CC = Song Override
+    db $FE                      ; return
+warnpc $CC3AF8 : padbyte $FE : pad $CC3AF8
+
+; new event code
+org EventScriptFreespace_2
+RecruitMogWoB:
+    db $B2                      ; run subroutine for Mog's tutorial
+    dl MogTutorial-EventBase    ; ^ continued
+    db $6A,$17,$00,$0A,$11,$40  ; loads map $0017 = Narshe: Cliffs (WoB)
+    db $47                      ; make character in slot 0 the lead character
+    db $96                      ; fade screen back in
+    db $5C                      ; wait for screen fade to complete
+    db $FE                      ; return
+
+RecruitMogWoR:
+    db $B2                      ; run subroutine for Mog's tutorial
+    dl MogTutorial-EventBase    ; ^ continued
+    db $6A,$2C,$20,$79,$2F,$40  ; loads map $202C = Narshe: Moogle Cave (WoR)
+    db $47                      ; make character in slot 0 the lead character
+    db $96                      ; fade screen back in
+    db $5C                      ; wait for screen fade to complete
+    db $FE                      ; return
+
+MogTutorial:
+    db $6A,$05,$30,$08,$07,$40  ; loads map $3005 = Empty (Mog Narration)
+    db $42,$31                  ; hide Party Character #1
+    db $45                      ; update objects
+    db $3D,$10                  ; create NPC 0
+    db $10,$84,$D5,$10,$07,$FF  ; action queue for NPC 0
+    db $41,$10                  ; show NPC 0
+    db $45                      ; update objects
+    db $96                      ; fade screen back in
+    db $5C                      ; wait for screen fade to complete
+    db $10,$84,$C3,$9F,$CE,$FF  ; action queue for NPC 0
+    db $92                      ; wait for 30 frames (1/2 second)
+    db $10,$85,$20,$E0,$03,$CE  ; action queue for NPC 0
+    db $FF                      ; ^ continued
+    db $92                      ; wait for 30 frames (1/2 second)
+    db $4B,$79,$02              ; display caption $279 (632)
+    db $4B,$7A,$02              ; display caption $27A (633)
+    db $92                      ; wait for 30 frames (1/2 second)
+    db $FE                      ; return
+EventScriptFreespace_3:
+
 warnpc $CB5EC5
 
 ; trigger Shadow's arrival when a player chooses to wait for him the second
