@@ -29,7 +29,7 @@ can_equip_fork:
 	jsl actor_chk	; Go to check if actor and esper equipped actor are the same
 	cmp $FD			; actor and esper equipped actor are the same? 
 	beq is_the_same	; Is the same so you can unequip
-	JSR $0EC0       ; Play buzzer
+	JSR $0eb2       ; Play menu sound
 	jmp rmv_from_actor
 is_the_same:
 	jsr $0EB2
@@ -371,4 +371,3 @@ terra_cant:
 	inc $fd			; inc id check and make no equal to Terra ID
 	rtl
 	
-
