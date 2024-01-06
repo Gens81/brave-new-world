@@ -701,6 +701,23 @@ GetSong:
   RTS
 warnpc !warn
 
+; This hack re-enables the "E" icon when shopping which indicates that a
+; character has a piece of equipment already equipped. This reverts the
+; following change that was made previously:
+;
+;   org $C3C29C : BRA $3F ; Never show equipped/up/down/equal icons
+;
+; Note: Removing dead code would free up around 42 bytes.
+
+org $C3C29C
+    CMP #$01        ; check if already equipped
+    BEQ e_icon      ; show "E" icon if ^
+    BRA no_icon     ; show no icon otherwise
+
+org $C3C2B6 : e_icon:
+org $C3C2DD : no_icon:
+
+
 ;Brave New World data
 org $C33BB8
 	db $d1,$78,"Brave New World 2.2 b23",$00
