@@ -1,28 +1,19 @@
 # Upcoming
 
 ### b23 (not yet released)
+- restored "E" in shop menu
+- removed buzzer sound when esper swapping
 - added a line about the new rage menu to Gau's tutorial
-- difficulty selector in config menu (Nowea, Seibaby): Normal/Hard (Hard doubles enemy's speed)
-- added Choreography hack (by Sir Newton Fig) for testing:
-
-This patch restructures the Dance command, breaking each biome's list of steps up into two categories: Shift steps and Repeat steps.
-Shift steps are those that can be chosen from when you dance a new background.
-Repeat steps are those that can be chosen when you choose a dance that matches the current background.
-There are 2 steps in each category, with probabilities as follows:
-Shift steps: 80%/20%
-Repeat steps: 60%/40%
-
-Due to the fluid nature of this system, the following core Dance mechanics have also changed:
-Dance status is no longer persistent under any circumstances.
-Instead, the Moogle Charm removes stumble rates entirely (otherwise dictated by Stamina).
-The intended purpose of this patch is to replace unpredictability with effort and planning.
-Any time you select a Dance, there will only be 2 possible outcomes, one of which is more likely than the other to occur. By mixing up dances from round to round, you can create routines of desired effects instead of simply camping out on a single Dance and hoping for the best – though this can still be useful at times, too. 
+- removed near fatal zigger/charm hack cause needs more polish
+- fixed Seraph not highlighting petrify/death resistance
+- added an event to explain dances after recruiting Mog
+- added Choreography hack (by Sir Newton Fig) for testing
 
 ### 2.2 roadmap:
 - Power/target alt description 
-- Fixed dual wield penalty shown regardless of whether you're using a second weapon
-- Fixed "If Near Fatal causes Zinger to be removed from a target, any remaining strikes will target whoever is in the 2nd slot"
-- Added Brave New World subtitle to the ingame animated title
+- Fix dual wield penalty shown regardless of whether you're using a second weapon
+- Fix Near Fatal hack bugs
+- Add Brave New World subtitle to the ingame animated title
 - Allow Esper menu to open "Curative Ally Targeting" submenu
 - Import Alphabetical Lore by Silent Enigma: useless for english version but useful for translations or future lores edits
 - Phoenix glitch fix
