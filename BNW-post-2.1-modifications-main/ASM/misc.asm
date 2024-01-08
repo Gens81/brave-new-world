@@ -717,6 +717,19 @@ org $C3C29C
 org $C3C2B6 : e_icon:
 org $C3C2DD : no_icon:
 
+;fix text position in multiple controller config submenu
+
+org $C347C0
+	LDY #$7C0F
+
+org $C347FD
+	LDY #$7C8F
+	
+org $C3483A
+	LDY #$7D0F
+	
+org $C34877
+	LDY #$7D8F
 
 ;Brave New World data
 org $C33BB8
