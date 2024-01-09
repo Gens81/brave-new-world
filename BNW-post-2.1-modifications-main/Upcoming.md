@@ -8,6 +8,7 @@
 - fixed Seraph not highlighting petrify/death resistance
 - added an event to explain dances after recruiting Mog
 - added Choreography hack (by Sir Newton Fig) for testing
+- fix text position and nomenclature in multiple controller config submenu
 
 ### 2.2 roadmap:
 - Power/target alt description 
