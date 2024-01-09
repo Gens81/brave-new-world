@@ -1,6 +1,6 @@
 # Changelog
 
-## [2.2 b22](https://github.com/Gens81/brave-new-world/releases) - 11/19/2023
+## [2.2 b23](https://github.com/Gens81/brave-new-world/releases) - 01/09/2024
 
 ### Features
 
@@ -39,6 +39,7 @@
 - New Locke scene in Returners Hideout (Fëanor)
 - The second dialogue while escaping from FC directly trigger Shadow's scene (Fëanor)
 - New rage details menu that shows status resistances and elemental properties (Ryo_Hazuki)
+- Choreography hack (by Sir Newton Fig) for testing
 
 ### Tweaks
 
@@ -89,10 +90,12 @@
 - Command arrange menu accessible from "normal" option
 - Elemental properties nomenclature and order changed to: Absorb, No Damage, Half Damage, Weakness (Ryo_Hazuki)
 - Changed all "exp." references to "XP" (Gens)
-- Removed Y toggle to see rerise learning percentage (It's now shown by default)
-- Detailed spells descriptions
-- Prelude plays during first visit to Beginner Classroom
-- Fraction icons used in rage and dance descriptions
+- Removed Y toggle to see rerise learning percentage -It's now shown by default- (Ryo_Hazuki)
+- Detailed spells descriptions (Gens)
+- Prelude plays during first visit to Beginner Classroom (Bropedio)
+- Fraction icons used in rage and dance descriptions (Gens)
+- Added an event to explain dances after recruiting Mog (Fëanor)
+- Restored "E" in shop menu (Fëanor)
 
 ### Bugfixes
 
@@ -119,5 +122,6 @@
 - Clears invisible Red-D (Fëanor)
 - Fix sprite priority bug after covering (Bropedio)
 - Fixed Sand Devil battle script
+- Fixed text position and nomenclature in multiple controller config submenu (Gens)
 
 ## Previous Versions are not tracked by this Doc
