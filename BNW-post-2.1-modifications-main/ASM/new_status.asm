@@ -584,6 +584,15 @@ take_item_index:
 
 esper_light_up:	
 	LDA $C0D690,X						; 1st byte esper 
+	PHA									; Save for later
+	BIT #$80							; Check if Death
+	BEQ .skip							; Skip if not
+	PHX									; Save X
+	LDY #death							; Death pointer
+	JSR C402F9							; Light up label
+	PLX									; Restore X
+.skip
+	PLA									; Restore A
 	JSR check_byte						; Jump and check if the value return active label 
 	LDA $C0D691,X						; 2nd byte esper
 	JSR check_byte						; Jump and check if the value return active label
