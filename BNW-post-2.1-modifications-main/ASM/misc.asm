@@ -717,7 +717,7 @@ org $C3C29C
 org $C3C2B6 : e_icon:
 org $C3C2DD : no_icon:
 
-;fix text position in multiple controller config submenu
+;fix text position and nomenclature in multiple controller config submenu
 
 org $C347C0
 	LDY #$7C0F
@@ -730,6 +730,16 @@ org $C3483A
 	
 org $C34877
 	LDY #$7D8F
+
+org $C34B08
+	db $21,$7C,"Port 1",$00
+	db $33,$7C,"Port 2",$00
+	db $A1,$7C,"Port 1",$00
+	db $B3,$7C,"Port 2",$00
+	db $21,$7D,"Port 1",$00
+	db $33,$7D,"Port 2",$00
+	db $A1,$7D,"Port 1",$00
+	db $B3,$7D,"Port 2",$00
 
 ;Brave New World data
 org $C33BB8
