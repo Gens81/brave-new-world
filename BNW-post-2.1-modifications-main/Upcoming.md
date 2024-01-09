@@ -1,15 +1,5 @@
 # Upcoming
 
-### b23 (not yet released)
-- restored "E" in shop menu
-- removed buzzer sound when esper swapping
-- added a line about the new rage menu to Gau's tutorial
-- removed near fatal zigger/charm hack cause needs more polish
-- fixed Seraph not highlighting petrify/death resistance
-- added an event to explain dances after recruiting Mog
-- added Choreography hack (by Sir Newton Fig) for testing
-- fix text position and nomenclature in multiple controller config submenu
-
 ### 2.2 roadmap:
 - Power/target alt description 
 - Fix dual wield penalty shown regardless of whether you're using a second weapon
