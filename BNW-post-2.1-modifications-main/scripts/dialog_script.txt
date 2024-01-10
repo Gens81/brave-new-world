@@ -2313,7 +2313,7 @@ Doing so will consume half a turn for one hand; changing both requires a full tu
 
 
 [caption #632]
-Kupo!<D> I learn Dances from the terrain I fight in. <D>Explore different areas to learn them all, and use them to help you in battle.
+Kupo!<D> I learn Dances from the terrain I fight in. <D>Explore different areas to learn them all and use them to help you in battle.
 
 [caption #633]
 Select the [yellow] dance - matching the current background - to use the [Repeat] steps.<EOP>
