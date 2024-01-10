@@ -2313,10 +2313,12 @@ Doing so will consume half a turn for one hand; changing both requires a full tu
 
 
 [caption #632]
-
+Kupo!<D> I learn Dances from the terrain I fight in. <D>Explore different areas to learn them all, and use them to help you in battle.
 
 [caption #633]
-
+Select the [yellow] dance - matching the current background - to use the [Repeat] steps.<EOP>
+Select any other to use the [Shift] steps, setting a new background.
+Mix and match to find your groove!
 
 [caption #634]
 
@@ -4299,7 +4301,7 @@ The next line is_?
 <C> [Alas, Draco_] <D17>
 
 [caption #1209]
-<$75> Oh <E$03>my <E$04>hero,<E$09> 
+<$75> Oh <E$03>my <E$04>hero,<E$09>
    my beloved,<E$0B><OP$12>
    shall we still<E$09>
    be made to part? <E$12><OP$12><EOP>
@@ -9255,7 +9257,8 @@ Rachel: The Phoenix has given me so little time. I have to leave again soon, but
 <A1>: _<EOP>
 Rachel: <A1>_ <D>with you I was happy. When I was dying, and my last thought was of you_ <D>
 I fell asleep so, so happy.<D><EOP>
-Rachel: This is what I've wanted to tell you for so long. Thank you, <A1>. <D>I'll never forget you.
+Rachel: This is what I've wanted to tell you for so long. Thank you,
+<A1>. <D>I'll never forget you.
 
 [caption #2605]
 <A1>: Rachel!<EOP>
