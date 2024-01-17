@@ -92,3 +92,6 @@ It's a combination of abridged+notext+fast_anim. It's a way to sail fast in a bn
 
 -selectable_blitz_bushido (Fëanor)
 Convert Blitz and Bushido in a simple selectable menu
+
+- sea of stars theme (Gens)
+2 window style (no gradient), variable width and fixed width font inspired to Sea of Stars.
