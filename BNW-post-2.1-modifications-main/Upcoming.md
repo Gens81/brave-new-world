@@ -42,14 +42,17 @@
 - Good doggy by Bropedio (no dmg numbers on dog block)
 
 ### BIB ideas:
-- Myria fixed back attack
-- Rods consume MP only when procs spells
-- Physical blitzes can crit
-- Remove 1 fight in IAF and/or Mine Cart
-- Magitek rided by humans are stealable
-- Remove Siren from BAR-BAR-BAR pool
-- Gray out null values on shop details menu
-- Raise Slow accuracy
+-hide warp point in first Phoenix Cave visit, make it accessible on subsequent visits
+-Myria fixed back attack
+-Rods consume MP only when procs spells
+-Physical blitzes can crit
+-Remove 1 fight in IAF
+-Add random encounters to mine cart room
+-Magitek rided by humans are stealable
+-Remove Siren from BAR-BAR-BAR pool
+-Gray out null values on shop details menu
+-Raise Slow accuracy
+-Raise Osmose accuracy
 
 ### Long-term goals (3.0?):
 - Colosseum overhaul
