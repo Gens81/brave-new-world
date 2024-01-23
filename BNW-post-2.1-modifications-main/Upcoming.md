@@ -1,15 +1,19 @@
 # Upcoming
 
 ### 2.2 roadmap:
-- Power/target alt description 
+- hide warp point in first Phoenix Cave visit, make it accessible on subsequent visits
+- remove gogo from moogle charm equippability (to balance choreography)
+- revert Phunbaba to 2 chars blown away (to balance Terra being equippable)
+- killing wrexsoul is no more a win condition (to balance Cyan joining wrexsoul)
 - Fix dual wield penalty shown regardless of whether you're using a second weapon
-- Fix Near Fatal hack bugs
+- Fix Phantasm (hp leak) being stronger on chars with higher stamina
+- Fix Near Fatal hack bugs (or leave it out)
+- Power/target alt description 
+- Allow summon menu to open "Curative Ally Targeting" submenu
 - Add Brave New World subtitle to the ingame animated title
-- Allow Esper menu to open "Curative Ally Targeting" submenu
 - Import Alphabetical Lore by Silent Enigma: useless for english version but useful for translations or future lores edits
 - Phoenix glitch fix
 - Disintegration animation for enemies that get petrified
-- fix Hp leak (aka Phantasm) doing more damage on chars with high stamina
 
 ### "Bro new world" features to port:
 - If "Fight" will yield a desperation attack, the text is yellow 
@@ -42,17 +46,16 @@
 - Good doggy by Bropedio (no dmg numbers on dog block)
 
 ### BIB ideas:
--hide warp point in first Phoenix Cave visit, make it accessible on subsequent visits
--Myria fixed back attack
--Rods consume MP only when procs spells
--Physical blitzes can crit
--Remove 1 fight in IAF
--Add random encounters to mine cart room
--Magitek rided by humans are stealable
--Remove Siren from BAR-BAR-BAR pool
--Gray out null values on shop details menu
--Raise Slow accuracy
--Raise Osmose accuracy
+- Rods consume MP only when procs spells
+- Physical blitzes can crit
+- Remove 1 fight in IAF
+- Add random encounters to mine cart room
+- Magitek rided by humans are stealable
+- Remove Siren from BAR-BAR-BAR pool
+- Gray out null values on shop details menu
+- Raise Slow accuracy
+- Raise Osmose accuracy
+- Swap Yellow-D and White-D location
 
 ### Long-term goals (3.0?):
 - Colosseum overhaul
