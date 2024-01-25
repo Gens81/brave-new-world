@@ -434,7 +434,7 @@ C4B6EE:
 	lda #$24							; Grey text
 	sta $29                             ; Set
 	ldx #statuses                       ; Statuses pointer
-	ldy #$0038                          ; Pointers q.ty
+	ldy #$003A                          ; Pointers q.ty
 	jsr C369BA                          ; Prepare print
 	ldx #Info                       	; statuses pointer	
 	ldy #$0006                          ; Pointers q.ty
