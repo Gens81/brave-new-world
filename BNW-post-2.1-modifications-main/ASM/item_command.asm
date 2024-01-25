@@ -452,3 +452,13 @@ org $C17BFF
 
 	JSL item_btl_menu
 	nop
+
+;fix item duplication bug in kefka tiers
+org $C24a73
+    jmp C23AEE                    ; Jump to clear ID and init new transition phase on Kefka
+org $C23AEE
+C23AEE:
+    stz $0100                    
+    stz $0101                    ;Clear Rearrange ID
+    jmp $0016                    ;do start of battle initialization function, then
+                                ;proceed with main battle loop
