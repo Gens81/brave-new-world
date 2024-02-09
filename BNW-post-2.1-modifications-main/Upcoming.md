@@ -1,8 +1,6 @@
 # Upcoming
 
 ### 2.2 roadmap:
-- hide warp point in first Phoenix Cave visit, make it accessible on subsequent visits
-- remove gogo from moogle charm equippability (to balance choreography)
 - revert Phunbaba to 2 chars blown away (to balance Terra being equippable)
 - killing wrexsoul is no more a win condition (to balance Cyan joining wrexsoul)
 - Fix dual wield penalty shown regardless of whether you're using a second weapon
