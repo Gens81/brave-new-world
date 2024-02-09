@@ -40,6 +40,7 @@
 - The second dialogue while escaping from FC directly trigger Shadow's scene (Fëanor)
 - New rage details menu that shows status resistances and elemental properties (Ryo_Hazuki)
 - Choreography hack (by Sir Newton Fig) for testing
+- Sketch always hits
 
 ### Tweaks
 
@@ -96,6 +97,8 @@
 - Fraction icons used in rage and dance descriptions (Gens)
 - Added an event to explain dances after recruiting Mog (Fëanor)
 - Restored "E" in shop menu (Fëanor)
+- Cursor wrapping equip menu
+- Hidden Phoenix Cave warp point
 
 ### Bugfixes
 
