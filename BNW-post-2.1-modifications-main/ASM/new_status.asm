@@ -645,9 +645,9 @@ check_byte:
 	SEP #$20							; 8-bit A
 	JSR C402F9                          ; Go to print
 	PLX                                 ; Restore Check byte Index
-	CPX #$000A							; You are here if bit it's true 
+	CPX #$000b							; You are here if bit it's true 
 	BEQ .Block_Sap						; Regen Bit true? branch if so
-	CPX #$000B                          ; You are here if bit it's true
+	CPX #$000c                          ; You are here if bit it's true
 	BEQ .Block_Slow                     ; Haste Bit true? branch if so
 .not_active                                 
 	inx                                 ; Increment index
