@@ -1,6 +1,6 @@
 # Changelog
 
-## [2.2 b23](https://github.com/Gens81/brave-new-world/releases) - 01/09/2024
+## [2.2 b24](https://github.com/Gens81/brave-new-world/releases) - 02/09/2024
 
 ### Features
 
