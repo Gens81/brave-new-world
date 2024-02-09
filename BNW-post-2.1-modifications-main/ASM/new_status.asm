@@ -583,16 +583,7 @@ take_item_index:
 ;****************************************************;
 
 esper_light_up:	
-	LDA $C0D690,X						; 1st byte esper 
-	PHA									; Save for later
-	BIT #$80							; Check if Death
-	BEQ .skip							; Skip if not
-	PHX									; Save X
-	LDY #death							; Death pointer
-	JSR C402F9							; Light up label
-	PLX									; Restore X
-.skip
-	PLA									; Restore A
+	LDA $C0D690,X						; 1st byte esper
 	JSR check_byte						; Jump and check if the value return active label 
 	LDA $C0D691,X						; 2nd byte esper
 	JSR check_byte						; Jump and check if the value return active label
@@ -627,7 +618,7 @@ item_light_up:
 	CMP #$05							; Counter it's 5?
 	BNE .second_bit						; Branch to check anoter flag if not
 	LDA $D85014,X						; load item function in $D85019
-	jmp check_byte						; Jump and check if the value return active label
+;	jmp check_byte						; Jump and check if the value return active label
 
 
 ;****************************************************************************;
@@ -660,17 +651,17 @@ check_byte:
 	BEQ .Block_Slow                     ; Haste Bit true? branch if so
 .not_active                                 
 	inx                                 ; Increment index
-	CPX #$0004							; Compare index
+	CPX #$0005							; Compare index
 	BEQ .next_status                    ; Branch if so
-	CPX #$0009                          ; Compare index
+	CPX #$000a                          ; Compare index
 	BEQ .next_status                    ; Branch if so
-	CPX #$00010                          ; Compare index
+	CPX #$00011                          ; Compare index
 	BEQ .next_status                    ; Branch if so
-	CPX #$0018							; Compare index
+	CPX #$0019							; Compare index
 	BEQ .next_status	                ; Branch if so
-	CPX #$001a                          ; Compare index
+	CPX #$001b                          ; Compare index
 	BEQ .next_status                    ; Branch if so
-	CPX #$001B                          ; Compare index
+	CPX #$001c                          ; Compare index
 	BEQ .next_status                    ; Branch and check new cycle bit
 	bra .next_bit                       ; Branch to another bit in the same cycle
 .next_status
@@ -753,12 +744,13 @@ statuses_bitmask:
 	db $04   ; Poison
 	db $20   ; Imp
 	db $40   ; Petrify
+	db $80   ; Death
 	
-	db $01   ; Death (repel condemned)
 	db $08   ; Mute
 	db $10   ; Berserk
 	db $20   ; Muddle
 	db $80   ; Sleep
+	db $40	 ; Sap (without regen)
 	
 	db $10	 ; Stop
 	db $02   ; Regen (Block Sap)
@@ -793,6 +785,7 @@ statuses:
 	dw #berserk
 	dw #muddle	
 	dw #sleep
+	dw #sap
 	
 	dw #stop
 	dw #regen
