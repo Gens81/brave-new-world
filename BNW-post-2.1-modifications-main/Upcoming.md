@@ -54,6 +54,7 @@
 - Raise Slow accuracy
 - Raise Osmose accuracy
 - Swap Yellow-D and White-D location
+- Brushless Sketch
 
 ### Long-term goals (3.0?):
 - Colosseum overhaul
