@@ -741,6 +741,14 @@ org $C34B08
 	db $A1,$7D,"Port 1",$00
 	db $B3,$7D,"Port 2",$00
 
+;Sketch never fails
+org $C23B40 : NOP #2
+
+; hide warp point in Phoenix Cave permanently
+org $C4566D : db $45    ; set "Returner's Hideout: Banon (Main Room)" as NPC switch
+                        ; Note: this NPC switch is turned off at CA/FD9E as
+                        ; part of setting up the Lete River sequence
+
 ;Brave New World data
 org $C33BB8
-	db $d1,$78,"Brave New World 2.2 b23",$00
+	db $d1,$78,"Brave New World 2.2 b24",$00
