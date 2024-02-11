@@ -601,30 +601,30 @@ DanceDescs:
 ;  db $17," Blizzard",$18,$18,$18,$19,$06,$16," Surge",$01
 ;  db $15," Mirage",$18,$18,$18,$02,$04,$14," Ice Rabbit",$00
   
-.wind_song
-  db "Shift: ",$1E," Sun Bath, ",$1A," Cockatrice",$01
-  db "Repeat: ",$05," Razor Leaf, ",$1F," Wind Slash",$00
-.forest_suite
-  db "Shift: ",$1E," Razor Leaf, ",$1A," Raccoon",$01
-  db "Repeat: ",$05," Harvester, ",$1F," Elf Fire",$00
-.desert_aria
-  db "Shift: ",$1E," Mirage, ",$1A," Meerkat",$01
-  db "Repeat: ",$05," Sun Bath, ",$1F," Sand Storm",$00
-.love_sonata
-  db "Shift: ",$1E," Elf Fire, ",$1A," Tapir",$01
-  db "Repeat: ",$05," Bedevil, ",$1F," Moonlight",$00
-.earth_blues
-  db "Shift: ",$1E," Avalanche, ",$1A," Wild Boars",$01
-  db "Repeat: ",$05," Landslide, ",$1F," Sun Bath",$00
-.water_rondo
-  db "Shift: ",$1E," El Nino, ",$1A," Toxic Frog",$01
-  db "Repeat: ",$05," Plasma, ",$1F," Surge",$00
-.dusk_requiem
-  db "Shift: ",$1E," Moonlight, ",$1A," Wombat",$01
-  db "Repeat: ",$05," Snare, ",$1F," Cave In",$00
-.snowman_jazz
-  db "Shift: ",$1E," Blizzard, ",$1A," Ice Rabbit",$01
-  db "Repeat: ",$05," Surge, ",$1F," Mirage",$00
+;.wind_song
+;  db "Shift: ",$1E," Sun Bath, ",$1A," Cockatrice",$01
+;  db "Repeat: ",$05," Razor Leaf, ",$1F," Wind Slash",$00
+;.forest_suite
+;  db "Shift: ",$1E," Razor Leaf, ",$1A," Raccoon",$01
+;  db "Repeat: ",$05," Harvester, ",$1F," Elf Fire",$00
+;.desert_aria
+;  db "Shift: ",$1E," Mirage, ",$1A," Meerkat",$01
+;  db "Repeat: ",$05," Sun Bath, ",$1F," Sand Storm",$00
+;.love_sonata
+;  db "Shift: ",$1E," Elf Fire, ",$1A," Tapir",$01
+;  db "Repeat: ",$05," Bedevil, ",$1F," Moonlight",$00
+;.earth_blues
+;  db "Shift: ",$1E," Avalanche, ",$1A," Wild Boars",$01
+;  db "Repeat: ",$05," Landslide, ",$1F," Sun Bath",$00
+;.water_rondo
+;  db "Shift: ",$1E," El Nino, ",$1A," Toxic Frog",$01
+;  db "Repeat: ",$05," Plasma, ",$1F," Surge",$00
+;.dusk_requiem
+;  db "Shift: ",$1E," Moonlight, ",$1A," Wombat",$01
+;  db "Repeat: ",$05," Snare, ",$1F," Cave In",$00
+;.snowman_jazz
+;  db "Shift: ",$1E," Blizzard, ",$1A," Ice Rabbit",$01
+;  db "Repeat: ",$05," Surge, ",$1F," Mirage",$00
 
 warnpc $C4B520
 
@@ -653,3 +653,30 @@ warnpc $C4B520
 ;$04  10 pixel
 ;$02  11 pixel
 ;$18  12 pixel
+
+; new choreography
+
+.wind_song
+  db "Shift: ",$0F," Sun Bath, ",$10," Razor Leaf",$01
+  db "Repeat: ",$0F," Wind Slash, ",$10," Razor Leaf",$00
+.forest_suite
+  db "Shift: ",$0F," Razor Leaf, ",$10," Elf Fire",$01
+  db "Repeat: ",$0F," Harvester, ",$10," Elf Fire",$00
+.desert_aria
+  db "Shift: ",$0F," Mirage, ",$10," Sand Storm",$01
+  db "Repeat: ",$0F," Sun Bath, ",$10," Sand Storm",$00
+.love_sonata
+  db "Shift: ",$0F," Elf Fire, ",$10," Moonlight",$01
+  db "Repeat: ",$0F," Bedevil, ",$10," Moonlight",$00
+.earth_blues
+  db "Shift: ",$0F," Landslide, ",$10," Sun Bath",$01
+  db "Repeat: ",$0F," Avalanche, ",$10," Sun Bath",$00
+.water_rondo
+  db "Shift: ",$0F," El Nino, ",$10," Surge",$01
+  db "Repeat: ",$0F," Plasma, ",$10," Surge",$00
+.dusk_requiem
+  db "Shift: ",$0F," Moonlight, ",$10," Cave In",$01
+  db "Repeat: ",$0F," Snare, ",$10," Cave In",$00
+.snowman_jazz
+  db "Shift: ",$0F," Blizzard, ",$10," Mirage",$01
+  db "Repeat: ",$0F," Surge, ",$10," Mirage",$00
