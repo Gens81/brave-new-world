@@ -324,3 +324,6 @@ DescripBug:
   DEC         ; reduce slot index left
   BRA .loop   ; loop
 .done
+
+; add cursor wrapping to equip slot selection
+org $C38E7B : db $00    ; wrap in both directions
