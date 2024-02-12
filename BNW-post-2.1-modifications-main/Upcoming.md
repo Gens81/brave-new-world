@@ -1,6 +1,7 @@
 # Upcoming
 
 ### 2.2 roadmap:
+- gray out EL bonus strings (+ xxx) for unequippable espers
 - revert Phunbaba to 2 chars blown away (to balance Terra being equippable)
 - killing soulblazers being no more a win condition (to balance Cyan joining wrexsoul)
 - Fix dual wield penalty shown regardless of whether you're using a second weapon
