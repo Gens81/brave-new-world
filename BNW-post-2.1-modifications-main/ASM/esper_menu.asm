@@ -83,7 +83,6 @@ C34E7F:	db $3F,$00,$00  ; LV
 		db $0c,$Ae,$FF
 		db $00         ; End 
 
-warnpc $c0ece0
 
 ; which number option finger cursor allow EL bonus
 org $C33BE2
@@ -95,13 +94,13 @@ org $C33BE9
 ; ------------------------------------------------------------------------
 ; Helper for Summon Descriptions (in freespace)
 
-org $C3876B           ; 29 bytes, we'll use 24 >.>
+org $C3f46B           ; 29 bytes, we'll use 24 >.>
 SummonDescription:    ; Load Esper summon description
-  LDX #EsperDescPointers
+  LDX #$FE40 
   STX $E7             ; Set ptr loc LBs
-  LDX $00
+  LDX #$3940
   STX $EB             ; Set text loc LBs
-  LDA #$CB            ; Pointer/text bank
+  LDA #$CF            ; Pointer/text bank
   STA $E9             ; Set ptr loc HB
   STA $ED             ; Set text loc HB
   LDA #$10
@@ -111,10 +110,34 @@ SummonDescription:    ; Load Esper summon description
                       ;   that doesn't belong to them, because it needs an offset to
                       ;   a region of memory where there will be a large swath of
                       ;   values below #$80 /shrug
+warnpc $c3f480
 
+					  
+org $C3876B 
 padbyte $FF : pad $C3877F
 
+; Fork: Esper effect
+org $C35C09 
+	LDX #EsperDescPointers      ; CF/FE40
+	STX $E7         ; Set ptr loc LBs
+	LDX $00     	 ; CF/3940
+	STX $EB         ; Set text loc LBs
+	LDA #$CB        ; Bank: CF
+	STA $E9         ; Set ptr loc HB
+	LDA #$CB        ; ...
+	STA $ED         ; Set text loc HB
+	RTS
 
+org $c3fd96
+DrawEsperMP:
+  LDA #$FF
+  STA $2180         ; 3 spaces
+  STA $2180
+  STA $2180
+  STZ $2180         ; EOS
+  RTS
+padbyte $FF : pad $C3fdd1
+warnpc $c3fdd1
 	
 org $c3f7b6
 	cmp #$04		; on which row bonus must be given to actor
@@ -135,12 +158,13 @@ loop:
 	DEY             ; One less left
 	BNE loop		; Loop till last
 	STZ $2180       ; End string
-	lda #$20		; white colour	
+	LDA $7e4412		; Esper colour
 	sta $29		
 	JMP $7FD9       ; Draw string
 padbyte $ff
 pad $c35a66
 warnpc $c35a67
+
 
 ;Inserted in another asm C3/FC20 - C3/F277
 

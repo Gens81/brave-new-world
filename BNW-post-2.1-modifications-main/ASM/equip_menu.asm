@@ -79,10 +79,11 @@ C395D8:
 ;org $C30247
 ;    dw #C39621      ; Sustain Equip - Update entry 36 in C301DB jump table
 
-org $C30285		; Sub routine menu table
-	dw C39E50	; 55: Handle selection of gear slot to fill
-	dw C398CF	; 56: Handle manual gear removal
-
+org $C30285				; Sub routine menu table
+	dw C39E50			; 55: Handle selection of gear slot to fill
+	dw C398CF	    	; 56: Handle manual gear removal
+	dw BrowseGear		; 57: New Gear Browsing (unified equip menu)
+	
 org $C39E4B
 ; Set text colour to yellow
 C39E4B:  LDA #$28        ; Palette 2
@@ -95,7 +96,7 @@ C39E50: LDA #$10		; Desc: On
 		JSR $9E14       ; Queue text upload (routine test and check a timer and choose if desc or text must be shown before)
 		JSR $8E72       ; Handle D-Pad
 		JSR $9F6A       ; Load description for equipped gear
-		JSR $99A0       ; Recolor hand names
+		JSR DrawHands   ; Recolor hand names
 
 
 		LDA $08         ; No-autofire keys
@@ -150,7 +151,7 @@ pad $C39EC4
 warnpc $C39ECB
 
 
-org $C398CF
+org $C398CB
 
 ; 56: Handle manual gear removal
 C398CF:	 LDA #$10        ; Description: On
@@ -192,10 +193,187 @@ C39908:  LDA #$7F        ; C3/1BF3
          STA $E0         ; Set init command
          JMP $2022       ; Handle L and R
  
-padbyte $FF
-pad $C39921
-warnpc $C39921
 
+; ------------------------------------------------------------------------
+; Handle gear browsing (Action 57)
+; Adds description handling, backs up gear effects, supports
+; auto-cursor change respecting current column
+; (Unified Equip Menu)
+
+BrowseGear:
+  LDA #$10        ; Description: On
+  TRB $45         ; Set menu flag
+  JSR $9E14       ; Queue text upload
+  JSR $9AD3       ; Handle navigation
+  JSR $9233       ; Draw stat preview
+  JSR $A294       ; Load description
+
+  LDA $08         ; No-autofire keys
+  BIT #$80        ; Pushing A?
+  BEQ .check_b    ; Branch if not
+  JSR $9A42       ; On a gray item?
+  BCC .fail       ; Fail if so
+  JSR $0EB2       ; Sound: Click
+  LDA $001F,Y     ; Item to unequip
+  CMP #$FF        ; None?
+  BEQ .clear      ; Branch if so
+  JSR $9D5E       ; Put in stock
+.clear
+  TDC             ; Clear A
+  LDA $4B         ; Gear list slot
+  TAX             ; Index it
+  LDA $7E9D8A,X   ; Inventory slot
+  TAX             ; Index it
+  LDA $1869,X     ; Item in slot
+  STA $001F,Y     ; Equip on actor
+  JSR $9D97       ; Adjust stock
+  JSR $90b5		  ; Redo text, status (* new routine position)
+  BRA .exit_list  ; Exit gear list
+
+.check_b
+  LDA $09         ; No-autofire keys
+  BIT #$80        ; Pushing B?
+  BEQ .exit       ; Exit if not
+  JSR $0EA9       ; Sound: Cursor
+
+  LDA $F0         ; Get stored Gear Effects [BNW ?]
+  STA $11D8       ; Copy to RAM [BNW ?]
+.exit_list
+  LDA #$10        ; Description: Off
+  TSB $45         ; Set menu flag
+
+  JSR $9C87       ; Clear stat preview
+  REP #$20        ; 16-bit A
+  LDA #$0100      ; BG1 H-Shift: 256
+  STA $7E9BD0     ; Hide gear list
+  SEP #$20        ; 8-bit A
+  LDA #$C1        ; Top cursor: Off
+  TRB $46         ; Scrollbar: Off
+  JSR $8E6C       ; Load navig data
+  LDA $5E         ; Former position (changed from $5F)
+  STA $4E         ; Set cursor row
+  LDA $5D         ; Former column [?]
+  STA $4D         ; Set cursor column [?]
+  JSR $8E75       ; Relocate cursor
+  JSR $1368       ; Refresh screen (*)
+  jsr $9e23		  ; You are equipping a weapon and refresh is required to avoid lag
+  LDA #$55        ; C3/9884
+  STA $26         ; Next: Body parts
+.exit
+  RTS
+.fail
+  JSR $0EC0       ; Play buzzer
+  JMP $305D       ; Pixelate screen (* remove unnecessary RTS)
+
+; ------------------------------------------------------------------------
+; Draw "R-hand" and "L-hand" in Equip menu
+; Handle placeholder text for empty slots
+; Handle Gauntlet effect coloring
+; Moves much code to new locations for space
+; (Unified Equip Menu) 
+
+DrawHands:
+  LDA $11D8       ; Gear effects
+  AND #$08        ; Gauntlet?
+  BEQ .draw_them  ; Branch if not
+  JSR $93F2       ; Define Y
+  LDA $001F,Y     ; R-Hand item
+  CMP #$FF        ; None?
+  BEQ .lyelit     ; Draw L-Hand in yellow
+  LDA $0020,Y     ; L-Hand item
+  CMP #$FF        ; None?
+  BNE .draw_them  ; branch if equipped
+.ryelit
+  LDA #$28        ; palette: yellow
+  STA $29         ; set color ^
+  JSR $9ecf		  ; draw r-hand w/o changing color
+  JMP $9ee9		  ; set user color, then draw l-hand
+.lyelit
+  LDA #$28        ; palette: yellow
+  STA $29         ; set color ^
+  JSR $9eed  	 ; draw l-hand w/o changing color
+  JMP $9ecb	     ; set user color, then draw r-hand
+.draw_them
+  JSR $9ecb   	 ; Draw R-Hand name/item
+  JMP $9ee9	     ; Draw L-Hand name/item
+
+; Define Bat.Pwr mode (normal, doubled, or combined hands)
+C399E8:  STZ $CD         ; Genji mode off
+         LDA $11D8       ; Gear effects
+         AND #$10        ; Genji Glove?
+		 BEQ C399F3
+         BRA real_dual   ; Branch if not
+C399F3:  STZ $A1         ; Power x2: Off
+         LDA $11D8       ; Gear effects
+         AND #$08        ; Gauntlet?
+         BEQ C39A0C      ; Exit if not
+         LDA $001F,Y     ; R-Hand item
+         CMP #$FF        ; None?
+         BEQ C39A0E      ; Branch if so
+         LDA $0020,Y     ; L-Hand item
+         CMP #$FF        ; None?
+         BEQ C39A2B      ; Branch if so
+         BRA C39A0C      ; ...
+C39A0C:  SEC             ; ...
+         RTS
+
+real_dual:
+		 LDA $001F,Y     ; R-Hand item
+         CMP #$5a        ; Weapon?
+		 BCC .check_left ; Check left if so
+		 BRA C399F3		 ; No weapon so Attack can't be merged
+.check_left:         
+		 LDA $0020,Y     ; L-Hand item
+         CMP #$5a        ; Weapon?
+         BCS C399F3      ; Branch if not
+		 INC $CD		 ; Attack should be merged
+         BRA C399F3      ; Branch if not
+
+; Fork: Check if L-Hand also empty
+C39A0E:  LDA $0020,Y     ; L-Hand item
+         CMP #$FF        ; None?
+         BNE C39A17      ; Branch if not
+         BRA C39A0C      ; Exit
+
+; Fork: Check if two-handed weapon in L-Hand
+C39A17:  JSR $8321      ; Compute index
+         LDX $2134       ; Load it
+         LDA $D85013,X   ; Properties
+         AND #$40        ; 2-hand OK?
+         BEQ C39A0C      ; Exit if not
+         CLC             ; ...
+         LDA #$01        ; Power: x2
+         STA $A1         ; Set Pwr mode
+         RTS
+
+; Fork: Check if two-handed weapon in R-Hand
+C39A2B:  LDA $001F,Y     ; R-Hand item
+         JSR $8321      ; Compute index
+         LDX $2134       ; Load it
+         LDA $D85013,X   ; Properties
+         AND #$40        ; 2-hand OK?
+         BEQ C39A0C      ; Exit if not
+         CLC             ; ...
+         LDA #$01        ; Power: x2
+         STA $A1         ; Set Pwr mode
+         RTS
+
+padbyte $ff
+pad $c39a42
+warnpc $C39a42
+
+org $C35fc8
+	jsr C399E8	; Define Bat.Pwr
+org $c390d1
+	jsr C399E8	; Define Bat.Pwr
+org $c39271
+	jsr C399E8	; Define Bat.Pwr
+
+
+org $c390bc
+	jsr DrawHands
+
+	
 org $C3960C
 ; Switch to layout with options in Equip or Relic menu
 C3960C:  RTS
@@ -295,20 +473,9 @@ org $C31C26
 	JSR $1BBD      ; Init variables
     JSR C396A8      ; Remove gear
 
-; 57: bottom
-org $C39995 
-	JSR refresh_bg3		; You are equipping a weapon and refresh is required to avoid lag
-	nop					; Nop necessary due to avoid bug from branches
-	RTS
-warnpc $C3999A
 
 org $c36525
-refresh_bg3:
-	jsr $9e23
-	lda #$55
-	sta $26
-	RTS
-	
+
 padbyte $FF
 pad $C3652C
 warnpc $C3652D

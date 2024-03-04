@@ -2,8 +2,7 @@ arch 65816
 hirom
 
 
-ORG $C3992E
-	JSR C3A1D8
+
 
 ORG $C3970A
 	JSR C3A150

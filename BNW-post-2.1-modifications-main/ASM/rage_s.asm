@@ -308,5 +308,5 @@ check_rage:
 
 
 PADBYTE $FF
-PAD $C3A226
-warnpc $C3A226
+PAD $C3A205
+warnpc $C3A205
