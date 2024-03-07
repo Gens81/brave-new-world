@@ -141,11 +141,23 @@ warnpc $c3fdd1
 	
 org $c3f7b6
 	cmp #$04		; on which row bonus must be given to actor
-
+org $c35a18
+	jsr $7fd9		; In Vanilla go to a C35a84 routine that print learning percentage - in BNW JMP $C37fd9 is set at destination address 
+	
+	
 org $c35a24
 	CMP #$0017      ; How many spell must be print
 
-org $C35a3e
+org $C35a29
+; Fork: Draw esper bonus message
+	SEP #$20        ; 8-bit A
+	LDA $D86E00,X   ; Esper bonus
+	CMP #$FF        ; None?
+	BEQ C35A67      ; Blank if so
+	STA $4202       ; Set multiplicand
+	LDA #$09        ; Text length
+	STA $4203       ; Set multiplier
+	jsr $f382		; Write Unspent, Available EL and set EL word next to q.ty
 	jsr $7fd9		; Draw spend q.ty string
 	ldy #$4793		; Bonus string Pos
 	jsr $3519		; Set pos, Wram
@@ -159,11 +171,16 @@ loop:
 	BNE loop		; Loop till last
 	STZ $2180       ; End string
 	LDA $7e4412		; Esper colour
-	sta $29		
+	cmp #$28		; Grey?
+	beq C35A67		; Unavailable EL so branch
+	lda #$20		; User colour
+C35A67:
+	sta $29			; Set colour
 	JMP $7FD9       ; Draw string
+	
 padbyte $ff
-pad $c35a66
-warnpc $c35a67
+pad $c35ae1
+warnpc $c35ae1
 
 
 ;Inserted in another asm C3/FC20 - C3/F277

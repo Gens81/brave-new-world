@@ -86,9 +86,6 @@ org	$C3873A
 org $C3F856
 	LDY #elementattack
 	
-org $C387C1
-	dw #itemquestionmark
-	
 org $C38A4B
 	LDY #itemowned
 
@@ -138,7 +135,7 @@ DefElement:
 
 ; Text 
 
-itemquestionmark:	dw $8643 : db $bf,$bf,$bf,$00
+itemquestionmark:	dw $8643+128 : db $bf,$bf,$bf,$00
 itemvigor:			dw $842F+128 : db "Vigor",$00
 itemstamina:		dw $85AF+128 : db "Stamina",$00
 itemmagic:			dw $84AF+128 : db "Magic",$00

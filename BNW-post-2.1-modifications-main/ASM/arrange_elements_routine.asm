@@ -55,7 +55,7 @@ C3879C:  TDC             ; Clear A
          JMP $04C0       ; Draw 3 digits
 
 ; Fork: Hide power
-C387C0:  LDY #$8D71+128  ; Text pointer
+C387C0:  LDY #itemquestionmark  ; Text pointer
          JSR $02F9       ; Draw "???"
          RTS
 	
