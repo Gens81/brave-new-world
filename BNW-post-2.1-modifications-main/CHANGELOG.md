@@ -1,6 +1,6 @@
 # Changelog
 
-## [2.2 b24](https://github.com/Gens81/brave-new-world/releases) - 02/09/2024
+## [2.2 RC1](https://github.com/Gens81/brave-new-world/releases) - 03/07/2024
 
 ### Features
 
@@ -28,7 +28,6 @@
 - "Native" dance shown in yellow (Fëanor)
 - More walkable beach tiles in solitary island for faster fish_catching (Fëanor)
 - Item/hands battle menu will always arrange inventory to have respectively items/weapons-shields on top of the list (Ryo_Hazuki)
-- Press Start to leave the menu everywhere  (Fëanor) 
 - Colosseum reversible bets highlighted by a different icon (Fëanor, Bropedio, Gens)
 - Rich status menu showing ailment immunities, inherent statuses and elemental properties (Ryo_Hazuki)
 - Possession, charm and love token go away if near fatal (Sir Newton Fig)
