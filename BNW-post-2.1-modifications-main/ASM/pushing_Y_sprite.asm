@@ -137,6 +137,10 @@ EDFC90:  LDA $26
 		 BEQ .delete
 		 CMP #$4D
 		 BEQ .delete
+		 CMP #$26
+		 BEQ .delete
+		 CMP #$1D
+		 BEQ .delete
 		 LDX $2D
 		 LDA #$E8         ; Cursor's X
          STA $33CA,X      ; Set sprite's

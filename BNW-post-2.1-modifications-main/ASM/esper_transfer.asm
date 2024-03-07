@@ -43,6 +43,9 @@ warnpc $C35902
 
 org $C35902
 is_white:
+	jsr $0eb2	; Sound click
+	jsr C32929	; Equip/Draw esper
+	
 org $C3590A
 not_pushing:
 org $C3f798
@@ -50,8 +53,39 @@ Pressed_A:
 org $C3f79c
 JMP can_equip_fork
 
+
+;Rearrange esper data to fit power target hack
+org $C30243
+	dw C3293A		; Old Wait while showing who holds esper
+
+org $c3290c
+	dw C32929		; Equip esper
+
+	
+org $C3291b	
+; Fork: Handle B in sustain
+C3291B:  LDA $09         ; No-autofire keys
+         BIT #$80        ; Pushing B?
+         BEQ C32928      ; Exit if not
+         LDA #$08        ; Blinker: Off
+         TRB $46         ; Set menu flag
+         JSR $29A5      ; Leave submenu
+C32928:	 jmp Y_spec
+		 RTS
+
+; Equip and draw selected esper
+C32929:  TDC             ; Clear A
+         LDA $28         ; Member slot
+         ASL A           ; Double it
+         TAX             ; Index it
+         LDY $6D,X       ; Actor's address
+         LDA $E0         ; Chosen esper
+         STA $001E,Y     ; Assign to actor
+         LDA $E0         ; ...
+         JMP $f49e      ; Draw it by actor
+	
 ; 34: Wait while showing who holds esper (Changes to gain space and)
-org $C3293A
+
 C3293A:  LDY $20		; Timer expired?
          BNE C32947		; Exit if not
          JSL C0EE4A		; Jump long and blank messages

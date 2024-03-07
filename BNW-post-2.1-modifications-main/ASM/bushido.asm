@@ -3,6 +3,21 @@ hirom
 
 table "menu.tbl", ltr
 
+; Insert Targe Power Hack
+org $C3298E
+LDA #$10        ; Description: On
+         TRB $45         ; Set menu flag
+         JSR $0EFD      ; Queue list upload
+         JSR $4BD4      ; Handle D-Pad
+         JSR Bpwrtrgt	; Insert Y func
+         LDA $09         ; No-autofire keys
+         BIT #$80        ; Pushing B?
+         BEQ C329A4      ; Exit if not
+         JSR $29A5      ; Leave submenu
+C329A4:  RTS
+warnpc $c329A5
+
+
 ;###################################################################
 ;
 ;	Insert number before Bushidos

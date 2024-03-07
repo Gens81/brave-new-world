@@ -187,11 +187,21 @@ PADBYTE $FF
 PAD $C3A222
 warnpc $C3A222
 
+; Initialize Magic menu
+org $C3211C
+	JSR $2130      ; Create scrollbar
+	JSR $2148      ; Load nav data, etc.
+	JSR $2158      ; Draw spells, etc.
+	JSR C32802
+	JSR $0F4D      ; Queue BG3 upload
+	LDA #$1A        ; C3/27E2
+	STA $26         ; Next: Sustain menu
+	RTS
+
 org $C327E2	
 ; 1A: Sustain Magic menu
 
-C327F2:  LDA $DF
-		 LDA #$10        ; Description: On
+C327F2:  LDA #$10        ; Description: On
 		 TRB $45         ; Set menu flag
 		 LDA #$01        ; List type: Magic
          STA $2A         ; Set redraw mode
@@ -206,22 +216,51 @@ C327FB:  JSR $1F64      ; Handle L and R
          BCS C32861      ; Exit if pushed
          JSR $4B88      ; Handle D-Pad
          JSR $56E5      ; Load description
+		 JSR Y_spec
 
-; Holding Y
-Y_spec:	 lda $0D
-         bit #$40           	; holding Y?	
-		 BEQ C32822				; Branch if not
-		 LDA #$10				; Description off
-		 TSB $45				; Set
-		 STA $C0				; Set power and target flag
-		 jsl power_target_title	; Jump to write power and target
-		 RTS					; Go to original routine
-		
+
+		 
 PADBYTE $EA :	PAD $C32822
 warnpc $C32822		 
 org $C3281f
 C32822:
-;	jsr $6A41      ; Clear BG3 map B
+
+org $c3fda5
+
+; Holding Y
+Y_spec:	 lda $0D
+         bit #$40           	; holding Y?	
+		 BEQ C32802				; Branch if not
+		 LDA #$10				; Description off
+		 TSB $45				; Set
+		 STA $C0				; Set power and target flag
+		 jsr $6a41
+		 jsl power_target_title	; Jump to write power and target
+		 JSR $0f75				; Upload BG3 tilemap B
+		 JSR $0EFD				; Upload BG1 tilemap A
+		 RTS					; Go to original routine
+C32802:	 LDA $C0				; Cleared tilemap B BG3?
+		 BEQ C3X822				; Branch if so
+		 STZ $C0				; Clear flag
+		 JSR $0F4D				; Upload 
+		 JMP $A662				; Build VEF tilemap
+C3X822:	 RTS
+
+warnpc $c3fdd1
+
+org $C3f69b
+C3F69B:	 LDY #$0400      ; $0800
+         STY $1b         ; Set VRAM ptr
+         LDY #$4049      ; 7E/4049
+         STY $1d         ; Set src LBs
+         LDA #$7E        ; Bank: 7E
+         STA $1f         ; Set src HB
+         LDY #$0800      ; Bytes: 4096
+         STY $19         ; Set data size
+         RTS	
+		 
+warnpc $C3F6B0
+
 
 org $C32861
 C32861:
@@ -239,43 +278,183 @@ org $c3f7d1
 	jsr C350A2
 
 org $C4b97b
-power_target_title2:
-	ldy #$0008
-	BRA power_target_title+3
 power_target_title:	
-	ldy #$0004
-	lda #$2c
-	sta $29
-	ldx #target_power_ptr
-	JSR C369BA
-	%FakeC3(0f4d)
+	ldy #$0004					; Pointers
+	lda #$2C					; Light blue colour
+	sta $29						; Set
+	ldx #target_power_ptr		; Pointer's pointer
+	JSR C369BA					; Print multiple string
+	jsl get_target				; Jump and get Target type 
 	RTL
 	
 target_power_ptr:
 	dw #target
 	dw #power
-	dw #target2
-	dw #power2
+
 	
-target:		dw $812f : db "Target",$00
-power:		dw $810f : db "Power",$00
-target2:	dw $814f : db "Target",$00
-power2:		dw $816f : db "Power",$00
+target:		dw $8123 : db "Target",$00
+power:		dw $810d : db "Power",$00
 
 warnpc $c4b9ce
 
 org $C0DF00
-	db "Free",$00
-	db "Single",$00
-	db "One Foe",$00
-	db "Foe(s)",$00
-	db "Foe Group",$00
-	db "All Foes",$00
-	db "One Ally",$00
-	db "Allies",$00
-	db "Ally Group",$00
-	db "Party",$00
-	db "All",$00
+effect_pointers:
+	dw #Free
+	dw #Single
+	dw #One_Foe
+	dw #Foes
+	dw #Foe_Group
+	dw #All_Foes
+	dw #One_Ally
+	dw #Allies
+	dw #Ally_Group
+	dw #Party
+	dw #All
+
+effect:
+Free:		db "Free",$00
+Single:		db "Single",$00
+One_Foe:	db "One Foe",$00
+Foes:		db "Foe(s)",$00
+Foe_Group:	db "Foe Group",$00
+All_Foes:	db "All Foes",$00
+One_Ally:	db "One Ally",$00
+Allies:		db "Allies",$00
+Ally_Group:	db "Ally Group",$00
+Party:		db "Party",$00
+All:		db "All",$00
 	
 warnpc $C0DF6B
 
+org $C9fd09
+get_target:
+	TDC				; Clear A
+	LDA $0100		; Load Spell Target address
+	STA $E7			; Store 
+	CLC				; Prepare ADC
+	ADC #$06		; Take Power Address
+	STA $F4			; Store
+	LDX $0101		; Load Spell Bank
+	STX $E8			; Store
+	STX $F5			; Store
+	LDA $4B			; Cursor position
+	TAX				; Index
+	LDA $7E9D89,x	; Which Skill
+	CMP #$FF
+	BNE .begin
+	RTL
+.begin
+	jsr get_index
+	ldy $2134
+	lda [$F4],y		; Load Power
+	PHA				; Push
+	lda [$E7],Y		; Load Target
+	jsr convert
+;---------------------------------
+; Some skills can't match bitmask
+;--------------------------------
+.bitmask
+	CMP #$01				; Reflect?
+	BNE .free				; Branch if not - may be free target
+	LDA #$41				; Turn into "Single" target active
+	BRA .skip				; Branch and avoid bitmask and print "Single"
+.free
+	cmp #$21				; Not Reflect, It's Cure?
+	BNE .bushido_blitz		; Branch if not
+	lda #$61				; Turn into "Free" target active
+	bra .skip				; Check
+.bushido_blitz
+	cmp #$7E				; Bushido and Blitz use $7E instead of $6E for All Foes 
+	bne .skip				; Branch if not
+	lda #$6E				; Convert if so
+.skip
+	STA $FF					; Save in $FF
+	LDX #$FFFF				; Load index
+.loop
+	INX						; iNC x
+	LDA.l bitmask,x			; Load bitmask
+	JSR convert
+	CMP $FF					; Same as $FF?
+	BNE .loop				; Loop untill last
+	TXA						; Transfer X to A
+	ASL						; Double it
+	TAX						; Index it
+	rep #$20				; 16-bit A
+	LDA.l effect_pointers,x	; Load pointer
+	STA $E7					; Save address for print			
+	LDY #$8131				; Load $7E/80F1 for single string print
+	%FakeC3(3519)			; Prepare print from $7E/9E89 ram address
+	TAY						; After JSR A will be $0000, clear Y
+	LDA #$C0				; string to print Bank
+	STA $E9					; Save
+	LDA #$20				; User colour
+	STA $29					; Set
+.print
+	LDA	[$E7],y				; Load string
+	beq .end				; 'Till $00
+	STA $2180				; Set
+	iny						; Inc index
+	bra .print				; Loop
+.end
+	stz $2180				; End String
+	%FakeC3(7FD9)			; Print string
+	pla						; Restore Power 
+    %FakeC3(04E0)     		; Turn into text
+    LDX #$8119      		; Text position
+    %FakeC3(04C0)      		; Draw 3 digits
+.back	
+	RTL
+convert:
+	CMP #$53				; Need to be changed?
+	BNE .rts				; Branch if not
+	LDA $26					; Menu flag
+	CMP #$3E				; Bushido?
+	BNE .blitz				; Branch if so
+	LDA $4b					; Cursor pos.
+	CMP #$03				; Flurry?
+	BEQ .rts				; Leave it 
+	CMP #$06				; Tempest?
+	BEQ .rts				; Leave it
+	BRA .one_foe			; Change in One Foe 
+.blitz
+	CMP #$3A 				; Blitz?
+	bne .rts				; Branch if so
+.one_foe
+	lda #$43				; Convert
+.rts
+	rts
+
+get_index:
+	sta $211b
+	stz $211b
+	lda #$0e 
+	sta $211c
+	sta $211c
+	rts
+
+bitmask:
+	db $61	; Free
+	db $41	; Single
+	db $43	; One Foe
+	db $53	; Foe(s)
+	db $6A	; Foe Group
+	db $6e	; All Foes
+	db $03	; One Ally
+	db $3e	; Allies
+	db $2a	; Ally Group
+	db $2e	; Party
+	db $04	; All
+
+	
+warnpc $C9fe00
+	
+
+;Rage:
+;26=1d
+;LDA $4B					; Rage in slot
+;		TAX						; Index it
+;		LDA $C4A7E0,X			; Rage ID - Multiplicand
+;		STA $211B				; Set Low-Byte
+;		STZ $211B				; Clear Hi-Byte
+;		LDA #$20				; Multiplier
+;
