@@ -284,6 +284,8 @@ power_target_title:
 	sta $29						; Set
 	ldx #target_power_ptr		; Pointer's pointer
 	JSR C369BA					; Print multiple string
+	lda #$20					; User colour
+	sta $29						; Set
 	jsl get_target				; Jump and get Target type 
 	RTL
 	
@@ -297,7 +299,7 @@ power:		dw $810d : db "Power",$00
 
 warnpc $c4b9ce
 
-org $C0DF00
+org $C0DEF2
 effect_pointers:
 	dw #Free
 	dw #Single
@@ -310,6 +312,7 @@ effect_pointers:
 	dw #Ally_Group
 	dw #Party
 	dw #All
+	dw #Warp_t
 
 effect:
 Free:		db "Free",$00
@@ -323,6 +326,7 @@ Allies:		db "Allies",$00
 Ally_Group:	db "Ally Group",$00
 Party:		db "Party",$00
 All:		db "All",$00
+Warp_t:		db "-",$00
 	
 warnpc $C0DF6B
 
@@ -342,20 +346,22 @@ get_target:
 	LDA $7E9D89,x	; Skill
 	CMP #$FF
 	BNE .begin
-.warp
 	RTL
 .begin
 	jsr get_index
-	ldy $2134
+	ldy $2134				; Load Spell index
 	lda [$E7],Y				; Load Target
-	BEQ .warp				; Warp? Branch if so
 	PHA						; Push A
 	lda [$F4],y				; Load Power
-    %FakeC3(04E0)     		; Turn into text
-    LDX #$8119      		; Text position
-	LDA #$20				; User colour
-	STA $29					; Set
-    %FakeC3(04C0)      		; Draw 3 digits
+	%FakeC3(04E0)			; Convert Blank leading 0
+	LDA $F9
+	CMP #$FF
+	BNE .not0
+	LDA #$b4
+	sta $f9
+.not0	
+	LDX #$8119      		; Power number position
+    %FakeC3(04C0)	   		; Draw 3 digits
 	PLA						; Restore Target
 	jsr convert				; Eventually convert
 ;---------------------------------
@@ -446,6 +452,7 @@ bitmask:
 	db $2a	; Ally Group
 	db $2e	; Party
 	db $04	; All
+	db $00	; Warp_t
 
 	
 warnpc $C9fe00
