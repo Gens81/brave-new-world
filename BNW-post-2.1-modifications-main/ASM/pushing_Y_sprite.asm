@@ -33,7 +33,10 @@ EDFCB8:  LDX $2D         ; Queue index
          STA $364A,X     ; Set sprite flags
 		 
 ; Mode 1: Sustain Y
-EDFCDC:  LDX $2D
+EDFCDC:	 LDA $26		  ; Menu flag
+		 CMP #$0a		  ; Skill menu?
+		 BEQ .delete	  ; Branch if so
+.sust	 LDX $2D		  ; Queue index
 		 LDA #$E8         ; Cursor's X
          STA $33CA,X      ; Set sprite's
          LDA #$c6         ; Cursor's Y
@@ -41,7 +44,8 @@ EDFCDC:  LDX $2D
          %FakeC3(1221)    ; Define OAM
 		 SEC              ; Set to requeue
          RTL              ; Exit
-
+.delete	 CLC			  ; Clear to dequeue
+		 RTL			  ; Exit
 
 ; Animation table for pushing Y
 EDFCF5:  dw EDFCFE       ; Top button sprite

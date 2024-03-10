@@ -163,7 +163,7 @@ org $C32d75
 	JMP C327EF
 	
 	
-org $C3a205
+org $C3a20A
 C327E2:
 	JSR $0F11
 	BRA skip
@@ -339,9 +339,11 @@ get_target:
 	STX $F5			; Store
 	LDA $4B			; Cursor position
 	TAX				; Index
-	LDA $7E9D89,x	; Which Skill
+	LDA $7E9D89,x	; Skill
+	BEQ .warp
 	CMP #$FF
 	BNE .begin
+.warp
 	RTL
 .begin
 	jsr get_index

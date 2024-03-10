@@ -6,7 +6,17 @@ org $C3028B
 	dw rage_stats_init		; 58: unused duplicate
 	dw rage_stats_sustain	; 59: bogus
 
-
+; Init Rage
+org $C321d6
+	jsr active_y
+	
+org $C37f7b
+	active_y:
+	jsr $5391
+	lda #$01
+	LDY #C36111							; C3/6510
+	Jmp $1173							; Queue OAM fn
+warnpc $c37f88
 
 ; 1D: Sustain Rage menu
 org $C328BA
@@ -30,9 +40,9 @@ C39FA7: LDA $09         ; No-autofire keys
         BEQ C39FB0      ; Exit if not	 
         JMP $29A5       ; Leave submenu		
 
-; Handle A
-C39FB0:	LDA $08			; No autofire keys	 
-		BIT #$80		; Pushing A?
+; Handle Y
+C39FB0:	LDA $09			; No autofire keys	 
+		BIT #$40		; Pushing Y?
 		BEQ C39FBA      ; Exit if not
 		LDA $4B			; Rage slot
 		TAX				; index
@@ -69,8 +79,8 @@ rage_stats_init:
 rage_stats_sustain:			        ;                                      |
 		jsr $0F4D					; Upload BG3 tilemaps A and B          |
 		lda $09						; no-autofire                          |
-		bit #$80					; pushing B?                           |
-		beq sustain_b				; exit if not                          |
+		bit #$40					; pushing Y?                           |
+		beq sustain_y				; exit if not                          |
 		JSR $6A15     				; Clear BG1 map A                      |
 		LDX #$4A00					; $7E/8249                             |
 		JSR $6A4E					; clear bg3 map b	                   |
@@ -81,7 +91,7 @@ rage_stats_sustain:			        ;                                      |
 		STA $45						; On---------------------------------- |
 		lda #$1D					; 1D: sustain rage menu
 		sta $26						; Set
-sustain_b:
+sustain_y:
         rts
 
 title_rage:
