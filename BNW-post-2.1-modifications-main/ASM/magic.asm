@@ -340,7 +340,6 @@ get_target:
 	LDA $4B			; Cursor position
 	TAX				; Index
 	LDA $7E9D89,x	; Skill
-	BEQ .warp
 	CMP #$FF
 	BNE .begin
 .warp
@@ -348,10 +347,17 @@ get_target:
 .begin
 	jsr get_index
 	ldy $2134
-	lda [$F4],y		; Load Power
-	PHA				; Push
-	lda [$E7],Y		; Load Target
-	jsr convert
+	lda [$E7],Y				; Load Target
+	BEQ .warp				; Warp? Branch if so
+	PHA						; Push A
+	lda [$F4],y				; Load Power
+    %FakeC3(04E0)     		; Turn into text
+    LDX #$8119      		; Text position
+	LDA #$20				; User colour
+	STA $29					; Set
+    %FakeC3(04C0)      		; Draw 3 digits
+	PLA						; Restore Target
+	jsr convert				; Eventually convert
 ;---------------------------------
 ; Some skills can't match bitmask
 ;--------------------------------
@@ -389,8 +395,6 @@ get_target:
 	TAY						; After JSR A will be $0000, clear Y
 	LDA #$C0				; string to print Bank
 	STA $E9					; Save
-	LDA #$20				; User colour
-	STA $29					; Set
 .print
 	LDA	[$E7],y				; Load string
 	beq .end				; 'Till $00
@@ -400,10 +404,6 @@ get_target:
 .end
 	stz $2180				; End String
 	%FakeC3(7FD9)			; Print string
-	pla						; Restore Power 
-    %FakeC3(04E0)     		; Turn into text
-    LDX #$8119      		; Text position
-    %FakeC3(04C0)      		; Draw 3 digits
 .back	
 	RTL
 convert:
