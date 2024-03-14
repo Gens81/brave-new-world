@@ -3,11 +3,7 @@ hirom
 table "menu.tbl",ltr
 
 
-; #########################################################################
-; Draw Esper
 
-org $C32937 : JMP DrawEsperHook ; include esper equip bonuses
-	
 ; #########################################################################
 ; Draw Selected Esper Data Info
 

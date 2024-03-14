@@ -59,7 +59,7 @@ org $C30243
 	dw C3293A		; Old Wait while showing who holds esper
 
 org $c3290c
-	dw C32929		; Equip esper
+	jsr C32929		; Equip esper
 
 	
 org $C3291b	
@@ -82,7 +82,7 @@ C32929:  TDC             ; Clear A
          LDA $E0         ; Chosen esper
          STA $001E,Y     ; Assign to actor
          LDA $E0         ; ...
-         JMP $f49e      ; Draw it by actor
+         JMP DrawEsperHook ; include esper equip bonuses
 	
 ; 34: Wait while showing who holds esper (Changes to gain space and)
 

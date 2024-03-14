@@ -330,38 +330,57 @@ Warp_t:		db "-",$00
 	
 warnpc $C0DF6B
 
-org $C9fd09
+org $CCFE80
 get_target:
-	TDC				; Clear A
-	LDA $0100		; Load Spell Target address
-	STA $E7			; Store 
-	CLC				; Prepare ADC
-	ADC #$06		; Take Power Address
-	STA $F4			; Store
-	LDX $0101		; Load Spell Bank
-	STX $E8			; Store
-	STX $F5			; Store
-	LDA $4B			; Cursor position
-	TAX				; Index
-	LDA $7E9D89,x	; Skill
-	CMP #$FF
-	BNE .begin
-	RTL
-.begin
-	jsr get_index
-	ldy $2134				; Load Spell index
+	TDC						; Clear A
+	LDA $0100				; Load Spell Target address
+	STA $E7					; Store 
+	CLC						; Prepare ADC
+	ADC #$06				; Take Power Address
+	STA $F5					; Store
+	LDX $0101				; Load Spell Bank
+	STX $E8					; Store
+	STX $F6					; Store
+	LDA $4B					; Cursor position
+	TAX						; Index
+	LDA $7E9D89,x			; Skill
+	CMP #$FF				; Skill?
+	BNE .begin				; Branch if so
+	RTL						; Back
+.begin						; Compute multiply by $0E
+	rep #$20				; 16-bit A
+	ASL						; Double
+	STA $fe					; keep *2
+	ASL						; double
+	PHA						; Store result *4
+	CLC						; Prepare ADC
+	ADC $fe					; Add 4 and make it *6
+	STA $fe					; Keep *6
+	PLA						; Restore *4
+	ASL						; double value
+	CLC						; Prepare ADD
+	ADC $fe					; Add stored value and make like multiply by $0e (14)
+	TAY						; Index multiply by 0E
+	TDC						; Clear A
+	SEP #$20				; 8-bit A
 	lda [$E7],Y				; Load Target
 	PHA						; Push A
-	lda [$F4],y				; Load Power
+	jmp bushido				; Jump and check if bushido
+.normal_power
+	lda [$F5],y				; Load Power
+	BEQ .zero				; Branch if 0
 	%FakeC3(04E0)			; Convert Blank leading 0
-	LDA $F9
-	CMP #$FF
-	BNE .not0
-	LDA #$b4
-	sta $f9
+	bra .not0				; Branch to print
+.zero
+	ldX	#$ffff				; Blank decimal and hundred values
+	STX $f7					; set
+	LDA #$c4				; Convert Blank into -
+	sta $f9					; Set
 .not0	
 	LDX #$8119      		; Power number position
     %FakeC3(04C0)	   		; Draw 3 digits
+.bushido_compute
+	TDC						; Clear A
 	PLA						; Restore Target
 	jsr convert				; Eventually convert
 ;---------------------------------
@@ -431,14 +450,16 @@ convert:
 	lda #$43				; Convert
 .rts
 	rts
+	
+bushido:
+	LDA $26					; Menu flag
+	CMP #$3E				; Bushido?
+	bne .back				; Branch if not
+	jmp compute_bushido
+.back
+	jmp get_target_normal_power
 
-get_index:
-	sta $211b
-	stz $211b
-	lda #$0e 
-	sta $211c
-	sta $211c
-	rts
+
 
 bitmask:
 	db $61	; Free
@@ -454,9 +475,79 @@ bitmask:
 	db $04	; All
 	db $00	; Warp_t
 
+compute_bushido:
+	PhY						; Push Y
+	LDA $11AC				; R-Hand
+	STA $F3
+	cmp #$0B				; Weapon?
+	BCS .weapon				; Branch if so
+	LDA $11AD				; L-Hand
+	BEQ .no_weapon			; Empty hand so add base attack and compute
+	CLC 
+	ADC	$F3					; Add R-Hand
+.weapon	
+	CLC
+	adc $11ad	
+	REP #$20				; 16-bit A
+	CLC
+	adc $11cc				; Add attack base
+	PHA						; store a
+	LSR         		    ; A / 2
+	CLC         		    ; clear carry
+	ADC $01,S   		    ; add A
+	STA $01,S   		    ; save result to stack
+	PLA          		   ; A * 1.5
+	bra .compute
+.no_weapon
+	CLC
+	adc $F3					; add R-Hand
+	REP #$20				; 16-bit A
+	CLC
+	adc $11cc				; Add base attack
+.compute	
+	ply
+	SEP #$10				; 8-BIT X,Y
+	ldx $4B					; Load finger pos.
+	cpx #$06				; On Tempest?
+	beq .tempest			; Branch if so
+	CPX #$00				; On Dispatch?
+	BEQ .dispatch			; Branch if so
+	cpx #$03				; On flurry?
+	bne .not_from_above		; Branch if not
+	LSR						; Power /2
+.dispatch
+	LSR						; Power /4 (/2)
+	LSR						; Power /8 (/4)
+	STA $f3					; Save
+	ASl						; Double it
+	clc						; Prepare ADC
+	adc $f3					; Make it X3
+	bra .skip_tempest
+.tempest
+	lsr						; Half power
+.skip_tempest	
+	STA $F3					; Save value
+
+	SEP #$20				; 8-bit A
+	REP #$10				; 16-bit x,y
+	TDC						; Clear A
+	TAX						; Transfer a to x
+	LDA #$05				; Digits: 5
+	STA $E0					; Set counter
+	LDY #$FFFE				; Ram index: -2
+	%FakeC3(0535)			; Turn into text (16-bit)
 	
-warnpc $C9fe00
+	LDX #$8119
+	%FakeC3(04c0)
+	jmp get_target_bushido_compute
+.not_from_above
+	REP #$10				; 16-bit x,y
+	SEP #$20				; 8-bit A
+	jmp bushido_back
 	
+warnpc $CD0000
+
+
 
 ;Rage:
 ;26=1d
