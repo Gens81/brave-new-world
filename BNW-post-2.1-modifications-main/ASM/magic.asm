@@ -349,17 +349,13 @@ get_target:
 	RTL						; Back
 .begin						; Compute multiply by $0E
 	rep #$20				; 16-bit A
-	ASL						; Double
-	STA $fe					; keep *2
-	ASL						; double
-	PHA						; Store result *4
-	CLC						; Prepare ADC
-	ADC $fe					; Add 4 and make it *6
-	STA $fe					; Keep *6
-	PLA						; Restore *4
-	ASL						; double value
-	CLC						; Prepare ADD
-	ADC $fe					; Add stored value and make like multiply by $0e (14)
+	sta $FE					; Temporary
+	asl						; *2
+	asl						; *4
+	asl						; *8
+	sec						; Prepare SBC
+	sbc $FE					; *7
+	asl						; *14
 	TAY						; Index multiply by 0E
 	TDC						; Clear A
 	SEP #$20				; 8-bit A
