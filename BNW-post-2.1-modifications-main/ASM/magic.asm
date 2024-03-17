@@ -440,8 +440,8 @@ convert:
 	BEQ .rts				; Leave it
 	BRA .one_foe			; Change in One Foe 
 .blitz
-	CMP #$3A 				; Blitz?
-	bne .rts				; Branch if so
+	CMP #$33 				; Blitz?
+	bne .rts				; Branch if not
 .one_foe
 	lda #$43				; Convert
 .rts
