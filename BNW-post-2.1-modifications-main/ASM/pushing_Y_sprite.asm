@@ -36,6 +36,8 @@ EDFCB8:  LDX $2D         ; Queue index
 EDFCDC:	 LDA $26		  ; Menu flag
 		 CMP #$0a		  ; Skill menu?
 		 BEQ .delete	  ; Branch if so
+		 CMP #$59		  ; Rages sub menu menu?
+		 BEQ .delete	  ; Branch if so		 
 .sust	 LDX $2D		  ; Queue index
 		 LDA #$E8         ; Cursor's X
          STA $33CA,X      ; Set sprite's

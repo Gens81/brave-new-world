@@ -79,8 +79,8 @@ rage_stats_init:
 rage_stats_sustain:			        ;                                      |
 		jsr $0F4D					; Upload BG3 tilemaps A and B          |
 		lda $09						; no-autofire                          |
-		bit #$40					; pushing Y?                           |
-		beq sustain_y				; exit if not                          |
+		bit #$80					; pushing B?                           |
+		beq sustain_b				; exit if not                          |
 		JSR $6A15     				; Clear BG1 map A                      |
 		LDX #$4A00					; $7E/8249                             |
 		JSR $6A4E					; clear bg3 map b	                   |
@@ -89,9 +89,8 @@ rage_stats_sustain:			        ;                                      |
         JSR $091F   		    	; Create scrollbar		               |
 		lda #$04					; Cursor & Desc.                       |
 		STA $45						; On---------------------------------- |
-		lda #$1D					; 1D: sustain rage menu
-		sta $26						; Set
-sustain_y:
+		jmp $21d6					; Re queue Y sprit button and sustain rage menu
+sustain_b:
         rts
 
 title_rage:
@@ -112,10 +111,13 @@ rage_label:
 	dw #rage_imp
 	dw #rage_petrify
 	dw #rage_death 
+	
 	dw #rage_mute
 	dw #rage_berserk
 	dw #rage_muddle	
 	dw #rage_sleep 
+	dw #rage_sap
+	
 	dw #rage_stop
  	dw #rage_regen 
 	dw #rage_haste
@@ -208,7 +210,7 @@ rage_light_up:
 		LDY #rage_sap2			; Label pointer
 		JSR $02F9               ; Print
 .not_sap
-		LDA #$04				; Counter
+		LDA #$05				; Counter
 		STA $DC					; Set
 		LDX $00					; Load $0000 in X
 		STX $DD					; Clear $DD
@@ -318,5 +320,5 @@ check_rage:
 
 
 PADBYTE $FF
-PAD $C3A205
-warnpc $C3A205
+PAD $C3A20A
+warnpc $C3A20A
