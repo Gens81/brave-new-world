@@ -89,7 +89,8 @@ rage_stats_sustain:			        ;                                      |
         JSR $091F   		    	; Create scrollbar		               |
 		lda #$04					; Cursor & Desc.                       |
 		STA $45						; On---------------------------------- |
-		jmp $21d6					; Re queue Y sprit button and sustain rage menu
+		jsr $7f80					; Queue Y sprite
+		Jmp $21d9					; Set Sustain rage menu
 sustain_b:
         rts
 
