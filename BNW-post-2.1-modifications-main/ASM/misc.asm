@@ -566,50 +566,50 @@ Splice:
     RTS
 warnpc !warn
 
-; -----------------------------------------------------------------------------
-; Synopsis: Adds hotkey to exit the main menu from anywhere.
-;   Author: Fëanor
-;  Created: 2023-07-21
-;  Updated: 2023-10-23
-; -----------------------------------------------------------------------------
-!free = $C3F6B0
-!warn = $C3F6CB
-
-!hotkey = #$10      ; Start
-
-; prevent mini-map toggling if Start is held for too long
-org $EE2028 : LDA $09   ; load pressed buttons (no-autofire keys)
-
-; -----------------------------------------------------------------------------
-; Menu State Loop
-; -----------------------------------------------------------------------------
-; C3/01BA:
-;   JSR $1412
-org $C301BD
-    JSR MenuLoopSplice
-;   CMP #$FF
-;   BEQ $01D8
-;   ...
-;   STZ $43
-;   RTS
-; -----------------------------------------------------------------------------
-
-org !free
-MenuLoopSplice:     ; [27 bytes]
-    TDC             ; [displaced]
-    LDA $0200       ; load menu type
-    BNE +           ; branch if ^ not main menu
-	LDA $09         ; load pressed buttons (no-autofire keys)
-    AND !hotkey     ; check if hotkey is pressed
-    BEQ +           ; branch if not ^
-    STZ $0205       ; clear item used out-of-battle
-    JSR $0EA9       ; play cursor sound effect (cancel)
-    JSR $1DD2       ; update field equipment effects
-    LDA #$FF        ; setup menu exit
-    RTS
-  + LDA $26         ; [displaced]
-    RTS
-warnpc !warn
+;; -----------------------------------------------------------------------------
+;; Synopsis: Adds hotkey to exit the main menu from anywhere.
+;;   Author: Fëanor
+;;  Created: 2023-07-21
+;;  Updated: 2023-10-23
+;; -----------------------------------------------------------------------------
+;!free = $C3F6B0
+;!warn = $C3F6CB
+;
+;!hotkey = #$10      ; Start
+;
+;; prevent mini-map toggling if Start is held for too long
+;org $EE2028 : LDA $09   ; load pressed buttons (no-autofire keys)
+;
+;; -----------------------------------------------------------------------------
+;; Menu State Loop
+;; -----------------------------------------------------------------------------
+;; C3/01BA:
+;;   JSR $1412
+;org $C301BD
+;    JSR MenuLoopSplice
+;;   CMP #$FF
+;;   BEQ $01D8
+;;   ...
+;;   STZ $43
+;;   RTS
+;; -----------------------------------------------------------------------------
+;
+;org !free
+;MenuLoopSplice:     ; [27 bytes]
+;    TDC             ; [displaced]
+;    LDA $0200       ; load menu type
+;    BNE +           ; branch if ^ not main menu
+;	LDA $09         ; load pressed buttons (no-autofire keys)
+;    AND !hotkey     ; check if hotkey is pressed
+;    BEQ +           ; branch if not ^
+;    STZ $0205       ; clear item used out-of-battle
+;    JSR $0EA9       ; play cursor sound effect (cancel)
+;    JSR $1DD2       ; update field equipment effects
+;    LDA #$FF        ; setup menu exit
+;    RTS
+;  + LDA $26         ; [displaced]
+;    RTS
+;warnpc !warn
 
 
 ; #########################
@@ -751,4 +751,4 @@ org $C4566D : db $45    ; set "Returner's Hideout: Banon (Main Room)" as NPC swi
 
 ;Brave New World data
 org $C33BB8
-	db $d1,$78,"Brave New World 2.2 b24",$00
+	db $d1,$78,"Brave New World 2.2 b26",$00
