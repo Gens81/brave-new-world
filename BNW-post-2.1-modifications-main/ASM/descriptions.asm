@@ -7,7 +7,7 @@ table "menu.tbl",ltr
 ;le	    $E1
 ;al	    $E2
 ;in	    $E4
-;-      $07
+;at     $07
 ; - 	$0E
 ;et	    $E5
 ;] 	    $EC
@@ -20,8 +20,8 @@ table "menu.tbl",ltr
 ;[S	    $F3
 ;d 	    $F4
 ;if	    $F5
-;fo	    $F7
-;ll	    $0D
+; s	    $F7
+;il	    $0C
 ;lt	    $09
 ;Holy	$F6
 ;Bolt   $F8
@@ -201,14 +201,14 @@ ChocoboHide:    db "Halves Water/Wind dmg",$00
 MoogleHide:     db "Halves Earth/Wind dmg",$00
 DragonHide:     db "Halves Fire/Wind dmg",$00
 SnowMuffler:    db "Blocks Ice/Wind dmg|HP+25%",$00
-Noiseblaster:   db "May set [Muddle]",$0E,"foe group",$00
+Noiseblaster:   db "May set [Muddle]",$0E,"foe group|Fail by stamina",$00
 BioBlaster:     db "Dark dmg",$0E,"foe group|Sets [Poison]",$00
 Flash:          db "Non-elemental dmg",$0E,"foe group|Sets [Blind]",$00
 Chainsaw:       db "This is not a drill|Ignores def., randomly kills",$00
 Defibrillator:  db "[CLEAR!]|Revives fallen ally",$00
 Drill:          db "This is a drill|Ignores def., sets [Sap]",$00
 ManaBattery:    db "It keeps going and going_|Cures MP - one ally",$00
-Autocrossbow:   db "Physical attack",$0E,"foe group|Ignores row",$00
+Autocrossbow:   db "Physical attack",$0E,"foe group|Ignores row, can miss",$00
 FireScroll:     db "(Split) Fire dmg",$0E,"all foes|Use w/ [Throw]",$00
 WaveScroll:     db "(Split) Water dmg",$0E,"all foes|Use w/ [Throw]",$00
 BoltScroll:     db "(Split) Bolt dmg",$0E,"all foes|Use w/ [Throw]",$00
@@ -575,7 +575,7 @@ Fish:
 RottenFish:
     db "A rotten fish",$00
 Guilt:
-    db "It's heavy with the weight of|murdered family and friends",$00
+    db "It's heavy w/ the weight of|murdered family and friends",$00
 LolaLetter:
     db "Rather explicit, to say the least",$00
 Booty:
@@ -585,7 +585,7 @@ Filth:
 EmperorMap:
     db "Show this to the old man",$00
 WD40:
-    db "Fixes anything that can't be fixed|with duct tape",$00
+    db "Fixes anything that can't be fixed|w/ duct tape",$00
 Schematics:
     db "Autocrossbow:|Power +50%, Accuracy = 100%",$00
 BettingChips:
@@ -634,57 +634,57 @@ org $D8C9A0
 Fire: db $FC,$00
 Ice: db $FB,$00
 Bolt: db $F8,$00
-Sap: db "May s",$E5," ",$F3,"ap], l",$F5,"t",$E0,"[Regen",$EC,"|",$EF," periodic",$EB,"mg",$0E,"s",$E4,"g",$E1,$00 ; May set "Sap", lifts "Regen|Dark periodic dmg - single
-Poison: db "May s",$E5," [Poison",$EC,$07,"s",$E4,"g",$E1,"|",$EF," ris",$E4,$EE,"periodic",$EB,"mg",$00 ; May set "Poison" - single|Dark rising periodic dmg
+Sap: db $EF," S",$E5,$E0,$F3,"ap]|Periodic",$EB,"mg, l",$F5,"t",$E0,"[Regen",$EC,$00 ; Dark Sets "Sap", periodic dmg, lifts "Regen"
+Poison: db $EF," S",$E5,$E0,"[Poison",$EC,"|Ris",$E4,$EE,"periodic",$EB,"mg",$00 ; Dark Sets "Poison"|Rising periodic dmg
 Fire2: db $FC,$FC,$00
 Ice2: db $FB,$FB,$00
 Bolt2: db $F8,$F8,$00
-Break: db $F9,$0E,"s",$E4,"g",$E1,"|Igno",$F1,$E0,"def.",$00 ; Wind - single|Ignores def.
+Break: db $F9," Igno",$F1,$E0,"def.",$00 ; Wind Ignores def.
 Fire3: db $FC,$FC,$FC,$00
 Ice3: db $FB,$FB,$FB,$00
 Bolt3: db $F8,$F8,$F8,$00
-Quake: db $FA," (ground)",$EB,"m",$EE,$07,"",$E2,"l|Igno",$F1,$E0,"def.",$00 ; Earth (ground) dmg - all|Ignores def.
-Doom: db "Ins",$F0,"nt",$EB,"eath",$0E,"s",$E4,"g",$E1,"|(He",$E2,$E0,"undead)",$00; Instant death - single|(Heals undead)
-Holy: db $F6,$0E,"s",$E4,"g",$E1,"|Igno",$F1,$E0,"def.",$00 ; Holy - single|Ignores def.
-Flare: db "Non-e",$E1,"ment",$E2,$EB,"m",$EE,$07,"s",$E4,"g",$E1,"|Igno",$F1,$E0,"def.",$00 ; Non-elemental dmg - single|Ignores def.
-Dark: db $EF,$0E,"s",$E4,"g",$E1,$00 ; Dark - single
-Storm: db $F9,"/",$FD,$0E,$E2,"l ",$F7,"es",$00 ; Wind/Water - all foes
-XZone: db "Ins",$F0,"nt",$EB,"eath",$0E,$F7,$E7,"group",$00 ; Instant death - foe group
-Meteor: db "Non-e",$E1,"ment",$E2,$EB,"m",$EE,$07,"",$E2,"l ",$F7,"es",$00 ; Non-elemental dmg - all foes
-Ultima: db "U",$09,"imat",$E7,"magic at",$F0,"ck",$00 ; Ultimate Magic Attack
-Merton: db $FC,"/",$EF,$0E,$E2,"l",$00 ; Fire/Dark - all
-Demi: db $FA," (HP * 1/2)",$0E,"s",$E4,"g",$E1,$00 ; Earth (HP * 1/2) - single
-Quartr: db $FA," (HP * 3/4)",$0E,$F7,$E7,"group",$00; Earth (HP * 3/4) - foe group
-Drain: db "Ste",$E2,$E0,"HP",$0E,"s",$E4,"g",$E1,$00 ; Steals HP - single
-Osmose: db "Ste",$E2,$E0,"MP",$0E,"s",$E4,"g",$E1,$00 ; Steals MP - single
-Rasp: db "MP",$EB,"m",$EE,$07,"s",$E4,"g",$E1,$00 ; MP dmg - single
-Muddle: db "S",$E5,$E0,"[Mudd",$E1,$EC,$07,"",$E2,"l ",$F7,"es|At",$F0,"ck random ",$E2,"lie",$E0,"until phys. hit",$00 ; Sets "Muddle" - all foes|Attack random allies until phys. hit
-Mute: db "S",$E5,$E0,"[Mute",$EC,$07,"s",$E4,"g",$E1,"|Can't",$EB,"o anyth",$E4,$EE,"that cost",$E0,"MP",$00; Sets "Mute" - single|Can't do anything that costs MP
-Sleep: db "S",$E5,$E0,$F3,$E1,"ep",$EC,$07,"s",$E4,"g",$E1,"|Inactiv",$E7,"until phys. hit or it wear",$E0,"off",$00 ; Sets "Sleep" - single|Inactive until phys. hit or it wears off
-SleepX: db "S",$E5,$E0,$F3,$E1,"ep",$EC,$07,"",$F7,$E7,"group",$00 ; Sets "Sleep" - foe group
-Imp: db "S",$E5,"s/l",$F5,"t",$E0,"[Imp",$EC,$07,"s",$E4,"g",$E1,"|Dm",$EE,"an",$F4,"he",$E2,$E4,$EE,"output h",$E2,"ved",$00 ; Sets/lifts "Imp" - single|Dmg and healing output halved
-Bserk: db "S",$E5,$E0,"[Berserk",$EC,$07,"s",$E4,"g",$E1,"|Phys.",$EB,"m",$EE,"up, becom",$E7,"uncontro",$0D,"ab",$E1,$00 ; Sets "Berserk" - single|Phys. dmg up, become uncontrollable
-Stop: db "S",$E5,$E0,$F3,"top",$EC,$07,"s",$E4,"g",$E1,"|Can't mov",$E7,$F7,"r a brief time",$00 ; Sets "Stop" - single - Can't move for a brief time
-Safe: db "S",$E5,$E0,$F3,"afe",$EC,$07,"on",$E7,$E2,$F2,"|Reduc",$E7,"physic",$E2,$EB,"m",$EE,$F0,"ken",$00 ; Sets "Safe" - one ally|Reduce physical dmg taken
-Shell: db "S",$E5,$E0,$F3,"he",$0D,$EC,$07,"on",$E7,$E2,$F2,"|Reduc",$E7,"magic",$E2,$EB,"m",$EE,$F0,"ken",$00 ; Sets "Shell" - one ally|Reduce magical dmg taken
-Haste: db "S",$E5,$E0,"[Haste",$EC,$07,"on",$E7,$E2,$F2,"|Spee",$F4,"up, l",$F5,"t",$E0,$F3,"low]",$00 ; Sets "Haste" - one ally|Speed up, lifts "Slow"
-HasteX: db "S",$E5,$E0,"[Haste",$EC,$07,"",$E2,$F2," group",$00 ; Sets "Haste" - ally group
-Slow: db "S",$E5,$E0,$F3,"low",$EC,$07,"s",$E4,"g",$E1,"|Speed",$EB,"own, l",$F5,"t",$E0,"[Haste]",$00 ; Sets "Slow" - single|Speed down, lifts "Haste"
-SlowX: db "S",$E5,$E0,$F3,"low",$EC,$07,"",$F7,$E7,"group",$00 ; Sets "Slow" - foe group
-Rflect: db "S",$E5,$E0,"[Ref",$E1,"ct",$EC,$07,"s",$E4,"g",$E1,"|Repel",$E0,"s",$E4,"g",$E1," an",$F4,"f",$F1,"e-",$F0,"rg",$E5," magic",$00 ; Sets "Reflect" - single|Repels single and free-target magic
-Float: db "S",$E5,$E0,"[Float",$EC,$07,"party|Block",$E0,"[ground",$EC,"at",$F0,"cks",$00 ; Sets "Float" - party|Blocks "ground" attacks
+Quake: db $FA," Igno",$F1,$E0,"def., groun",$F4,$07,$F0,"ck",$00 ; Earth Ignores def., ground attack
+Doom: db "Ins",$F0,"nt",$EB,"e",$07,"h (he",$E2,$E0,"undead)|Fa",$0C," by",$F7,$F0,"m",$E4,"a",$00; Instant death|Heals undead
+Holy: db $F6," Igno",$F1,$E0,"def.",$00 ; Holy Ignores def.
+Flare: db "Non-e",$E1,"ment",$E2,$EB,"mg|Igno",$F1,$E0,"def.",$00 ; Non-elemental dmg|Ignores def.
+Dark: db $EF,$00 ; Dark
+Storm: db $F9,"/",$FD,$00 ; Wind/Water
+XZone: db "Ins",$F0,"nt",$EB,"e",$07,"h|Fa",$0C," by",$F7,$F0,"m",$E4,"a",$00 ; Instant death
+Meteor: db "Non-e",$E1,"ment",$E2,$EB,"mg",$00 ; Non-elemental dmg
+Ultima: db "U",$09,"im",$07,$E7,"magic ",$07,$F0,"ck",$00 ; Ultimate Magic Attack
+Merton: db $FC,"/",$EF,$00 ; Fire/Dark
+Demi: db $FA," (HP * ",$11,")|Fa",$0C," by",$F7,$F0,"m",$E4,"a",$00 ; Earth (HP * 1/2)
+Quartr: db $FA," (HP * ",$12,")|Fa",$0C," by",$F7,$F0,"m",$E4,"a",$00; Earth (HP * 3/4)
+Drain: db "Ste",$E2,$E0,"HP|hitr",$07,$E7,"= 90%",$00 ; Steals HP
+Osmose: db "Ste",$E2,$E0,"MP|hitr",$07,$E7,"= 90%",$00 ; Steals MP
+Rasp: db "MP",$EB,"mg|Fa",$0C," by",$F7,$F0,"m",$E4,"a",$00 ; MP dmg
+Muddle: db "S",$E5,$E0,"[Mudd",$E1,"], fa",$0C," by",$F7,$F0,"m",$E4,"a|At",$F0,"ck random ",$E2,"lie",$E0,"unt",$0C," phys. hit",$00 ; Sets "Muddle"|Attack random allies until phys. hit
+Mute: db "S",$E5,$E0,"[Mute], fa",$0C," by",$F7,$F0,"m",$E4,"a|Can't",$EB,"o anyth",$E4,$EE,"th",$07," cost",$E0,"MP",$00; Sets "Mute"|Can't do anything that costs MP
+Sleep: db "S",$E5,$E0,$F3,$E1,"ep], fa",$0C," by",$F7,$F0,"m",$E4,"a|Inactiv",$E7,"unt",$0C,$03,"phys.",$03,"hit",$03,"or",$03,"it wear",$E0,"off",$00 ; Sets "Sleep"|Inactive until phys. hit or it wears off
+SleepX: db "S",$E5,$E0,$F3,$E1,"ep]|Fa",$0C," by",$F7,$F0,"m",$E4,"a",$00 ; Sets "Sleep"
+Imp: db "S",$E5,"s/l",$F5,"t",$E0,"[Imp]|Dm",$EE,"an",$F4,"he",$E2,$E4,$EE,"output h",$E2,"ved",$00 ; Sets/lifts "Imp"|Dmg and healing output halved
+Bserk: db "S",$E5,$E0,"[Berserk]|Phys.",$EB,"m",$EE,"up, becom",$E7,"uncontrollab",$E1,$00 ; Sets "Berserk"|Phys. dmg up, become uncontrollable
+Stop: db "S",$E5,$E0,$F3,"top], fa",$0C," by",$F7,$F0,"m",$E4,"a|Can't mov",$E7,"for a brief time",$00 ; Sets "Stop"|Can't move for a brief time
+Safe: db "S",$E5,$E0,$F3,"afe]|Reduc",$E7,"physic",$E2,$EB,"m",$EE,$F0,"ken",$00 ; Sets "Safe"|Reduce physical dmg taken
+Shell: db "S",$E5,$E0,$F3,"hell",$EC,"|Reduc",$E7,"magic",$E2,$EB,"m",$EE,$F0,"ken",$00 ; Sets "Shell"|Reduce magical dmg taken
+Haste: db "S",$E5,$E0,"[Haste]|Spee",$F4,"up, l",$F5,"t",$E0,$F3,"low]",$00 ; Sets "Haste"|Speed up, lifts "Slow"
+HasteX: db "S",$E5,$E0,"[Haste]",$00 ; Sets "Haste"
+Slow: db "S",$E5,$E0,$F3,"low], fa",$0C," by",$F7,$F0,"m",$E4,"a|Speed",$EB,"own, l",$F5,"t",$E0,"[Haste]",$00 ; Sets "Slow"|Speed down, lifts "Haste"
+SlowX: db "S",$E5,$E0,$F3,"low]|Fa",$0C," by",$F7,$F0,"m",$E4,"a",$00 ; Sets "Slow"
+Rflect: db "S",$E5,$E0,"[Ref",$E1,"ct]|Repel",$E0,"s",$E4,"g",$E1," an",$F4,"f",$F1,"e-",$F0,"rg",$E5," magic",$00 ; Sets "Reflect"|Repels single and free-target magic
+Float: db "S",$E5,$E0,"[Flo",$07,"]|Block",$E0,"groun",$F4,$07,$F0,"cks",$00 ; Sets "Float"|Blocks ground attacks
 Warp: db "Go to Worl",$F4,"9",$00
-Scan: db "!",$00
-Dispel: db "L",$F5,"t",$E0,"goo",$F4,"s",$F0,"tuse",$E0,$07,"s",$E4,"g",$E1,$00 ; Lifts good statuses - single
+Scan: db "Display",$E0,"HP/MP, activ",$E7,"st",$07,"uses|an",$F4,"e",$E1,"ment",$E2," weaknesses",$00
+Dispel: db "L",$F5,"t",$E0,"positiv",$E7,"s",$F0,"tuses",$00 ; Lifts positive statuses
 Cure: db "Cu",$F1,$E0,"HP|",$F6,$EB,"m",$EE,"to undead",$00; Cures HP|Holy dmg to undead
 Cure2: db "Cu",$F1,$E0,"HP|",$F6,$F6,$00
 Cure3: db "Cu",$F1,$E0,"HP|",$F6,$F6,$F6,$00
 Life: db "Revive",$E0,"f",$E2,$E1,"n ",$E2,$F2,"|(HP = 250~500)",$00 ; Revives fallen ally|(HP = 250~500)
 Life2: db "Revive",$E0,"f",$E2,$E1,"n ",$E2,$F2,"|(HP = max)",$00 ; Revives fallen ally|HP = max
-Rerise: db "S",$E5,$E0,"[Rerise",$EC,$07,"on",$E7,$E2,$F2,"|Cast",$E0,$E8,"L",$F5,$E7,"upon",$EB,"eath",$00; Sets "Rerise" - one ally|Casts ○Life upon death
-GRemedy: db "L",$F5,"t",$E0,"most ba",$F4,"s",$F0,"tuses|S",$F0,"m",$E4,"a-base",$F4,"cu",$F1,$0E,"on",$E7,$E2,$F2,$00 ; Lifts most bad statuses|Stamina-based cure - one ally
-Regen: db "S",$E5,$E0,"[Regen], l",$F5,"t",$E0,$F3,"ap",$EC,$07,"on",$E7,$E2,$F2,"|S",$F0,"m",$E4,"a-base",$F4,"cu",$F1,", periodic he",$E2,$00 ; Sets "Regen", lifts "Sap" - one ally|Stamina-based cure, periodic heal
-RegenX: db "S",$E5,$E0,"[Regen",$EC,$07,"",$E2,$F2," group|S",$F0,"m",$E4,"a-base",$F4,"cu",$F1,$00 ; Sets "Regen" - ally group|Stamina-based cure
+Rerise: db "S",$E5,$E0,"[Rerise]|Cast",$E0,$E8,"L",$F5,$E7,"upon",$EB,"e",$07,"h",$00; Sets "Rerise"|Casts ○Life upon death
+GRemedy: db "Cu",$F1,$E0,"HP (s",$F0,"m",$E4,"a-based)|L",$F5,"t",$E0,"most ba",$F4,"s",$F0,"tuses",$00 ; Cures HP (stamina-based)|Lifts most bad statuses
+Regen: db "S",$E5,$E0,"[Regen]; periodic he",$E2,", l",$F5,"t",$E0,"[Sap]|Cu",$F1,$E0,"HP (s",$F0,"m",$E4,"a-based)",$00 ; Cures HP (stamina-based)|Sets "Regen" (periodic heal; lifts Sap)
+RegenX: db "S",$E5,$E0,"[Regen]|Cu",$F1,$E0,"HP (s",$F0,"m",$E4,"a-based)",$00 ; Cures HP (stamina-based)|Sets "Regen"
 
 warnpc $D8CE9F
 
@@ -756,15 +756,15 @@ Pummel:
 Suplex:
 	db "Physical attack (ignores def.)|May set [Stop]",$00
 Aurabolt:
-	db $F6," (stamina) attack",$00
+	db $F6," (stamina-based)|Row affects dmg",$00
 FireDance:
-	db $FC," - all foes",$00
+	db $FC,$00
 Mantra:
-	db "Cures ally HP (stamina-based)|Weaker at low HP",$00
+	db "Cures HP (stamina-based)|Weaker at low HP",$00
 Chakra:
-	db "Cures ally MP (stamina-based)",$00
+	db "Cures MP (stamina-based)",$00
 SonicBoom:
-	db $F9," (stamina) attack - all foes",$00
+	db $F9," (stamina-based)",$00
 BumRush:
 	db "Punch hard (ignores def.)",$00
 
@@ -788,21 +788,21 @@ org $CFFF9E
 org $CFFD00
 
 Dispatch:
-	db "Physic",$E2," attack (ignore",$E0,"def.)|2x dmg to humans",$00
+	db "Physic",$E2," attack (ignore",$E0,"def.)|2x",$EB,"mg to humans",$00
 Mindblow:
-	db "500 MP dmg",$0E,"on",$E7,$F7,"e",$00
-Empeworer:
-	db "S",$E5,$E0,$F3,"ap]",$0E,"on",$E7,$F7,"e|Ste",$E2,$E0,"HP/MP (effective vs undead)",$00
+	db "500 MP",$EB,"mg",$00
+Empowerer:
+	db "Ste",$E2,$E0,"HP/MP, row affects",$EB,"mg|Effective vs undead, s",$E5,$E0,$F3,"ap]",$00
 Flurry:
-	db "4x physic",$E2," attack|May s",$E5," [Muddle]",$00
+	db "4 physic",$E2," attacks|May",$F7,$E5," [Muddle]",$00
 Dragon:
-	db "Stamina attack",$0E,"ignore",$E0,"def.|May s",$E5," [Petrify]",$00
+	db "Stamina-based, ignore",$E0,"def.|May",$F7,$E5," [Petrify]",$00
 Eclipse:
-	db "Non-e",$E1,"mental dmg",$0E,$E2,"l foes|S",$E5,$E0,"[Blind]",$00
+	db "Non-e",$E1,"mental",$EB,"mg|S",$E5,$E0,"[Blind]",$00
 Tempest:
-	db "4x physical attack",$00
+	db "4 physical attacks",$00
 Cleave:
-	db $E6,$0E,$E2,"l foes",$00
+	db "Instant",$EB,"eath|Can miss",$00
 
 warnpc $CFFE00
 
@@ -810,7 +810,7 @@ org $CFFFAE
 
 	dw Dispatch-Dispatch
 	dw Mindblow-Dispatch
-	dw Empeworer-Dispatch
+	dw Empowerer-Dispatch
 	dw Flurry-Dispatch
 	dw Dragon-Dispatch
 	dw Eclipse-Dispatch
@@ -824,29 +824,29 @@ org $CFFFAE
 org $ED77A0
 
 Aqualung:
-	db $FD," - all foes",$00
+	db $FD,$00
 BadBreath:
-	db "Sets bad statuses - foe group|([Poison]/[Blind]/[Mute])",$00
+	db "Sets [Poison]/[Blind]/[Mute]|Fail by stamina",$00
 BlackOmen:
-	db "Non-elemental dmg - all foes|Ignores def.",$00
+	db "Non-elemental dmg|Ignores def.",$00
 Blaze:
 	db $FC,"/",$F9,", may set [Blind]/[Sap]",$00
 BlowFish:
-	db "Physical attack - single|Dmg = 1000",$00
+	db "Physical dmg = 1000",$00
 Discord:
-	db "Sets [Muddle]/[Berserk] - single|Unreflectable",$00
+	db "Sets [Muddle]/[Berserk]|Unreflectable, fail by stamina",$00
 HolyWind:
-	db "Cures HP - party|Amount = (Caster's current HP)",$00
+	db "Cures HP|Amount healed = caster's (current) HP",$00
 Raid:
-	db "Steal HP/MP - single|Unreflectable, ignores def.",$00
+	db "Steal HP/MP, fail by stamina|Ignores def., unreflectable",$00
 Raze:
-	db $FC,"/",$F9," - single, may set [Sap]",$00
+	db $FC,"/",$F9,", may set [Sap]",$00
 Refract:
-	db "Sets [Reflect]/[Image] - one ally|Unreflectable",$00
+	db "Sets [Reflect]/[Image]|Unreflectable",$00
 Shield:
-	db "Sets [Safe] - party",$00
+	db "Sets [Safe]",$00
 Tsunami:
-	db $FD," - all foes",$00
+	db $FD,$FD,$FD,$00
 
 warnpc $ED7A6F
 
@@ -918,33 +918,33 @@ EsperDescPointers:
   dw Starlet
   dw Phoenix
 
-Ramuh: db "Judgement:|",$F8," - all foes",$00
-Ifrit: db "Inferno:|",$FC," - all foes",$00
-Shiva: db "Gem Dust:|",$FB," - all foes",$00
-Siren: db "Siren Song:|Sets [Muddle]/[Berserk] - all foes",$00
-Terrato: db "Earth Rage:|",$FA," - all foes",$00
-Shoat: db "Hurricane:|Sets [Petrify] - all foes",$00
-Maduin: db "Chaos Wing:|",$F9," - all foes, ignores def.",$00
-Bismark: db "Sea Song:|",$FD," - all foes",$00
-Stray: db "Cait Sith: Sets [Regen]|Stamina-based cure - party",$00
-Palidor: db "Air Raid:|Party attacks with [Jump]",$00
-Tritoch: db "Trisection:|",$FC,"/",$FB,"/",$F8," - all foes",$00
-Odin: db "Atom Edge: Stamina-based - all foes|Non-elemental dmg; ignores def.",$00
+Ramuh: db "Judgement:|",$F8," (",$11," dmg on multi-target)",$00
+Ifrit: db "Inferno:|",$FC," (",$11," dmg on multi-target)",$00
+Shiva: db "Gem Dust:|",$FB," (",$11," dmg on multi-target)",$00
+Siren: db "Siren Song: Sets [Muddle]/[Berserk]|Fail by stamina",$00
+Terrato: db "Earth Rage:|",$FA," (",$11," dmg on multi-target)",$00
+Shoat: db "Hurricane:|Sets [Petrify] (low hit%)",$00
+Maduin: db "Chaos Wing:|",$F9," Ignores def.",$00
+Bismark: db "Sea Song:|",$FD," (",$11," dmg on multi-target)",$00
+Stray: db "Cait Sith: Sets [Regen]|Cures HP (stamina-based)",$00
+Palidor: db "Air Raid:|Party attacks w/ [Jump]",$00
+Tritoch: db "Trisection:|",$FC,"/",$FB,"/",$F8," (",$11," dmg on multi-target)",$00
+Odin: db "Atom Edge:|Stamina-based dmg, ignores def.",$00
 Loki: db $00
-Bahamut: db "Mega Flare: Ignores def.|Non-elemental dmg - all foes",$00
-Crusader: db "Jihad:|",$EF," - all foes",$00
-Ragnarok: db "Oblivion:|9999 damage - one foe",$00
-Alexandr: db "Justice:|",$F6," - all foes",$00
-Kirin: db "Life Force: Cures HP - party|Revives fallen allies",$00
-Zoneseek: db "Light Wall:|Sets [Shell] - party",$00
-Carbunkl: db "Ruby Blast:|Sets [Reflect] - party",$00
-Phantom: db "Fader: Sets [Clear] - party|100% physical, 0% magical evasion",$00
-Seraph: db "Lifeline:|Sets [Rerise] - party",$00
-Golem: db "Earth Wall: Blocks physical attacks|(Durability = caster's max HP)",$00
-Unicorn: db "Heal Horn: Stamina-based cure - party|Lifts most bad statuses",$00
-Fenrir: db "Moonshine: Sets [Image] - party|Evades one or more physical attacks",$00
-Starlet: db "Group Hug: Cures HP to max - party|Lifts all bad statuses",$00
-Phoenix: db "Rebirth: Revives fallen allies - party|(HP = max)",$00
+Bahamut: db "Mega Flare:|Non-elemental dmg, ignores def.",$00
+Crusader: db "Jihad:|",$EF," (",$11," dmg on multi-target)",$00
+Ragnarok: db "Oblivion:|Non-elemental dmg = 9999",$00
+Alexandr: db "Justice:|",$F6," (",$11," dmg on multi-target)",$00
+Kirin: db "Life Force:|Cures HP, revives allies",$00
+Zoneseek: db "Light Wall:|Sets [Shell]",$00
+Carbunkl: db "Ruby Blast:|Sets [Reflect]",$00
+Phantom: db "Fader: Sets [Clear]|100% physical, 0% magical evasion",$00
+Seraph: db "Lifeline:|Sets [Rerise]",$00
+Golem: db "Earth Wall: Blocks physical dmg|Durability = caster's max HP",$00
+Unicorn: db "Heal Horn: Cures HP (stamina-based)|Lifts most bad statuses",$00
+Fenrir: db "Moonshine: Sets [Image]|Evades one or more physical attacks",$00
+Starlet: db "Group Hug: Cures HP to max|Lifts all bad statuses",$00
+Phoenix: db "Rebirth:|Revives fallen allies to max HP",$00
 
 warnpc $CB5790
 
@@ -981,7 +981,7 @@ Odinb:
 Lokib:
 	db "",$00
 Bahamutb:
-    db "Equip Bonus:|Auto-Safe",$00
+	db "Equip Bonus:|Auto-Safe",$00
 Crusaderb:
 	db "Equip Bonus:|Auto-Reflect",$00
 Ragnarokb:
