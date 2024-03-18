@@ -2313,12 +2313,11 @@ Doing so will consume half a turn for one hand; changing both requires a full tu
 
 
 [caption #632]
-Kupo!<D> I learn Dances from the terrain I fight in. <D>Explore different areas to learn them all and use them to help you in battle.
+Kupo!<D> I learn Dances from the terrain I fight in. <D>Explore different areas to learn them all and unlock my full talent..
 
 [caption #633]
-Select the [yellow] dance - matching the current background - to use the [Repeat] steps.<EOP>
-Select any other to use the [Shift] steps, setting a new background.
-Mix and match to find your groove!
+In battle, select the current (yellow) terrain to use a [Repeat] step, or another to switch terrain and use a [Shift] step.<EOP>
+Sometimes, when I'm lucky, Dances summon powerful animals - this can happen on Shift or Repeat. <D>Mix and match steps to find your groove!
 
 [caption #634]
 
@@ -4224,8 +4223,8 @@ Is she safe? Is she waiting? <E$18><OP$12>
 [caption #1189]
 <$75> Oh <E$0A>Maria <E$10><OP$12>Oh <E$0A>Maria<E$0E><OP$12>
    My beloved, <E$0D>do you hear<E$0B><OP$12>
-   My words whispered <E$0B>in your hear<E$0D><OP$12>
-   As if i were <E$13>by your side? <$75> <E$1D><OP$12>
+   My words whispered <E$0B>in your ear<E$0D><OP$12>
+   As if I were <E$13>by your side? <$75> <E$1D><OP$12>
 
 [caption #1190]
 <A1>: I'm going to the dressing room.
