@@ -304,14 +304,6 @@ S<P>U<P>P<P>L<P>E<P>X!<P>
 
 [caption #84]
 <A$03>:
-S<P>
-S
-S
-S
-S
-S
-S
-S
 SUPLEX!?<P>
 He suplexed a fucking TRAIN!?<P>
 
@@ -373,7 +365,7 @@ difference between us.<P>
 kind of funny.<P>
 
 [caption #101]
-<A$05>: Uh, guys?<P> Can we maybe have
+<A$05>: Can we maybe have
 this conversation later?<P> Like, when
 an evil train isn't trying to kill us?
 
@@ -586,9 +578,9 @@ to her!<P>
 thing!<P>
 
 [caption #157]
-Press $ on a enemy's name in the
-Rage menu for details.<D>
-                                             Fin~<P>
+Press ± on an enemy name in the
+Rage menu to learn more about it.
+<D>Fin~<P>
 
 [caption #158]
 <A$02>: Worry not. I can not brood
@@ -988,3 +980,4 @@ die.<P> But enough talk! Have at you!]<P>
 [caption #255]
 [Urgh_ <D>chest_ <D>on fire_ <D>can't_
 <D>breathe_]<P>
+
