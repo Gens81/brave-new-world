@@ -34,3 +34,18 @@ HalfATBY:
   RTS
 
 HalfATBBlitz_EOF:
+
+; Half turn stumble
+
+org $C217BD
+    JSL StumbleHook
+
+org HalfATBBlitz_EOF
+StumbleHook:
+    JSL $C18A0E     ; set ATB to 50%
+    LDA #$20        ; [displaced]
+    STA $B5         ; [displaced]
+    RTL
+HalfATBStumble_EOF:
+warnpc $EFFC00
+
