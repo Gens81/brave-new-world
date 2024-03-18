@@ -124,13 +124,13 @@ animal_dance_pointers:
 	dw #a_snowman
 	
 animal_dance_text:
-a_wind:		db	"Prova per funzionamento|Funziona?",$00
-a_forest:	db	"Work in progress!",$00
-a_desert:	db	"This should be fine!",$00
-a_love:		db	"This should be fine!",$00
-a_earth:	db	"a",$00
-a_water:	db	"a",$00
-a_dusk:		db	"a",$00
-a_snowman:	db	"a",$00
+a_wind:		db	$14," Cockatrice: Non-elemental dmg|Ignores def., sets [Petrify]",$00
+a_forest:	db	$14," Raccoon: Cures HP to max|Lifts most bad statuses - party",$00
+a_desert:	db	$14," Meerkat:|Sets [Image]/[Haste] - party",$00
+a_love:		db	$14," Tapir: Cures MP|Lifts all bad statuses - party",$00
+a_earth:	db	$14," Wild Boars: Non-elemental dmg|Ignores def., ground attack",$00
+a_water:	db	$14," Toxic Frog: ",$FD,"/",$EF,", sets [Poison]",$00
+a_dusk:		db	$14," Wombat: Non-elemental dmg|Ignores def., ground attack",$03,"- all foes",$00
+a_snowman:	db	$14," Ice Rabbit: Cures HP to max|Sets [Image] - party",$00
 	
 warnpc $cb5ec0
