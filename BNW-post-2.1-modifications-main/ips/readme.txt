@@ -1,14 +1,3 @@
--1key_blitzes (Gens)
-Replace the default blitz combos with 1 button inputted.
-
-Pummel      ←		Suplex      ↑
-Aurabolt    ↓		Fire Dance  →          
-Mantra      R		Chakra      L
-Sonic Boom  Y		Bum Rush    x
-
--advance_font
-Change large and small font with a ff6 advance inspired font
-
 -laurel_portraits, abysswolf_portraits, fft_portraits (Gens)
 1)Replace vanilla portraits with portraits ported from "Edgar's new look - Redrawn menu portraits" by Laurel aka Stig
 2)portraits based on abysswolf drawings in deviantart
