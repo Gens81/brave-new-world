@@ -10,7 +10,7 @@ table "menu.tbl", ltr
 ;
 ; 4D: Sustain esper data menu (12 free bytes)
 org $C358CE
-	JSR $5983       ; Handle D-Pad
+	JSR C35983      ; Handle D-Pad
 	JSR $5B93       ; Load description
 	LDA $08         ; No-autofire keys
 	BIT #$80        ; Pushing A?
@@ -48,6 +48,42 @@ is_white:
 	
 org $C3590A
 not_pushing:
+org $C3597C
+	JMP check_for_y	; Jump to routine that can return the target_power data
+	RTS				; Back to loop
+
+org $c3876b
+check_for_y:
+	jml chek_if_shown
+.Y_spec	
+	jmp Y_spec
+.rts
+	rts
+	
+warnpc $c3877f	
+
+org $c479e0
+chek_if_shown:	
+	LDA $4B			; Cursor pos
+	BNE .not_esper	; Branch if not esper slot
+	ldx #$6DB4		; Esper at $C4/6DB4
+	bra .push_y
+.not_esper
+	CMP #$04		; On Bonus?
+	BEQ .not_bonus	; Branch if so
+	LDX #$6AC0		; Magic at $C4/6AC0
+.push_y
+	stx $0100
+	TAX
+	LDA #$C4		; Bank
+	STA $0102
+	jml check_for_y_Y_spec
+.not_bonus	
+	jml check_for_y_rts
+
+
+
+
 org $C3f798
 Pressed_A:
 org $C3f79c
@@ -70,8 +106,7 @@ C3291B:  LDA $09         ; No-autofire keys
          LDA #$08        ; Blinker: Off
          TRB $46         ; Set menu flag
          JSR $29A5      ; Leave submenu
-C32928:	 jmp Y_spec
-		 RTS
+C32928:	 RTS
 
 ; Equip and draw selected esper
 C32929:  TDC             ; Clear A

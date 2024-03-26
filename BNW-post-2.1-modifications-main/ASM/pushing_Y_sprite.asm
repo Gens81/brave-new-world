@@ -138,16 +138,16 @@ EDFC71:  LDX $2D         ; Queue index
          STA $364A,X     ; Set sprite flags
 		 
 ; Mode 1: Sustain Y
-EDFC90:  LDA $26
-		 CMP #$0A
-		 BEQ .delete
-		 CMP #$4D
-		 BEQ .delete
-		 CMP #$26
-		 BEQ .delete
-		 CMP #$1D
-		 BEQ .delete
-		 LDX $2D
+EDFC90:  LDA $26		  ; Menu flag
+		 CMP #$0A		  ;
+		 BEQ .delete	  ;
+		 CMP #$1e		  ; Esper?
+		 BEQ .delete	  ; Branch if so
+		 CMP #$26         ;
+		 BEQ .delete      ;
+		 CMP #$1D         ;
+		 BEQ .delete      ;
+		 LDX $2D          ;
 		 LDA #$E8         ; Cursor's X
          STA $33CA,X      ; Set sprite's
          LDA #$1f         ; Cursor's Y

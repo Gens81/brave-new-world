@@ -341,9 +341,18 @@ get_target:
 	LDX $0101				; Load Spell Bank
 	STX $E8					; Store
 	STX $F6					; Store
+	LDA $26					; Menu flag
+	CMP #$4D				; Esper data?
+	BNE .not_esper			; Branch if not
+	LDA $4B					; Cursor Pos
+	TAX						; Index it
+	lda $7eab8d,x			; Load spell or esper Index
+	bra .skip_normal		; 
+.not_esper	
 	LDA $4B					; Cursor position
 	TAX						; Index
 	LDA $7E9D89,x			; Skill
+.skip_normal
 	CMP #$FF				; Skill?
 	BNE .begin				; Branch if so
 	RTL						; Back

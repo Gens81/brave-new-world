@@ -11,13 +11,12 @@ table "menu.tbl", ltr
 ;#########################################################################;
 
 ; Initialize esper data menu
-
 org $c358c1
 	JSL C34E2D      ; Load V-shift data
-	nop
-	TRB $46         ; Set anim index
-	JSR $597D       ; Load navig data
-	JMP $5986       ; Relocate cursor
+	LDY #C36122		; $C3/6122
+	JSR $1173
+	JMP C35986      ; Relocate cursor
+warnpc $c358ce
 
 org $c3592a
 	lda #$0068		; blinking cursor whe exit submenu
@@ -52,9 +51,15 @@ C34E3D:	LDA.L C34E7F,X  ; Skill V-Data
 C34E63:	LDA.L C34E7F,X  ; Bottom V-Data
 		STA $7E9849,X   ; Save in RAM
 		INX             ; Index +1
-		CPX #$005E      ; End of table?
+		CPX #$005e      ; End of table?
 		BNE C34E63      ; Loop if not
 		LDA #$C0        ; Scrollbar: Off
+		TRB $46         ; Set anim index		
+		phk				; push 
+		per $0006		; push return
+		pea $96EE		; push address
+		jml C3597D		; Load navig data
+
 		RTL
 
 ; BG1 V-Shift table for skill menus (condenses text)
@@ -96,11 +101,11 @@ org $C33BE9
 
 org $C3f46B           ; 29 bytes, we'll use 24 >.>
 SummonDescription:    ; Load Esper summon description
-  LDX #$FE40 
+  LDX #EsperDescPointers 
   STX $E7             ; Set ptr loc LBs
-  LDX #$3940
+  LDX $00
   STX $EB             ; Set text loc LBs
-  LDA #$CF            ; Pointer/text bank
+  LDA #$Cb            ; Pointer/text bank
   STA $E9             ; Set ptr loc HB
   STA $ED             ; Set text loc HB
   LDA #$10
@@ -116,17 +121,7 @@ warnpc $c3f480
 org $C3876B 
 padbyte $FF : pad $C3877F
 
-; Fork: Esper effect
-org $C35C09 
-	LDX #EsperDescPointers      ; CF/FE40
-	STX $E7         ; Set ptr loc LBs
-	LDX $00     	 ; CF/3940
-	STX $EB         ; Set text loc LBs
-	LDA #$CB        ; Bank: CF
-	STA $E9         ; Set ptr loc HB
-	LDA #$CB        ; ...
-	STA $ED         ; Set text loc HB
-	RTS
+
 
 org $c3fd96
 DrawEsperMP:
@@ -270,9 +265,18 @@ org $C3F41A
 	
 org $c3f751
 	ldx #$4637	; unspent SP quantity coordinates
-	
+
+org $C35980
+; Load navigation data for esper data menu
+C3597D:	LDY #C3598C     ; C3/598C
+		JMP $05FE      ; Load navig data
+
+; Handle D-Pad for esper data menu
+C35983: JSR $072D		; Handle D-Pad
+C35986: LDY #C35991		; C3/5991
+        JMP $0640		; Relocate cursor	
 ; Navigation data for esper data menu
-org $C3598C
+C3598C:
 	db $80          ; Wraps vertically
 	db $00          ; Initial column
 	db $00          ; Initial row
@@ -280,14 +284,14 @@ org $C3598C
 	db $05          ; 6 rows
 	
 ; Cursor positions for esper data menu
-org $C35991
+C35991:
 	dw $7210        ; Esper
 	dw $7e18        ; Spell A
 	dw $8a18        ; Spell B
 	dw $9618        ; Spell C
 	dw $c418        ; Bonus
-	dw $c810        ; 
-	dw $B818        ; 
+
+warnpc $c3599f
 
 ; rearrange esper code to avoid redundant text on screen
 org $d86e00

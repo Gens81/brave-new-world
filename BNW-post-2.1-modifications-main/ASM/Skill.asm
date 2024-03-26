@@ -1,10 +1,6 @@
 arch 65816
 hirom
 
-; Init Espers Menu
-org $c320e3
-	jsr pesper
-	
 ; Init Bushido Menu
 org $C320fd
 	jsr pbshdo
