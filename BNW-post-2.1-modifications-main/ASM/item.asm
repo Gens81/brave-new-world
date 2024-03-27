@@ -53,3 +53,20 @@ org $D2BEBB
     db $EB,"Dried>Meat  "
     
 warnpc $D2BFF3
+
+;adds +10 physical evade to every claws
+
+org $D859D4 
+    db $01
+org $D859F2 
+    db $01
+org $D85A10 
+    db $01
+org $D85A2E 
+    db $01
+org $D85A4C 
+    db $01
+org $D85A6A 
+    db $01
+org $D85A88 
+    db $01
