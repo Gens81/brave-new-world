@@ -25,6 +25,7 @@ echo Applying ips...
 %FLIPS% --apply "C2686C_Cinematic_Program.ips" %EDITED_ROM%
 %FLIPS% --apply "D8F000_Cinematic_Title_Isle_GFX.ips" %EDITED_ROM%
 %FLIPS% --apply "misc.ips" %EDITED_ROM%
+%FLIPS% --apply "fast_anim_v4_n.ips" %EDITED_ROM%
 %FLIPS% --apply "minimap.ips" %EDITED_ROM%
 %FLIPS% --apply "docileNPCs.ips" %EDITED_ROM%
 %FLIPS% --apply "newnarshe.ips" %EDITED_ROM%
