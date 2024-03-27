@@ -42,14 +42,14 @@ SortTbl:
     db $10 ; Valiance
     db $45 ; Mythril Bolo
     db $3F ; Iron Cutlass
-    db $30 ; Scimitar
-    db $2A ; Flametongue
-    db $2B ; Icebrand
-    db $29 ; Elec Sword
+    db $31 ; Scimitar
+    db $2B ; Flametongue
+    db $2C ; Icebrand
+    db $2A ; Elec Sword
     db $FF
     db $FF
     db $14 ; Blood Sword
-    db $35 ; Imperial
+    db $27 ; Imperial
     db $23 ; Rune Blade
     db $25 ; Falchion
     db $11 ; Soul Sabre
@@ -70,7 +70,7 @@ SortTbl:
     db $4A ; Tanto
     db $44 ; Kunai
     db $3B ; Sakura
-    db $2F ; Ninjato
+    db $30 ; Ninjato
     db $FF ; Kagenui (dummy)
     db $07 ; Orochi
     db $49 ; Hanzo
@@ -83,12 +83,12 @@ SortTbl:
     db $05 ; Mutsunokami
     db $FF ; Spook Stick
     db $47 ; Mythril Rod
-    db $31 ; Fire Rod
-    db $32 ; Ice Rod
-    db $33 ; Thunder Rod
+    db $32 ; Fire Rod
+    db $33 ; Ice Rod
+    db $34 ; Thunder Rod
     db $0B ; Wind Breaker
     db $24 ; Doomstick
-    db $28 ; Quartrstaff
+    db $29 ; Quartrstaff
     db $08 ; Punisher
     db $FF
     db $42 ; Light Brush
@@ -99,10 +99,10 @@ SortTbl:
     db $FF
     db $FF ; Ninja Star
     db $43 ; Club
-    db $2E ; Full Moon
-    db $2C ; Morning Star
+    db $2F ; Full Moon
+    db $2D ; Morning Star
     db $3A ; Boomerang
-    db $27 ; Rising Sun
+    db $28 ; Rising Sun
     db $36 ; Kusarigama
     db $19 ; Bone Club
     db $41 ; Magic Bone
@@ -116,8 +116,8 @@ SortTbl:
     db $4B ; Mythril Claw
     db $3E ; Spirit Claw
     db $39 ; Poison Claw
-    db $34 ; Ocean Claw
-    db $2D ; Hell Claw
+    db $35 ; Ocean Claw
+    db $2E ; Hell Claw
     db $17 ; Frostgore
     db $0E ; Stormfang
     db $5B ; Buckler
