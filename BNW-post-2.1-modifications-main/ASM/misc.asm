@@ -748,6 +748,20 @@ org $C23B40 : NOP #2
 org $C4566D : db $45    ; set "Returner's Hideout: Banon (Main Room)" as NPC switch
                         ; Note: this NPC switch is turned off at CA/FD9E as
                         ; part of setting up the Lete River sequence
+						
+;empty moogle charm spot
+org $ED8678
+	db $40,$BD
+
+;Yeti drops Moogle Charm
+org $CF3442
+	db $DE,$DE
+	
+;; check event bit "164: World of Ruin" ($1E94.4) when determining if
+;; Interceptor can hit floating targets
+;org $C23C22
+;    LDA $1E94       ; load event flags
+;    AND #$10        ; check for "World of Ruin" event bit
 
 ;Brave New World data
 org $C33BB8
