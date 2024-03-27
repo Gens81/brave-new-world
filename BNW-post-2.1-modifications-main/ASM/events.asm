@@ -180,13 +180,37 @@ org $CB7D1C : padbyte $FE : pad $CB7D24
 ; clear event script for Relm's initial response ("…")
 org $CB7D58 : padbyte $FE : pad $CB7D5C
 
+; -----------------------------------------------------------------------------
+; Pulling the lever on the Phantom Train to detach the rear wagons now
+; automatically opens the wall that blocks the way forward.
+; -----------------------------------------------------------------------------
+
+; disable secondary lever effect
+org $CBB64B
+    db $C0,$83,$81,$B3,$5E,$00  ; if $183==On return else continue
+
+; hook into event script of primary lever effect
+org $CBB659
+    db $B2,$C7,$B7,$01          ; call subroutine $CBB7C7
+
+; animation for wall opening up (uses space occupied by secondary lever effect)
+org $CBB7C7
+    db $B2,$C3,$6A,$01          ; [displaced] call subroutine $CB6AC3 (pull lever)
+    db $73,$1C,$03,$01,$01,$2E  ; replace current map's Layer 1 at ($1C, $03)
+    db $B2,$CD,$6A,$01          ; call subroutine $CB6ACD
+    db $73,$1A,$05,$01,$04,$97  ; replace current map's Layer 1 at ($1A, $05)
+    db $97,$41,$41              ; ^ continued
+    db $58,$F8                  ; shake the screen
+    db $D2,$7F                  ; set event bit $17F (path is cleared)
+    db $FE                      ; return
+
 ; used to calculate relative offsets for jumps and subroutine calls
 org $CA0000 : EventBase:
 
 ; points to a large chunk of freespace within the event script block gained by
 ; getting rid of the event code for the Auction House.
 ; Note: the gap to the previous data is on purpose in case that needs expansion
-org $CB5790 : EventScriptFreespace_0:
+org $CB5A00 : EventScriptFreespace_0:
 
 ; -----------------------------------------------------------------------------
 ; This hacks ports a QoL feature from the Pixel Remaster to BNW. During the
@@ -214,7 +238,7 @@ org $CC8A96 : Banquet:          ; entry point when timer expires
 ; banquet during the "talk to the soldiers" segment
 org EventScriptFreespace_0
 LeftDoor:
-    db $C1,$3C,$81,$F1,$81,$B3  ; [displaced] if $13C==On || $1F1==On return else
+    db $C1,$3C,$81,$F0,$81,$B3  ; [displaced] if $13C==On || $1F0==On return else
     db $5E,$00                  ; [displaced] ^ continue
     db $C0,$7C,$00,$EB,$85,$02  ; if $07C==Off jump to $CC85EB else continue
     db $C0,$27,$01              ; always jump to target
@@ -471,6 +495,248 @@ MogTutorial:
     db $92                      ; wait for 30 frames (1/2 second)
     db $FE                      ; return
 EventScriptFreespace_3:
+
+; -----------------------------------------------------------------------------
+; Visiting Duncan in WoR to complete Sabin's training now unlocks all of his
+; blitzes instead of only Bum Rush (similar to how Cyan unlocks all Bushido
+; skills). For balancing reasons, completing Sabin's training is now gated
+; behind Doom Gaze's defeat.
+;
+; This means there are now three different scenes that can play out:
+; 1. you meet Duncan and he assigns you the task of defeating Doom Gaze,
+; 2. you return after completing it, or alternatively
+; 3. you meet Duncan with Doom Gaze already defeated
+; -----------------------------------------------------------------------------
+
+; modify event command $90 to unlock all of Sabin's blitzes
+org $C0B005 : ORA #$FF
+
+; change event address for event tile outside Duncan's cabin
+org $C409C5 : dl Duncan_Start-EventBase
+
+; hook into event script for talking to Duncan inside the cabin
+org $CC0F55
+    db $B2
+    dl Duncan_Inside-EventBase
+warnpc $CC0F59
+
+; refactor beginning of original event script into subroutines to avoid the
+; need for event code duplication
+org $CC0BD8
+Duncan_A:                       ; [CC/0BE7-CC/0C24]
+    db $F2,$40                  ; fade out current song with speed $40
+    db $3D,$10                  ; create NPC 0
+    db $45                      ; update objects
+    db $F4,$2C                  ; play sound effect $2C
+    db $73,$07,$08,$01,$02,$04  ; replace current map's Layer 1 at ($07, $08)
+    db $14                      ; ^ continued
+    db $41,$10                  ; show NPC 0
+    db $78,$10                  ; enable passability for NPC 0
+    db $10,$83,$C2,$86,$FF      ; action queue for NPC 0
+    db $92                      ; wait for 30 frames (1/2 second)
+    db $B2,$AC,$C6,$00          ; call subroutine $CAC6AC (create 1-person party)
+    db $B2,$34,$2E,$01          ; call subroutine $CB2E34 (enable passability of party)
+    db $3C,$05,$FF,$FF,$FF      ; set up party as follows: $05, $FF, $FF, $FF
+    db $32,$04,$C3,$A8,$CC,$FF  ; action queue for Party Character #2
+    db $33,$04,$C3,$86,$CC,$FF  ; action queue for Party Character #3
+    db $34,$04,$C3,$A7,$CC,$FF  ; action queue for Party Character #4
+    db $05,$87,$C3,$CC,$C7,$86  ; action queue for Sabin
+    db $C6,$80,$FF              ; ^ continued
+    db $FE                      ; return
+
+Duncan_B:                       ; [CC/0C25-CC/0C30]
+    db $4B,$E4,$05              ; display caption $05E4 (halt execution until gone)
+    db $10,$82,$1F,$FF          ; action queue for NPC 0
+    db $94                      ; wait for 60 frames (1 second)
+    db $10,$82,$CE,$FF          ; action queue for NPC 0
+    db $FE                      ; return
+
+Duncan_C:                       ; [CC/0C31-CC/0C3E]
+    db $92                      ; wait for 30 frames (1/2 second)
+    db $10,$03,$A2,$CD,$FF      ; action queue for NPC 0
+    db $05,$86,$C3,$80,$CF,$E0  ; action queue for Sabin
+    db $08,$FF                  ; ^ continued
+    db $FE                      ; return
+
+Duncan_D:                       ; [CC/0C3F-CC/0C90]
+    db $B5,$06                  ; pause for 6/4 second(s)
+    db $B0,$08                  ; start repeat (8 repetitions)
+    db $10,$82,$5D,$FF          ; action queue for NPC 0
+    db $B4,$02                  ; pause for 2/60 second(s)
+    db $10,$82,$5E,$FF          ; action queue for NPC 0
+    db $B4,$02                  ; pause for 2/60 second(s)
+    db $B1                      ; end repeat
+    db $10,$82,$CD,$FF          ; action queue for NPC 0
+    db $4B,$E5,$05              ; display caption $05E5 (halt execution until gone)
+    db $92                      ; wait for 30 frames (1/2 second)
+    db $05,$82,$22,$FF          ; action queue for Sabin
+    db $B5,$06                  ; pause for 6/4 second(s)
+    db $4B,$E6,$05              ; display caption $05E6 (halt execution until gone)
+    db $94                      ; wait for 60 frames (1 second)
+    db $F4,$6A                  ; play sound effect $6A
+    db $10,$89,$C2,$C8,$02,$C7  ; action queue for NPC 0
+    db $1F,$DC,$A1,$CC,$FF      ; ^ continued
+    db $92                      ; wait for 30 frames (1/2 second)
+    db $F4,$6A                  ; play sound effect $6A
+    db $10,$85,$1E,$DC,$A0,$CF  ; action queue for NPC 0
+    db $FF                      ; ^ continued
+    db $92                      ; wait for 30 frames (1/2 second)
+    db $F4,$6A                  ; play sound effect $6A
+    db $10,$85,$14,$DC,$A2,$CC  ; action queue for NPC 0
+    db $FF                      ; ^ continued
+    db $92                      ; wait for 30 frames (1/2 second)
+    db $F4,$6A                  ; play sound effect $6A
+    db $10,$85,$16,$DC,$A3,$CD  ; action queue for NPC 0
+    db $FF                      ; ^ continued
+    db $92                      ; wait for 30 frames (1/2 second)
+    db $4B,$E7,$05              ; display caption $05E7 (halt execution until gone)
+    db $FE                      ; return
+
+Duncan_E:                       ; [CC/0C91-CC/0CB7]
+    db $94                      ; wait for 60 frames (1 second)
+    db $10,$82,$CE,$FF          ; action queue for NPC 0
+    db $92                      ; wait for 30 frames (1/2 second)
+    db $10,$82,$09,$FF          ; action queue for NPC 0
+    db $91                      ; wait for 15 frames (1/4 second)
+    db $F4,$6A                  ; play sound effect $6A
+    db $10,$8B,$16,$C4,$8C,$C3  ; action queue for NPC 0
+    db $80,$E0,$02,$C2,$82,$09  ; ^ continued
+    db $FF                      ; ^ continued
+    db $92                      ; wait for 30 frames (1/2 second)
+    db $05,$82,$CC,$FF          ; action queue for Sabin
+    db $10,$86,$16,$C2,$DC,$A0  ; action queue for NPC 0
+    db $CE,$FF                  ; ^ continued
+    db $FE                      ; return
+
+Duncan_F:                       ; [CC/0CB8-CC/0CCF]
+    db $92                      ; wait for 30 frames (1/2 second)
+    db $B0,$08                  ; start repeat (8 repetitions)
+    db $10,$82,$5D,$FF          ; action queue for NPC 0
+    db $B4,$02                  ; pause for 2/60 second(s)
+    db $10,$82,$5E,$FF          ; action queue for NPC 0
+    db $B4,$02                  ; pause for 2/60 second(s)
+    db $B1                      ; end repeat
+    db $10,$82,$CE,$FF          ; action queue for NPC 0
+    db $92                      ; wait for 30 frames (1/2 second)
+    db $4B,$E8,$85              ; display caption $85E8 (halt execution until gone)
+    db $FE                      ; return
+
+Duncan_G:                       ; [CC/0CD2-CC/0CDE]
+    db $94                      ; wait for 60 frames (1 second)
+    db $10,$82,$18,$FF          ; action queue for NPC 0
+    db $95                      ; wait for 120 frames (2 seconds)
+    db $05,$85,$21,$E0,$04,$CC  ; action queue for Sabin
+    db $FF                      ; ^ continued
+    db $FE                      ; return
+
+warnpc $CC0CDF : padbyte $FD : pad $CC0CDF
+Duncan_Fight:
+
+; refactor end of original event script into a subroutine to avoid the need for
+; event code duplication
+org $CC0F06
+    db $B2                      ; call subroutine
+    dl Duncan_End-EventBase     ; ^ continued
+    db $F0,$23                  ; play song $23
+    db $D4,$AF                  ; set event bit $2AF
+    db $90                      ; Grant Sabin the Bum Rush
+    db $FE                      ; return
+
+Duncan_End:                     ; [CC/0F06-CC/0F22]
+    db $5A,$04                  ; fade out screen with speed $04
+    db $5C                      ; wait for screen fade to complete
+    db $05,$84,$C8,$00,$C6,$FF  ; action queue for Sabin
+    db $B2,$95,$CB,$00          ; call subroutine $CACB95 (hide party members 2-4)
+    db $3B                      ; disable user control
+    db $B2,$2B,$2E,$01          ; call subroutine $CB2E2B (disable passability of party)
+    db $39                      ; unlock screen (scroll when character moves)
+    db $42,$10                  ; hide NPC 0
+    db $31,$83,$C2,$82,$FF      ; action queue for Party Character #1
+    db $59,$04                  ; fade in screen with speed $04
+    db $5C                      ; wait for screen fade to complete
+    db $FE                      ; return
+
+warnpc $CC0F2E : padbyte $FD : pad $CC0F2E
+
+; new entry point for event tile outside Duncan's cabin
+org EventScriptFreespace_3
+Duncan_Start:
+    db $DE                      ; set control switches: Current Party Characters
+    db $C0,$A5,$01,$B3,$5E,$00  ; if $1A5==Off (Sabin's missing) return else continue
+    db $C0,$AF,$82,$B3,$5E,$00  ; if $2AF==On (Learned Bum Rush) return else continue
+    db $C9,$BF,$86,$E2,$00,$B3  ; if $6BF==On (Met Duncan) && $0E2==Off (Doom Gaze lives)
+    db $5E,$00                  ; return else continue
+    db $B2                      ; call subroutine
+    dl Duncan_A-EventBase       ; ^ continued
+    db $C1,$BF,$06,$E2,$00      ; jump if $6BF==Off (Haven't Met Duncan) ||
+    dl .skip1-EventBase         ; $0E2==Off (Doom Gaze lives) else continue
+    db $B2                      ; call subroutine
+    dl Duncan_Jump-EventBase    ; ^ continued
+    db $C0,$27,$01              ; always jump to target
+    dl .skip4-EventBase
+.skip1
+    db $C0,$BF,$86              ; jump if $6BF==On (Sabin Met Duncan) else continue
+    dl .skip2-EventBase         ; ^ continued
+    db $B2                      ; call subroutine
+    dl Duncan_B-EventBase       ; ^ continued
+.skip2
+    db $B2                      ; call subroutine
+    dl Duncan_C-EventBase       ; ^ continued
+    db $C0,$BF,$86              ; jump if $6BF==On (Sabin Met Duncan) else continue
+    dl .skip3-EventBase         ; ^ continued
+    db $B2                      ; call subroutine
+    dl Duncan_D-EventBase       ; ^ continued
+.skip3
+    db $10,$83,$C8,$02,$FF      ; action queue for NPC 0
+    db $B2                      ; call subroutine
+    dl Duncan_E-EventBase       ; ^ continued
+    db $C0,$BF,$86              ; jump if $6BF==On (Sabin Met Duncan) else continue
+    dl .skip4-EventBase         ; ^ continued
+    db $B2                      ; call subroutine
+    dl Duncan_F-EventBase       ; ^ continued
+.skip4
+    db $C0,$E2,$00              ; jump if $0E2==Off (Doom Gaze lives) else continue
+    dl .no_music-EventBase      ; ^ continued
+    db $F0,$0A                  ; play song $0A ("Edgar & Sabin")
+.no_music
+    db $B2                      ; call subroutine
+    dl Duncan_G-EventBase       ; ^ continued
+    db $DD,$B5                  ; clear event bit $6B5 (Duncan's House: Duncan A)
+    db $DC,$BF                  ; set event bit $6BF (Duncan's House: Duncan B)
+    db $C0,$E2,$00              ; jump if $0E2==Off (Doom Gaze lives) else continue
+    dl Duncan_Task-EventBase    ; ^ continued
+    db $C0,$27,$01              ; always jump to target
+    dl Duncan_Fight-EventBase   ; ^ continued
+
+Duncan_Task:
+    db $4B,$00,$86              ; display caption $600 (#1536)
+    db $B2                      ; call subroutine
+    dl Duncan_End-EventBase     ; ^ continued
+    db $F1,$23,$40              ; fade in song $23 ("Mt. Kolts") with speed $40
+    db $FE
+
+Duncan_Jump:
+    db $05,$82,$80,$FF          ; action queue for Sabin
+    db $92                      ; wait for 30 frames (1/2 second)
+    db $10,$84,$C8,$02,$09,$FF  ; action queue for NPC 0
+    db $91                      ; wait for 15 frames (1/4 second)
+    db $F4,$6A                  ; play sound effect $6A
+    db $10,$8B,$16,$C4,$8C,$C3  ; action queue for NPC 0
+    db $80,$E0,$02,$C2,$82,$09  ; ^ continued
+    db $FF                      ; ^ continued
+    db $FE                      ; return
+
+Duncan_Inside:
+    db $C0,$AF,$82              ; if $2AF==On (Blitz skills mastered) jump to target
+    dl .mastered-EventBase      ; ^ else continue
+    db $4B,$00,$86              ; display caption $600 (#1536)
+    db $91                      ; [displaced] wait for 15 frames (1/4 second)
+    db $FE                      ; return
+.mastered
+    db $4B,$EE,$05              ; [displaced] display caption $05EE
+    db $91                      ; [displaced] wait for 15 frames (1/4 second)
+    db $FE                      ; return
+EventScriptFreespace_4:
 
 warnpc $CB5EC5
 
