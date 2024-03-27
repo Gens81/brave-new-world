@@ -105,10 +105,11 @@ org $C328AA
 	jsr $0EFD					; Upload BG	
 	jsr Dancepwrtrgt			; Go to load Desc
 	
-warnpc $c328b1	
+warnpc $c328b1
+
 ; Dance 2nd screen
 
-org $CB5890
+org $CB5790
 animal_dance_pointers:
 	dw #a_wind
 	dw #a_forest
@@ -129,4 +130,4 @@ a_water:	db	$14," Toxic Frog: ",$FD,"/",$EF,", sets [Poison]",$00
 a_dusk:		db	$14," Wombat: Non-elemental dmg|Ignores def., ground attack",$03,"- all foes",$00
 a_snowman:	db	$14," Ice Rabbit: Cures HP to max|Sets [Image] - party",$00
 	
-warnpc $cb5ec0
+warnpc $CB5A00
