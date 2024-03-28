@@ -762,8 +762,8 @@ statuses_bitmask:
 	
 	db $01   ; ATK +
 	db $02   ; Mag +
-	db $10   ; HP/MP +
-	db $10   ; HP/MP +
+	db $10   ; HP +
+	db $80   ; MP +
 	db $04   ; HP ++
 	db $08   ; HP +++
 	db $20   ; MP ++
@@ -1073,13 +1073,13 @@ changeshadow:
 !Draw4Digits = $0490
 !Draw3Digits = $04C0
 !Draw2Digits = $04B6
-!StatCoord = $C3FDD1
+!StatCoord = $C3FDD4
 !StatOffset = $C3FDE0
 !Make1ESBCValue = $FEC0
 !StatDiff = $FDEC		; StatOffset + 12
 !HpMpDiff = $FE3E
 
-org $C3FDD1
+org $C3FDD4
 ; StatCoord
 	dw $3C5F+128					; magic     (11A0)  
 	dw $3D5F+128					; stamina   (11A2)
