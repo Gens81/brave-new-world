@@ -756,6 +756,17 @@ org $ED8678
 ;Yeti drops Moogle Charm
 org $CF3442
 	db $DE,$DE
+
+; -----------------------------------------------------------------------------
+; The current optimize equipment routine wasn't written with the current
+; dual-wielding implementation in mind. It contains a bug where if a character
+; has a dual-wield weapon equipped prior to optimization, he might get equipped
+; with two non-dual-wield weapons. 
+; TODO: remove the dual-wield handling completely to free up a few bytes
+; -----------------------------------------------------------------------------
+
+; disable genji glove handling
+org $C39728 : NOP #2  ; never branch
 	
 ;; check event bit "164: World of Ruin" ($1E94.4) when determining if
 ;; Interceptor can hit floating targets
@@ -765,4 +776,4 @@ org $CF3442
 
 ;Brave New World data
 org $C33BB8
-	db $d1,$78,"Brave New World 2.2 b26",$00
+	db $d1,$78,"Brave New World 2.2 b26.1",$00
