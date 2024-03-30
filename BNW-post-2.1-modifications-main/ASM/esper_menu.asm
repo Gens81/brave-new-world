@@ -10,26 +10,289 @@ table "menu.tbl", ltr
 ;                                                                         ;
 ;#########################################################################;
 
+; Refresh BG1 Tilemap B after "Handle Esper Selectione" while holding Yes
+org $C327EF
+C327EF:	JSR $a662		; Build VWF tilemap
+		;JSR $0F4D
+		;JSR $1488
+		RTS
+		
+warnpc $C327FB
+
+; 1E: Handle esper selection
+org $C328D3
+C328D3: JSR C327EF
+		LDA #$10        ; Description: On
+        TRB $45         ; Set menu flag
+        LDA #$04        ; List type: Espers
+        STA $2A         ; Set redraw mode
+        JSR $0EFD       ; Queue list upload
+        JSR $1F64       ; Handle L and R
+        BCS C32928      ; Exit if pushed
+        JSR $4C1E       ; Handle D-Pad
+        JSR $56DF       ; Load description
+;		jsl rstore_desc	;
+        LDA $08         ; No-autofire keys
+        BIT #$80        ; Pushing A?
+        BEQ C3291B      ; Branch if not
+        JSR $0EB2       ; Sound: Click
+C328F2: TDC             ; Clear A
+        LDA $4B         ; Selected slot
+        TAX             ; Index it
+        LDA $7E9D89,X   ; Esper in slot
+        CMP #$FF        ; None?
+        BEQ C32908      ; Unequip if so
+        STA $99         ; Memorize esper
+		JSR SelectEsperSplice	; Load Cursor pos., store and Init submenu
+        LDA #$4D        ; C3/58CE
+        STA $26         ; Next: Data menu
+        RTS
+		
+; Fork: Unequip esper
+C32908: LDA #$FF        ; Value for empty
+        STA $E0         ; Set esper to equip
+        JSR C32929      ; Clear esper held
+        JSR $546C       ; Redraw esper list
+        JSR $0F11       ; Queue desc upload (BG1 Tilemap B)
+        JSR $1368       ; Refresh held esper
+        JMP $0EFD       ; Queue list upload (BG1 Tilemap A)
+;		JSR $1488
+;		JMP $0F4D
+		
+; Fork: Handle B
+C3291B: LDA $09        		; No-autofire keys
+        BIT #$80       		; Pushing B?
+        BEQ C32928     		; Exit if not
+        LDA #$08       		; Blinker: Off
+        TRB $46        		; Set menu flag
+        JSR $29A5			; Leave submenu
+C32928:	RTS
+
+; Equip and draw selected esper
+C32929: TDC          		; Clear A
+		LDA $28      		; Member slot
+		ASL A        		; Double it
+		TAX          		; Index it
+		LDY $6D,X    		; Actor's address
+		LDA $E0      		; Chosen esper
+		STA $001E,Y   		; Assign to actor
+		LDA $E0       		; ...
+		JMP DrawEsperHook	; include esper equip bonuses
+	
+; 34: Wait while showing who holds esper (Changes to gain space and)
+
+C3293A: LDY $20				; Timer expired?
+        BNE C32947			; Exit if not
+        JSL C0EE4A			; Jump long and blank messages
+        JMP C35913			; Exit submenu
+C32947: RTS
+
+; Unequip from sub-menu
+unequip_esper:
+		jsr $2908			; Equip and draw selected esper
+		ldy #$0000			; Clear Y
+		jmp C326FB			; Exit Delay
+
+; Set Exit delay
+C326F5:	jsr $7fd9			; Print string
+		LDY #$0020			; Frames: 32
+C326FB: STY $20				; Set exit delay
+C326FC:	LDA #$34			; C3/293A
+		STA $26				; Next: Late exit
+		jsr $0F11			; Queue text upload	
+		rts	
+		
+padbyte $FF
+Pad $C32966
+warnpc $C32966
+
+; Draw "<actor> has it!" in esper data menu (20 free bytes)
+org $C3559A
+C3559A:  
+	JML C0DD68			; Go to print <Can't Equip or [Equip from <Actor>] 
+actor_name:
+	LDA $1602,X			; Character's name; displaced from calling function
+actor_letters:
+	CMP #$FF        	; Terminator?
+	BEQ C355CE      	; Done if so
+	STA $2180       	; Add to string
+	INX             	; Point to next
+	DEY             	; One less left
+	BNE actor_name    	; Loop till last
+C355CE: 
+	lda #$BF			; load <?>
+	sta $2180			; Save
+	STZ $2180       	; End string
+	jsr $7fd9			; print string
+	jsr $0F11			; Queue text upload
+	tdc
+	sta $26
+	jmp C3F0CB			; Initialize Remove selection
+
+; Navigation data (Remove esper submenu)
+navi_data:
+	db $81			; Never Wraps
+	db $00			; Initial column
+	db $00			; Initial row
+	db $02			; 2 column
+	db $01			; 1 rows
+
+esp_crsr:
+	dw $1C0F		; Yes
+	dw $1C3F		; No
+
+padbyte $FF
+Pad $C355D4	
+warnpc $C355D4
+
+
+
+
+org $C35897
 ; Initialize esper data menu
-org $c358c1
-	JSL C34E2D      ; Load V-shift data
-	LDY #C36122		; $C3/6122
-	JSR $1173
-	JMP C35986      ; Relocate cursor
+C35897: LDY $4F         ; Cursor position
+        STY $8E         ; Set return loc
+        LDA $4A         ; Scroll position
+        STA $90         ; Set return loc
+        JSR $5B54		; Load esper info
+        JSR $599F		; Draw esper info
+        JSR $0F11		; Queue its upload
+        JSR $1368		; Upload it now
+        JSR $0EFD		; Requeue esper list
+        REP #$20        ; 16-bit A
+        LDA #$0100      ; BG1 H-Shift: 256
+        STA $7E9A10     ; Hide esper list
+        SEP #$20        ; 8-bit A
+		JSL InitEsperDataSlice
+        LDA #$07        ; BG1 VRAM row: 7
+        STA $49         ; Save for V-Shift
+		JSL C0EC20      ; Load V-shift data
+		LDY #C36122		; $C3/6122
+		JSR $1173		; Create Blinking Y
+		JMP C35986      ; Relocate cursor
 warnpc $c358ce
 
-org $c3592a
-	lda #$0068		; blinking cursor whe exit submenu
+; Changing "[actor] has it" into "You have equipped"
+; 4D: Sustain esper data menu (12 free bytes)
+org $C358CE
+		JSR C35983	    	; Handle D-Pad
+		JSR active_desc		; Active desc to refresh
+		LDA $08         	; No-autofire keys
+		BIT #$80       		; Pushing A?
+		BEQ C3590A			; Branch if not
+		TDC            		; Clear A
+		jmp check_slot  	; support Spell Bank and EL Bonus Selection
+can_equip_fork:	
+		BNE C3590A			; Branch if not Esper slot
+		LDA $99         	; Viewed esper
+		JSR $5574      		; Choose palette
+		STA $E0         	; Memorize esper
+		LDA $FC         	; Esper palette
+		CMP #$20        	; Is esper color white?
+		BEQ C35902			; Branch if it is
+		jsl actor_chk		; Go to check if actor and esper equipped actor are the same
+		cmp $FD				; actor and esper equipped actor are the same? 
+		beq is_the_same		; Is the same so you can unequip
+		JSR $0eb2       	; Play menu sound
+		jmp C3559A			; Draw <Actor Has it or Can't equip>
+is_the_same:
+		jsr $0EB2
+		jmp unequip_esper
+	
+; Fork: Equip esper
+C35902:	jsr $0eb2	; Sound click
+		jsr C32929	; Equip/Draw esper
+		BRA C35913      ; Exit submenu
+
+; Fork: Handle B
+C3590A: LDA $09         ; No-autofire keys
+        BIT #$80        ; Pushing B?
+        BEQ C3597C      ; Exit if not
+        JSR $0EA9       ; Sound: Cursor
+C35913: LDA #$10        ; Reset/Stop desc
+        TSB $45         ; Set menu flag
+        LDA $5F         ; Top BG1 write row
+        STA $49         ; Restore it
+        JSR $546C       ; Draw esper list
+        JSR $091F       ; Create scrollbar
+        REP #$20        ; 16-bit A
+        LDA #$1300      ; V-Speed: 16 px
+        STA $7E354A,X   ; Set scrollbar's
+        LDA #$0068      ; Y: 96
+        STA $7E34CA,X   ; Set scrollbar's
+        SEP #$20        ; 8-bit A
+        JSR $4C18       ; Load navig data
+        LDA $8E         ; Old cursor column
+        STA $4D         ; Set onscreen col
+        LDY $8E         ; Old cursor loc
+        STY $4F         ; Set as current
+        LDA $90         ; Old scroll pos
+        STA $4A         ; Set as current
+        LDA $4A         ; ...
+        STA $E0         ; Memorize it...
+        LDA $50         ; List row
+        SEC             ; Prepare SBC
+        SBC $E0         ; Deduct scroll pos
+        STA $4E         ; Set cursor row
+        JSR $4C21       ; Relocate cursor
+        LDA #$05        ; Top row
+        STA $5C         ; Set scroll limit
+        LDA #$08        ; Onscreen rows: 8
+        STA $5A         ; Set rows per page
+        LDA #$02        ; Onscreen cols: 2
+        STA $5B         ; Set cols per page
+        JSR $0EFD       ; Queue list upload (BG1 Tilemap A)
+        JSR $1368       ; Refresh esper list
+        REP #$20        ; 16-bit A
+        TDC             ; BG1 H-Shift: 0
+        STA $7E9A10     ; Unhide esper list
+        SEP #$20        ; 8-bit A
+        LDY #$0100      ; X: 256
+        STY $39         ; Set BG2 X-Pos
+        STY $3D         ; Set BG3 X-Pos
+        JSR $4E2D       ; Load V-shift data
+		JSR C3A20A		; In Magic ASM - Transfer to RAM BG1 Tilemap B (Desc)
+        LDA #$1E        ; C3/28D3
+        STA $26         ; Next: Esper choice
+		RTS				; Back to loop
+C3597C:	JMP check_for_y	; Jump to routine that can return the target_power data
+	
+
+; Load navigation data for esper data menu
+C35980:	LDY #C3598F     ; C3/598C
+		JMP $05FE      ; Load navig data
+
+; Handle D-Pad for esper data menu
+C35983: JSR $072D		; Handle D-Pad
+C35986: LDY #C35994		; C3/5991
+        JMP $0640		; Relocate cursor	
+; Navigation data for esper data menu
+C3598F:
+	db $80          ; Wraps vertically
+	db $00          ; Initial column
+	db $00          ; Initial row
+	db $01          ; 1 column
+	db $05          ; 6 rows
+	
+; Cursor positions for esper data menu
+C35994:
+	dw $7210        ; Esper
+	dw $7e18        ; Spell A
+	dw $8a18        ; Spell B
+	dw $9618        ; Spell C
+	dw $c418        ; Bonus
+
+warnpc $c3599f		 
 
 ; Load vertical shift values for BG1 text in skill menus
 org $c0ec20
-C34E2D:	LDX $00         ; Index: 0
-C34E2F:	LDA.L C34E7F,X  ; Stats V-Data
+C0EC20:	LDX $00         ; Index: 0
+C0EC21:	LDA.L C0EC74,X  ; Stats V-Data
 		STA $7E9849,X   ; Save in RAM
 		INX             ; Index +1
 		CPX #$0012      ; At skills?
-		BNE C34E2F      ; Loop if not
-C34E3D:	LDA.L C34E7F,X  ; Skill V-Data
+		BNE C0EC21      ; Loop if not
+C0EC30:	LDA.L C0EC74,X  ; Skill V-Data
 		STA $7E9849,X   ; Save in RAM
 		INX             ; Index +1
 		TDC             ; Clear A
@@ -41,29 +304,29 @@ C34E3D:	LDA.L C34E7F,X  ; Skill V-Data
 		AND #$FF        ; ...
 		REP #$20        ; 16-bit A
 		CLC             ; Prepare ADC
-		ADC.L C34E7F,X  ; Add V-Data
+		ADC.L C0EC74,X  ; Add V-Data
 		STA $7E9849,X   ; Save in RAM
 		SEP #$20        ; 8-bit A
 		INX             ; Index +1
 		INX             ; Index +1
 		CPX #$005A      ; Past list?
-		BNE C34E3D      ; Loop if not
-C34E63:	LDA.L C34E7F,X  ; Bottom V-Data
+		BNE C0EC30      ; Loop if not
+C0EC56:	LDA.L C0EC74,X  ; Bottom V-Data
 		STA $7E9849,X   ; Save in RAM
 		INX             ; Index +1
 		CPX #$005e      ; End of table?
-		BNE C34E63      ; Loop if not
+		BNE C0EC56      ; Loop if not
 		LDA #$C0        ; Scrollbar: Off
 		TRB $46         ; Set anim index		
 		phk				; push 
 		per $0006		; push return
 		pea $96EE		; push address
-		jml C3597D		; Load navig data
+		jml C35980		; Load navig data
 
 		RTL
 
 ; BG1 V-Shift table for skill menus (condenses text)
-C34E7F:	db $3F,$00,$00  ; LV
+C0EC74:	db $3F,$00,$00  ; LV
 		db $0C,$04,$00  ; HP
 		db $0C,$08,$00  ; MP
 		db $0A,$0C,$00  ; Nothing
@@ -88,7 +351,218 @@ C34E7F:	db $3F,$00,$00  ; LV
 		db $0c,$Ae,$FF
 		db $00         ; End 
 
+; Handle Switch Esper
+org $C0ED60
+C0ED60:	JMP (C0ED63,X)
+C0ED63: dw C0ED67	; 01 Invoke switch esper
+		dw C0ED80	; 02 Sustain Switch Esper
+		
+; Invoke Switch
+C0ED67:	jsr C0EE18			; Navigation data
+		jsr C0EE24			; Relocate cursor
+		LDY #C0EE0D			; Yes pointer
+		JSL C302F9			; Draw text
+		LDY #C0EE13			; No pointer
+		JSL C302F9			; Draw text
+		LDA #$01			; Sustain
+		STA $26
+		RTL
 
+; Sustain Switch
+; Handle A	
+C0ED80:	jsr C0EE20			; Handle D-Pad
+		lda $08				; No-autofire keys
+		bit #$80			; Pushing A?
+		BEQ C0EDB8			; Branch if not
+		LDA $4D				; On Yes?
+		BNE C0EDB8+6		; exit if not
+		JSR C0EE42			; Play click
+		JSR C0EE2C			; Blank messages		
+		REP #$20			; 16 bit-A
+		LDA #$161E			; Equipped esper base position
+		CLC					; Prepare addition
+		ADC $FD				; Possessor ID
+		TAX					; Idex it
+		SEP #$20			; 8 bit-A
+		LDA #$FF			; Remove esper
+		STA $00,X			; ^
+		JSL actor_id		; Jump long and bring actual actor id
+		REP #$20			; 16 bit-A
+		CLC					; Prepare addition
+		ADC #$161E			; Equipped esper position
+		SEP #$20			; 8 bit-A
+		TAX					; Index it
+		LDA $99				; Viewed esper
+		STA $00,X			; Save in actual actor SRAM
+		STA $E0				; Memorize for redraw
+		LDA #$20			; Remove "flag" on
+		RTL
+; Handle B
+C0EDB8:	LDA $09				; No-autofire keys
+		BIT #$80			; Pushing B?
+		BEQ C0EDE3			; Branch if not
+		JSR C0EE42			; Play click
+		JSR C0EE2C			; Blank messages			
+		LDA $8E				; Old cursor column
+		STA $4D				; Set onscreen col
+		LDY $8E				; Old cursor loc
+		STY $4F				; Set as current
+		LDA $90				; Old scroll pos
+		STA $4A				; Set as current
+		LDA $4A				; ...
+		STA $E0				; Memorize it...
+		LDA $50				; List row
+		SEC    				; Prepare SBC
+		SBC $E0				; Deduct scroll pos
+		STA $4E				; Set cursor row		
+		JSL C30677			; 
+		LDA #$1E
+		STA $26
+C0EDE3: RTL	
+
+; Equip from another actor routines
+
+; Text
+C0EDE4: dw $40CD : db "                           ",$00
+C0EE02: dw $4151 : db "   ",$00
+C0EE08: dw $415D : db "  ",$00
+C0EE0D: dw $4151 : db "Yes",$00
+C0EE13: dw $415D : db "No",$00 
+
+
+; Load navigation data
+C0EE18:	LDY #navi_data			; Navigation dataaddress
+		JSL.l C305FE			; Load navig data
+		RTS
+		
+; Handle D-Pad
+C0EE20:	JSl.l C3072D			; Handle D-Pad	
+C0EE24:	LDY #esp_crsr			; Cursor Position address
+		JSL.l C30640			; Relocate cursor
+		RTS
+
+; Blank Messages
+C0EE2C:	LDY #C0EDE4			; Yes pointer
+		JSL C302F9			; Blank message
+		LDY #C0EE02			; No pointer
+		JSL C302F9			; Blank message
+		LDY #C0EE08			; Text pointer
+		JSl C302F9			; Blank message	
+;		phk					; push 
+;		per $0006			; push return
+;		pea $96EE			; push address
+;		jml $c327EF			; jump to address
+		
+		RTS
+		
+; Play click sound
+C0EE42: LDA #$20        ; APU command
+        STA $002140     ; Set I/O port 0
+        RTS
+C0EE4A: JSR C0EE2C
+		RTL
+		
+warnpc $c0eea0
+
+org $c0dd68
+C0DD68:
+		LDA #$10			; Reset/Stop desc
+		TSB $45				; Set menu flag
+		LDA $0D				; Handle Button
+		BIT #$40			; Pushing Y?
+		BEQ .not
+		JSL clear_pwr_trgt	; Routine that clear Desc box from target and power text
+.not	
+		LDA #$20        	; Palette 0
+		STA $29         	; Color: User's
+		REP #$20        	; 16-bit A
+		LDA #$40CD      	; Tilemap ptr
+		STA $7E9E89     	; Set position
+		LDA #$9E8B      	; 7E/9E8B
+		STA $2181       	; Set WRAM LBs
+		SEP #$20        	; 8-bit A
+		
+		LDX $00         	; Letter: 1st
+		BIT $FB				; Is esper equippable?
+		BPL +               ; Branch if not
+
+load_next:
+		LDA.L Equip_from,X	; Message letter
+		BEQ done      		; Done if end
+		STA $2180       	; Add to string
+		INX             	; Point to next
+		BRA load_next   	; Do next letter	
+	
+done:
+		LDX $FD				; Actor ID
+		LDY #$0006      	; Letters: 6
+		JML actor_name		; Actor name letters
+
+cant_letter:	
++		LDA.l NoEqTxt,X
+		STA $2180         ; Print the current letter.
+		BEQ .exit         ; If the letter written was null ($00), exit.
+		INX               ; Go to the next letter.
+		BRA cant_letter
+.exit
+		JML C326F5
+	
+NoEqTxt:  db "Can't equip!",$00
+
+actor_chk:	bit $fb			; esper equippable?
+			bpl terra_cant  ; uneqippable esper and branch 
+actor_id:	phx
+			tdc
+			tax
+			lda $28			; load actor index
+			tax				; index it
+			lda $69,x		; load actor ID
+			sta $211B		; set multiplicand LB 
+			stz $211B		; clear HB
+			lda #$25		; set multiplier
+			sta $211C		; ...
+			lda $2135		; product Hi-Byte
+			XBA				; exchange with lo-byte
+			lda $2134		; product Lo-Byte = which actor are you in
+			plx				; clear X
+			rtl
+Equip_from:
+	db "Take it from ",$00
+	
+terra_cant:
+	inc $fd			; inc id check and make no equal to Terra ID
+	rtl
+
+org $c0de10
+clear_pwr_trgt:
+	tdc				; Clear A
+	tax             ; Clear X
+.loop
+	sta $7E810D,x   ; Clear Ram
+	inx             ; Inc X
+	cpx #$0040      ; Finish?
+	bne .loop       ; Branch if not
+	rtl
+
+org $c47a00
+rstore_desc:
+	LDY #$4400      ; $8800
+	STY $2116       ; Set VRAM 
+	LDY #$8049      ; 7E/8049
+	STY $4302       ; Set src L
+	LDA #$01        ; 2Rx1B to PPU
+	STA $4300       ; Set DMA mode
+	LDA #$18        ; $2118
+	STA $4301       ; To VRAM
+	LDA #$7E        ; Bank: 7E
+	STA $4304       ; Set src HB
+	LDY #$0800      ; Bytes: 4096
+	STY $4305       ; Set data size
+	LDA #$01        ; Channel: 0
+	STA $420B       ; Move data
+	RTL
+
+	
 ; which number option finger cursor allow EL bonus
 org $C33BE2
 	cmp #$04		; row index description msg bouns print
@@ -249,11 +723,6 @@ warnpc $c35ae1
 ;org $C3F3FA
 ;	LDA.l available,X 	; get "available" txt
 
-org $c3599f :	lda #$24
-org $c359a3	:	ldy #learnlabel
-org $c359a9	:	ldy #splabel
-org $c3fd7c	:	ldy #thirty
-
 org $C35Ca7
 splabel:	dw $462f : db "SP",$00
 learnlabel:	dw $4435 : db " Learn",$00
@@ -266,32 +735,11 @@ org $C3F41A
 org $c3f751
 	ldx #$4637	; unspent SP quantity coordinates
 
-org $C35980
-; Load navigation data for esper data menu
-C3597D:	LDY #C3598C     ; C3/598C
-		JMP $05FE      ; Load navig data
 
-; Handle D-Pad for esper data menu
-C35983: JSR $072D		; Handle D-Pad
-C35986: LDY #C35991		; C3/5991
-        JMP $0640		; Relocate cursor	
-; Navigation data for esper data menu
-C3598C:
-	db $80          ; Wraps vertically
-	db $00          ; Initial column
-	db $00          ; Initial row
-	db $01          ; 1 column
-	db $05          ; 6 rows
-	
-; Cursor positions for esper data menu
-C35991:
-	dw $7210        ; Esper
-	dw $7e18        ; Spell A
-	dw $8a18        ; Spell B
-	dw $9618        ; Spell C
-	dw $c418        ; Bonus
-
-warnpc $c3599f
+org $c3599f :	lda #$24
+org $c359a3	:	ldy #learnlabel
+org $c359a9	:	ldy #splabel
+org $c3fd7c	:	ldy #thirty
 
 ; rearrange esper code to avoid redundant text on screen
 org $d86e00
@@ -370,13 +818,6 @@ org $C320BA
 	LDA #$1300      ; V-Speed: 19 px
 	STA $7E354A,X   ; Set scrollbar's
 	
-org $c35950	
-	LDA #$05        ; Top row: Carbuncle's
-	STA $5C         ; Set scroll limit
-
-org $c35923
-	LDA #$1300      ; V-Speed: 19 px
-	STA $7E354A,X   ; Set scrollbar's
 	
 ; -----------------------------------------------------------------------------
 ; Synopsis: Enables batch spending of SP/EL instead of having to reopen the
@@ -430,8 +871,8 @@ org $c35923
 ;   CMP #$FF               ; None?
 ;   BEQ $2908              ; Unequip if so
 ;   STA $99                ; Memorize esper
-org $C32900
-    JSR SelectEsperSplice  ; perform splice after selecting esper
+;org $C32900
+;    JSR SelectEsperSplice  ; perform splice after selecting esper
 ;   LDA #$4D               ; C3/58CE
 ;   STA $26                ; Next: Data menu
 ;   RTS

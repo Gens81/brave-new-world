@@ -40,15 +40,15 @@ goprev:	STX $0100		; Store
 ; From Bushido
 Bpwrtrgt:
 	jsr $5700      ; Load description
-	jmp Y_spec		; Routine that manage Y button	
+	jmp compute_null		; Routine that manage Y button	
 	
 Blitzpwrtrgt:
 	jsr $5715		; Load Descritpion
-	jmp Y_spec		; Routine that manage Y button	
+	jmp compute_null		; Routine that manage Y button	
 
 Lorepertrgt:
 	jsr $56eb		; Load Descritpion
-	jmp Y_spec		; Routine that manage Y button		
+	jmp compute_null		; Routine that manage Y button		
 
 Dancepwrtrgt:
 	

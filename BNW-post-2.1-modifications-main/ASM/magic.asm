@@ -9,7 +9,7 @@ org $C3F786
 ;Restore original opcodes -> Now MP will be always showed up 
 ORG $C34c80
 		STZ $9E         ; No MP by Magic
-		JSR $0F89      ; Stop VRAM DMA B
+		JSR $0F89		; Stop VRAM DMA B
 
 ; Draw text in spell slot of Magic menu
 ORG $C34FC4
@@ -143,45 +143,33 @@ CanLrn:	JSR $50EC		; Spell
 ORG $C350C5
 C350C5:					; Placeholder to avoid compiling issues
 
-; Erase Fork: Handle Y, moving down 1A: Sustain Magic Menu
-org $C327E2
-
-PADBYTE $FF :	PAD $C327FE
-warnpc $C327FE
-
 org $C3020F
 	dw C327F2
 
 ; Queue pushing Y OAM fn	
 org $C32097
-	JSR C327E5			; Jump to routine that load sprite when entering skill submenu
+	JSR C3A210			; Jump to routine that load sprite when entering skill submenu
 	
-org $C35975	
-	JSR C327E2
-
 org $C32d75
-	JMP C327EF
+	JMP C3A21C
 	
 	
 org $C3a20A
-C327E2:
-	JSR $0F11
-	BRA skip
-C327E5:
-	LDA $4B
-	ASL
-skip:
-	PHA
-	TDC
+C3A20A:
+	JSR $0F11			; Upload BG1 tilemap B
+	JSR $1488			; Transfer now to VRAM
+C3A210:
+	PHX					; Push X (Save skill Menu index)
 	LDY #C36122			; $C3/6122
 	JSR $1173			; Queue OAM fn
-	TDC
-	PLA
+	PLX					; Pull X
+	TDC					; Clear A
+	TXA					; Transfer in A
+	ASL
 	RTS
-	
-C327EF:
+C3A21C:
 	JSR $3541
-	BRA skip
+	BRA C3A210
 
 PADBYTE $FF
 PAD $C3A222
@@ -189,52 +177,67 @@ warnpc $C3A222
 
 ; Initialize Magic menu
 org $C3211C
-	JSR $2130      ; Create scrollbar
-	JSR $2148      ; Load nav data, etc.
-	JSR $2158      ; Draw spells, etc.
-	JSR C32802
-	JSR $0F4D      ; Queue BG3 upload
-	LDA #$1A        ; C3/27E2
-	STA $26         ; Next: Sustain menu
+	JSR $2130		; Create scrollbar
+	JSR $2148		; Load nav data, etc.
+	JSR $2158		; Draw spells, etc.
+	JSR $a662		; Build VWF Tilemap
+	JSR $0F4D		; Queue BG3 upload
+	LDA #$1A		; C3/27E2
+	STA $26			; Next: Sustain menu
 	RTS
 
-org $C327E2	
+org $C327E2
+compute_null:
+	jml check_null		; Check if null
+for_y_spec:
+	Jmp Y_spec			; Go to routine that show alt desc
+el_bonus:
+	jsr $a662			; go to redraw desc
+	jmp $0F4D			; refresh bg3 tilemap b
+	
+org $C327fb	
 ; 1A: Sustain Magic menu
 
-C327F2:  LDA #$10        ; Description: On
-		 TRB $45         ; Set menu flag
-		 LDA #$01        ; List type: Magic
-         STA $2A         ; Set redraw mode
-         JSR $0EFD      ; Queue list upload
-         LDA $021E       ; Frame counter
-         ROR A           ; Even value?
-         BCC C327F8      ; Favor desc if so
-         JSR $0F75      ; Queue cost upload
-         BRA C327FB      ; Skip a line
-C327F8:  JSR $A991      ; Queue desc upload
-C327FB:  JSR $1F64      ; Handle L and R
-         BCS C32861      ; Exit if pushed
-         JSR $4B88      ; Handle D-Pad
-         JSR $56E5      ; Load description
-		 JSR Y_spec
+C327F2:  LDA #$10    	    ; Description: On
+		 TRB $45     	    ; Set menu flag
+		 LDA #$01    	    ; List type: Magic
+         STA $2A     	    ; Set redraw mode
+         JSR $0EFD   		; Queue list upload
+         LDA $021E   	    ; Frame counter
+         ROR A        		; Even value?
+         BCC C327F8   		; Favor desc if so
+         JSR $0F75    		; Queue cost upload
+         BRA C327FB    		; Skip a line
+C327F8:  JSR $A991     		; Queue desc upload
+C327FB:  JSR $1F64     		; Handle L and R
+         BCS C32861     	; Exit if pushed
+         JSR $4B88      	; Handle D-Pad
+         JSR $56E5			; Load description
+		 JSR compute_null	; Routine that manage Y - Check if spell etc... id = $FF then go to Y routine or blank desc
 
-
-		 
-PADBYTE $EA :	PAD $C32822
 warnpc $C32822		 
+
 org $C3281f
+; Pushing B?
 C32822:
 
-org $c3fda5
+org $C32861
+; L-R pushed
+C32861:
 
+
+org $c3fda5
 ; Holding Y
-Y_spec:	 lda $0D
+Y_spec:	 LDA $FF				; Load Spel/Esper whatelse id
+		 CMP #$FF				; No spell/esper whatelse?
+ 		 BEQ C32802				; Branch if not
+		 lda $0D
          bit #$40           	; holding Y?	
-		 BEQ C32802				; Branch if not
+		 BEQ C32802				; Exit if so
 		 LDA #$10				; Description off
 		 TSB $45				; Set
 		 STA $C0				; Set power and target flag
-		 jsr $6a41
+		 jsr $6a41				; Clear BG3 B
 		 jsl power_target_title	; Jump to write power and target
 		 JSR $0f75				; Upload BG3 tilemap B
 		 JSR $0EFD				; Upload BG1 tilemap A
@@ -243,10 +246,10 @@ C32802:	 LDA $C0				; Cleared tilemap B BG3?
 		 BEQ C3X822				; Branch if so
 		 STZ $C0				; Clear flag
 		 JSR $0F4D				; Upload 
-		 JMP $A662				; Build VEF tilemap
+		 JMP $A662				; Build VWF tilemap
 C3X822:	 RTS
 
-warnpc $c3fdd1
+warnpc $c3fdd4
 
 org $C3f69b
 C3F69B:	 LDY #$0400      ; $0800
@@ -262,22 +265,43 @@ C3F69B:	 LDY #$0400      ; $0800
 warnpc $C3F6B0
 
 
-org $C32861
-C32861:
-
 org $C36122
+; Y sprite queue func
+
 C36122:
 	JSL EDFD68		; Jump to routine that print y button
 	RTS
 warnpc $c36128
 
-ORG $C350DB
-	JSR C350AE
-	
-org $c3f7d1 
-	jsr C350A2
 
-org $C4b97b
+
+org $C4B97B
+; Check if Spell etc... it's $FF
+check_null:
+	TDC						; Clear A
+	LDA $26					; Menu flag
+	CMP #$4D				; Esper data menu?
+	BNE .not_esper_data		; Branch if not
+	LDA $4B					; Cursor Pos.
+	cmp #$04				; EL Bonus?
+	beq .clear				; Branch if so
+	TAX						; Index it
+	lda $7eab8d,x			; Load spell or esper Index
+	bra .skip				; Skip to set ID
+.not_esper_data
+	CMP #$1E				; Sustain Esper?
+	beq .clear				; Branch if so
+	LDA $4B					; Cursor position
+	TAX						; Index
+	LDA $7E9D89,x			; Skill
+.skip
+	sta $ff					; Store for after
+	jml for_y_spec			; Go back and jump to Y check routine 
+.clear
+	jml el_bonus			; El Bonus - go to show desc instead of power and target
+
+
+	
 power_target_title:	
 	ldy #$0004					; Pointers
 	lda #$2C					; Light blue colour
@@ -297,7 +321,7 @@ target_power_ptr:
 target:		dw $8123 : db "Target",$00
 power:		dw $810d : db "Power",$00
 
-warnpc $c4b9ce
+warnpc $c4b9cf
 
 org $C0DEF2
 effect_pointers:
@@ -341,29 +365,15 @@ get_target:
 	LDX $0101				; Load Spell Bank
 	STX $E8					; Store
 	STX $F6					; Store
-	LDA $26					; Menu flag
-	CMP #$4D				; Esper data?
-	BNE .not_esper			; Branch if not
-	LDA $4B					; Cursor Pos
-	TAX						; Index it
-	lda $7eab8d,x			; Load spell or esper Index
-	bra .skip_normal		; 
-.not_esper	
-	LDA $4B					; Cursor position
-	TAX						; Index
-	LDA $7E9D89,x			; Skill
-.skip_normal
-	CMP #$FF				; Skill?
-	BNE .begin				; Branch if so
-	RTL						; Back
+	lda $ff					; Load index
 .begin						; Compute multiply by $0E
 	rep #$20				; 16-bit A
-	sta $FE					; Temporary
+	sta $0103				; Temporary
 	asl						; *2
 	asl						; *4
 	asl						; *8
 	sec						; Prepare SBC
-	sbc $FE					; *7
+	sbc $0103				; *7
 	asl						; *14
 	TAY						; Index multiply by 0E
 	TDC						; Clear A
@@ -552,7 +562,11 @@ compute_bushido:
 	
 warnpc $CD0000
 
-
+ORG $C350DB
+	JSR C350AE
+	
+org $c3f7d1 
+	jsr C350A2
 
 ;Rage:
 ;26=1d
