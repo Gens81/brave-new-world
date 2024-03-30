@@ -546,6 +546,8 @@ clear_pwr_trgt:
 
 org $c47a00
 rstore_desc:
+	LDA #$80
+	STA $2115
 	LDY #$4400      ; $8800
 	STY $2116       ; Set VRAM 
 	LDY #$8049      ; 7E/8049
