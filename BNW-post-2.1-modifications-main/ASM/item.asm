@@ -13,17 +13,16 @@ org $D2BC99	;Gum pod
 org $D2BB7B
 	db $D8,"Defibr",$0C,$0D,"ator"
 
-org $D2B681	;Full Moon
-	db $EC
-
-org $D2B69B	;Boomerang
-	db $EC
-
-org $D2B6A8	;Rising Sun
-	db $EC
-
-org $D2B6DC	;Wing Edge
-	db $EC
+org $D2B674	
+	db $E3,"Club        "
+    db $EC,"Full>Moon   "
+    db $E3,"Morning>Star"
+    db $EC,"Boomerang   "
+    db $EC,"Rising>Sun  "
+    db $E3,"Kusarigama  "
+    db $E3,"Bone>Club   "
+    db $E3,"Magic>Bone  "
+    db $EC,"Wing>Edge   "
 
 org $D2BEBB
 
@@ -54,19 +53,40 @@ org $D2BEBB
     
 warnpc $D2BFF3
 
-;adds +10 physical evade to every claws
+;Claw buff
 
-org $D859D4 
-    db $01
-org $D859F2 
-    db $01
-org $D85A10 
-    db $01
-org $D85A2E 
-    db $01
-org $D85A4C 
-    db $01
-org $D85A6A 
-    db $01
-org $D85A88 
-    db $01
+org $D859E0 
+    db $10
+org $D859FF 
+    db $10      ;Spirit/Poison HP+
+org $D85A1D 
+    db $04
+org $D85A3B 
+    db $04      ;Ocean/Hell HP++
+org $D85A59 
+    db $08
+org $D85A77 
+    db $08      ;Frost/Storm HP+++
+
+;Royal Jacket (no hp bonus, spellcast up, auto-safe)
+org $D86142
+    db $40,$00,$00,$00,$80
+
+;Radiant Gown (no mp bonus, auto-shell)
+org $D861F6
+    db $20,$00
+
+org $D85792
+    db $64      ;Ross Brush proc Haste
+    
+;Morning Star (Anti-human)
+
+org $c2a7d6
+
+MorningStarAU:
+JSR $3DC5 ; ignore target defense
+JSR $38F2 ; double damage to humans
+RTS
+
+org $C242EB ; special effect jump table
+dw MorningStarAU
