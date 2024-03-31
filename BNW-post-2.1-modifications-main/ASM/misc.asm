@@ -776,4 +776,4 @@ org $C39728 : NOP #2  ; never branch
 
 ;Brave New World data
 org $C33BB8
-	db $d1,$78,"Brave New World 2.2 b26.1",$00
+	db $d1,$78,"Brave New World 2.2 b27",$00
