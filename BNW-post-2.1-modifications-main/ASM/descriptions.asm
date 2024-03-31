@@ -38,16 +38,16 @@ table "menu.tbl",ltr
 
 org $ED6400
 
-HealingShiv:    db "The pointy end does the healing",$00
-MythrilDirk:    db "Knives allow a 2nd weapon|and can be used w/ [Throw]",$00
-Kagenui:        db "[Fight] hits 2x|May set [Stop]/[Slow]",$00
+HealingShiv:    db "The pointy end doe",$E0,"the healing",$00
+MythrilDirk:    db "Knive",$E0,"allow a 2nd weapon|and can be used w/ [Throw]",$00
+Kagenui:        db "[Fight] hit",$E0,"2x|May set [Stop]/[Slow]",$00
 Butterfly:      db "2x dmg to humans",$00
 Switchblade:    db "May steal from foe",$00
 Demonsbane:     db "Undead-slayer",$00
 ManEater:       db "2x dmg to humans",$00
 Kunai:          db "",$00
 Avenger:        db "Holy dmg",$00
-Valiance:       db "Ignores defense|Stronger at low HP",$00
+Valiance:       db "Ignore",$E0,"defense|Stronger at low HP",$00
 MythrilBolo:    db "",$00
 IronCutlass:    db "",$00
 Scimitar:       db "Dual-wield|May counterattack",$00
@@ -58,22 +58,22 @@ Epee:           db "",$00
 BreakBlade:     db "",$00
 BloodSword:     db "May cast Drain",$00
 Imperial:       db "",$00
-RuneBlade:      db "Uses MP for critical hits",$00
+RuneBlade:      db "Use",$E0,"MP for critical hits",$00
 Falchion:       db "Dual-wield|May counterattack",$00
 SoulSabre:      db "May cast Osmose",$00
 Organix:        db "",$00
-Excalibur:      db "Uses MP for critical hits|Stronger in 2 hands",$00
-Zantetsuken:    db "Always hits, may counterattack|High crit rate, can insta-kill",$00
-Illumina:       db "Uses MP for critical hits|May cast Holy",$00
-Apocalypse:     db "Uses MP for critical hits|May cast Flare",$00
-AtmaWeapon:     db "Attacks w/ stamina|Weaker at low HP",$00
-MythrilPike:    db "Spears are stronger in 2 hands|and users may guard allies",$00
+Excalibur:      db "Use",$E0,"MP for critical hits|Stronger in 2 hands",$00
+Zantetsuken:    db "Alway",$E0,"hits, may counterattack|High crit rate, can insta-kill",$00
+Illumina:       db "Use",$E0,"MP for critical hits|May cast Holy",$00
+Apocalypse:     db "Use",$E0,"MP for critical hits|May cast Flare",$00
+AtmaWeapon:     db "Attack",$E0,"w/ stamina|Weaker at low HP",$00
+MythrilPike:    db "Spear",$E0,"are stronger in 2 hands|and user",$E0,"may guard allies",$00
 Trident:        db "HP+12.5%|Water dmg",$00
 StoutSpear:     db "HP+25%",$00
 Partisan:       db "HP+25%",$00
 Longinus:       db "HP+25%|Holy dmg",$00
 FireLance:      db "HP+12.5%|Fire dmg",$00
-Gungnir:        db "HP+50%|Always hits",$00
+Gungnir:        db "HP+50%|Alway",$E0,"hits",$00
 PointyStick:    db "",$00
 Tanto:          db "",$00
 Kunai2:         db "Anti-air, high crit rate",$00
@@ -81,67 +81,67 @@ Sakura:         db "May cast Break",$00
 Ninjato:        db "Anti-air, high crit rate",$00
 Kagenui2:       db "Ninja can wield",$00
 Orochi:         db "Anti-air, high crit rate",$00
-Hanzo:          db "Katanas are stronger in 2 hands",$00
+Hanzo:          db "Katana",$E0,"are stronger in 2 hands",$00
 Kotetsu:        db "May counterattack",$00
 Ichimonji:      db "High crit rate, can insta-kill",$00
-Kazekiri:       db "May hit all foes with|stamina-based wind attack",$00
+Kazekiri:       db "May hit all foe",$E0,"with|stamina-based wind attack",$00
 Murasame:       db "May counterattack",$00
 Masamune:       db "May counterattack",$00
 Spoon:          db "",$00
-Mutsunokami:    db "Wind blade is most powerful",$00
+Mutsunokami:    db "Wind blade i",$E0,"most powerful",$00
 SpookStick:     db "",$00
-MythrilRod:     db "Rods use MP for critical dmg|and have high spellcast rate",$00
+MythrilRod:     db "Rod",$E0,"use MP for critical dmg|and have high spellcast rate",$00
 FireRod:        db "May cast Fire 2|(MP crit = 2x spell dmg)",$00
 IceRod:         db "May cast Ice 2|(MP crit = 2x spell dmg)",$00
 ThunderRod:     db "May cast Bolt 2|(MP crit = 2x spell dmg)",$00
-WindBreaker:    db "Wind hits with much stamina",$00
+WindBreaker:    db "Wind hit",$E0,"with much stamina",$00
 Doomstick:      db "May cast Doom|(MP crit = X-Zone)",$00
-Quartrstaff:    db "May cast Quartr|(MP crit = hits foe group)",$00
+Quartrstaff:    db "May cast Quartr|(MP crit = hit",$E0,"foe group)",$00
 Punisher:       db "May cast Dark|(MP crit = 2x spell dmg)",$00
 MagusRod:       db "",$00
-LightBrush:     db "Brushes cure HP and hit 2x",$00
+LightBrush:     db "Brushe",$E0,"cure HP and hit 2x",$00
 MonetBrush:     db "May cast Safe",$00
 DaliBrush:      db "May cast Shell",$00
-RossBrush:      db "May cast Reflect",$00
+RossBrush:      db "May cast Haste",$00
 Shuriken:       db "Use w/ [Throw]|Can spread with L/R",$00
 TackStar:       db "",$00
 NinjaStar:      db "Strongest throw",$00
 Club:           db "",$00
-FullMoon:       db "Anti-air, high crit rate|Ignores row, dual-wield",$00
-MorningStar:    db "Ignores defense",$00
-Boomerang:      db "Anti-air, high crit rate|Ignores row, dual-wield",$00
-RisingSun:      db "Anti-air, high crit rate|Ignores row, dual-wield",$00
+FullMoon:       db "Anti-air, high crit rate|Ignore",$E0,"row, dual-wield",$00
+MorningStar:    db "Ignore",$E0,"defense|2x dmg to humans",$00
+Boomerang:      db "Anti-air, high crit rate|Ignore",$E0,"row, dual-wield",$00
+RisingSun:      db "Anti-air, high crit rate|Ignore",$E0,"row, dual-wield",$00
 Kusarigama:     db "2x dmg to humans|May set [Stop]/[Slow]",$00
 BoneClub:       db "",$00
 MagicBone:      db "",$00
 WingEdge:       db "Such wing, much edge",$00
 Cards:          db "",$00
-Darts:          db "Casino weapons ignore row",$00
+Darts:          db "Casino weapon",$E0,"ignore row",$00
 Tarot:          db "Holy dmg, undead-slayer",$00
-ViperDarts:     db "Uses MP for critical hits",$00
-Dice:           db "Damage = (2Lv. * D1 * D2)|Always hits",$00
-FixedDice:      db "Damage = (2Lv. * D1 * D2 * D3)|Always hits",$00
+ViperDarts:     db "Use",$E0,"MP for critical hits",$00
+Dice:           db "Dmg = (2Lv. * D1 * D2)|Alway",$E0,"hits",$00
+FixedDice:      db "Dmg = (2Lv. * D1 * D2 * D3)|Alway",$E0,"hits",$00
 MythrilClaw:    db "",$00
-SpiritClaw:     db "Holy dmg|May cast Slow",$00
-PoisonClaw:     db "Dark dmg|May cast Sap",$00
-OceanClaw:      db "Water dmg|May cast Drain",$00
-HellClaw:       db "Fire dmg|May cast Fire",$00
-Frostgore:      db "Ice dmg|May cast Ice",$00
-Stormfang:      db "Bolt dmg|May cast Bolt",$00
+SpiritClaw:     db "HP+12.5%|Holy dmg, may cast Slow",$00
+PoisonClaw:     db "HP+12.5%|Dark dmg, may cast Sap",$00
+OceanClaw:      db "HP+25%|Water dmg, may cast Drain",$00
+HellClaw:       db "HP+25%|Fire dmg, may cast Fire",$00
+Frostgore:      db "HP+50%|Ice dmg, may cast Ice",$00
+Stormfang:      db "HP+50%|Bolt dmg, may cast Bolt",$00
 Buckler:        db "",$00
 IronShield:     db "",$00
 Targe:          db "",$00
-GoldShield:     db "Halves Water dmg",$00
-AegisShield:    db "Auto-Haste (Blocks [Slow])",$00
-DiamondKite:    db "Halves Bolt dmg",$00
-Flameguard:     db "Absorbs Fire dmg",$00
-Iceguard:       db "Absorbs Ice dmg",$00
-Thunderguard:   db "Absorbs Bolt dmg",$00
-CrystalKite:    db "Halves Wind dmg",$00
+GoldShield:     db "Halve",$E0,"Water dmg",$00
+AegisShield:    db "Auto-Haste (Block",$E0,"[Slow])",$00
+DiamondKite:    db "Halve",$E0,"Bolt dmg",$00
+Flameguard:     db "Absorb",$E0,"Fire dmg",$00
+Iceguard:       db "Absorb",$E0,"Ice dmg",$00
+Thunderguard:   db "Absorb",$E0,"Bolt dmg",$00
+CrystalKite:    db "Halve",$E0,"Wind dmg",$00
 GenjiShield:    db "Auto-Safe",$00
-Multiguard:     db "Blocks Fire/Ice/Bolt dmg",$00
+Multiguard:     db "Block",$E0,"Fire/Ice/Bolt dmg",$00
 CursedShield:   db "A horrible shield to have a curse",$00
-HeroShield:     db "Auto-Regen (Blocks [Sap])",$00
+HeroShield:     db "Auto-Regen (Block",$E0,"[Sap])",$00
 ForceShield:    db "Auto-Shell",$00
 LeatherHat:     db "",$00
 HairBand:       db "",$00
@@ -155,16 +155,16 @@ StatHat:        db "",$00
 GreenBeret:     db "HP/MP+12.5%",$00
 HeadBand:       db "",$00
 MyhtrilHelm:    db "",$00
-Tiara:          db "A pretty princess tiara",$00
-GoldHelm:       db "Halves Water dmg",$00
-TigerMask:      db "Halves Fire dmg",$00
+Tiara:          db "A pretty princes",$E0,"tiara",$00
+GoldHelm:       db "Halve",$E0,"Water dmg",$00
+TigerMask:      db "Halve",$E0,"Fire dmg",$00
 RedCap:         db "HP/MP+25%",$00
 MysteryVeil:    db "Sword spellcast rate up",$00
 Circlet:        db "MP+50%",$00
-DragonHelm:     db "[Jump] randomly hits 2x",$00
-DiamondHelm:    db "Halves Bolt dmg",$00
+DragonHelm:     db "[Jump] randomly hit",$E0,"2x",$00
+DiamondHelm:    db "Halve",$E0,"Bolt dmg",$00
 DarkHood:       db "",$00
-CrystalHelm:    db "Halves Wind dmg",$00
+CrystalHelm:    db "Halve",$E0,"Wind dmg",$00
 OathVeil:       db "Sword spellcast rate up",$00
 CatHood:        db "",$00
 GenjiHelm:      db "",$00
@@ -179,72 +179,72 @@ MythrilVest:    db "",$00
 NinjaGear:      db "",$00
 WhiteDress:     db "",$00
 MythrilMail:    db "",$00
-GaiaGear:       db "Halves Earth dmg",$00
-MirageVest:     db "Auto-Haste (Blocks [Slow])",$00
-GoldArmor:      db "Halves Water dmg",$00
+GaiaGear:       db "Halve",$E0,"Earth dmg",$00
+MirageVest:     db "Auto-Haste (Block",$E0,"[Slow])",$00
+GoldArmor:      db "Halve",$E0,"Water dmg",$00
 PowerArmor:     db "",$00
 LightRobe:      db "",$00
-DiamondVest:    db "Halves Bolt dmg",$00
-RoyalJacket:    db "HP+25%",$00
-ForceArmor:     db "Halves Fire/Ice/Bolt dmg",$00
-DiamondMail:    db "Halves Bolt dmg",$00
+DiamondVest:    db "Halve",$E0,"Bolt dmg",$00
+RoyalJacket:    db "Auto-Safe|Spellcast rate up",$00
+ForceArmor:     db "Halve",$E0,"Fire/Ice/Bolt dmg",$00
+DiamondMail:    db "Halve",$E0,"Bolt dmg",$00
 DarkGear:       db "",$00
 TaoRobe:        db "",$00
-CrystalMail:    db "Halves Wind dmg",$00
-RadiantGown:    db "MP+25%|Brush spellcast rate up",$00
+CrystalMail:    db "Halve",$E0,"Wind dmg",$00
+RadiantGown:    db "Auto-Shell|Brush spellcast rate up",$00
 GenjiArmor:     db "",$00
-LazyShell:      db "Halves Bolt/Wind dmg",$00
-Minerva:        db "Blocks Fire/Ice/Bolt dmg",$00
-TabbyHide:      db "Halves Earth dmg",$00
-GatorHide:      db "Halves Water dmg",$00
-ChocoboHide:    db "Halves Water/Wind dmg",$00
-MoogleHide:     db "Halves Earth/Wind dmg",$00
-DragonHide:     db "Halves Fire/Wind dmg",$00
-SnowMuffler:    db "Blocks Ice/Wind dmg|HP+25%",$00
+LazyShell:      db "Halve",$E0,"Bolt/Wind dmg",$00
+Minerva:        db "Block",$E0,"Fire/Ice/Bolt dmg",$00
+TabbyHide:      db "Halve",$E0,"Earth dmg",$00
+GatorHide:      db "Halve",$E0,"Water dmg",$00
+ChocoboHide:    db "Halve",$E0,"Water/Wind dmg",$00
+MoogleHide:     db "Halve",$E0,"Earth/Wind dmg",$00
+DragonHide:     db "Halve",$E0,"Fire/Wind dmg",$00
+SnowMuffler:    db "Block",$E0,"Ice/Wind dmg|HP+25%",$00
 Noiseblaster:   db "May set [Muddle]",$0E,"foe group|Fail by stamina",$00
-BioBlaster:     db "Dark dmg",$0E,"foe group|Sets [Poison]",$00
-Flash:          db "Non-elemental dmg",$0E,"foe group|Sets [Blind]",$00
-Chainsaw:       db "This is not a drill|Ignores def., randomly kills",$00
-Defibrillator:  db "[CLEAR!]|Revives fallen ally",$00
-Drill:          db "This is a drill|Ignores def., sets [Sap]",$00
-ManaBattery:    db "It keeps going and going_|Cures MP - one ally",$00
-Autocrossbow:   db "Physical attack",$0E,"foe group|Ignores row, can miss",$00
+BioBlaster:     db "Dark dmg",$0E,"foe group|Set",$E0,"[Poison]",$00
+Flash:          db "Non-elemental dmg",$0E,"foe group|Set",$E0,"[Blind]",$00
+Chainsaw:       db "Thi",$E0,"i",$E0,"not a drill|Ignore",$E0,"def., randomly kills",$00
+Defibrillator:  db "[CLEAR!]|Revive",$E0,"fallen ally",$00
+Drill:          db "Thi",$E0,"i",$E0,"a drill|Ignore",$E0,"def., set",$E0,"[Sap]",$00
+ManaBattery:    db "It keep",$E0,"going and going_|Cure",$E0,"MP - one ally",$00
+Autocrossbow:   db "Physical attack",$0E,"foe group|Ignore",$E0,"row, can miss",$00
 FireScroll:     db "(Split) Fire dmg",$0E,"all foes|Use w/ [Throw]",$00
 WaveScroll:     db "(Split) Water dmg",$0E,"all foes|Use w/ [Throw]",$00
 BoltScroll:     db "(Split) Bolt dmg",$0E,"all foes|Use w/ [Throw]",$00
 InvizScroll:    db "Ninja vanish!",$00
-SmokeBomb:      db "Sets [Image]",$0E,"one ally|Use w/ [Throw]",$00
+SmokeBomb:      db "Set",$E0,"[Image]",$0E,"one ally|Use w/ [Throw]",$00
 LeoCrest:       db $E6,$00
-Bracelet:       db "Blocks [Poison]",$00
-SpiritStone:    db "Blocks [Blind]/[Poison]/[Petrify]",$00
-Amulet:         db "Blocks [Sleep]/[Muddle]/[Berserk]",$00
-WhiteCape:      db "Blocks [Imp]/[Mute]/[Stop]",$00
-Talisman:       db "Blocks [Blind]/[Poison]",$00
-FairyCharm:     db "Blocks [Sleep]/[Muddle]",$00
-BarrierCube:    db "Sets [Shell] on low HP",$00
-SafetyGlove:    db "Sets [Safe] on low HP",$00
+Bracelet:       db "Block",$E0,"[Poison]",$00
+SpiritStone:    db "Block",$E0,"[Blind]/[Poison]/[Petrify]",$00
+Amulet:         db "Block",$E0,"[Sleep]/[Muddle]/[Berserk]",$00
+WhiteCape:      db "Block",$E0,"[Imp]/[Mute]/[Stop]",$00
+Talisman:       db "Block",$E0,"[Blind]/[Poison]",$00
+FairyCharm:     db "Block",$E0,"[Sleep]/[Muddle]",$00
+BarrierCube:    db "Set",$E0,"[Shell] on low HP",$00
+SafetyGlove:    db "Set",$E0,"[Safe] on low HP",$00
 GuardRing:      db "Auto-Safe",$00
-SprintShoes:    db "Auto-Haste (Blocks [Slow])",$00
+SprintShoes:    db "Auto-Haste (Block",$E0,"[Slow])",$00
 ReflectRing:    db "Auto-Reflect",$00
 -:              db "",$00
 GumPod:         db "",$00
 KnightCape:     db "HP+12.5%|May guard allies",$00
 DragoonSeal:    db "[Fight] to [Jump]|Sword spellcast rate up",$00
-ZephyrCape:     db "Sets [Haste] on low HP",$00
-MysteryEgg:     db "It's a mystery_",$00
+ZephyrCape:     db "Set",$E0,"[Haste] on low HP",$00
+MysteryEgg:     db "It'",$E0,"a mystery_",$00
 BlackHeart:     db "HP+50%",$00
 MagicCube:      db "MP+50%",$00
-PowerGlove:     db "Physical output +25%|(It's so bad)",$00
+PowerGlove:     db "Physical output +25%|(It'",$E0,"so bad)",$00
 BlizzardOrb:    db "Magical output +25%|(??? on yeti)",$00
 PsichoBelt:     db "Physical output +25%|(??? on yeti)",$00
-RogueCloak:     db "[Fight] always hits|Magical output +25%",$00
+RogueCloak:     db "[Fight] alway",$E0,"hits|Magical output +25%",$00
 WallRing:       db "Auto-Shell",$00
 HeroRing:       db "HP/MP+25%|May guard allies",$00
-Ribbon:         db "Blocks [Stop]/[Petrify]/Death|(Death includes [Zombie])",$00
+Ribbon:         db "Block",$E0,"[Stop]/[Petrify]/Death|(Death include",$E0,"[Zombie])",$00
 MuscleBelt:     db "HP+25%|Physical output +25%",$00
 CrystalOrb:     db "MP+25%|Magical output +25%",$00
-Goggles:        db "Blocks [Blind]",$00
-SoulBox:        db "MP costs = 1/2",$00
+Goggles:        db "Block",$E0,"[Blind]",$00
+SoulBox:        db "MP cost",$E0,"= 1/2",$00
 ThiefGlove:     db "[Steal] to [Mug]|Physical dmg +25%",$00
 Gauntlet2:      db "",$00
 GenjiGlove:     db "",$00
@@ -254,45 +254,45 @@ Beads:          db "",$00
 ExBlack:        db "",$00
 HeijiCoin:      db "[Slot] to [GP Toss]",$00
 SageStone:      db "[Magic] to [X-Magic]",$00
-GemBox:         db "MP costs = 1/2",$00
+GemBox:         db "MP cost",$E0,"= 1/2",$00
 NirvanaBand:    db "All output +25%",$00
-Economizer:     db "1 MP cost",$00
-MementoRing:    db "That is not dead|Which can rise again",$00
+Economizer:     db "MP cost",$E0,"= 1",$00
+MementoRing:    db "That i",$E0,"not dead|Which can rise again",$00
 QuartzCharm:    db "Auto-Safe/Shell",$00
-GhostRing:      db "Makes wearer undead",$00
+GhostRing:      db "Make",$E0,"wearer undead",$00
 MoogleCharm:    db "Dance like the wind|Fall like a stone",$00
-BlackBelt:      db "[Fight] always hits|May counterattack",$00
+BlackBelt:      db "[Fight] alway",$E0,"hits|May counterattack",$00
 Codpiece:       db "",$00
-BackGuard:      db "Prevents ambushes",$00
+BackGuard:      db "Prevent",$E0,"ambushes",$00
 GaleHairpin:    db "Pre-emptive attack rate up",$00
 StatStick:      db "HP/MP+12.5%",$00
-DarylSoul:      db "[Fight] hits 2x",$00
-LifeBell:       db "Auto-Regen (Blocks [Sap])",$00
+DarylSoul:      db "[Fight] hit",$E0,"2x",$00
+LifeBell:       db "Auto-Regen (Block",$E0,"[Sap])",$00
 DirtyUndies:    db "",$00
 RenameCard:     db "Hidden item",$00
-Tonic:          db "Cures 1/2 Max HP",$00
-Potion:         db "Cures 3/4 Max HP",$00
-XPotion:        db "Cures 3/4 Max HP",$0E,"party",$00
-Tincture:       db "Cures 50 MP",$00
-Ether:          db "Cures 3/4 Max MP",$00
-XEther:         db "Cures 3/4 Max MP",$0E,"party",$00
-Elixir:         db "Cures HP/MP to max|Lifts most bad statuses",$00
+Tonic:          db "Cure",$E0,"1/2 Max HP",$00
+Potion:         db "Cure",$E0,"3/4 Max HP",$00
+XPotion:        db "Cure",$E0,"3/4 Max HP",$0E,"party",$00
+Tincture:       db "Cure",$E0,"50 MP",$00
+Ether:          db "Cure",$E0,"3/4 Max MP",$00
+XEther:         db "Cure",$E0,"3/4 Max MP",$0E,"party",$00
+Elixir:         db "Cure",$E0,"HP/MP to max|Lift",$E0,"most bad statuses",$00
 Megalixir:      db "Full heal (HP/MP/status)",$0E,"party",$00
-PhoenixDown:    db "Revives fallen ally|(HP = 1)",$00
-HolyWater:      db "Cures [Zombie]|(HP = 1/8 max)",$00
-Antidote:       db "Cures [Poison]",$00
-Eyedrops:       db "Cures [Blind]",$00
+PhoenixDown:    db "Revive",$E0,"fallen ally|(HP = 1)",$00
+HolyWater:      db "Cure",$E0,"[Zombie]|(HP = 1/8 max)",$00
+Antidote:       db "Cure",$E0,"[Poison]",$00
+Eyedrops:       db "Cure",$E0,"[Blind]",$00
 SnakeOil:       db "All-Natural",$00
-Remedy:         db "Lifts most bad statuses",$00
+Remedy:         db "Lift",$E0,"most bad statuses",$00
 Scrap:          db "Sell for GP",$00
 Tent:           db "",$00
-GreenCherry:    db "Has a calming effect",$00
-PhoenixTear:    db "Revives fallen ally|(HP = 3/4 max)",$00
+GreenCherry:    db "Ha",$E0,"a calming effect",$00
+PhoenixTear:    db "Revive",$E0,"fallen ally|(HP = 3/4 max)",$00
 BouncyBall:     db "Do not taunt Happy Fun Ball",$00
-RedBull:        db "Cures 200 HP",$00
+RedBull:        db "Cure",$E0,"200 HP",$00
 SlimJim:        db "Snap into it!",$00
 WarpWhistle:    db "Welcome to Warp Zone",$00
-DriedMeat:      db "Cures 100 HP",$00
+DriedMeat:      db "Cure",$E0,"100 HP",$00
 DontFuck:       db "",$00
 
 warnpc $ED779F
@@ -563,9 +563,9 @@ dw DontFuck-HealingShiv
 org $CEFCB0
 
 Cider:
-    db "Cider made from delicious fruit",$00
+    db "Cider made from deliciou",$E0,"fruit",$00
 ClockKey:
-    db "Useful if your clock locks up",$00
+    db "Useful if your clock lock",$E0,"up",$00
 TastyFish:
     db "A tasty fish",$00
 JustFish:
@@ -575,30 +575,30 @@ Fish:
 RottenFish:
     db "A rotten fish",$00
 Guilt:
-    db "It's heavy w/ the weight of|murdered family and friends",$00
+    db "It'",$E0,"heavy with the weight of|murdered family and friends",$00
 LolaLetter:
     db "Rather explicit, to say the least",$00
 Booty:
     db "Yar, it be the booty of a pirate",$00
 Filth:
-    db "[The Adventures of Mr. Tentacle and| the Naughty Schoolgirl]",$00
+    db "[The Adventure",$E0,"of Mr. Tentacle and| the Naughty Schoolgirl]",$00
 EmperorMap:
-    db "Show this to the old man",$00
+    db "Show thi",$E0,"to the old man",$00
 WD40:
-    db "Fixes anything that can't be fixed|w/ duct tape",$00
+    db "Fixe",$E0,"anything that can't be fixed|with duct tape",$00
 Schematics:
     db "Autocrossbow:|Power +50%, Accuracy = 100%",$00
 BettingChips:
-    db "These look like somebody tried to|eat them_",$00
+    db "These look like somebody tried|to eat them_",$00
 Blank1: db $00
 Blank2: db $00
 CrackedStone:
-    db "This is why we can't have nice|things_",$00
+    db "Thi",$E0,"i",$E0,"why we can't have nice|things_",$00
 LeoSpirits:
-    db "A bottle of Leo's favorite booze",$00
+    db "A bottle of Leo'",$E0,"favorite booze",$00
 Blank3: db $00
 Pendant:
-    db "Some things you",$03,"just can't get rid of_",$00
+    db "Some thing",$E0,"you",$03,"just can't get rid of_",$00
 
 warnpc $CEFFFF
 
@@ -645,7 +645,7 @@ Ice3: db $FB,$FB,$FB,$00
 Bolt3: db $F8,$F8,$F8,$00
 Quake: db $FA," Igno",$F1,$E0,"def., groun",$F4,$07,$F0,"ck",$00 ; Earth Ignores def., ground attack
 Doom: db "Ins",$F0,"nt",$EB,"e",$07,"h (he",$E2,$E0,"undead)|Fa",$0C," by",$F7,$F0,"m",$E4,"a",$00; Instant death|Heals undead
-Holy: db $F6," Igno",$F1,$E0,"def.",$00 ; Holy Ignores def.
+Holy: db $F6," Igno",$F1,$E0,"def.",$00 ; Holy Ignore",$E0,"def.
 Flare: db "Non-e",$E1,"ment",$E2,$EB,"mg|Igno",$F1,$E0,"def.",$00 ; Non-elemental dmg|Ignores def.
 Dark: db $EF,$00 ; Dark
 Storm: db $F9,"/",$FD,$00 ; Wind/Water
@@ -659,7 +659,7 @@ Drain: db "Ste",$E2,$E0,"HP|hitr",$07,$E7,"= 90%",$00 ; Steals HP
 Osmose: db "Ste",$E2,$E0,"MP|hitr",$07,$E7,"= 90%",$00 ; Steals MP
 Rasp: db "MP",$EB,"mg|Fa",$0C," by",$F7,$F0,"m",$E4,"a",$00 ; MP dmg
 Muddle: db "S",$E5,$E0,"[Mudd",$E1,"], fa",$0C," by",$F7,$F0,"m",$E4,"a|At",$F0,"ck random ",$E2,"lie",$E0,"unt",$0C," phys. hit",$00 ; Sets "Muddle"|Attack random allies until phys. hit
-Mute: db "S",$E5,$E0,"[Mute], fa",$0C," by",$F7,$F0,"m",$E4,"a|Can't",$EB,"o anyth",$E4,$EE,"th",$07," cost",$E0,"MP",$00; Sets "Mute"|Can't do anything that costs MP
+Mute: db "S",$E5,$E0,"[Mute], fa",$0C," by",$F7,$F0,"m",$E4,"a|Can't",$EB,"o anyth",$E4,$EE,"th",$07," cost",$E0,"MP",$00; Set",$E0,""Mute"|Can't do anything that cost",$E0,"MP
 Sleep: db "S",$E5,$E0,$F3,$E1,"ep], fa",$0C," by",$F7,$F0,"m",$E4,"a|Inactiv",$E7,"unt",$0C,$03,"phys.",$03,"hit",$03,"or",$03,"it wear",$E0,"off",$00 ; Sets "Sleep"|Inactive until phys. hit or it wears off
 SleepX: db "S",$E5,$E0,$F3,$E1,"ep]|Fa",$0C," by",$F7,$F0,"m",$E4,"a",$00 ; Sets "Sleep"
 Imp: db "S",$E5,"s/l",$F5,"t",$E0,"[Imp]|Dm",$EE,"an",$F4,"he",$E2,$E4,$EE,"output h",$E2,"ved",$00 ; Sets/lifts "Imp"|Dmg and healing output halved
@@ -667,12 +667,12 @@ Bserk: db "S",$E5,$E0,"[Berserk]|Phys.",$EB,"m",$EE,"up, becom",$E7,"uncontrolla
 Stop: db "S",$E5,$E0,$F3,"top], fa",$0C," by",$F7,$F0,"m",$E4,"a|Can't mov",$E7,"for a brief time",$00 ; Sets "Stop"|Can't move for a brief time
 Safe: db "S",$E5,$E0,$F3,"afe]|Reduc",$E7,"physic",$E2,$EB,"m",$EE,$F0,"ken",$00 ; Sets "Safe"|Reduce physical dmg taken
 Shell: db "S",$E5,$E0,$F3,"hell",$EC,"|Reduc",$E7,"magic",$E2,$EB,"m",$EE,$F0,"ken",$00 ; Sets "Shell"|Reduce magical dmg taken
-Haste: db "S",$E5,$E0,"[Haste]|Spee",$F4,"up, l",$F5,"t",$E0,$F3,"low]",$00 ; Sets "Haste"|Speed up, lifts "Slow"
-HasteX: db "S",$E5,$E0,"[Haste]",$00 ; Sets "Haste"
+Haste: db "S",$E5,$E0,"[Haste]|Spee",$F4,"up, l",$F5,"t",$E0,$F3,"low]",$00 ; Sets "Haste"|Speed up, lift",$E0,""Slow"
+HasteX: db "S",$E5,$E0,"[Haste]",$00 ; Set",$E0,""Haste"
 Slow: db "S",$E5,$E0,$F3,"low], fa",$0C," by",$F7,$F0,"m",$E4,"a|Speed",$EB,"own, l",$F5,"t",$E0,"[Haste]",$00 ; Sets "Slow"|Speed down, lifts "Haste"
 SlowX: db "S",$E5,$E0,$F3,"low]|Fa",$0C," by",$F7,$F0,"m",$E4,"a",$00 ; Sets "Slow"
 Rflect: db "S",$E5,$E0,"[Ref",$E1,"ct]|Repel",$E0,"s",$E4,"g",$E1," an",$F4,"f",$F1,"e-",$F0,"rg",$E5," magic",$00 ; Sets "Reflect"|Repels single and free-target magic
-Float: db "S",$E5,$E0,"[Flo",$07,"]|Block",$E0,"groun",$F4,$07,$F0,"cks",$00 ; Sets "Float"|Blocks ground attacks
+Float: db "S",$E5,$E0,"[Flo",$07,"]|Block",$E0,"groun",$F4,$07,$F0,"cks",$00 ; Sets  "Float"|Blocks ground attacks
 Warp: db "Go to Worl",$F4,"9",$00
 Scan: db "Display",$E0,"HP/MP, activ",$E7,"st",$07,"uses|an",$F4,"e",$E1,"ment",$E2," weaknesses",$00
 Dispel: db "L",$F5,"t",$E0,"positiv",$E7,"s",$F0,"tuses",$00 ; Lifts positive statuses
@@ -752,21 +752,21 @@ org $D8CF80
 org $CFFC00
 
 Pummel:
-	db "Physical attack (ignores def.)|Sets [Sap]",$00
+	db "Physical attack (ignore",$E0,"def.)|Set",$E0,"[Sap]",$00
 Suplex:
-	db "Physical attack (ignores def.)|May set [Stop]",$00
+	db "Physical attack (ignore",$E0,"def.)|May set [Stop]",$00
 Aurabolt:
-	db $F6," (stamina-based)|Row affects dmg",$00
+	db $F6," (stamina-based)|Row affect",$E0,"dmg",$00
 FireDance:
 	db $FC,$00
 Mantra:
-	db "Cures HP (stamina-based)|Weaker at low HP",$00
+	db "Cure",$E0,"HP (stamina-based)|Weaker at low HP",$00
 Chakra:
-	db "Cures MP (stamina-based)",$00
+	db "Cure",$E0,"MP (stamina-based)",$00
 SonicBoom:
 	db $F9," (stamina-based)",$00
 BumRush:
-	db "Punch hard (ignores def.)",$00
+	db "Punch hard (ignore",$E0,"def.)",$00
 
 warnpc $CFFCFF
 
@@ -792,7 +792,7 @@ Dispatch:
 Mindblow:
 	db "500 MP",$EB,"mg",$00
 Empowerer:
-	db "Ste",$E2,$E0,"HP/MP, row affects",$EB,"mg|Effective vs undead, s",$E5,$E0,$F3,"ap]",$00
+	db "Ste",$E2,$E0,"HP/MP, row affects",$EB,"mg|Effective v",$E0,"undead, s",$E5,$E0,$F3,"ap]",$00
 Flurry:
 	db "4 physic",$E2," attacks|May",$F7,$E5," [Muddle]",$00
 Dragon:
@@ -826,25 +826,25 @@ org $ED77A0
 Aqualung:
 	db $FD,$00
 BadBreath:
-	db "Sets [Poison]/[Blind]/[Mute]|Fail by stamina",$00
+	db "Set",$E0,"[Poison]/[Blind]/[Mute]|Fail by stamina",$00
 BlackOmen:
-	db "Non-elemental dmg|Ignores def.",$00
+	db "Non-elemental dmg|Ignore",$E0,"def.",$00
 Blaze:
 	db $FC,"/",$F9,", may set [Blind]/[Sap]",$00
 BlowFish:
 	db "Physical dmg = 1000",$00
 Discord:
-	db "Sets [Muddle]/[Berserk]|Unreflectable, fail by stamina",$00
+	db "Set",$E0,"[Muddle]/[Berserk]|Unreflectable, fail by stamina",$00
 HolyWind:
-	db "Cures HP|Amount healed = caster's (current) HP",$00
+	db "Cure",$E0,"HP|Amount healed = caster'",$E0,"(current) HP",$00
 Raid:
-	db "Steal HP/MP, fail by stamina|Ignores def., unreflectable",$00
+	db "Steal HP/MP, fail by stamina|Ignore",$E0,"def., unreflectable",$00
 Raze:
 	db $FC,"/",$F9,", may set [Sap]",$00
 Refract:
-	db "Sets [Reflect]/[Image]|Unreflectable",$00
+	db "Set",$E0,"[Reflect]/[Image]|Unreflectable",$00
 Shield:
-	db "Sets [Safe]",$00
+	db "Set",$E0,"[Safe]",$00
 Tsunami:
 	db $FD,$FD,$FD,$00
 
@@ -921,30 +921,30 @@ EsperDescPointers:
 Ramuh: db "Judgement:|",$F8," (",$11," dmg on multi-target)",$00
 Ifrit: db "Inferno:|",$FC," (",$11," dmg on multi-target)",$00
 Shiva: db "Gem Dust:|",$FB," (",$11," dmg on multi-target)",$00
-Siren: db "Siren Song: Sets [Muddle]/[Berserk]|Fail by stamina",$00
+Siren: db "Siren Song: Set",$E0,"[Muddle]/[Berserk]|Fail by stamina",$00
 Terrato: db "Earth Rage:|",$FA," (",$11," dmg on multi-target)",$00
-Shoat: db "Hurricane:|Sets [Petrify] (low hit%)",$00
-Maduin: db "Chaos Wing:|",$F9," Ignores def.",$00
+Shoat: db "Hurricane:|Set",$E0,"[Petrify] (low hit%)",$00
+Maduin: db "Chao",$E0,"Wing:|",$F9," Ignore",$E0,"def.",$00
 Bismark: db "Sea Song:|",$FD," (",$11," dmg on multi-target)",$00
-Stray: db "Cait Sith: Sets [Regen]|Cures HP (stamina-based)",$00
-Palidor: db "Air Raid:|Party attacks w/ [Jump]",$00
+Stray: db "Cait Sith: Set",$E0,"[Regen]|Cure",$E0,"HP (stamina-based)",$00
+Palidor: db "Air Raid:|Party attack",$E0,"w/ [Jump]",$00
 Tritoch: db "Trisection:|",$FC,"/",$FB,"/",$F8," (",$11," dmg on multi-target)",$00
-Odin: db "Atom Edge:|Stamina-based dmg, ignores def.",$00
+Odin: db "Atom Edge:|Stamina-based dmg, ignore",$E0,"def.",$00
 Loki: db $00
-Bahamut: db "Mega Flare:|Non-elemental dmg, ignores def.",$00
+Bahamut: db "Mega Flare:|Non-elemental dmg, ignore",$E0,"def.",$00
 Crusader: db "Jihad:|",$EF," (",$11," dmg on multi-target)",$00
 Ragnarok: db "Oblivion:|Non-elemental dmg = 9999",$00
 Alexandr: db "Justice:|",$F6," (",$11," dmg on multi-target)",$00
-Kirin: db "Life Force:|Cures HP, revives allies",$00
-Zoneseek: db "Light Wall:|Sets [Shell]",$00
-Carbunkl: db "Ruby Blast:|Sets [Reflect]",$00
-Phantom: db "Fader: Sets [Clear]|100% physical, 0% magical evasion",$00
-Seraph: db "Lifeline:|Sets [Rerise]",$00
-Golem: db "Earth Wall: Blocks physical dmg|Durability = caster's max HP",$00
-Unicorn: db "Heal Horn: Cures HP (stamina-based)|Lifts most bad statuses",$00
-Fenrir: db "Moonshine: Sets [Image]|Evades one or more physical attacks",$00
-Starlet: db "Group Hug: Cures HP to max|Lifts all bad statuses",$00
-Phoenix: db "Rebirth:|Revives fallen allies to max HP",$00
+Kirin: db "Life Force:|Cure",$E0,"HP, revive",$E0,"allies",$00
+Zoneseek: db "Light Wall:|Set",$E0,"[Shell]",$00
+Carbunkl: db "Ruby Blast:|Set",$E0,"[Reflect]",$00
+Phantom: db "Fader: Set",$E0,"[Clear]|100% physical, 0% magical evasion",$00
+Seraph: db "Lifeline:|Set",$E0,"[Rerise]",$00
+Golem: db "Earth Wall: Block",$E0,"physical dmg|Durability = caster'",$E0,"max HP",$00
+Unicorn: db "Heal Horn: Cure",$E0,"HP (stamina-based)|Lift",$E0,"most bad statuses",$00
+Fenrir: db "Moonshine: Set",$E0,"[Image]|Evade",$E0,"one or more physical attacks",$00
+Starlet: db "Group Hug: Cure",$E0,"HP to max|Lift",$E0,"all bad statuses",$00
+Phoenix: db "Rebirth:|Revive",$E0,"fallen allie",$E0,"to max HP",$00
 
 warnpc $CB5790
 
@@ -955,25 +955,25 @@ warnpc $CB5790
 org $CF3940
 
 Ramuhb:
-    db "Equip Bonus:|Halves Bolt damage",$00
+    db "Equip Bonus:|Halve",$E0,"Bolt damage",$00
 Ifritb:
-    db "Equip Bonus:|Halves Fire damage",$00
+    db "Equip Bonus:|Halve",$E0,"Fire damage",$00
 Shivab:
-    db "Equip Bonus:|Halves Ice damage",$00
+    db "Equip Bonus:|Halve",$E0,"Ice damage",$00
 Sirenb:
-    db "Equip Bonus:|Blocks [Mute]/[Muddle]/[Berserk]",$00
+    db "Equip Bonus:|Block",$E0,"[Mute]/[Muddle]/[Berserk]",$00
 Terratob:
-	db "Equip Bonus:|Halves Earth damage",$00
+	db "Equip Bonus:|Halve",$E0,"Earth damage",$00
 Shoatb:
 	db "Equip Bonus:|Stamina +5",$00
 Maduinb:
-	db "Equip Bonus:|Halves Wind damage",$00
+	db "Equip Bonus:|Halve",$E0,"Wind damage",$00
 Bismarkb:
-	db "Equip Bonus:|Halves Water damage",$00
+	db "Equip Bonus:|Halve",$E0,"Water damage",$00
 Strayb:
-	db "Equip Bonus:|Blocks [Blind]/[Poison]/[Imp]",$00
+	db "Equip Bonus:|Block",$E0,"[Blind]/[Poison]/[Imp]",$00
 Palidorb:
-	db "Equip Bonus:|Auto-Haste (blocks [Slow])",$00
+	db "Equip Bonus:|Auto-Haste (block",$E0,"[Slow])",$00
 Tritochb:
 	db "Equip Bonus:|Auto-Shell",$00
 Odinb:
@@ -993,11 +993,11 @@ Kirinb:
 Zoneseekb:
 	db "Equip Bonus:|M.Def +10",$00
 Carbunklb:
-	db "Equip Bonus:|Auto-Regen (blocks [Sap])",$00
+	db "Equip Bonus:|Auto-Regen (block",$E0,"[Sap])",$00
 Phantomb:
 	db "Equip Bonus:|M.Evade +10",$00
 Seraphb:
-	db "Equip Bonus:|Blocks [Sleep]/[Petrify]/Death",$00
+	db "Equip Bonus:|Block",$E0,"[Sleep]/[Petrify]/Death",$00
 Golemb:
 	db "Equip Bonus:|Def +10",$00
 Unicornb:
