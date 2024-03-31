@@ -403,8 +403,8 @@ multiflag:
 	LDA #$30                ; Turn Man Eater and Butterlfy flag value into bitmask value
 	BRA .end                ; branch to go back
 .IgnoresDef_AntiHum
-	CPX #$0012
-	BEQ .AntiHuman
+	LDA #$38
+    BRA .end
 .IgnoresDef
 	LDA #$08
 	BRA .end
