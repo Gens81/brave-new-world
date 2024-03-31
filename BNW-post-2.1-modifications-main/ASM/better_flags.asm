@@ -383,7 +383,7 @@ multiflag:
 	CMP #$A0				; Valiance?
 	BEQ .IgnoresDef         ; branch if so
 	CMP #$50                ; Morning Star?
-	BEQ .IgnoresDef         ; branch if so
+	BEQ .IgnoresDef_AntiHum ; branch if so
 	CMP #$80                ; Anti-Air and High Critical Bonus?
 	BEQ .end                ; branch if so
 .clear
@@ -402,6 +402,9 @@ multiflag:
 .AntiHuman                  
 	LDA #$30                ; Turn Man Eater and Butterlfy flag value into bitmask value
 	BRA .end                ; branch to go back
+.IgnoresDef_AntiHum
+	CPX #$0012
+	BEQ .AntiHuman
 .IgnoresDef
 	LDA #$08
 	BRA .end
