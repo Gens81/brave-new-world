@@ -31,6 +31,10 @@ table "menu.tbl",ltr
 ;Fire   $FC
 ;Water  $FD
 ;Dark   $EF
+;white magic dot 	$E8
+;black magic dot	$E9
+;gray magic dot		$EA
+;lore icon			$E3
 
 ;-------------------------------
 ; Item descriptions
@@ -51,21 +55,21 @@ Valiance:       db "Ignore",$E0,"defense|Stronger at low HP",$00
 MythrilBolo:    db "",$00
 IronCutlass:    db "",$00
 Scimitar:       db "Dual-wield|May counterattack",$00
-Flametongue:    db "Fire dmg|May cast Fire 2",$00
-Icebrand:       db "Ice dmg|May cast Ice 2",$00
-ElecSword:      db "Bolt dmg|May cast Bolt 2",$00
+Flametongue:    db "Fire dmg|May cast ",$E9,"Fire 2",$00
+Icebrand:       db "Ice dmg|May cast ",$E9,"Ice 2",$00
+ElecSword:      db "Bolt dmg|May cast ",$E9,"Bolt 2",$00
 Epee:           db "",$00
 BreakBlade:     db "",$00
-BloodSword:     db "May cast Drain",$00
+BloodSword:     db "May cast ",$E9,"Drain",$00
 Imperial:       db "",$00
 RuneBlade:      db "Use",$E0,"MP for critical hits",$00
 Falchion:       db "Dual-wield|May counterattack",$00
-SoulSabre:      db "May cast Osmose",$00
+SoulSabre:      db "May cast ",$EA,"Osmose",$00
 Organix:        db "",$00
 Excalibur:      db "Use",$E0,"MP for critical hits|Stronger in 2 hands",$00
 Zantetsuken:    db "Alway",$E0,"hits, may counterattack|High crit rate, can insta-kill",$00
-Illumina:       db "Use",$E0,"MP for critical hits|May cast Holy",$00
-Apocalypse:     db "Use",$E0,"MP for critical hits|May cast Flare",$00
+Illumina:       db "Use",$E0,"MP for critical hits|May cast ",$E9,"Holy",$00
+Apocalypse:     db "Use",$E0,"MP for critical hits|May cast ",$E9,"Flare",$00
 AtmaWeapon:     db "Attack",$E0,"w/ stamina|Weaker at low HP",$00
 MythrilPike:    db "Spear",$E0,"are stronger in 2 hands|and user",$E0,"may guard allies",$00
 Trident:        db "HP+12.5%|Water dmg",$00
@@ -77,7 +81,7 @@ Gungnir:        db "HP+50%|Alway",$E0,"hits",$00
 PointyStick:    db "",$00
 Tanto:          db "",$00
 Kunai2:         db "Anti-air, high crit rate",$00
-Sakura:         db "May cast Break",$00
+Sakura:         db "May cast ",$E9,"Break",$00
 Ninjato:        db "Anti-air, high crit rate",$00
 Kagenui2:       db "Ninja can wield",$00
 Orochi:         db "Anti-air, high crit rate",$00
@@ -91,18 +95,18 @@ Spoon:          db "",$00
 Mutsunokami:    db "Wind blade i",$E0,"most powerful",$00
 SpookStick:     db "",$00
 MythrilRod:     db "Rod",$E0,"use MP for critical dmg|and have high spellcast rate",$00
-FireRod:        db "May cast Fire 2|(MP crit = 2x spell dmg)",$00
-IceRod:         db "May cast Ice 2|(MP crit = 2x spell dmg)",$00
-ThunderRod:     db "May cast Bolt 2|(MP crit = 2x spell dmg)",$00
+FireRod:        db "May cast ",$E9,"Fire 2|(MP crit = 2x spell dmg)",$00
+IceRod:         db "May cast ",$E9,"Ice 2|(MP crit = 2x spell dmg)",$00
+ThunderRod:     db "May cast ",$E9,"Bolt 2|(MP crit = 2x spell dmg)",$00
 WindBreaker:    db "Wind hit",$E0,"with much stamina",$00
-Doomstick:      db "May cast Doom|(MP crit = X-Zone)",$00
-Quartrstaff:    db "May cast Quartr|(MP crit = hit",$E0,"foe group)",$00
-Punisher:       db "May cast Dark|(MP crit = 2x spell dmg)",$00
+Doomstick:      db "May cast ",$E9,"Doom|(MP crit = X-Zone)",$00
+Quartrstaff:    db "May cast ",$E9,"Quartr|(MP crit = hit",$E0,"foe group)",$00
+Punisher:       db "May cast ",$E9,"Dark|(MP crit = 2x spell dmg)",$00
 MagusRod:       db "",$00
 LightBrush:     db "Brushe",$E0,"cure HP and hit 2x",$00
-MonetBrush:     db "May cast Safe",$00
-DaliBrush:      db "May cast Shell",$00
-RossBrush:      db "May cast Haste",$00
+MonetBrush:     db "May cast ",$EA,"Safe",$00
+DaliBrush:      db "May cast ",$EA,"Shell",$00
+RossBrush:      db "May cast ",$EA,"Haste",$00
 Shuriken:       db "Use w/ [Throw]|Can spread with L/R",$00
 TackStar:       db "",$00
 NinjaStar:      db "Strongest throw",$00
@@ -122,12 +126,12 @@ ViperDarts:     db "Use",$E0,"MP for critical hits",$00
 Dice:           db "Dmg = (2Lv. * D1 * D2)|Alway",$E0,"hits",$00
 FixedDice:      db "Dmg = (2Lv. * D1 * D2 * D3)|Alway",$E0,"hits",$00
 MythrilClaw:    db "",$00
-SpiritClaw:     db "HP+12.5%|Holy dmg, may cast Slow",$00
-PoisonClaw:     db "HP+12.5%|Dark dmg, may cast Sap",$00
-OceanClaw:      db "HP+25%|Water dmg, may cast Drain",$00
-HellClaw:       db "HP+25%|Fire dmg, may cast Fire",$00
-Frostgore:      db "HP+50%|Ice dmg, may cast Ice",$00
-Stormfang:      db "HP+50%|Bolt dmg, may cast Bolt",$00
+SpiritClaw:     db "HP+12.5%|Holy dmg, may cast ",$EA,"Slow",$00
+PoisonClaw:     db "HP+12.5%|Dark dmg, may cast ",$E9,"Sap",$00
+OceanClaw:      db "HP+25%|Water dmg, may cast ",$E9,"Drain",$00
+HellClaw:       db "HP+25%|Fire dmg, may cast ",$E9,"Fire",$00
+Frostgore:      db "HP+50%|Ice dmg, may cast ",$E9,"Ice",$00
+Stormfang:      db "HP+50%|Bolt dmg, may cast ",$E9,"Bolt",$00
 Buckler:        db "",$00
 IronShield:     db "",$00
 Targe:          db "",$00
