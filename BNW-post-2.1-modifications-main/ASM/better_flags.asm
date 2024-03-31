@@ -186,9 +186,9 @@ org $C386F0 : LDA #$84C5+128	; magic
 org $C386C1 : LDA #$8545+128	; speed
 org $C386D6 : LDA #$85c5+128	; stamina
 ;org $c3879D : LDX #$8643		; attack	-> in arrange elements routine 
-org $c38727 : LDX #$86C3+128	; defense
+org $c38727 : LDX #$87C3+128	; defense 
 ;org $c387AC : LDA #$8743		; evade		->				^
-org $c38717 : LDX #$87C3+128	; m.def.
+org $c38717 : LDX #$86C3+128	; m.def. 
 ;org $c387C7 : LDA #$8843		; m.evade	->				^
 
 
