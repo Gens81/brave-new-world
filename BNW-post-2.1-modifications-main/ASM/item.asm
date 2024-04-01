@@ -81,12 +81,5 @@ org $D85792
     
 ;Morning Star (Anti-human)
 
-org $c2a7d6
-
-MorningStarAU:
-JSR $3DC5 ; ignore target defense
-JSR $38F2 ; double damage to humans
-RTS
-
-org $C242EB ; special effect jump table
-dw MorningStarAU
+; update per-target jump table entry of weapon effect $05
+org $C23DD7 : dw $38F2  ; double damage to humans
