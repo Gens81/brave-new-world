@@ -112,7 +112,7 @@ TackStar:       db "",$00
 NinjaStar:      db "Strongest throw",$00
 Club:           db "",$00
 FullMoon:       db "Anti-air, high crit rate|Ignore",$E0,"row, dual-wield",$00
-MorningStar:    db "Ignore",$E0,"defense|2x dmg to humans",$00
+MorningStar:    db "2x dmg to humans|Ignore",$E0,"defense",$00
 Boomerang:      db "Anti-air, high crit rate|Ignore",$E0,"row, dual-wield",$00
 RisingSun:      db "Anti-air, high crit rate|Ignore",$E0,"row, dual-wield",$00
 Kusarigama:     db "2x dmg to humans|May set [Stop]/[Slow]",$00
@@ -649,7 +649,7 @@ Ice3: db $FB,$FB,$FB,$00
 Bolt3: db $F8,$F8,$F8,$00
 Quake: db $FA," Igno",$F1,$E0,"def., groun",$F4,$07,$F0,"ck",$00 ; Earth Ignores def., ground attack
 Doom: db "Ins",$F0,"nt",$EB,"e",$07,"h (he",$E2,$E0,"undead)|Fa",$0C," by",$F7,$F0,"m",$E4,"a",$00; Instant death|Heals undead
-Holy: db $F6," Igno",$F1,$E0,"def.",$00 ; Holy Ignore",$E0,"def.
+Holy: db $F6," Igno",$F1,$E0,"def.",$00 ; Holy Ignores def.
 Flare: db "Non-e",$E1,"ment",$E2,$EB,"mg|Igno",$F1,$E0,"def.",$00 ; Non-elemental dmg|Ignores def.
 Dark: db $EF,$00 ; Dark
 Storm: db $F9,"/",$FD,$00 ; Wind/Water
@@ -663,7 +663,7 @@ Drain: db "Ste",$E2,$E0,"HP|hitr",$07,$E7,"= 90%",$00 ; Steals HP
 Osmose: db "Ste",$E2,$E0,"MP|hitr",$07,$E7,"= 90%",$00 ; Steals MP
 Rasp: db "MP",$EB,"mg|Fa",$0C," by",$F7,$F0,"m",$E4,"a",$00 ; MP dmg
 Muddle: db "S",$E5,$E0,"[Mudd",$E1,"], fa",$0C," by",$F7,$F0,"m",$E4,"a|At",$F0,"ck random ",$E2,"lie",$E0,"unt",$0C," phys. hit",$00 ; Sets "Muddle"|Attack random allies until phys. hit
-Mute: db "S",$E5,$E0,"[Mute], fa",$0C," by",$F7,$F0,"m",$E4,"a|Can't",$EB,"o anyth",$E4,$EE,"th",$07," cost",$E0,"MP",$00; Set",$E0,""Mute"|Can't do anything that cost",$E0,"MP
+Mute: db "S",$E5,$E0,"[Mute], fa",$0C," by",$F7,$F0,"m",$E4,"a|Can't",$EB,"o anyth",$E4,$EE,"th",$07," cost",$E0,"MP",$00; Sets "Mute"|Can't do anything that costs MP
 Sleep: db "S",$E5,$E0,$F3,$E1,"ep], fa",$0C," by",$F7,$F0,"m",$E4,"a|Inactiv",$E7,"unt",$0C,$03,"phys.",$03,"hit",$03,"or",$03,"it wear",$E0,"off",$00 ; Sets "Sleep"|Inactive until phys. hit or it wears off
 SleepX: db "S",$E5,$E0,$F3,$E1,"ep]|Fa",$0C," by",$F7,$F0,"m",$E4,"a",$00 ; Sets "Sleep"
 Imp: db "S",$E5,"s/l",$F5,"t",$E0,"[Imp]|Dm",$EE,"an",$F4,"he",$E2,$E4,$EE,"output h",$E2,"ved",$00 ; Sets/lifts "Imp"|Dmg and healing output halved
@@ -671,12 +671,12 @@ Bserk: db "S",$E5,$E0,"[Berserk]|Phys.",$EB,"m",$EE,"up, becom",$E7,"uncontrolla
 Stop: db "S",$E5,$E0,$F3,"top], fa",$0C," by",$F7,$F0,"m",$E4,"a|Can't mov",$E7,"for a brief time",$00 ; Sets "Stop"|Can't move for a brief time
 Safe: db "S",$E5,$E0,$F3,"afe]|Reduc",$E7,"physic",$E2,$EB,"m",$EE,$F0,"ken",$00 ; Sets "Safe"|Reduce physical dmg taken
 Shell: db "S",$E5,$E0,$F3,"hell",$EC,"|Reduc",$E7,"magic",$E2,$EB,"m",$EE,$F0,"ken",$00 ; Sets "Shell"|Reduce magical dmg taken
-Haste: db "S",$E5,$E0,"[Haste]|Spee",$F4,"up, l",$F5,"t",$E0,$F3,"low]",$00 ; Sets "Haste"|Speed up, lift",$E0,""Slow"
+Haste: db "S",$E5,$E0,"[Haste]|Spee",$F4,"up, l",$F5,"t",$E0,$F3,"low]",$00 ; Sets "Haste"|Speed up, lifts "Slow"
 HasteX: db "S",$E5,$E0,"[Haste]",$00 ; Set",$E0,""Haste"
 Slow: db "S",$E5,$E0,$F3,"low], fa",$0C," by",$F7,$F0,"m",$E4,"a|Speed",$EB,"own, l",$F5,"t",$E0,"[Haste]",$00 ; Sets "Slow"|Speed down, lifts "Haste"
 SlowX: db "S",$E5,$E0,$F3,"low]|Fa",$0C," by",$F7,$F0,"m",$E4,"a",$00 ; Sets "Slow"
 Rflect: db "S",$E5,$E0,"[Ref",$E1,"ct]|Repel",$E0,"s",$E4,"g",$E1," an",$F4,"f",$F1,"e-",$F0,"rg",$E5," magic",$00 ; Sets "Reflect"|Repels single and free-target magic
-Float: db "S",$E5,$E0,"[Flo",$07,"]|Block",$E0,"groun",$F4,$07,$F0,"cks",$00 ; Sets  "Float"|Blocks ground attacks
+Float: db "S",$E5,$E0,"[Flo",$07,"]|Block",$E0,"groun",$F4,$07,$F0,"cks",$00 ; Sets "Float"|Blocks ground attacks
 Warp: db "Go to Worl",$F4,"9",$00
 Scan: db "Display",$E0,"HP/MP, activ",$E7,"st",$07,"uses|an",$F4,"e",$E1,"ment",$E2," weaknesses",$00
 Dispel: db "L",$F5,"t",$E0,"positiv",$E7,"s",$F0,"tuses",$00 ; Lifts positive statuses
