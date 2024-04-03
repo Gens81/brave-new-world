@@ -55,7 +55,7 @@ warnpc $D2BFF3
 
 ;Claw buff
 
-org $D859E0 
+org $D859E1 
     db $10
 org $D859FF 
     db $10      ;Spirit/Poison HP+
