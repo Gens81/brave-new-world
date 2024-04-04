@@ -5,6 +5,8 @@ set VANILLA_ROM="rom\Final Fantasy III (USA) (Rev 1).sfc"
 set EDITED_ROM="bnw.sfc"
 set PATCHES="asm"
 set SCRIPTS="scripts"
+set ORIGINAL_BIN="gfx\modified\02686C_Title_Program_orig.bin"
+set EDITED_BIN="gfx\modified\02686C_Title_Program.bin"
 
 rem ----------------------------------------------------------------------------
 set ASAR="tools\asar.exe"
@@ -15,6 +17,7 @@ set ATLAS="tools\Atlas.exe"
 
 rem ----------------------------------------------------------------------------
 copy %ORIGINAL_ROM% %EDITED_ROM% /y
+copy %ORIGINAL_BIN% %EDITED_BIN% /y
 rem ----------------------------------------------------------------------------
 
 echo.
@@ -32,7 +35,11 @@ echo Applying ips...
 %FLIPS% --apply "improved_portraits.ips" %EDITED_ROM%
 
 echo Applying hacks...
+%ASAR% --pause-mode=on-error %PATCHES%\new_opening.asm %EDITED_BIN%
 %ASAR% --pause-mode=on-error %PATCHES%\main.asm %EDITED_ROM%
+
+echo Inserting Compressed Graphics...
+%FFVIDECOMP% -m c -s 0x02686C %EDITED_ROM% < %EDITED_BIN%
 
 echo Creating patch...
 %FLIPS% --create --ips %VANILLA_ROM% %EDITED_ROM% "[n]BNW 2.2 b26.ips"
