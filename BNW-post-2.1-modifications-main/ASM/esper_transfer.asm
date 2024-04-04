@@ -2,18 +2,31 @@ arch 65816
 hirom
 table "menu.tbl", ltr
 
-org $C3876b
+org $C3f69b
 active_desc:
 	LDA #$10        ; Description: On
 	TRB $45         ; Set menu flag
+	JSR C35983    	; Handle D-Pad
 	jmp $5B93       ; Load description
-	
+
+warnpc $C3F6B0	
+
+
+org $C3876b
 check_for_y:
 	jsl chek_if_shown
 	jmp compute_null
 .rts
 	rts
-	
+
+el_bonus:
+	jsr $a662			; go to redraw desc
+	jsr $a991			; Set to upload VWF description, freeze CGRAM
+	jmp $0F4D			; refresh bg3 tilemap b
+
+
+padbyte $FF
+pad $c3877f	
 warnpc $c3877f	
 
 org $c479e0

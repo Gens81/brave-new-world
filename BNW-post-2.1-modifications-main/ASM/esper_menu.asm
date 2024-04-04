@@ -12,17 +12,19 @@ table "menu.tbl", ltr
 
 ; Refresh BG1 Tilemap B after "Handle Esper Selectione" while holding Yes
 org $C327EF
-C327EF:	JSR $a662		; Build VWF tilemap
-		;JSR $0F4D
-		;JSR $1488
-		RTS
+C327EF:	LDA $0D			; Key
+		BIT #$40		; Holding ?
+		BEQ .skip		; Branch if not
+		JMP check_for_y	; Jump to chek Y button
+.skip
+		JMP C358D7		; Jump to go on with regular code
+
 		
 warnpc $C327FB
 
 ; 1E: Handle esper selection
 org $C328D3
-C328D3: JSR C327EF
-		LDA #$10        ; Description: On
+C328D3:	LDA #$10        ; Description: On
         TRB $45         ; Set menu flag
         LDA #$04        ; List type: Espers
         STA $2A         ; Set redraw mode
@@ -31,8 +33,7 @@ C328D3: JSR C327EF
         BCS C32928      ; Exit if pushed
         JSR $4C1E       ; Handle D-Pad
         JSR $56DF       ; Load description
-;		jsl rstore_desc	;
-        LDA $08         ; No-autofire keys
+		LDA $08         ; No-autofire keys
         BIT #$80        ; Pushing A?
         BEQ C3291B      ; Branch if not
         JSR $0EB2       ; Sound: Click
@@ -175,9 +176,9 @@ warnpc $c358ce
 ; Changing "[actor] has it" into "You have equipped"
 ; 4D: Sustain esper data menu (12 free bytes)
 org $C358CE
-		JSR C35983	    	; Handle D-Pad
-		JSR active_desc		; Active desc to refresh
-		LDA $08         	; No-autofire keys
+		JSR active_desc		; Active description, handle d-pad and load desc
+		JMP C327EF			; Jump to avoid press A while pressing Y
+C358D7:	LDA $08         	; No-autofire keys
 		BIT #$80       		; Pushing A?
 		BEQ C3590A			; Branch if not
 		TDC            		; Clear A
@@ -410,12 +411,9 @@ C0EDB8:	LDA $09				; No-autofire keys
 		LDA $90				; Old scroll pos
 		STA $4A				; Set as current
 		LDA $4A				; ...
-		STA $E0				; Memorize it...
 		LDA $50				; List row
-		SEC    				; Prepare SBC
-		SBC $E0				; Deduct scroll pos
 		STA $4E				; Set cursor row		
-		JSL C30677			; 
+		JSL C30677			; Relocate cursor
 		LDA #$1E
 		STA $26
 C0EDE3: RTL	
@@ -448,11 +446,6 @@ C0EE2C:	LDY #C0EDE4			; Yes pointer
 		JSL C302F9			; Blank message
 		LDY #C0EE08			; Text pointer
 		JSl C302F9			; Blank message	
-;		phk					; push 
-;		per $0006			; push return
-;		pea $96EE			; push address
-;		jml $c327EF			; jump to address
-		
 		RTS
 		
 ; Play click sound
@@ -544,26 +537,6 @@ clear_pwr_trgt:
 	bne .loop       ; Branch if not
 	rtl
 
-org $c47a00
-rstore_desc:
-	LDA #$80
-	STA $2115
-	LDY #$4400      ; $8800
-	STY $2116       ; Set VRAM 
-	LDY #$8049      ; 7E/8049
-	STY $4302       ; Set src L
-	LDA #$01        ; 2Rx1B to PPU
-	STA $4300       ; Set DMA mode
-	LDA #$18        ; $2118
-	STA $4301       ; To VRAM
-	LDA #$7E        ; Bank: 7E
-	STA $4304       ; Set src HB
-	LDY #$0800      ; Bytes: 4096
-	STY $4305       ; Set data size
-	LDA #$01        ; Channel: 0
-	STA $420B       ; Move data
-	RTL
-
 	
 ; which number option finger cursor allow EL bonus
 org $C33BE2
@@ -597,16 +570,43 @@ warnpc $c3f480
 org $C3876B 
 padbyte $FF : pad $C3877F
 
-
+org $c0ee50
+DrawEsperMP:
+	LDA #$FF
+	STA $2180       	; 3 spaces
+	STA $2180
+	STA $2180
+	LDA $99     	    ; Current Esper
+	ADC #$36  	        ; Get attack ID
+	PHX
+	phk					; push 
+	per $0006			; push return
+	pea $96EE			; push address
+	jml $c350F5     	; Compute index
+	LDX $2134       	; Load it
+	LDA $C46AC5,X   	; Base MP cost
+	PLX
+	phk						; push 
+	per $0006				; push return
+	pea $96EE				; push address
+	jml $C304E0       	; Turns A into displayable digits
+	LDA $F8         	; tens digit
+	STA $2180
+	LDA $F9         	; ones digit
+	STA $2180
+	LDA #$FF        	; space
+	STA $2180
+	LDA #$8C   		    ; M
+	STA $2180
+	LDA #$8F        	; P
+	STA $2180
+	STZ $2180       	; EOS
+	RTL
+warnpc $c0eea0
 
 org $c3fd96
-DrawEsperMP:
-  LDA #$FF
-  STA $2180         ; 3 spaces
-  STA $2180
-  STA $2180
-  STZ $2180         ; EOS
-  RTS
+	jsl DrawEsperMP
+	RTS
 padbyte $FF : pad $C3fdd1
 warnpc $c3fdd1
 	

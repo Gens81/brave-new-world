@@ -49,7 +49,7 @@ org $C3FC74
 	JMP $07B0      ; Queue cursor OAM
 
 padbyte $FF
-pad $C3FCA0
+pad $C3FC88
 
 warnpc $C3FCA0 	
 	

@@ -127,7 +127,10 @@ CanLrn:	JSR $50EC		; Spell
 		BEQ .rerise		; Branch if so
 .Cannot	JMP C3501A+3	; Print blank if not
 
-.rerise	PHY				; Save Y
+.rerise	JSR C350A2		; Get spell mastery percentage
+		CMP #$00		; Not learn?
+		BEQ .Cannot		; Blank if so
+		PHY				; Save Y
 		LDY $67			; Actor index in Y
 		LDA $0000,Y		; Load Actor ID
 		PLY				; Restore Y
@@ -191,9 +194,7 @@ compute_null:
 	jml check_null		; Check if null
 for_y_spec:
 	Jmp Y_spec			; Go to routine that show alt desc
-el_bonus:
-	jsr $a662			; go to redraw desc
-	jmp $0F4D			; refresh bg3 tilemap b
+
 	
 org $C327fb	
 ; 1A: Sustain Magic menu
@@ -228,42 +229,43 @@ C32861:
 
 org $c3fda5
 ; Holding Y
-Y_spec:	 LDA $FF				; Load Spel/Esper whatelse id
-		 CMP #$FF				; No spell/esper whatelse?
- 		 BEQ C32802				; Branch if not
-		 lda $0D
-         bit #$40           	; holding Y?	
-		 BEQ C32802				; Exit if so
-		 LDA #$10				; Description off
-		 TSB $45				; Set
-		 STA $C0				; Set power and target flag
-		 jsr $6a41				; Clear BG3 B
-		 jsl power_target_title	; Jump to write power and target
-		 JSR $0f75				; Upload BG3 tilemap B
-		 JSR $0EFD				; Upload BG1 tilemap A
-		 RTS					; Go to original routine
-C32802:	 LDA $C0				; Cleared tilemap B BG3?
-		 BEQ C3X822				; Branch if so
-		 STZ $C0				; Clear flag
-		 JSR $0F4D				; Upload 
-		 JMP $A662				; Build VWF tilemap
-C3X822:	 RTS
+Y_spec:	LDA $FF					; Load Spel/Esper whatelse id
+		CMP #$FF				; No spell/esper whatelse?
+ 		BEQ C3FDBF				; Branch if not
+		lda $0D
+        bit #$40        	   	; holding Y?	
+		BEQ C3FDC2				; Exit if so
+		LDA #$10				; Description off
+		TSB $45					; Set
+		STA $C0					; Set power and target flag
+		jsr $6a41				; Clear BG3 B
+		jsl power_target_title	; Jump to write power and target
+		jsr $0f75				; Upload BG3 tilemap B
+		Jmp $0EFD				; Upload BG1 tilemap A
+C3FDBF: jsr C3FC88
+C3FDC2:	LDA $C0					; Cleared tilemap B BG3?
+		BEQ C3FDCX				; Branch if so
+		STZ $C0					; Clear flag
+		JSR $0F4D				; Upload 
+		JMP $A662				; Build VWF tilemap
+C3FDCX:	RTS
 
+padbyte $FF
+pad $c3fdd4
 warnpc $c3fdd4
 
-org $C3f69b
-C3F69B:	 LDY #$0400      ; $0800
-         STY $1b         ; Set VRAM ptr
-         LDY #$4049      ; 7E/4049
-         STY $1d         ; Set src LBs
-         LDA #$7E        ; Bank: 7E
-         STA $1f         ; Set src HB
-         LDY #$0800      ; Bytes: 4096
-         STY $19         ; Set data size
-         RTS	
-		 
-warnpc $C3F6B0
 
+org $C3FC88
+C3FC88:	jsr $a796				; Clear Desc Ram addres
+		jsr $A991				; Set to upload VWF description, freeze CGRAM
+		rts						; Go back
+
+warnpc $c3fc99		 
+
+
+org $c0ed10
+C0ED10:	
+warnpc $c0ed60
 
 org $C36122
 ; Y sprite queue func
