@@ -146,8 +146,156 @@ padbyte $FF
 Pad $C355D4	
 warnpc $C355D4
 
+; Add charchter name on desc
+org $C356e2
+	jmp C35ADC
+
+org $C35ADC
+C35ADC:
+	jml C9FD10		; Print who can equip esper
+
+; Load skill or item description	
+org $c9fd10
+C9FD10:	LDX #$9EC9      	; 7E/9EC9
+		STX $2181       	; Set WRAM LBs
+		TDC             	; Clear A
+		LDA $4B         	; List slot
+		TAX             	; Index it
+		LDA $7E9D89,X   	; Skill or item
+		PHA					; Save for after
+		CMP #$FF        	; Empty slot?
+		BEQ C3576D      	; Blank if so
+		REP #$20        	; 16-bit A
+		ASL A           	; Double it
+		TAY             	; Index it
+		LDA [$E7],Y     	; Relative ptr
+		TAY             	; Index it
+		SEP #$20        	; 8-bit A
+.loop	
+		LDA [$EB],Y     	; Text character
+		BEQ C3574F      	; Branch if 00h
+		STA $2180       	; Add to string
+		INY             	; Index +1
+		BRA .loop			; Do next char
+C3574F:	tdc
+		PLA 				; Restore Esper ID
+		ASL
+		TAX
+		rep #$20
+		LDA.l esper_equip,X	; get equippability byte for esper/character pair 
+		stz $e0				; Terra
+		ldx $00				; Esper done:0
+C38529: LSR A          		; Actor can use?
+        BCC .skip     		; Skip if not
+        PHA            		; Save compat.
+        SEP #$20       		; 8-bit A
+        LDA $E0        		; Current actor
+		
+		jsr .print 
+
+        REP #$20       		; 16-bit A
+        PLA            		; Compatibility
+.skip:	SEP #$20       		; 8-bit A
+        INC $E0        		; Actor number +1
+        REP #$20       		; 16-bit A
+        INX            		; Esper done +1
+        CPX #$001E     		; Done all?
+        BNE C38529     		; Loop if not
+        SEP #$20       		; 8-bit A
+        LDA #$FF       		; Terminator
+        STA $2180      		; End list		
+		jml $C3574F		
+		
+		
+
+.print  phx
+		sta $211b
+		stz $211b
+		lda #$25
+		sta $211c
+		ldx $2134
+		lda #$ff
+        STA $2180      		; Add to list
+		ldy $00
+		inx #2
+.loop		
+		lda $1600,X
+		cmp #$FF
+		beq .end
+        STA $2180      		; Add to list
+		inx
+		iny
+		cpy #$0006
+		beq .end
+		bra .loop
+.end
+		plx
+		rts
+		
+C3576D: JML $C3576D		
+
+warnpc $C9FE00
+org $d86f80
+esper_equip:
+	dw $0042	; 	Ramuh	
+	dw $0102	; 	Ifrit	
+	dw $00C0	; 	Shiva	
+	dw $0050	; 	Siren	
+	dw $0420	; 	Terrato	
+	dw $0600	; 	Shoat	
+	dw $0401	; 	Maduin	
+	dw $0005	; 	Bismark	
+	dw $0820	; 	Stray	
+	dw $0410	; 	Palidor	
+	dw $0001	; 	Tritoch	
+	dw $0080	; 	Odin	
+	dw $0000	; 	Loki	
+	dw $0100	; 	Bahamut	
+	dw $0044	; 	Crusader
+	dw $0001	; 	Ragnarok
+	dw $0040	; 	Alexande
+	dw $0006	; 	Kirin	
+	dw $0100	; 	Zoneseek
+	dw $0081	; 	Carbuncl
+	dw $0048	; 	Phantom	
+	dw $0240	; 	Seraph	
+	dw $0030	; 	Golem	
+	dw $0001	; 	Unicorn	
+	dw $0808	; 	Fenrir	
+	dw $0300	; 	Starlet	
+	dw $0003	; 	Phoenix	
+	
+warnpc $d87000
 
 
+; Character esper data table. See below for specifics.
+;EsperData:
+;  db $C0,$84,$88,$04 ;1 Terra
+;  db $03,$00,$02,$04 ;2 Locke
+;  db $80,$40,$02,$00 ;4 Cyan
+;  db $00,$00,$10,$01 ;8 Shadow
+;  db $08,$02,$C0,$00 ;10 Edgar
+;  db $10,$01,$40,$00 ;20 Sabin
+;  db $0D,$40,$31,$00 ;40 Celes
+;  db $04,$08,$0C,$00 ;80 Strago
+;  db $02,$20,$04,$02 ;1 Relm
+;  db $20,$00,$20,$02 ;2 Setzer
+;  db $70,$02,$00,$00 ;4 Mog
+;  db $00,$01,$00,$01 ;8 Gau
+;  db $00,$00,$00,$00 ; Gogo
+;  db $00,$00,$00,$00 ; Umaro
+;  db $00,$00,$00,$00 ; Slot 15
+;  db $00,$00,$00,$00 ; Slot 16
+
+; Byte 1        Byte 2         Byte 3         Byte 4
+; $01: Ramuh    $01: Stray     $01: Alexandr  $01: Fenrir
+; $02: Ifrit    $02: Palidor   $02: Kirin     $02: Starlet
+; $04: Shiva    $04: Tritoch   $04: Zoneseek  $04: Phoenix
+; $08: Siren    $08: Odin      $08: Carbunkle $08: N/A
+; $10: Terrato  $10: Raiden    $10: Phantom   $10: N/A
+; $20: Shoat    $20: Bahamut   $20: Seraph    $20: N/A
+; $40: Maduin   $40: Crusader  $40: Golem     $40: N/A
+; $80: Bismark  $80: Ragnarok  $80: Unicorn   $80: N/A
 
 org $C35897
 ; Initialize esper data menu
@@ -650,8 +798,8 @@ C35A67:
 	JMP $7FD9       ; Draw string
 	
 padbyte $ff
-pad $c35ae1
-warnpc $c35ae1
+pad $c35adc
+warnpc $c35adc
 
 
 ;Inserted in another asm C3/FC20 - C3/F277
