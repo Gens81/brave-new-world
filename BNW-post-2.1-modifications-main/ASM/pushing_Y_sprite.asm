@@ -147,6 +147,12 @@ EDFC90:  LDA $26		  ; Menu flag
 		 BEQ .delete      ;
 		 CMP #$1D         ;
 		 BEQ .delete      ;
+		 CMP #$4D
+		 BNE .go_on
+		 LDA $4B
+		 CMP #$04
+		 beq .delete2
+.go_on		 
 		 LDX $2D          ;
 		 LDA #$E8         ; Cursor's X
          STA $33CA,X      ; Set sprite's
@@ -157,7 +163,10 @@ EDFC90:  LDA $26		  ; Menu flag
          RTL              ; Exit
 .delete	 CLC
 		 RTL
-		 
+.delete2
+ 		 STA $df		  ; Re-active lghtning y flag
+		 CLC
+		 RTL
 warnpc $edfe00		 
 
 org $ED5AC0

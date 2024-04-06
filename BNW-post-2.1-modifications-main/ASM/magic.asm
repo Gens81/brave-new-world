@@ -195,7 +195,7 @@ compute_null:
 for_y_spec:
 	Jmp Y_spec			; Go to routine that show alt desc
 
-	
+		
 org $C327fb	
 ; 1A: Sustain Magic menu
 

@@ -12,7 +12,15 @@ active_desc:
 warnpc $C3F6B0	
 
 
-org $C3876b
+org $C38760
+queue_y:
+	lda $df
+	beq check_for_y
+	tdc
+	LDY #C36122			; $C3/6122
+	jsr $1173			; Queue OAM fn
+	stz $df
+
 check_for_y:
 	jsl chek_if_shown
 	jmp compute_null

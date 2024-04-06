@@ -15,7 +15,7 @@ org $C327EF
 C327EF:	LDA $0D			; Key
 		BIT #$40		; Holding ?
 		BEQ .skip		; Branch if not
-		JMP check_for_y	; Jump to chek Y button
+		JMP queue_y		; Jump to chek Y button
 .skip
 		JMP C358D7		; Jump to go on with regular code
 
@@ -159,7 +159,8 @@ org $c9fd10
 C3576D: JML $C3576D	
 ;-----------------------------------------------------------------------------------------|
 ; (Chara name on 1st row)                                                                 |
-C9FD10:	LDX #$9EC9      	; 7E/9EC9                                                     |
+C9FD10:	stz $ff				;															  |
+		LDX #$9EC9      	; 7E/9EC9                                                     |
 		STX $2181       	; Set WRAM LBs                                                |
 		TDC             	; Clear A                                                     |
 		LDA $4B         	; List slot                                                   |
@@ -283,22 +284,31 @@ C38529: LSR A          		; Actor can use?                                       
 		lda #$25
 		sta $211c
 		ldx $2134
-		lda #$ff
-        STA $2180      		; Add to list
 		ldy $00
 		inx #2
-.loop		
-		lda $1600,X
-		cmp #$FF
-		beq .end
-        STA $2180      		; Add to list
-		inx
-		iny
-		cpy #$0006
-		beq .end
+		lda $1600,X			; Actor 1st letter or last 
+		cmp #$FF			; Last letter or not yet recruited?
+		beq .end			; Branch if so
+		lda $FF				; Already done 1 actor?
+		beq .blank			; Branch if not
+		lda #$C0			; Slash
+		sta $2180			; Add to string
 		bra .loop
+.blank	lda #$FF
+		sta $2180			; Add to string	
+.loop		
+		lda $1600,X			; Actor 1st letter or last 
+		cmp #$FF			; Last letter or not yet recruited?
+		beq .end			; Branch if so 
+        STA $2180      		; Add to list
+		inx					; Inc index
+		iny					; Inc counter
+		cpy #$0006			; 6 letters done?
+		beq .end			; Branch if so
+		bra .loop			; Loop
 .end
 		plx
+		inc $FF
 		rts
 			
 
@@ -472,7 +482,7 @@ C35913: LDA #$10        ; Reset/Stop desc
         LDA #$1E        ; C3/28D3
         STA $26         ; Next: Esper choice
 		RTS				; Back to loop
-C3597C:	JMP check_for_y	; Jump to routine that can return the target_power data
+C3597C:	JMP queue_y		; Jump to routine that can return the target_power data
 	
 
 ; Load navigation data for esper data menu
