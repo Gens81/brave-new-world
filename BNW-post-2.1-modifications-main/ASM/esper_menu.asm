@@ -154,59 +154,128 @@ org $C35ADC
 C35ADC:
 	jml C9FD10		; Print who can equip esper
 
-; Load skill or item description	
+; Load skill or item description
 org $c9fd10
-C9FD10:	LDX #$9EC9      	; 7E/9EC9
-		STX $2181       	; Set WRAM LBs
-		TDC             	; Clear A
-		LDA $4B         	; List slot
-		TAX             	; Index it
-		LDA $7E9D89,X   	; Skill or item
-		PHA					; Save for after
-		CMP #$FF        	; Empty slot?
-		BEQ C3576D      	; Blank if so
-		REP #$20        	; 16-bit A
-		ASL A           	; Double it
-		TAY             	; Index it
-		LDA [$E7],Y     	; Relative ptr
-		TAY             	; Index it
-		SEP #$20        	; 8-bit A
-.loop	
-		LDA [$EB],Y     	; Text character
-		BEQ C3574F      	; Branch if 00h
-		STA $2180       	; Add to string
-		INY             	; Index +1
-		BRA .loop			; Do next char
-C3574F:	tdc
-		PLA 				; Restore Esper ID
-		ASL
-		TAX
-		rep #$20
-		LDA.l esper_equip,X	; get equippability byte for esper/character pair 
-		stz $e0				; Terra
-		ldx $00				; Esper done:0
-C38529: LSR A          		; Actor can use?
-        BCC .skip     		; Skip if not
-        PHA            		; Save compat.
-        SEP #$20       		; 8-bit A
-        LDA $E0        		; Current actor
-		
-		jsr .print 
+C3576D: JML $C3576D	
+;-----------------------------------------------------------------------------------------|
+; (Chara name on 1st row)                                                                 |
+C9FD10:	LDX #$9EC9      	; 7E/9EC9                                                     |
+		STX $2181       	; Set WRAM LBs                                                |
+		TDC             	; Clear A                                                     |
+		LDA $4B         	; List slot                                                   |
+		TAX             	; Index it                                                    |
+		LDA $7E9D89,X   	; Skill or item                                               |
+		PHA					; Save for after                                              |
+		CMP #$FF        	; Empty slot?                                                 |
+		BEQ C3576D      	; Blank if so                                                 |
+		REP #$20        	; 16-bit A                                                    |
+		ASL A           	; Double it                                                   |
+		TAY             	; Index it                                                    |
+		LDA [$E7],Y     	; Relative ptr                                                |
+		TAY             	; Index it                                                    |
+		SEP #$20        	; 8-bit A                                                     |
+.loop	                    ;                                                             |
+		LDA [$EB],Y     	; Text character                                              |
+		CMP #$01            ;                                                             |
+		BEQ .end_ln         ;                                                             |
+		STA $2180       	; Add to string                                               |
+		INY             	; Index +1                                                    |
+		BRA .loop			; Do next char                                                |
+.end_ln	STY $FC				; Push Y                                                      |
+		tdc					; Clear A                                                     |
+		PLA 				; Restore Esper ID                                            |
+		ASL					; Doublt it                                                   |
+		TAX					; Index it                                                    |
+		rep #$20			; 16-bit A                                                    |
+		LDA.l esper_equip,X	; get equippability byte for esper/character pair             |
+		stz $e0				; Terra                                                       |
+		ldx $00				; Esper done:0                                                |
+C38529: LSR A          		; Actor can use?                                              |
+        BCC .skip     		; Skip if not                                                 |
+        PHA            		; Save compat.                                                |
+        SEP #$20       		; 8-bit A                                                     |
+        LDA $E0        		; Current actor                                               |
+		jsr .print 			; Toutine that add actor to string                            |
+        REP #$20       		; 16-bit A                                                    |
+        PLA            		; Compatibility                                               |
+.skip:	SEP #$20       		; 8-bit A                                                     |
+        INC $E0        		; Actor number +1                                             |
+        REP #$20       		; 16-bit A                                                    |
+        INX            		; Esper done +1                                               |
+        CPX #$001E     		; Done all?                                                   |
+        BNE C38529     		; Loop if not                                                 |
+        SEP #$20       		; 8-bit A                                                     |
+        LDA #$01       		; Terminator                                                  |
+        STA $2180      		; End list	                                                  |
+		LDY $FC				; Pull                                                        |
+		INY					; Inc Next                                                    |
+.loop2	                    ;                                                             |
+							;															  |
+		LDA [$EB],Y     	; Text character                                              |
+		BEQ .end_it         ;                                                             |
+		STA $2180       	; Add to string                                               |
+		INY             	; Index +1                                                    |
+		BRA .loop2			; Do next char                                                |
+.end_it		                ;                                                             |
+		jml $C3574F		    ;                                                             |
+;-----------------------------------------------------------------------------------------|
 
-        REP #$20       		; 16-bit A
-        PLA            		; Compatibility
-.skip:	SEP #$20       		; 8-bit A
-        INC $E0        		; Actor number +1
-        REP #$20       		; 16-bit A
-        INX            		; Esper done +1
-        CPX #$001E     		; Done all?
-        BNE C38529     		; Loop if not
-        SEP #$20       		; 8-bit A
-        LDA #$FF       		; Terminator
-        STA $2180      		; End list		
-		jml $C3574F		
+;-----------------------------------------------------------------------------------------|		
+;; (Chara name on 2nd row)                                                                |
+;org $c9fd10                                                                              |
+;C9FD10:	LDX #$9EC9      	; 7E/9EC9                                                 |
+;		STX $2181       	; Set WRAM LBs                                                |
+;		TDC             	; Clear A                                                     |
+;		LDA $4B         	; List slot                                                   |
+;		TAX             	; Index it                                                    |
+;		LDA $7E9D89,X   	; Skill or item                                               |
+;		PHA					; Save for after                                              |
+;		CMP #$FF        	; Empty slot?                                                 |
+;		BEQ C3576D      	; Blank if so                                                 |
+;		REP #$20        	; 16-bit A                                                    |
+;		ASL A           	; Double it                                                   |
+;		TAY             	; Index it                                                    |
+;		LDA [$E7],Y     	; Relative ptr                                                |
+;		TAY             	; Index it                                                    |
+;		SEP #$20        	; 8-bit A                                                     |
+;.loop	                    ;                                                             |
+;		LDA [$EB],Y     	; Text character                                              |
+;		BEQ .end_it      	; Branch if 00h                                               |
+;		STA $2180       	; Add to string                                               |
+;		INY             	; Index +1                                                    |
+;		BRA .loop			; Do next char                                                |
+;.end_it	tdc             ;                                                             |
+;		PLA 				; Restore Esper ID                                            |
+;		ASL                 ;                                                             |
+;		TAX                 ;                                                             |
+;		rep #$20            ;                                                             |
+;		LDA.l esper_equip,X	; get equippability byte for esper/character pair             |
+;		stz $e0				; Terra                                                       |
+;		ldx $00				; Esper done:0                                                |
+;C38529: LSR A          		; Actor can use?                                          |
+;        BCC .skip     		; Skip if not                                                 |
+;        PHA            		; Save compat.                                            |
+;        SEP #$20       		; 8-bit A                                                 |
+;        LDA $E0        		; Current actor                                           |
+;		                    ;                                                             |
+;		jsr .print          ;                                                             |
+;                           ;                                                             |
+;        REP #$20       		; 16-bit A                                                |
+;        PLA            		; Compatibility                                           |
+;.skip:	SEP #$20       		; 8-bit A                                                     |
+;        INC $E0        		; Actor number +1                                         |
+;        REP #$20       		; 16-bit A                                                |
+;        INX            		; Esper done +1                                           |
+;        CPX #$001E     		; Done all?                                               |
+;        BNE C38529     		; Loop if not                                             |
+;		                    ;                                                             |
+;        SEP #$20       		; 8-bit A                                                 |
+;        LDA #$FF       		; Terminator                                              |
+;        STA $2180      		; End list		                                          |
+;		jml $C3574F		     ;                                                            |
+;-----------------------------------------------------------------------------------------|		
 		
-		
+; Chara name print routine
 
 .print  phx
 		sta $211b
@@ -231,8 +300,7 @@ C38529: LSR A          		; Actor can use?
 .end
 		plx
 		rts
-		
-C3576D: JML $C3576D		
+			
 
 warnpc $C9FE00
 org $d86f80
