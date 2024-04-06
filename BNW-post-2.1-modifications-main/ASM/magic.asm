@@ -525,6 +525,8 @@ compute_bushido:
 	ply
 	SEP #$10				; 8-BIT X,Y
 	ldx $4B					; Load finger pos.
+	cpx #$01				; Mindblow?
+	beq .mindblow			; Branch if so
 	cpx #$06				; On Tempest?
 	beq .tempest			; Branch if so
 	CPX #$00				; On Dispatch?
@@ -561,6 +563,11 @@ compute_bushido:
 	REP #$10				; 16-bit x,y
 	SEP #$20				; 8-bit A
 	jmp bushido_back
+
+.mindblow
+	REP #$10				; 16-bit x,y
+	SEP #$20				; 8-bit A
+	jmp get_target_zero
 	
 warnpc $CD0000
 
