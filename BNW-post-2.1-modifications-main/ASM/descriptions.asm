@@ -672,7 +672,7 @@ Stop: db "S",$E5,$E0,$F3,"top], fa",$0C," by",$F7,$F0,"m",$E4,"a|Can't mov",$E7,
 Safe: db "S",$E5,$E0,$F3,"afe]|Reduc",$E7,"physic",$E2,$EB,"m",$EE,$F0,"ken",$00 ; Sets "Safe"|Reduce physical dmg taken
 Shell: db "S",$E5,$E0,$F3,"hell",$EC,"|Reduc",$E7,"magic",$E2,$EB,"m",$EE,$F0,"ken",$00 ; Sets "Shell"|Reduce magical dmg taken
 Haste: db "S",$E5,$E0,"[Haste]|Spee",$F4,"up, l",$F5,"t",$E0,$F3,"low]",$00 ; Sets "Haste"|Speed up, lifts "Slow"
-HasteX: db "S",$E5,$E0,"[Haste]",$00 ; Set",$E0,""Haste"
+HasteX: db "S",$E5,$E0,"[Haste]",$00 ; Sets "Haste"
 Slow: db "S",$E5,$E0,$F3,"low], fa",$0C," by",$F7,$F0,"m",$E4,"a|Speed",$EB,"own, l",$F5,"t",$E0,"[Haste]",$00 ; Sets "Slow"|Speed down, lifts "Haste"
 SlowX: db "S",$E5,$E0,$F3,"low]|Fa",$0C," by",$F7,$F0,"m",$E4,"a",$00 ; Sets "Slow"
 Rflect: db "S",$E5,$E0,"[Ref",$E1,"ct]|Repel",$E0,"s",$E4,"g",$E1," an",$F4,"f",$F1,"e-",$F0,"rg",$E5," magic",$00 ; Sets "Reflect"|Repels single and free-target magic
@@ -922,32 +922,32 @@ EsperDescPointers:
   dw Starlet
   dw Phoenix
 
-Ramuh: db "Judgement:|",$F8," (",$11," dmg on multi-target)",$00
-Ifrit: db "Inferno:|",$FC," (",$11," dmg on multi-target)",$00
-Shiva: db "Gem Dust:|",$FB," (",$11," dmg on multi-target)",$00
-Siren: db "Siren Song: Set",$E0,"[Muddle]/[Berserk]|Fail by stamina",$00
-Terrato: db "Earth Rage:|",$FA," (",$11," dmg on multi-target)",$00
-Shoat: db "Hurricane:|Set",$E0,"[Petrify] (low hit%)",$00
+Ramuh: db "Judgement:|",$F8," (",$11,$EB,"mg on multi-target)",$00
+Ifrit: db "Inferno:|",$FC," (",$11,$EB,"mg on multi-target)",$00
+Shiva: db "Gem Dust:|",$FB," (",$11,$EB,"mg on multi-target)",$00
+Siren: db "Siren Song:Set",$E0,"[Muddle]/[Berserk]|Fail by stamina",$00
+Terrato: db "Earth Rage:|",$FA," (",$11,$EB,"mg on multi-target)",$00
+Shoat: db "Hurricane:|Set",$E0,"[Petrify",$EC,"(low hit%)",$00
 Maduin: db "Chao",$E0,"Wing:|",$F9," Ignore",$E0,"def.",$00
-Bismark: db "Sea Song:|",$FD," (",$11," dmg on multi-target)",$00
-Stray: db "Cait Sith: Set",$E0,"[Regen]|Cure",$E0,"HP (stamina-based)",$00
+Bismark: db "Sea Song:|",$FD," (",$11,$EB,"mg on multi-target)",$00
+Stray: db "Cait Sith:Set",$E0,"[Regen]|Cure",$E0,"HP (stamina-based)",$00
 Palidor: db "Air Raid:|Party attack",$E0,"w/ [Jump]",$00
-Tritoch: db "Trisection:|",$FC,"/",$FB,"/",$F8," (",$11," dmg on multi-target)",$00
-Odin: db "Atom Edge:|Stamina-based dmg, ignore",$E0,"def.",$00
+Tritoch: db "Trisection:|",$FC,"/",$FB,"/",$F8," (",$11,$EB,"mg on multi-target)",$00
+Odin: db "Atom Edge:|Stamina-based",$EB,"mg, ignore",$E0,"def.",$00
 Loki: db $00
-Bahamut: db "Mega Flare:|Non-elemental dmg, ignore",$E0,"def.",$00
-Crusader: db "Jihad:|",$EF," (",$11," dmg on multi-target)",$00
-Ragnarok: db "Oblivion:|Non-elemental dmg = 9999",$00
-Alexandr: db "Justice:|",$F6," (",$11," dmg on multi-target)",$00
-Kirin: db "Life Force:|Cure",$E0,"HP, revive",$E0,"allies",$00
-Zoneseek: db "Light Wall:|Set",$E0,"[Shell]",$00
+Bahamut: db "Mega Flare:|Non-elemental",$EB,"mg, ignore",$E0,"def.",$00
+Crusader: db "Jihad:|",$EF," (",$11,$EB,"mg on multi-target)",$00
+Ragnarok: db "Oblivion:|Non-elemental",$EB,"mg = 9999",$00
+Alexandr: db "Justice:|",$F6," (",$11,$EB,"mg on multi-target)",$00
+Kirin: db "Lif",$E7,"Force:|Cure",$E0,"HP, revive",$E0,"allies",$00
+Zoneseek: db "Light Wall:|Set",$E0,$F3,"hell]",$00
 Carbunkl: db "Ruby Blast:|Set",$E0,"[Reflect]",$00
-Phantom: db "Fader: Set",$E0,"[Clear]|100% physical, 0% magical evasion",$00
+Phantom: db "Fader:Set",$E0,"[Clear]|100% physical, 0% magical evasion",$00
 Seraph: db "Lifeline:|Set",$E0,"[Rerise]",$00
-Golem: db "Earth Wall: Block",$E0,"physical dmg|Durability = caster'",$E0,"max HP",$00
-Unicorn: db "Heal Horn: Cure",$E0,"HP (stamina-based)|Lift",$E0,"most bad statuses",$00
-Fenrir: db "Moonshine: Set",$E0,"[Image]|Evade",$E0,"one or more physical attacks",$00
-Starlet: db "Group Hug: Cure",$E0,"HP to max|Lift",$E0,"all bad statuses",$00
+Golem: db "Earth Wall:Block",$E0,"physical",$EB,"mg|Durability = caster'",$E0,"max HP",$00
+Unicorn: db "Heal Horn:Cure",$E0,"HP (stamina-based)|Lift",$E0,"most bad statuses",$00
+Fenrir: db "Moonshine:Set",$E0,"[Image]|Evade",$E0,"on",$E7,"or mor",$E7,"physical attacks",$00
+Starlet: db "Group Hug:Cure",$E0,"HP to max|Lift",$E0,"all bad statuses",$00
 Phoenix: db "Rebirth:|Revive",$E0,"fallen allie",$E0,"to max HP",$00
 
 warnpc $CB5790
@@ -959,59 +959,59 @@ warnpc $CB5790
 org $CF3940
 
 Ramuhb:
-    db "Equip Bonus:|Halve",$E0,"Bolt damage",$00
+    db "Equip:|H",$E2,"ve",$E0,"Bolt damage",$00
 Ifritb:
-    db "Equip Bonus:|Halve",$E0,"Fire damage",$00
+    db "Equip:|H",$E2,"ve",$E0,"Fi",$F1," damage",$00
 Shivab:
-    db "Equip Bonus:|Halve",$E0,"Ice damage",$00
+    db "Equip:|H",$E2,"ve",$E0,"Ice damage",$00
 Sirenb:
-    db "Equip Bonus:|Block",$E0,"[Mute]/[Muddle]/[Berserk]",$00
+    db "Equip:|Block",$E0,"[Mute]/[Mudd",$E1,"]/[Berserk]",$00
 Terratob:
-	db "Equip Bonus:|Halve",$E0,"Earth damage",$00
+	db "Equip:|H",$E2,"ve",$E0,"Earth damage",$00
 Shoatb:
-	db "Equip Bonus:|Stamina +5",$00
+	db "Equip:|S",$F0,"m",$E4,"a +5",$00
 Maduinb:
-	db "Equip Bonus:|Halve",$E0,"Wind damage",$00
+	db "Equip:|H",$E2,"ve",$E0,"W",$E4,"d damage",$00
 Bismarkb:
-	db "Equip Bonus:|Halve",$E0,"Water damage",$00
+	db "Equip:|H",$E2,"ve",$E0,"W",$07,"er damage",$00
 Strayb:
-	db "Equip Bonus:|Block",$E0,"[Blind]/[Poison]/[Imp]",$00
+	db "Equip:|Block",$E0,"[Bl",$E4,"d]/[Poison]/[Imp]",$00
 Palidorb:
-	db "Equip Bonus:|Auto-Haste (block",$E0,"[Slow])",$00
+	db "Equip:|Auto-Hast",$E7,"(block",$E0,$F3,"low])",$00
 Tritochb:
-	db "Equip Bonus:|Auto-Shell",$00
+	db "Equip:|Auto-Shell",$00
 Odinb:
-	db "Equip Bonus:|Speed +5",$00
+	db "Equip:|Speed +5",$00
 Lokib:
 	db "",$00
 Bahamutb:
-	db "Equip Bonus:|Auto-Safe",$00
+	db "Equip:|Auto-Safe",$00
 Crusaderb:
-	db "Equip Bonus:|Auto-Reflect",$00
+	db "Equip:|Auto-Ref",$E1,"ct",$00
 Ragnarokb:
-	db "Equip Bonus:|Magical output +25%",$00
+	db "Equip:|Magic",$E2," output +25%",$00
 Alexandrb:
-	db "Equip Bonus:|Physical output +25%",$00
+	db "Equip:|Physic",$E2," output +25%",$00
 Kirinb:
-	db "Equip Bonus:|Magic +5",$00
+	db "Equip:|Magic +5",$00
 Zoneseekb:
-	db "Equip Bonus:|M.Def +10",$00
+	db "Equip:|M.Def. +10",$00
 Carbunklb:
-	db "Equip Bonus:|Auto-Regen (block",$E0,"[Sap])",$00
+	db "Equip:|Auto-Regen (block",$E0,$F3,"ap])",$00
 Phantomb:
-	db "Equip Bonus:|M.Evade +10",$00
+	db "Equip:|M.Evad",$E7,"+10",$00
 Seraphb:
-	db "Equip Bonus:|Block",$E0,"[Sleep]/[Petrify]/Death",$00
+	db "Equip:|Block",$E0,$F3,$E1,"ep]/[P",$E5,"rify]/De",$07,"h",$00
 Golemb:
-	db "Equip Bonus:|Def +10",$00
+	db "Equip:|Def +10",$00
 Unicornb:
-	db "Equip Bonus:|Vigor +5",$00
+	db "Equip:|Vigor +5",$00
 Fenrirb:
-	db "Equip Bonus:|Evade +10",$00
+	db "Equip:|Evad",$E7,"+10",$00
 Starletb:
-	db "Equip Bonus:|MP+25%",$00
+	db "Equip:|MP+25%",$00
 Phoenixb:
-	db "Equip Bonus:|HP+25%",$00
+	db "Equip:|HP+25%",$00
 
 warnpc $CF3C40
 

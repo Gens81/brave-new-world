@@ -657,26 +657,26 @@ warnpc $C4B520
 ; new choreography
 
 .wind_song
-  db "Shift: ",$0F," Sun Bath, ",$10," Razor Leaf",$01
-  db "Repeat: ",$0F," Wind Slash, ",$10," Razor Leaf",$00
+  db "Shift:",$0F," Sun Bath, ",$10," Razor Leaf",$01
+  db "Repeat:",$0F," Wind Slash, ",$10," Razor Leaf",$00
 .forest_suite
-  db "Shift: ",$0F," Razor Leaf, ",$10," Elf Fire",$01
-  db "Repeat: ",$0F," Harvester, ",$10," Elf Fire",$00
+  db "Shift:",$0F," Razor Leaf, ",$10," Elf Fire",$01
+  db "Repeat:",$0F," Harvester, ",$10," Elf Fire",$00
 .desert_aria
-  db "Shift: ",$0F," Mirage, ",$10," Sand Storm",$01
-  db "Repeat: ",$0F," Sun Bath, ",$10," Sand Storm",$00
+  db "Shift:",$0F," Mirage, ",$10," Sand Storm",$01
+  db "Repeat:",$0F," Sun Bath, ",$10," Sand Storm",$00
 .love_sonata
-  db "Shift: ",$0F," Elf Fire, ",$10," Moonlight",$01
-  db "Repeat: ",$0F," Bedevil, ",$10," Moonlight",$00
+  db "Shift:",$0F," Elf Fire, ",$10," Moonlight",$01
+  db "Repeat:",$0F," Bedevil, ",$10," Moonlight",$00
 .earth_blues
-  db "Shift: ",$0F," Landslide, ",$10," Sun Bath",$01
-  db "Repeat: ",$0F," Avalanche, ",$10," Sun Bath",$00
+  db "Shift:",$0F," Landslide, ",$10," Sun Bath",$01
+  db "Repeat:",$0F," Avalanche, ",$10," Sun Bath",$00
 .water_rondo
-  db "Shift: ",$0F," El Nino, ",$10," Surge",$01
-  db "Repeat: ",$0F," Plasma, ",$10," Surge",$00
+  db "Shift:",$0F," El Nino, ",$10," Surge",$01
+  db "Repeat:",$0F," Plasma, ",$10," Surge",$00
 .dusk_requiem
-  db "Shift: ",$0F," Moonlight, ",$10," Cave In",$01
-  db "Repeat: ",$0F," Snare, ",$10," Cave In",$00
+  db "Shift:",$0F," Moonlight, ",$10," Cave In",$01
+  db "Repeat:",$0F," Snare, ",$10," Cave In",$00
 .snowman_jazz
-  db "Shift: ",$0F," Blizzard, ",$10," Mirage",$01
-  db "Repeat: ",$0F," Surge, ",$10," Mirage",$00
+  db "Shift:",$0F," Blizzard, ",$10," Mirage",$01
+  db "Repeat:",$0F," Surge, ",$10," Mirage",$00

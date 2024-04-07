@@ -78,6 +78,10 @@ org $D861F6
 
 org $D85792
     db $64      ;Ross Brush proc Haste
+
+;fix gale hairpin stat (from +3 stam to +3 magic)    
+org $D86A8D 
+	db $30
     
 ;Morning Star (Anti-human)
 
