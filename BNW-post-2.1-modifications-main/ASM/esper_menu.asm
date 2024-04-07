@@ -339,7 +339,7 @@ esper_equip:
 	dw $0048	; 	Phantom	
 	dw $0240	; 	Seraph	
 	dw $0030	; 	Golem	
-	dw $0001	; 	Unicorn	
+	dw $0011	; 	Unicorn	
 	dw $0808	; 	Fenrir	
 	dw $0300	; 	Starlet	
 	dw $0003	; 	Phoenix	
