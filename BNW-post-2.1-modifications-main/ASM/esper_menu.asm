@@ -156,8 +156,7 @@ C35ADC:
 
 ; Load skill or item description
 org $c9fd10
-C3576D:	PLA 				; Pull due to avoid bug 
-		JML $C3576D			; End string
+C3576D: JML $C3576D	
 ;-----------------------------------------------------------------------------------------|
 ; (Chara name on 1st row)                                                                 |
 C9FD10:	stz $ff				;															  |
