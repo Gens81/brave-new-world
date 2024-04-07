@@ -737,6 +737,26 @@ Duncan_Inside:
     db $91                      ; [displaced] wait for 15 frames (1/4 second)
     db $FE                      ; return
 EventScriptFreespace_4:
+; -----------------------------------------------------------------------------
+; This small event hack ensures that the names for Strago and Relm are
+; obfuscated prior to getting their first equippable magicite.
+; -----------------------------------------------------------------------------
+
+; hook into event script that turns Ifrit and Shiva into magicite
+org $CC79C5
+    db $B2                      ; call subroutine
+    dl ObfuscateNames-EventBase ; ^ continued
+warnpc $CC79C9
+
+; obfuscate the names of Strago and Relm
+org EventScriptFreespace_4
+ObfuscateNames:
+    db $7F,$07,$1D              ; change Strago's name to "?????"
+    db $7F,$08,$1D              ; change Relm's name to "?????"
+    db $DC,$47                  ; [displaced] set event bit $647
+    db $DC,$48                  ; [displaced] set event bit $648
+    db $FE                      ; return
+EventScriptFreespace_5:
 
 warnpc $CB5EC5
 
