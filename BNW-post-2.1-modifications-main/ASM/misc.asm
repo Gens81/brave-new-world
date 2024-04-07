@@ -673,8 +673,8 @@ org $C3C36D : db $D3
 org $C3506B : db $D3
 	
 ;change Setzer's initial weapon
-org $ED7D75
-	db $03	;Butterfly
+;org $ED7D75
+;	db $03	;Butterfly
 
 ; edit jump table to skip over Window/Short check
 org $C3234E : dw $236F
@@ -774,6 +774,17 @@ org $C39728 : NOP #2  ; never branch
 ;    LDA $1E94       ; load event flags
 ;    AND #$10        ; check for "World of Ruin" event bit
 
+;custom key prompts for blitz commands
+
+org $C35C22 
+	db $6C	;X
+org $C35C24
+	db $6D	;Y
+org $C35C26 
+	db $6E	;L
+org $C35C28
+	db $6F	;R
+
 ;Brave New World data
 org $C33BB8
-	db $d1,$78,"Brave New World 2.2 b27",$00
+	db $d1,$78,"Brave New World 2.2 b28",$00
