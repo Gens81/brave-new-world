@@ -66,7 +66,7 @@ Dancepwrtrgt:
 	STX $E7          			; store pointer offset
 	LDX $00    					; use base offset for text
 	STX $EB          			; ^ will be added to Y index
-	LDA #$CB         			; bank
+	LDA #$D8         			; bank
 	STA $ED		 				; text bank
 	STA $E9          			; pointer bank
 	lda #$10					; Desc on
@@ -87,10 +87,6 @@ reset_vwf:
 	lda #$10					; Desc of
 	tsb $45						; Set
 	jmp $11b0					; Reset VWF
-	
-
-
-
 
 ; Sustain blitz
 org $C32981
@@ -109,7 +105,7 @@ warnpc $c328b1
 
 ; Dance 2nd screen
 
-org $CB5790
+org $D8EE47
 animal_dance_pointers:
 	dw #a_wind
 	dw #a_forest
@@ -121,13 +117,13 @@ animal_dance_pointers:
 	dw #a_snowman
 	
 animal_dance_text:
-a_wind:		db	$14," Cockatrice: Non-elemental dmg|Ignores def., sets [Petrify]",$00
-a_forest:	db	$14," Raccoon: Cures HP to max|Lifts most bad statuses - party",$00
-a_desert:	db	$14," Meerkat:|Sets [Image]/[Haste] - party",$00
-a_love:		db	$14," Tapir: Cures MP|Lifts all bad statuses - party",$00
-a_earth:	db	$14," Wild Boars: Non-elemental dmg|Ignores def., ground attack",$00
-a_water:	db	$14," Toxic Frog: ",$FD,"/",$EF,", sets [Poison]",$00
-a_dusk:		db	$14," Wombat: Non-elemental dmg|Ignores def., ground attack",$03,"- all foes",$00
-a_snowman:	db	$14," Ice Rabbit: Cures HP to max|Sets [Image] - party",$00
+a_wind:		db	$14," Cock",$07,"rice:Non-e",$E1,"ment",$E2,$EB,"mg|Igno",$F1,$E0,"def.,",$F7,$E5,$E0,"[P",$E5,"r",$F5,"y]",$00
+a_forest:	db	$14," Raccoon:Cu",$F1,$E0,"HP to max|L",$F5,"t",$E0,"most ba",$F4,"st",$07,"use",$E0,"- party",$00
+a_desert:	db	$14," Meerk",$07,":|S",$E5,$E0,"[Image]/[Haste]",$0E," party",$00
+a_love:		db	$14," Tapir:Cu",$F1,$E0,"MP|L",$F5,"t",$E0,$E2,"l ba",$F4,"st",$07,"use",$E0,"- party",$00
+a_earth:	db	$14," Wil",$F4,"Boars:Non-e",$E1,"ment",$E2,$EB,"mg|Igno",$F1,$E0,"def., groun",$F4,$07,$F0,"ck",$00
+a_water:	db	$14," Toxic Frog:",$FD,"/",$EF,",",$F7,$E5,$E0,"[Poison]",$00
+a_dusk:		db	$14," Womb",$07,":Non-e",$E1,"ment",$E2,$EB,"mg|Igno",$F1,$E0,"def., groun",$F4,$07,$F0,"ck",$03,"- ",$E2,"l foes",$00
+a_snowman:	db	$14," Ice Rabbit:Cu",$F1,$E0,"HP to max|S",$E5,$E0,"[Image]",$0E," party",$00
 	
-warnpc $CB5A00
+warnpc $D8EFFE
