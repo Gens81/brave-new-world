@@ -207,10 +207,8 @@ org $CBB7C7
 ; used to calculate relative offsets for jumps and subroutine calls
 org $CA0000 : EventBase:
 
-; points to a large chunk of freespace within the event script block gained by
-; getting rid of the event code for the Auction House.
-; Note: the gap to the previous data is on purpose in case that needs expansion
-org $CB5A00 : EventScriptFreespace_0:
+; points to a large chunk of freespace (before Treasure Data)
+org $ED8BFC : EventScriptFreespace_0:
 
 ; -----------------------------------------------------------------------------
 ; This hacks ports a QoL feature from the Pixel Remaster to BNW. During the
@@ -737,6 +735,7 @@ Duncan_Inside:
     db $91                      ; [displaced] wait for 15 frames (1/4 second)
     db $FE                      ; return
 EventScriptFreespace_4:
+
 ; -----------------------------------------------------------------------------
 ; This small event hack ensures that the names for Strago and Relm are
 ; obfuscated prior to getting their first equippable magicite.
@@ -758,7 +757,7 @@ ObfuscateNames:
     db $FE                      ; return
 EventScriptFreespace_5:
 
-warnpc $CB5EC5
+warnpc $ED8E5B
 
 ; trigger Shadow's arrival when a player chooses to wait for him the second
 ; time at end of Floating Continent
