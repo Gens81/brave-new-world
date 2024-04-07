@@ -205,7 +205,7 @@ Pincer attack<END>
 //POINTER #38 @ $11F7EC - STRING #38 @ $11F1E4
 
 #W16($11F7EC)
-Got <VAR2> GP<END>
+Got <VAR2> GP<wait for key><END>
 
 //POINTER #39 @ $11F7EE - STRING #39 @ $11F1ED
 
