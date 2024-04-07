@@ -334,7 +334,7 @@ esper_equip:
 	dw $0001	; 	Ragnarok
 	dw $0040	; 	Alexande
 	dw $0006	; 	Kirin	
-	dw $0100	; 	Zoneseek
+	dw $0180	; 	Zoneseek
 	dw $0081	; 	Carbuncl
 	dw $0048	; 	Phantom	
 	dw $0240	; 	Seraph	
