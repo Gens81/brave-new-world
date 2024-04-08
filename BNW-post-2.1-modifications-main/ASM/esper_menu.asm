@@ -294,10 +294,7 @@ C38529: LSR A          		; Actor can use?                                       
 		beq .blank			; Branch if not
 		lda #$C0			; Slash
 		sta $2180			; Add to string
-		bra .loop
-.blank	lda #$FF
-		sta $2180			; Add to string	
-.loop		
+.blank	
 		lda $1600,X			; Actor 1st letter or last 
 		cmp #$FF			; Last letter or not yet recruited?
 		beq .end			; Branch if so 
@@ -306,7 +303,7 @@ C38529: LSR A          		; Actor can use?                                       
 		iny					; Inc counter
 		cpy #$0006			; 6 letters done?
 		beq .end			; Branch if so
-		bra .loop			; Loop
+		bra .blank			; Loop
 .end
 		plx
 		inc $FF
