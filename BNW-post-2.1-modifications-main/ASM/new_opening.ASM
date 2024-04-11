@@ -40,75 +40,75 @@ ORG $001543
 ;00,04,00,04
 
 intro_text:	;  VRAM, X, PAL
-concept:	dw $4458,$0024	:	db "original concept",$00
-name_1:		dw $44D8,$0120	:	db "  BTB",$FE
+concept:	dw $4450,$0024	:	db "original concept",$00
+name_1:		dw $44D8,$0120	:	db "   BTB",$FE
 								db "SYNCHYSI",$00
-hacking:	dw $4458,$0024	:	db "hacking",$00
+hacking:	dw $4454,$0024	:	db " hacking",$00
 name_2:		dw $44D4,$0320	:	db "SYNCHYSI",$FE
-								db "BROPEDIO",$FE
-								db "QLIPHOT",$00
-name_3:		dw $44D4,$0320	:	db "  SEIBABY",$fe
-								db "SIRNEWTONFIG",$FE
-								db "FEANOR",$00
-name_4:		dw $44D6,$0120	:	db "RYO_HAZUKI",$FE
+								db " BROPEDIO",$FE
+								db "  QLIPHOTH",$00
+name_3:		dw $44D4,$0320	:	db "FIG",$fe
+								db " FEANOR",$FE
+								db "  SEIBABY",$00
+name_4:		dw $44D4,$0120	:	db "RYO_HAZUKI",$FE
 								db "THINK0028",$FE
-								db "GRAYSHADOWS",$00
-name_5:		dw $44D6,$0420	:	db "MADSIUR",$FE
-								db "GI NATTAK",$00
-design:		dw $4458,$0624	:	db "Design",$00
-name_6:		dw $44D4,$0020	:	db "  MISHRAK",$FE
-								db "   NOWEA",$FE
-								db "THZFZNNYMZN",$00
-name_7:		dw $44D4,$0020	:	db "GENS",$FE
-								db "CAINEN",$FE
-								db "CECIL188",$00
-name_8:		dw $44D8,$0120	:	db "DANDACHEERMAN",$FE
-								db "DESCHAIN",$FE
-								db "HERO",$00								
-name_9:		dw $44Da,$0320	:	db "LETHA",$FE
-								db "LOCKIRBY",$00
+								db " GRAYSHADOWS",$00
+name_5:		dw $44D4,$0420	:	db "MADSIUR",$FE
+								db " GI NATTAK",$00
+design:		dw $4458,$0624	:	db "design",$00
+name_6:		dw $44D6,$0020	:	db " MISHRAK",$FE
+								db "  NOWEA",$FE
+								db "   GENS",$00
+name_7:		dw $44D4,$0020	:	db "THZFZNNYMZN",$FE
+								db " CECIL188",$FE
+								db "  CAINEN",$00
+name_8:		dw $44D4,$0120	:	db "DANDACHEERMAN",$FE
+								db " DESCHAIN",$FE
+								db "  HERO",$00								
+name_9:		dw $44D8,$0320	:	db "LETHA",$FE
+								db " LOCKIRBY",$00
 name_10:	dw $44d6,$0020	:	db "KAIN STRYDER",$FE
-								db "THRAXIS",$00
-name_11:	dw $44d8,$0020	:	db "... AND THE REST OF THE",$FE
-								db "BAD IDEA BRIGADE",$00
-								
+								db " THRAXIS",$00
+name_11:	dw $44d0,$0020	:	db "AND THE FF6HACKING",$FE
+								db "   COMMUNITY",$00
 music:		dw $445a,$0224	:	db "music",$00
 name_22:	dw $44D8,$0220	:	db "JACKIMUS",$00							
 graphic:	dw $4458,$0024	:	db "graphics",$00
-name_12:	dw $44d4,$0020	:	db "BAUGLIR",$FE
-								db "AUTUMN SHINESPARK",$00
-mterial:	dw $444a,$0224	:	db "promotional material",$00
-name_13:	dw $44d8,$0120	:	db " A DUMMY",$00
+name_12:	dw $44d2,$0020	:	db "AUTUMN SHINESPARK",$FE
+								db "   BAUGLIR",$00
+mterial:	dw $444a,$0224	:	db " promotional material",$00
+name_13:	dw $44d8,$0120	:	db "A DUMMY",$00
 
-script:		dw $444a,$0224	:	db "script editing",$00
-name_14:	dw $44d0,$0020	:	db "BISHOP",$FE
-								db "FIELD",$FE
-								db "DESCHAIN E BEAR",$00
-translat:	dw $4454,$0124	:	db "translations",$00
-name_15:	dw $44d8,$0120	:	db "  GENS",$FE
-								db "  UMARO",$00	
+script:		dw $444E,$0224	:	db " script editing",$00
+name_14:	dw $44d0,$0020	:	db "DESCHAIN $ BEAR",$FE
+								db " BISHOP",$FE
+								db "  FIELD",$00
 								
-or_hack:	dw $4452,$0024	:	db "original hacks",$00
-name_16:	dw $44D8,$0420	:	db " ARMORVIL",$fe
-								db "ASSASSIN17",$FE
-								db " BYDOLESS",$00
-name_17:	dw $44C4,$0120	:	db "HATZEN",$FE
-								db "IMZOGELMO",$FE
-								db "LEET SKETCHER",$00
-name_18:	dw $44d6,$0720	:	db "MASTER ZED",$FE
-								db "NOVALIA SPIRIT",$FE								
-								db " POCO LOCO",$00
-name_19:	dw $44d4,$0120	:	db "SILENT ENIGMA",$FE
-								db "TERII SENSHI",$FE
-								db "ZEEMIS",$00
-tools:		dw $444c,$0024	:	db "tools",$00	
+translat:	dw $4454,$0124	:	db "translations",$00
+name_15:	dw $44d8,$0120	:	db "GENS",$FE
+								db " UMARO",$00	
+								
+or_hack:	dw $4452,$0024	:	db " original hacks",$00
+name_16:	dw $44D6,$0420	:	db "ASSASSIN17",$fe
+								db " ARMORVIL",$FE
+								db "  BYDOLESS",$00
+name_17:	dw $44D4,$0120	:	db "LEET SKETCHER",$FE
+								db " IMZOGELMO",$FE
+								db "   HATZEN",$00
+name_18:	dw $44d4,$0720	:	db "NOVALIA SPIRIT",$FE
+								db " MASTER ZED",$FE								
+								db "  SERITY",$00
+name_19:	dw $44d4,$0120	:	db "SILENTENIGMA",$FE
+								db " TERII SENSHI",$FE
+								db "   ZEEMIS",$00
+tools:		dw $4458,$0024	:	db " tools",$00	
 name_20:	dw $44d4,$0120	:	db "FF3USME",$FE
-								db "FF6TOOLS",$FE
-								db "ZONE DOCTOR",$00
-thanks:		dw $444c,$0024	:	db "special thanks to",$00								
-name_21:	dw $44D8,$0120	:	db "FF6 HACKING COMMUNITY",$FE
-								db "SERITY",$fe
-								db "LINA DARKSTAR",$00
+								db " ZONE DOCTOR",$FE
+								db "   FF6TOOLS",$00
+thanks:		dw $444c,$0024	:	db "special thanks to the",$00								
+name_21:	dw $44C8,$0120	:	db "NGPLUS DISCORD COMMUNITY",$FE
+								db "       and the",$fe
+								db "   BAD IDEA BRIGADE",$00
 
 
 ; Clear screen data
