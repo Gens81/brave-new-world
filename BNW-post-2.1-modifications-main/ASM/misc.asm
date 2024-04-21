@@ -741,9 +741,6 @@ org $C34B08
 	db $A1,$7D,"Port 1",$00
 	db $B3,$7D,"Port 2",$00
 
-;Sketch never fails
-org $C23B40 : NOP #2
-
 ; hide warp point in Phoenix Cave permanently
 org $C4566D : db $45    ; set "Returner's Hideout: Banon (Main Room)" as NPC switch
                         ; Note: this NPC switch is turned off at CA/FD9E as
@@ -756,6 +753,10 @@ org $ED8678
 ;Yeti drops Moogle Charm
 org $CF3442
 	db $DE,$DE
+
+;Zozo chest Hell Claw>Ninja Star
+org $ED88E0
+	db $43
 
 ; -----------------------------------------------------------------------------
 ; The current optimize equipment routine wasn't written with the current
@@ -787,4 +788,4 @@ org $C35C28
 
 ;Brave New World data
 org $C33BB8
-	db $d1,$78,"Brave New World 2.2 b29",$00
+	db $d1,$78,"Brave New World 2.2 b30.1",$00
