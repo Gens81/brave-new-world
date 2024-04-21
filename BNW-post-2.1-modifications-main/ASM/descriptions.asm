@@ -94,7 +94,7 @@ Masamune:       db "May counterattack",$00
 Spoon:          db "",$00
 Mutsunokami:    db "Wind blade i",$E0,"most powerful",$00
 SpookStick:     db "",$00
-MythrilRod:     db "Rod",$E0,"use MP for critical dmg|and have high spellcast rate",$00
+MythrilRod:     db "Rod",$E0,"use MP for critical dmg|May cast ",$EA,"Rasp",$00
 FireRod:        db "May cast ",$E9,"Fire 2|(MP crit = 2x spell dmg)",$00
 IceRod:         db "May cast ",$E9,"Ice 2|(MP crit = 2x spell dmg)",$00
 ThunderRod:     db "May cast ",$E9,"Bolt 2|(MP crit = 2x spell dmg)",$00
@@ -103,9 +103,9 @@ Doomstick:      db "May cast ",$E9,"Doom|(MP crit = X-Zone)",$00
 Quartrstaff:    db "May cast ",$E9,"Quartr|(MP crit = hit",$E0,"foe group)",$00
 Punisher:       db "May cast ",$E9,"Dark|(MP crit = 2x spell dmg)",$00
 MagusRod:       db "",$00
-LightBrush:     db "Brushe",$E0,"cure HP and hit 2x",$00
-MonetBrush:     db "May cast ",$EA,"Safe",$00
-DaliBrush:      db "May cast ",$EA,"Shell",$00
+LightBrush:     db "Brushe",$E0,"cure HP|May cast ",$EA,"Safe",$00
+MonetBrush:     db "May cast ",$EA,"Shell",$00
+DaliBrush:      db "May cast ",$EA,"Reflect",$00
 RossBrush:      db "May cast ",$EA,"Haste",$00
 Shuriken:       db "Use w/ [Throw]|Can spread with L/R",$00
 TackStar:       db "",$00
@@ -126,12 +126,12 @@ ViperDarts:     db "Use",$E0,"MP for critical hits",$00
 Dice:           db "Dmg = (2Lv. * D1 * D2)|Alway",$E0,"hits",$00
 FixedDice:      db "Dmg = (2Lv. * D1 * D2 * D3)|Alway",$E0,"hits",$00
 MythrilClaw:    db "",$00
-SpiritClaw:     db "HP+12.5%|Holy dmg, may cast ",$EA,"Slow",$00
-PoisonClaw:     db "HP+12.5%|Dark dmg, may cast ",$E9,"Sap",$00
-OceanClaw:      db "HP+25%|Water dmg, may cast ",$E9,"Drain",$00
-HellClaw:       db "HP+25%|Fire dmg, may cast ",$E9,"Fire",$00
-Frostgore:      db "HP+50%|Ice dmg, may cast ",$E9,"Ice",$00
-Stormfang:      db "HP+50%|Bolt dmg, may cast ",$E9,"Bolt",$00
+SpiritClaw:     db "Holy dmg, may cast ",$EA,"Slow|May counterattack",$00
+PoisonClaw:     db "Dark dmg, may cast ",$E9,"Sap|HP+12.5%",$00
+OceanClaw:      db "Water dmg, may cast ",$E9,"Drain|May counterattack",$00
+HellClaw:       db "Fire dmg, may cast ",$E9,"Fire|HP+25%",$00
+Frostgore:      db "Ice dmg, may cast ",$E9,"Ice|May counterattack",$00
+Stormfang:      db "Bolt dmg, may cast ",$E9,"Bolt|HP+50%",$00
 Buckler:        db "",$00
 IronShield:     db "",$00
 Targe:          db "",$00
