@@ -1,0 +1,16 @@
+;;------------------------------------------------------------------------------
+;; Game: FFVI Brave New World
+;; Platform: SNES
+;; Region: USA [!]
+;;------------------------------------------------------------------------------
+
+;uncomment to activate patches ;activate just one speed patch
+
+incsrc "version.asm"
+incsrc "levelcap.asm"
+incsrc "inventory_limits.asm"
+incsrc "elemental_nerf.asm"
+incsrc "el_tweaks.asm"
+incsrc "speedy_enemies.asm"
+;incsrc "slow_players.asm"
+;incsrc "speedy_enemies-slow_players.asm"
