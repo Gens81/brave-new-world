@@ -757,6 +757,37 @@ ObfuscateNames:
     db $FE                      ; return
 EventScriptFreespace_5:
 
+; -----------------------------------------------------------------------------
+; This small event hack ensures that Edgar is the one talking to Julian while
+; receiving the Schematics.
+; -----------------------------------------------------------------------------
+
+; hook at end of regular Julian event
+org $CB5223
+    db $C0,$27,$01                  ; always jump to destination
+    dl GetSchematics-EventBase      ; ^continued
+warnpc $CB5229
+
+org EventScriptFreespace_5
+GetSchematics:                  ; 40 bytes
+    db $31,$82,$C3,$FF          ; action queue for Party Character #1
+    db $B2,$64,$CA,$00          ; call subroutine $CACA64 (check facing direction)
+    db $BE,$02                  ; jump based on facing direction:
+    dl $10CACB                  ; ^ facing right
+    dl $30CAD2                  ; ^ facing left
+    db $47                      ; make character in slot 0 the lead character
+    db $04,$82,$CE,$FF          ; action queue for Edgar
+    db $42,$31                  ; hide party leader
+    db $41,$04                  ; show Edgar
+    db $19,$82,$CC,$FF          ; action queue for Julian
+    db $92                      ; wait for 30 frames (1/2 second)
+    db $4B,$77,$06              ; display caption $0677 (halt execution until gone)
+    db $42,$04                  ; hide Edgar
+    db $41,$31                  ; show Party Character #1
+    db $D2,$DC                  ; set event bit $1DC
+    db $FE                      ; return
+EventScriptFreespace_6:
+
 warnpc $ED8E5B
 
 ; trigger Shadow's arrival when a player chooses to wait for him the second
