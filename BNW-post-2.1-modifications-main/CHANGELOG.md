@@ -1,6 +1,6 @@
 # Changelog
 
-## [2.2 RC1](https://github.com/Gens81/brave-new-world/releases) - 03/07/2024
+## [2.2](https://github.com/Gens81/brave-new-world/releases) - 05/05/2024
 
 ### Features
 
@@ -38,8 +38,13 @@
 - New Locke scene in Returners Hideout (Fëanor)
 - The second dialogue while escaping from FC directly trigger Shadow's scene (Fëanor)
 - New rage details menu that shows status resistances and elemental properties (Ryo_Hazuki)
-- Choreography hack (by Sir Newton Fig) for testing
+- Choreography hack (by Sir Newton Fig)
 - Sketch always hits
+- Implemented Power/Target alt description (hold Y) for espers, magic, blitzes, bushido and lores
+- Added custom credits during the intro and a special message in the end screen
+- Added Equippable chars in the esper list
+- press Select while fighting to cycle between: ATB bar, current/max HP, current/max MP
+- pressing Y on the equip screen shows details side-menu
 
 ### Tweaks
 
@@ -98,6 +103,24 @@
 - Restored "E" in shop menu (Fëanor)
 - Cursor wrapping equip menu
 - Hidden Phoenix Cave warp point
+- Phunbaba blows away 2 chars
+- Moogle charm is now dropped by Yeti
+- Blitz skill full mastering at Duncan needs killing doomgaze
+- new animations by Autumn (Sap, Dark, Rasp, Break)
+- changes to pulling the lever in Soul's Train
+- Removed HP bonus from Royal Jacket, added spellcast rate up and Auto-Safe
+- Removed MP bonus from Radiant Gown, added Auto-Shell
+- Added anti-human flag to Morning Star
+- Key buttons icons on blitz combos menu
+- GP gain message is dismissable
+- Removed x-fight from brushes but raised proc success rate and battle power
+- Light Brush may cast Safe, Monet Brush Shell, Dali Brush Reflect, Ross Brush Haste
+- Spirit Claw, Ocean Claw and Frostgore get counter-attack
+- Poison CLaw, Hell Claw and Stormfang get HP bonus
+- Hell Claw Chest in Zozo replaced with Ninja Star
+- shadow recruitable in kohlingen with a full party
+- gau's lines in zozo have priority over shadow's
+- boooty's counter
 
 ### Bugfixes
 
@@ -125,5 +148,8 @@
 - Fix sprite priority bug after covering (Bropedio)
 - Fixed Sand Devil battle script
 - Fixed text position and nomenclature in multiple controller config submenu (Gens)
+- Fixed gale hairpin stats( +3 magic in place of +3 stamina)
+- Fixed hp leak and poison doing more damage with regen
+- Edgar sprite shown in schematics event
 
 ## Previous Versions are not tracked by this Doc
