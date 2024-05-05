@@ -66,7 +66,7 @@ org $D85A20
     db $12      ;Ocean Claw> counter-attack
 org $D85A3B 
     db $04      ;Hell Claw> HP++
-org $D85A5C 
+org $D85A5C
     db $12      ;Frostgore> counter-attack
 org $D85A77 
     db $08      ;Stormfang> HP+++
