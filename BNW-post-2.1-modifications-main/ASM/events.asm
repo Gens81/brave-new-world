@@ -204,6 +204,84 @@ org $CBB7C7
     db $D2,$7F                  ; set event bit $17F (path is cleared)
     db $FE                      ; return
 
+; -----------------------------------------------------------------------------
+; Makes changes to the caption branching to prioritize Gau over Shadow if and
+; only if Shadow has a generic caption during the meeting with Ramuh. Also sets
+; Gau as the temporary party leader in the case where a player takes a party
+; consisting of only Gau and Shadow to meet Ramuh.
+; -----------------------------------------------------------------------------
+
+; Note: includes the entire event command despite the fact that everything
+; except for the last 6 bytes remain unchanged
+org $CA9828
+	db $BE,$07      ; switch case based on active party members (7 checks)
+	db $C7,$AC,$10  ; Locke ("Is Terra all right?")
+	db $C7,$AC,$40  ; Edgar ("Is Terra all right?")
+	db $CF,$AC,$60  ; Celes ("Celes: What happened to Terra?")
+	db $C7,$AC,$50  ; Sabin ("Is Terra all right?")
+	db $CB,$AC,$20  ; Cyan ("Cyan: How fareth Terra?")
+	db $D3,$AC,$B0  ; Gau ("Gau: GAU!")
+	db $C7,$AC,$30  ; Shadow ("Is Terra all right?")
+
+org $CA9925
+	db $BE,$07      ; switch case based on active party members (7 checks)
+	db $D7,$AC,$10  ; Locke ("But don’t espers live in another world?")
+	db $D7,$AC,$40  ; Edgar ("But don’t espers live in another world?")
+	db $DB,$AC,$60  ; Celes ("Celes: We thought that espers lived in a different realm…")
+	db $D7,$AC,$50  ; Sabin ("But don’t espers live in another world?")
+	db $D7,$AC,$20  ; Cyan ("But don’t espers live in another world?")
+	db $DF,$AC,$B0  ; Gau ("Gau: Gau…?")
+	db $D7,$AC,$30  ; Shadow ("But don’t espers live in another world?")
+
+org $CA9965
+	db $BE,$07      ; switch case based on active party members (7 checks)
+	db $E3,$AC,$10  ; Locke ("Why do you hide the fact that you’re espers?")
+	db $E3,$AC,$40  ; Edgar ("Why do you hide the fact that you’re espers?")
+	db $E3,$AC,$60  ; Celes ("Why do you hide the fact that you’re espers?")
+	db $E3,$AC,$50  ; Sabin ("Why do you hide the fact that you’re espers?")
+	db $E3,$AC,$20  ; Cyan ("Why do you hide the fact that you’re espers?")
+	db $E7,$AC,$B0  ; Gau ("Gau: Gau, GAU! …Gau?")
+	db $E3,$AC,$30  ; Shadow ("Why do you hide the fact that you’re espers?")
+
+org $CA9B20
+	db $BE,$07      ; switch case based on active party members (7 checks)
+	db $FB,$AC,$10  ; Locke ("If we can get inside the Magitek Research Facility, you’re sure we’ll find your people?")
+	db $FB,$AC,$40  ; Edgar ("If we can get inside the Magitek Research Facility, you’re sure we’ll find your people?")
+	db $03,$AD,$60  ; Celes ("Celes: The Magitek Research Facility…")
+	db $FB,$AC,$50  ; Sabin ("If we can get inside the Magitek Research Facility, you’re sure we’ll find your people?")
+	db $FB,$AC,$20  ; Cyan ("If we can get inside the Magitek Research Facility, you’re sure we’ll find your people?")
+	db $07,$AD,$B0  ; Gau ("Gau: GAU! GAU!")
+	db $FB,$AC,$30  ; Shadow ("If we can get inside the Magitek Research Facility, you’re sure we’ll find your people?")
+
+org $CA9CC2
+	db $BE,$07      ; switch case based on active party members (7 checks)
+	db $3C,$AD,$10  ; Locke ("He gave up his own life to help us…")
+	db $3C,$AD,$40  ; Edgar ("He gave up his own life to help us…")
+	db $44,$AD,$60  ; Celes ("Celes: He gave up his own life to help us…")
+	db $3C,$AD,$50  ; Sabin ("He gave up his own life to help us…")
+	db $40,$AD,$20  ; Cyan ("Cyan: He gave all that we might by this means save some…")
+	db $48,$AD,$B0  ; Gau ("Gau: Gaauuu…")
+	db $3C,$AD,$30  ; Shadow ("He gave up his own life to help us…")
+
+; prioritize Gau over Shadow when setting a temporary party leader for an event
+; (called at beginning of Ramuh meeting and Figaro brothers scene)
+org $CAC770
+	db $BE,$0E      ; switch case based on active party members (14 checks)
+	db $9D,$C7,$00  ; Terra
+	db $A3,$C7,$10  ; Locke
+	db $A9,$C7,$40  ; Edgar
+	db $AF,$C7,$60  ; Celes
+	db $B5,$C7,$50  ; Sabin
+	db $BB,$C7,$20  ; Cyan
+	db $C7,$C7,$70  ; Strago
+	db $CD,$C7,$80  ; Relm
+	db $D3,$C7,$90  ; Setzer
+	db $D9,$C7,$A0  ; Mog
+	db $DF,$C7,$B0  ; Gau
+	db $C1,$C7,$30  ; Shadow
+	db $E5,$C7,$C0  ; Gogo
+	db $EB,$C7,$D0  ; Umaro
+
 ; used to calculate relative offsets for jumps and subroutine calls
 org $CA0000 : EventBase:
 
@@ -787,6 +865,133 @@ GetSchematics:                  ; 40 bytes
     db $D2,$DC                  ; set event bit $1DC
     db $FE                      ; return
 EventScriptFreespace_6:
+
+; -----------------------------------------------------------------------------
+; Adds a caption to notify the player once the required amount of booty has
+; been collected.
+; -----------------------------------------------------------------------------
+
+; rewrite entry point for opening a booty chest to include new "check booty
+; total" routine calls
+org $CB7418
+BootyChest:
+    db $D2,$D8                  ; set event bit $1D8 (Booty)
+    db $BD                      ; randomly jump to target
+    dl BootyAdd1-EventBase      ; ^ continued
+    db $BD                      ; randomly jump to target
+    dl BootyAdd3-EventBase      ; ^ continued
+    db $4B,$45,$0B              ; display caption $B45
+    db $E9,$07,$05,$00          ; increment booty total by 5
+    db $B2                      ; call subroutine "check booty total"
+    dl CheckBooty-EventBase     ; ^ continued
+    db $FE                      ; return
+BootyAdd2:
+    db $4B,$43,$0B              ; display caption $B43
+    db $E9,$07,$02,$00          ; increment booty total by 2
+    db $B2                      ; call subroutine "check booty total"
+    dl CheckBooty-EventBase     ; ^ continued
+    db $FE                      ; return
+BootyAdd3:
+    db $4B,$44,$0B              ; display caption $B44
+    db $E9,$07,$03,$00          ; increment booty total by 3
+    db $B2                      ; call subroutine "check booty total"
+    dl CheckBooty-EventBase     ; ^ continued
+    db $FE                      ; return
+warnpc $CB7446
+
+; new "check booty total" routine (repurposes available freespace)
+org $CB710C
+CheckBooty:                     ; 14 bytes
+    db $EB,$07,$15,$00          ; compare variable "Pieces of coral" to 21
+    db $BE,$01                  ; switch based on case
+    db $16,$71,$11              ; if greater call subroutine $CB/7116
+    db $FE                      ; return
+    db $4B,$69,$0B              ; display caption $B69
+    db $FE                      ; return
+warnpc $CB711B
+
+; relocate one of the random jumps to make space for the extra routine calls
+org EventScriptFreespace_6
+BootyAdd1:                      ; 16 bytes
+    db $BD                      ; randomly jump to target
+    dl BootyAdd2-EventBase      ; ^ continued
+    db $4B,$42,$0B              ; display caption $B42
+    db $E9,$07,$01,$00          ; increment booty total by 1
+    db $B2                      ; call subroutine "check booty total"
+    dl CheckBooty-EventBase     ; ^ continued
+    db $FE                      ; return
+EventScriptFreespace_7:
+
+; -----------------------------------------------------------------------------
+; This event hack makes the following changes:
+; - if a player tries to hire Shadow with a full party, they'll be given the
+;   opportunity to form a 3-person party to make space for Shadow
+; - allows a player to rehire Shadow for a fee after he leaves the party when
+;   the player enters Narshe
+; -----------------------------------------------------------------------------
+
+; add hook to "hire Shadow" event code
+org $CC6FEB
+KohlingenShadow:
+    db $4B,$E7,$03              ; display caption $3E7 ("Say… 1000 GP: Yes/No")
+    db $B6                      ; jump based on dialog choice:
+    dl .hire-EventBase          ; 1. Yes
+    db $B3,$5E,$00              ; 2. No (return)
+    db $FE                      ; return
+.hire
+    db $85,$E8,$03              ; take 1000 GP from party
+    db $C0,$BE,$81,$FF,$69,$01  ; jump to $CB69FF if Not Enough GP else continue
+    db $B2,$C1,$C5,$00          ; call subroutine $CAC5C1 (count party members)
+    db $C0,$A3,$81              ; if four party members jump to target else continue
+    dl HireShadowHook-EventBase ; ^ continued
+    db $92                      ; wait for 30 frames (1/2 second)
+warnpc $CC700A
+
+org $CC704F : ShadowJoins:
+
+; add hook to "Shadow leaves party outside Narshe" event code
+org $CCD3C0
+    db $B2                      ; call subroutine
+    dl ShadowLeftHook-EventBase ; ^ continued
+warnpc $CCD3C4
+
+org EventScriptFreespace_7
+; new event script that handles the "full party" case by giving the player the
+; opportunity to free a party slot for Shadow
+HireShadowHook:                 ; 60 bytes
+    db $4B,$4D,$88              ; display caption $84D ("Choose 3 characters.")
+    db $C0,$54,$80              ; jump to target if "After Meeting Ramuh" ($054==On)
+    dl .post_ramuh-EventBase    ; ^ else continue
+    db $99,$01,$00,$00          ; invoke 1-party selection screen
+    db $C0,$27,$01              ; always jump to target
+    dl .skip-EventBase          ; ^ continued
+.post_ramuh
+    db $99,$01,$42,$00          ; invoke 1-party selection screen (lock Celes/Locke)
+.skip
+    db $46,$01                  ; make $01 the current party
+    db $47                      ; make character in slot 0 the lead character
+    db $B2,$A4,$CC,$00          ; call subroutine $CACCA4 (delete benched characters)
+    db $B2,$A4,$35,$02          ; call subroutine $CC35A4 (unequip benched characters)
+    db $B2,$C1,$C5,$00          ; call subroutine $CAC5C1 (count party members)
+    db $C0,$A3,$81              ; if four party members jump to target else continue
+    dl .refund-EventBase        ; ^ continued
+    db $B2                      ; call subroutine "Shadow joins party"
+    dl ShadowJoins-EventBase    ; ^ continued
+    db $96,$5C                  ; fade screen back in (wait until complete)
+    db $FE                      ; return
+.refund
+    db $96,$5C                  ; fade screen back in (wait until complete)
+    db $84,$E8,$03              ; give 1000 GP to party
+    db $4B,$E5,$03              ; display caption $3E5 ("Shadow: Go away.")
+    db $FE                      ; return
+; new event script that resets the "hire Shadow" flags and unequips Shadow when
+; he leaves the party
+ShadowLeftHook:                 ; 7 bytes
+    db $8D,$03                  ; unequip Shadow
+    db $DC,$51                  ; set event bit $651 (Show Shadow in Inn)
+    db $D3,$8E                  ; clear event bit $18E (Play Shadow's theme)
+    db $FE                      ; return
+EventScriptFreespace_8:
 
 warnpc $ED8E5B
 
