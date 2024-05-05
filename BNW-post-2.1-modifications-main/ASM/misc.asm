@@ -788,4 +788,4 @@ org $C35C28
 
 ;Brave New World data
 org $C33BB8
-	db $d1,$78,"Brave New World 2.2 b32",$00
+	db $d1,$78,"Brave New World 2.2 b31",$00
