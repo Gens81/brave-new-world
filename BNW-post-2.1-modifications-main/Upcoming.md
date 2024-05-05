@@ -1,21 +1,20 @@
 # Upcoming
 
 ### 2.2 roadmap:
-- Added cut for Shift dances?
-- Add bnw dev names to credits
-- revert Phunbaba to 2 chars blown away (to balance Terra being equippable)
-- killing soulblazers being no more a win condition (to balance Cyan joining wrexsoul)
-- Fix dual wield penalty shown regardless of whether you're using a second weapon
-- Fix Phantasm (hp leak) being stronger on chars with higher stamina
-- Fix Near Fatal hack bugs (or leave it out)
-- Power/target alt description 
-- Allow summon menu to open "Curative Ally Targeting" submenu
+- pressing Y on the equip screen shows details side-menu
+- shadow recruitable in kohlingen with a full party
+- gau's lines in zozo have priority over shadow's
+- boooty's counter
+- Moogle Charm tweak?
+- new Wrexsoul script
 - Add Brave New World subtitle to the ingame animated title
+- Allow summons to open "Curative Ally Targeting" submenu
+- Disintegration animation for enemies that get petrified
+- Good doggy by Bropedio (no dmg numbers on dog block)
 - Import Alphabetical Lore by Silent Enigma: useless for english version but useful for translations or future lores edits
 - Phoenix glitch fix
-- Disintegration animation for enemies that get petrified
 
-### "Bro new world" features to port:
+### "Bro new world" features candidates to port:
 - If "Fight" will yield a desperation attack, the text is yellow 
 - Scan anytime (HP/MP accessible via X, Status via Y, elemental properties and AI hints via Scan)
 - Status tick rate not affected by speed/haste/slow
@@ -43,7 +42,6 @@
 - Imperial camp dialogue fix (sabin aware of doma without speaking to Shadow)
 - Bottom shadow for menu letters q,p,g,y,j
 - Oceanic line anomaly
-- Good doggy by Bropedio (no dmg numbers on dog block)
 
 ### BIB ideas:
 - Rods consume MP only when procs spells
