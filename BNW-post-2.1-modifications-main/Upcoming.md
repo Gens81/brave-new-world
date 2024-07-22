@@ -1,12 +1,14 @@
 # Upcoming
 
-### 2.2 roadmap:
-- pressing Y on the equip screen shows details side-menu
+Already in:
 - shadow recruitable in kohlingen with a full party
 - gau's lines in zozo have priority over shadow's
-- boooty's counter
-- Moogle Charm tweak?
+- enough booty to feed the chest message
+- fix party restore before Lete River sequence
 - new Wrexsoul script
+
+### 2.2 roadmap:
+
 - Add Brave New World subtitle to the ingame animated title
 - Allow summons to open "Curative Ally Targeting" submenu
 - Disintegration animation for enemies that get petrified
