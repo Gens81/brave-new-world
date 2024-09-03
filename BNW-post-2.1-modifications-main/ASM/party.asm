@@ -84,3 +84,22 @@ org $C37944
 
 org $C375A0
 	dw $598B,$041C	; 30x07 at $598B (Stats)
+
+; New cursor column upon entering 3-party area of Lineup menu
+org $C37466  
+		 db $00,$00      ; 1 -> 1
+         db $01,$01      ; 2 -> 2
+         db $02,$01      ; 3 -> 2
+         db $03,$02      ; 4 -> 3
+         db $04,$03      ; 5 -> 4
+         db $05,$04      ; 6 -> 5
+         db $06,$05      ; 7 -> 5
+         db $07,$06      ; 8 -> 6
+
+; New cursor column upon leaving 3-party area of Lineup menu
+C37476:  db $00,$00      ; 1 -> 1
+         db $01,$01      ; 2 -> 2
+         db $02,$03      ; 3 -> 4
+         db $03,$04      ; 4 -> 5
+         db $04,$05      ; 5 -> 7
+         db $05,$06      ; 6 -> 8
