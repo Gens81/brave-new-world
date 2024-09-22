@@ -218,7 +218,7 @@ weapon_sub:
 	LDY #$2B81					; Prepare move from SRAM to 7E2B81 ram address
 	jsr item_rearrange+3		; go to reload btl menu (Put weapon on top)(+3 to avoid clear flag)
 	PLY							; restore y
-	SEP #$30                    ; 8-bit A,X,Y
+	SEP #$20                    ; 8-bit A
 	STZ $0100                   ; Clear rearrange flag
 	RTL
 
