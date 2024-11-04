@@ -1,6 +1,6 @@
 # Changelog
 
-## [2.2](https://github.com/Gens81/brave-new-world/releases) - 05/05/2024
+## [2.2 RC1](https://github.com/Gens81/brave-new-world/releases) - 11/04/2024
 
 ### Features
 
@@ -21,11 +21,11 @@
 - Selecting an esper twice remove it, selecting an esper equipped on another char makes you choose if you want to "transfer" it (Ryo_Hazuki)
 - Enable esper batch spending (Fëanor)
 - Prevent using slim jim from field menu (Gens)
-- Battle quote box show enemy "reactions" in yellow (Fëanor) and enemy flashes differently (Bropedio)
+- Enemies flash red and slower while performing a counter (Fëanor)
 - Double GP by default on Veldt and reward bonuses not showing at the end of a battle if exp gain is off (Fëanor)
 - Summon available even for chars with X-Magic active (Fëanor)
 - Rage checklist (Original hack by Novalia Spirit, ported to Bnw by Fëanor) 
-- "Native" dance shown in yellow (Fëanor)
+- Current terrain's dance shown in yellow (Fëanor)
 - More walkable beach tiles in solitary island for faster fish_catching (Fëanor)
 - Item/hands battle menu will always arrange inventory to have respectively items/weapons-shields on top of the list (Ryo_Hazuki)
 - Colosseum reversible bets highlighted by a different icon (Fëanor, Bropedio, Gens)
@@ -38,12 +38,11 @@
 - New Locke scene in Returners Hideout (Fëanor)
 - The second dialogue while escaping from FC directly trigger Shadow's scene (Fëanor)
 - New rage details menu that shows status resistances and elemental properties (Ryo_Hazuki)
-- Choreography hack (by Sir Newton Fig)
 - Sketch always hits
 - Implemented Power/Target alt description (hold Y) for espers, magic, blitzes, bushido and lores
 - Added custom credits during the intro and a special message in the end screen
 - Added Equippable chars in the esper list
-- press Select while fighting to cycle between: ATB bar, current/max HP, current/max MP
+- press Select while fighting to cycle between: ATB bar, current/max HP, current/max MP (Fëanor)
 - pressing Y on the equip screen shows details side-menu
 
 ### Tweaks
@@ -81,7 +80,7 @@
 - Numbered Bushido screen (Ryo_Hazuki)
 - Bushido gauge speed capped when reaching 6 (Fëanor)
 - A Moogle explains the commands customization feature after recruiting Gogo (Gens)
-- Optimized dte table and added 3 captions (about yellow counters, the 2x gp gain with exp off, a hint about the number of soldiers to speak before banquet) (Gens)
+- Optimized dte table and added 3 captions (about flashy counters, the 2x gp gain with exp off, a hint about the number of soldiers to speak before banquet) (Gens)
 - Aligned to the center "New game" and "Save" (Gens) 
 - Fixed visual bugs when changing rows in Intangir Z fight and it works mechanically as intended (Fëanor)
 - Throw menu stops at line 21st (Ryo_Hazuki)
@@ -91,7 +90,6 @@
 - Equipment menu list sorted by value (Fëanor)
 - Relm recruitable in Owzer's mansion directly after saving her in the Veldt Cave (Fëanor)
 - Added blinking Y button to the status and shop screens (Ryo_Hazuki)
-- Changed Setzer's initial weapon from Darts to Butterfly (BTB)
 - Command arrange menu accessible from "normal" option
 - Elemental properties nomenclature and order changed to: Absorb, No Damage, Half Damage, Weakness (Ryo_Hazuki)
 - Changed all "exp." references to "XP" (Gens)
@@ -104,7 +102,6 @@
 - Cursor wrapping equip menu
 - Hidden Phoenix Cave warp point
 - Phunbaba blows away 2 chars
-- Moogle charm is now dropped by Yeti
 - Blitz skill full mastering at Duncan needs killing doomgaze
 - new animations by Autumn (Sap, Dark, Rasp, Break)
 - changes to pulling the lever in Soul's Train
@@ -115,12 +112,16 @@
 - GP gain message is dismissable
 - Removed x-fight from brushes but raised proc success rate and battle power
 - Light Brush may cast Safe, Monet Brush Shell, Dali Brush Reflect, Ross Brush Haste
+- Mythril Rod become Magus Rod and may cast Rasp (updated betting reward and enemy)
 - Spirit Claw, Ocean Claw and Frostgore get counter-attack
 - Poison CLaw, Hell Claw and Stormfang get HP bonus
 - Hell Claw Chest in Zozo replaced with Ninja Star
 - shadow recruitable in kohlingen with a full party
 - gau's lines in zozo have priority over shadow's
 - boooty's counter
+- implemented "Cyan uneventful dream" (full party in Cyan's dream from the very beginning)
+- Rune blade is chest content and shop value lowered from 25k to 20k GP
+- Megaflare (Bahamut) bpow raised to 150
 
 ### Bugfixes
 
@@ -150,6 +151,5 @@
 - Fixed text position and nomenclature in multiple controller config submenu (Gens)
 - Fixed gale hairpin stats( +3 magic in place of +3 stamina)
 - Fixed hp leak and poison doing more damage with regen
-- Edgar sprite shown in schematics event
 
 ## Previous Versions are not tracked by this Doc
