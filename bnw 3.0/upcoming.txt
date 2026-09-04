@@ -1,0 +1,47 @@
+# Upcoming
+
+### 2.2 features that would be ok to have but not necessary:
+- Recruit shadow right after banquet
+- Make Blood Sword and Soul Sabre trade each other in Colosseum
+- Allow Esper menu to open "Curative Ally Targeting" submenu
+- Import Alphabetical Lore by Silent Enigma: useless for english version but useful for translations/future lore edits or bnw spinoffs
+- Disintegration animation for enemies that get petrified
+
+### BIB ideas:
+- Black market in KT that sells "treasure" items (snake oil, slim Jim, inviz scroll etc)
+- Myria fixed back attack
+- Rods consume MP only when procs spells
+- Physical blitzes can crit
+- Remove 1 fight in IAF gauntlet
+- Magitek rided by humans are stealable
+- Humpty and Dumpty are stealable
+- Remove Siren and/or Shoat from BAR-BAR-BAR pool
+- Gray out null values on shop details menu
+- Raise Slow accuracy (or make SlowX free targeting and 100% accurate when ST)
+
+### Events
+- Restore Shadow cutscene during Soul train fight
+- Banon's death reference at the end of Thamasa events 
+	Terra: Where's Banon?
+	Edgar: (head down) He_<D> didn't make it out.
+- Add "CT - Mistery from the past" track to Ultima's sealed door (or just "Nighty Night")
+
+### Bugfixes/features temporarily discarded:
+- Import Snaphat compression algorythm
+- Stuck in a pose (walking pose in events like npc unequip)
+- Banon riding chocobo pose 
+- Imperial camp dialogue fix (sabin aware of doma without speaking to Shadow)
+- Oceanic line anomaly
+- Narshe Cave door by Leet Fletcher
+- Sliding dash by Silent Enigma
+
+### "Bro new world" candidate features to port:
+- If "Fight" will yield a desperation attack, the text is yellow 
+- Status tick rate not affected by speed/haste/slow
+- Defend work against piercing (ignore defense) attacks
+- Dog Block and Golem preempt check for cover
+- Smart targeting
+	Random targeting behaves differently 50% of the time
+	If setting/toggling status, selects target without the status
+	If lifting status, select target with the status
+	If damaging/healing, selects near fatal target

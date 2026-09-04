@@ -1,0 +1,228 @@
+Brave New World v3.0 Changelog
+
+
+Battle Changes
+
+
+* New “Choreography” Dance command rework (Sir Newton Fig)
+   * Choosing to “change the background” and choosing to “repeat the background” with Dance gives different results
+   * Dance no longer causes the player to lose control of Mog/Gogo
+   * Mog/Gogo no longer stumble
+   * Mog has “fast fall” by default when using Jump
+   * Moogle Charm is gone forever
+   * Added an event to explain the new Dance command after recruiting Mog (Fëanor)
+   * The current battle terrain is shown in yellow text in the Dance menu (Fëanor)
+* Changed 100+ animations, and added brand new animations for some abilities (Khaos)
+   * Animations better indicate their elemental properties and effects
+   * Characters jump to indicate that an effect cures many or all negative statuses
+   * Various long animations have been sped up significantly
+   * Duplicated animations have been removed
+* Enemies flash red when performing a counter-attack (Fëanor)
+* When your cursor is on a non-boss enemy, press ‘X’ for HP/MP information (Bropedio)
+* When your cursor is on any enemy, press ‘Y’ for a list of active statuses (Bropedio)
+* Scan has been reworked to give hints about enemy behavior (only for non-bosses) in addition to listing elemental weaknesses (Bropedio, Gens, Khaos)
+* Press ‘Select’ button in battle to cycle between: ATB bar, current/max HP, and current/max MP (Fëanor)
+* Summoning espers is possible for characters with X-Magic (Fëanor)
+* “Summon available” icon added next to Magic command during battle (Sir Newton Fig)
+* Item menu will arrange the inventory to have more relevant items at the top of the list during battle (Ryo_Hazuki)
+* New graphics added to distinguish characters affected by Zombie status from those with only the Undead status (Toadstyle, Khaos)
+* Wrexsoul’s battle has been reworked (Khaos)
+   * Gi Nattak applies the Condemn status, indicating who is possessed
+   * MP damage no longer trivializes the fight
+   * Cyan joins the party for the battle (Fëanor)
+* The final battle with the three tiers has been remastered (Khaos, Ryo_Hazuki)
+   * Final enemies flash when they attack or counter-attack
+   * New graphics indicate if a final enemy is dead
+   * Final enemies have new names
+   * Final enemies are sketchable
+   * Final fight background with Kefka changed to be “Brave New World” themed (Gens)
+
+
+Balance Changes
+
+
+* Removed MP bonus from Radiant Gown, added Auto-Shell
+* Brushes reworked
+   * Light Brush may cast Safe
+   * Monet Brush may cast Shell
+   * Dali Brush may cast Reflect
+   * Ross Brush may cast Haste
+   * Removed X-fight from brushes, but raised proc rate to 50% and increased battle power
+* Sketch can’t miss
+* Bahamut summon spell power raised to 150
+* Magus Rod (formerly Mythril Rod) may cast Rasp (betting reward updated accordingly)
+* Removed HP bonus from Royal Jacket, added “spellcast rate up” and Auto-Safe
+* Claws reworked
+   * Light Claw (formerly Spirit Claw), Ocean Claw and Frostgore provide counter-attack
+   * Poison Claw, Hell Claw and Stormfang provide HP bonuses
+* Hell Claw Chest in Zozo replaced with Ninja Star (and added a secret Hell Claw backdoor) (Fëanor)
+* Killing Doomgaze unlocks all Blitz abilities (by talking to Duncan) (Fëanor)
+* Soul Sabre’s spellcast rate increased from 25% to 50%
+* Exploder (player version) leaves the caster with 1 HP (Sir Newton Fig)
+* Siren Song may set Muddle and Berserk
+* Added anti-human flag to Morning Star
+
+
+Other Changes and Features
+
+
+* Optional “Diary” patch is available (Ryo_Hazuki, Gens)
+   * Includes a full Bestiary with graphics and details for every monster
+   * Includes all Scan behavior hints, as well as Diary-exclusive boss hints
+   * Includes a music player (Madsiur, ported by Ryo_Hazuki)
+   * Includes wallpaper gradient switch
+   * Includes font switching between FF6 Standard and FF6 Advance
+   * Note that this patch will expand ROM size to 4MB
+* “Advanced Diary” patch is available in the unlockme once you beat the game
+   * Instead of listing hints, the advanced diary gives a complete description of all enemy scripts, including bosses
+* Managing magicite and ELs is more streamlined (Ryo_Hazuki)
+   * Yellow up-arrows appear on the main menu to indicate that a character has unspent ELs 
+   * Selecting magicite equipped by another character allows you to transfer it
+   * Selecting the same magicite twice automatically unequips it
+   * Status screen shows how much a stat has been raised by using ELs
+   * EL number in the main menu grays out when no magicite is equipped
+   * EL batch spending has been added (Fëanor)
+* LV number in the main menu grays out when XP gain is off (Ryo_Hazuki)
+* The Rage menu outside of battle has been overhauled (Ryo_Hazuki, Gens)
+   * A Rage details screen has been added, which displays: Status resistances, innate statuses, elemental resistances and elemental weaknesses (press ‘Y’ to access)
+   * Rage ability descriptions have been added
+   * Rage checklist has been added (Novalia Spirit, ported by Fëanor)
+* World of Balance Rage formations unlock after completing the Floating Continent (Seibaby)
+* Characters are no longer automatically equipped in some cases, instead the main menu opens before the following fights: (Fëanor)
+   * Cranes
+   * Phunbaba 3
+   * Tentacles
+   * Wrexsoul
+   * After selecting "Go to the Floating Continent"
+* Stamina renamed to Spirit
+* Holding the ‘B’ button will advance dialog text, except for choices (Fëanor)
+* New Locke scene in Returners Hideout (Fëanor)
+* Spell and ability descriptions have been updated (Gens)
+* New Slots menu added to the skills menu (Ryo_Hazuki)
+* Power and targeting information for many abilities is available in menus by holding the ‘Y’ button (Ryo_Hazuki)
+* Warping out of Ancient Castle and Ancient Cave is enabled (Khaos)
+* Some accessibility features have been added:
+   * Reduced repeated flashing effects for Bum Rush, Schiller, and Volt Array (formerly Diffuser)
+   * Reduced mosaic effect when poisoned (Gens)
+   * Half ATB is refunded on incorrect blitz input (Sir Newton Fig)
+   * Bushido gauge speed capped when reaching 6 (Fëanor)
+   * Each bridge guard in Gogo’s Cave can knock you off at most once (Khaos)
+   * Factory doors in Kefka’s Tower are more visible (Khaos)
+* Added custom title screen (Ryo_Hazuki, Khaos)
+* Added custom credits to the introduction
+* Added a special message to the end screen
+
+
+Small Tweaks and Improvements
+
+
+* New Blind, Elemental, and Tool icons (Khaos)
+* New Magicite icon added (Sir Newton Fig)
+* New Lore icon added (Gens)
+* New Ranged icon and category for weapons added (Gens, Ryo_Hazuki)
+* New “Mastered Magicite” icon added (Madsiur, ported by Ryo_Hazuki)
+* New Consumable icon added for item sorting (Gens)
+* Decensored pub signs (Gens)
+* Decensored enemies in the final fight (Khaos)
+* New Narshe tiles in the World of Balance overworld (Gens, Gi Nattak)
+* Reprioritized debuff graphics to make it clearer which debuffs you have, when many are applied simultaneously (Toadstyle)
+* Icons are immune to font color changing effects (Ryo_Hazuki)
+* Edgar uses "Gerad" palette during Tentacles battle (Leet Sketcher)
+* Added an option to trigger the banquet scene (Fëanor)
+* Double GP is enabled by default on the Veldt (Fëanor)
+* Wallchange will no longer roll the same element twice in a row (Sir Newton Fig)
+* Ground-only attacks use their proper casting animations again (Sir Newton Fig)
+* Fixed visual bugs when changing rows in Intangir Z fight (works as originally intended) (Fëanor)
+* When using a Lore that can cure, the buff/debuff subscreen is visible (Bropedio)
+* "Phantasm” added to the buff/debuff subscreen (Sir Newton Fig)
+* GP gain message can be dismissed (Fëanor)
+* Aesthetically improved many menus, and improved scrolling through some longer menus (Ryo_Hazuki, Gens)
+* Added Tool and Scroll attack values in shops, and associated characters cheer when selecting Tools or Scrolls (Ryo_Hazuki)
+* Slim Jims are no longer usable outside of battle (Gens)
+* Deleted rare item counter, except for ‘Booty’ (Ryo_Hazuki)
+* Consumables will show 0 next to defense stats (as every other stat) in the shop details screen (Ryo_Hazuki)
+* Added equipable characters to magicite descriptions (Ryo_Hazuki)
+* Added mountains to the minimap (Madsiur)
+* The coliseum menu has been updated
+   * Deleted entries with no rewards (Ryo_Hazuki)
+   * Added prize descriptions to all bets (Ryo_Hazuki)
+   * Bets that can be “reversed” are identified with a new icon (Fëanor, Bropedio, Gens)
+* Longer skill names by 1 digit (properly named Reflect, Berserk and few other skills) (Ryo_Hazuki, Gens)
+* Font kerning reduced to 1 pixel, similar to Chrono Trigger font (Gens)
+* Added controller key prompts in dialogues and tutorials (Gens)
+* Reduced magicite list by 1 line to have 26 slots available for 26 magicite (Gens)
+* Bushido menu includes numbers (Ryo_Hazuki)
+* Throw menu stops at the 21st line (Ryo_Hazuki)
+* Item descriptions are displayed automatically in the equip menu (Ryo_Hazuki)
+* Added all missing flags to weapon details screen (Ryo_Hazuki)
+* Inventory equipment list sorted by value (Fëanor)
+* Elemental properties nomenclature and order changed to: Absorb, No Damage, Half Damage, and Weakness (Ryo_Hazuki)
+* Changed all "exp." references to "XP" (Gens)
+* Removed ‘Y’ button toggle to see Rerise learning percentage, shown by default (Ryo_Hazuki)
+* Added blinking ‘Y’ button to the status and shop screens (Ryo_Hazuki)
+* “Arrange battle command” screen is accessible from window mode (Ryo_Hazuki)
+* Restored "E" for “Equipped” in the shop menu (Fëanor)
+* Can no longer buy more than 1 copy of each tool (entry is grayed out in shop if you already own it) (Ryo_Hazuki)
+* Leveling to the maximum level shows “0 XP” next to level in place of random large numbers in the status screen (Fëanor)
+* Relm is recruitable in Owzer's mansion directly after saving her in the Veldt Cave (Fëanor)
+* Shadow is recruitable in Kohlingen with a full party (Fëanor)
+* Overhauled opera scene with dialogues synced with music (Gens)
+* More walkable beach tiles added to Solitary Island for faster fish catching (Fëanor)
+* NPCs are led to not occupy tiles pointed to by the player (Silent Enigma)
+* The second dialogue while escaping from Floating Continent will directly trigger Shadow's scene (Fëanor)
+* Tutorial added for the commands customization feature after recruiting Gogo (Gens)
+* Added dialogue regarding new features, a hint about the number of soldiers to speak to before the banquet, a Rage tutorial, and others (Gens)
+* Prelude plays during first visit to Beginner Classroom (Bropedio)
+* Detaching the car in the Soul Train also opens the door in the next car (Fëanor)
+* Some cosmetic changes to Cyan’s cave dream (Khaos)
+* The Beginner School NPC has a new look
+* ATB bar turns blue when a command has been issued (Bropedio)
+* Gau's lines in Zozo have priority over Shadow's (Fëanor)
+* At the start of Cyan's dream, you start with your full party (PowerPanda)
+* Rune Blade added to chest, and shop value lowered from 25k to 20k GP
+* Minor adjustments made to the “Four Fiends” track (FigaroCruller)
+* Imp portrait removed for something a little special
+* Renamed a handful of items and abilities
+
+
+Bug Fixes
+
+
+* Final Kefka can't cast Meteor twice in a row (Fëanor)
+* Fixed Ghost Ring not providing Undead status when raging a non-Undead monster (Fëanor)
+* Fixed Intangir transferring its weaknesses to Intangir Z (Seibaby)
+* Fixed Dumpty battle script (Gens)
+* Fixed Sand Devil battle script
+* Fixed Gale Hairpin stat bonus (+3 Magic in place of +3 Spirit)
+* Fixed Phantasm (HP leak) and poison doing more damage with regen (Fëanor)
+* Fixed Palidor BAR-BAR-BAR bug (Khaos)
+* Fixed Phoenix BAR-BAR-BAR bug and re-added Phoenix to Roulette pool (Khaos)
+* Fixed Phoenix graphical glitches when used against large enemies (Khaos)
+* Fixed Safe/Shell/Reflect aura turning off with Berserk/Poison status (Toadstyle)
+* Damage numbers no longer show when Interceptor blocks an attack (Bropedio)
+* Fixed Rizopas boss skip (Khaos)
+* Invisible chests in Soul Train have been made visible (Dark Mage, Gens)
+* Edgar and Sabin don't blush anymore during Setzer’s proposal to Celes (Novalia Spirit)
+* Reward bonuses do not show at the end of a battle if XP gain is off (Fëanor)
+* Fairy Charm's chest in Returners Hideout is side-openable (Gens)
+* Blocked controller 2 Blitz input (Sir Newton Fig)
+* Decoupled MP color digits to fix Reflect palette corruptions and Crusader bug (Silent Enigma, ported by Ryo_Hazuki)
+* Fixed the display glitch after 255 named attacks are shown in battle (Fëanor)
+* The disabled Phoenix Cave warp point has been removed (Fëanor)
+* Red Dragon NPC loses its collision after being defeated instead of just turning invisible (Fëanor)
+* Fixed sprite priority bug after covering a physical attack (Bropedio)
+* Updated wording in “multiple controller” config screen (Gens)
+* Blue triangle pre-animation restored for some rages (Khaos)
+* Multi-targeting with Ninja Star or Shurikens copies the animation for all targets (Khaos)
+* Lag removed from shop menu (Abyssonym, ported by Ryo_Hazuki)
+* Zombie won’t remove statuses if they are permanent statuses (Assassin)
+* Figaro Guards no longer vanish after viewing Sabin’s flashback cutscene (DrakeyC)
+* Item descriptions no longer get cut off when switching to the details screen (Silent Enigma)
+* Quasar no longer messes up Storm’s animation (Leet Sketcher)
+* Party leader is maintained when you switch from Cyan’s scene to the Imperial Camp (Leet Sketcher)
+* Using cure effects outside of battle no longer cures poison in some cases (CDude)
+* Fixed some small graphical imperfections (Sealed gate bridge tiles, drained pond tile, Magitek tube tile, Soul Train forest background tiles, shopkeeper missing pixels, and various others) (Seibaby, Gi Nattak, Gens)
+* Fixed map tile glitch in Owzer's Basement (Gi Nattak)
+* Fixed missing pixels on several enemies and esper summons (Khaos)
+* Minor dialogue fixes (Gens)
+* Fixed Printme/ROM discrepancies (Fëanor)
