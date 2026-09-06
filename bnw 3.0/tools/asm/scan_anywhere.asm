@@ -345,7 +345,7 @@ org $CF09F1 : db $A6 ; Bomb             Dangerous at lower HP         Counters m
 org $CF0A31 : db $05 ; Boxxy            Dangerous when alone          ---
 org $CF0A51 : db $A5 ; Slamdancer       Dangerous when alone          Counters melee attacks
 org $CF0A71 : db $B6 ; Giant            Dangerous at lower HP         Counters any attack
-org $CF0A91 : db $03 ; Pug              Kind-hearted...?              ---
+org $CF0A91 : db $02 ; Pug              Dangerous!		              ---
 org $CF0AB1 : db $03 ; Magic Pot        Kind-hearted...?              ---
 org $CF0B11 : db $06 ; Buffalax         Dangerous at lower HP         ---
 org $CF0B31 : db $07 ; Eukaryote        Punishes bad status           ---
