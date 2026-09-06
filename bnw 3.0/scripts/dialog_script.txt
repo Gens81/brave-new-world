@@ -201,7 +201,7 @@ Need help?
 <C> No
 
 [caption #54]
-You'll fight in 3 groups. Press ± to switch between them.<EOP>
+You'll fight in 3 groups. Press Â± to switch between them.<EOP>
 Your objective is to defeat the commander before his men reach <A0>.<EOP>
 And don't steal my spear - I need it to defend myself. <D>Go buy your own, kupo.
 
@@ -2144,7 +2144,7 @@ We thought that was stupid, so now they don't.
 
 [caption #605]
 When outfitting your party, remember that most equipment does more now than just boost raw defense or battle power.<EOP>
-Hold ± when shopping to view the full stats of any item prior to purchase.<EOP>
+Hold Â± when shopping to view the full stats of any item prior to purchase.<EOP>
 Equipment can be also reviewed in the item menu: press $ twice for info and use @/& to switch views.<EOP>
 Note that while stat boosts from equipment will stack, other properties (including HP/MP boosts) will not.
 
@@ -2168,18 +2168,17 @@ Enemies will flash red when performing counters.<EOP>
 Finally, hitting an elemental weakness can sometimes have additional effects on enemies beyond the extra damage dealt.
 
 [caption #609]
-Hold down £ and { to run from battles that get out of hand.<EOP>
+Hold down Â£ and { to run from battles that get out of hand.<EOP>
 Faster characters like <A1> are better at getting away quickly than others are.<EOP>
 Also, by pressing }` in battle, you can cycle between ATB, current/max HP and current/max MP display.
 
 [caption #610]
-Press ^ or ± in battle to [hold] an active character's turn and cycle to the next available ally.<EOP>
-When targeting a foe, ^ or ± instead display HP or status, respectively.<EOP>
-When a command is input, there will be a delay until it executes indicated by the ATB gauge turning blue and counting down.<EOP>
-This feature can be disabled in the config menu if you find it distracting.
+Press ^ or Â± in battle to [hold] an active character's turn and cycle to the next available ally.<EOP>
+When targeting a foe, ^ displays HP/MP, while Â± displays current status.<EOP>
+When a command is queued, the ATB gauge turns blue and counts down until it executes. This [Wait Gauge] can be disabled in the config menu.
 
 [caption #611]
-Press £ or { to select multiple targets for any spell with no targeting restrictions, such as
+Press Â£ or { to select multiple targets for any spell with no targeting restrictions, such as
 <A0>'s Fire and Cure spells.<EOP>
 Other commands with [free] targeting are [Throw] (with stars) and [GP Toss].<EOP>
 The damage (or healing) dealt by anything split in this manner will be reduced by 50%.<EOP>
@@ -2232,8 +2231,7 @@ You can also set it as the default movement speed in the config menu.
 [caption #618]
 [Slow] and [Sap] aren't very crippling statuses, but they usually work - particularly against bosses.<EOP>
 [Haste] and [Regen] are their opposite effects; setting one will cancel out the other.<EOP>
-Having any of the above statuses inherent will grant immunity to its counterpart.<EOP>
-If you're ever unsure, the [Scan] spell will display all statuses on a foe - and won't consume the caster's turn.
+Having any of the above statuses inherent will grant immunity to its counterpart.
 
 [caption #619]
 Statuses affecting speed are indicated by color changes to a character's ATB bar.<EOP>
@@ -2305,7 +2303,7 @@ And while ice may not be one of the more powerful elements, it still killed the 
 Earth and wind are very strong on the other hand, but no foes have a weakness to them.<EOP>
 Fractional damage in particular is effective against any enemy that doesn't resist its element and isn't a boss.<EOP>
 Holy-elemental spells (including curative ones) are best used on the undead for major damage.<EOP>
-And if all else fails, use fire.
+If you're ever unsure, the [Scan] spell will display weaknesses - and won't consume the caster's turn.
 
 [caption #630]
 Weapons and/or shields can be swapped in battle by pressing <$74> in the [Item] menu.<EOP>
@@ -3169,7 +3167,7 @@ Need some info?
 <C> No
 
 [caption #877]
-You'll fight in 2 groups. Press ± to switch between them.<EOP>
+You'll fight in 2 groups. Press Â± to switch between them.<EOP>
 Defeat Kefka before his men reach Banon, or it's game over!
 
 [caption #878]
@@ -3353,7 +3351,7 @@ Wanna know how to ride a chocobo?
 | = steer
 $ = move forward
 \ = dismount
-£/{ = do a barrel roll
+Â£/{ = do a barrel roll
 
 [caption #934]
 Chocobo ride, 100 GP!
@@ -4709,7 +4707,7 @@ Would you like to know more?
 <C> No
 
 [caption #1317]
-<A9>: Press #+ to toggle the map. Hold ± and use the | to move in all directions.<EOP>
+<A9>: Press #+ to toggle the map. Hold Â± and use the | to move in all directions.<EOP>
 <A9>: Crash this thing and so help me I will fuck you with a rake.
 
 [caption #1318]
@@ -9303,7 +9301,7 @@ Many people have since gone there in search of loot.<EOP>
 Some like to call it [treasure hunting], but I just call it common thievery.
 
 [caption #2614]
-Press ± to switch parties.
+Press Â± to switch parties.
 
 [caption #2615]
 Don't bother heading in_ <D>there's nothing left.
@@ -10792,11 +10790,11 @@ Kefka: I, Kefka, will knock you all down!
 
 [caption #3036]
 
-          _is cupcakes. <E$08><OP$12>
+          _is ********. <E$08><OP$12>
 
 [caption #3037]
 
-     Got it? It's cupcakes. <E$08><OP$12>
+     Got it? It's ********. <E$08><OP$12>
 
 [caption #3038]
 <A6>: Ugh_ <E$08><OP$12>
