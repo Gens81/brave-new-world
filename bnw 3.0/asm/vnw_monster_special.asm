@@ -463,7 +463,7 @@ org $CFD0D0
 	db "Lick      " ;061  Chickenlip
 	db "Crush     " ;062   Sand Worm
 	db "Pike      " ;063    Thanatos
-	db "          " ;064      Chupon
+	db "Sneeze    " ;064      Chupon
 	db "Trigger   " ;065   Onion Kid
 	db "Metal>Fist" ;066   Tek Armor
 	db "Jettison  " ;067   Sky Armor
@@ -672,7 +672,7 @@ org $CFD0D0
 	db "          " ;270
 	db "          " ;271
 	db "Tackle    " ;272        Yeti
-	db "          " ;273    Guardian
+	db "FAKK2     " ;273    Guardian
 	db "FAKK2     " ;274    Guardian
 	db "          " ;275         IAF
 	db "          " ;276   Esper...?
@@ -761,8 +761,8 @@ org $CFD0D0
 	db "Despair   " ;359  Soulblazer *
 	db "Ink       " ;360      Ultros *
 	db "Maru>Mari " ;361    Bat Lady
-	db "          " ;362    Phunbaba
-	db "          " ;363    Phunbaba
+	db "Body>Check" ;362    Phunbaba
+	db "Body>Check" ;363    Phunbaba
 	db "Body>Check" ;364    Phunbaba
 	db "          " ;365
 	db "          " ;366     (Event)
@@ -772,7 +772,7 @@ org $CFD0D0
 	db "          " ;370        !Gau
 	db "          " ;371     (Event)
 	db "          " ;372
-	db "          " ;373     Trooper
+	db "Bayonet   " ;373     Trooper
 	db "Slice     " ;374   Centurion
 	db "Lunge     " ;375       Kefka *
 	db "          " ;376
