@@ -13,8 +13,8 @@ hirom
 ;;; animation used for things like muddle, sleep, and near fatal poses.
 ;;;
 ;;; We repurpose the unused graphic action $17 (table C2/C6A9), which statically displays
-;;; graphic frame $19 (table C2/C745), which is seemingly glitchy and otherwise unused. We
-;;; reconfigure it to display our new zombie sprite.
+;;; graphic frame $19 (table C2/C745), which is seemingly glitchy and only used in one scene
+;;; when Gestahl dies. We reconfigure it to display our new zombie sprite.
 ;;;
 ;;; We also tweak battle event command $12 (subroutine C1/FEB9) to prevent zombies from
 ;;; participating in group animations (e.g. the victory fanfare). This puts them more in
@@ -48,9 +48,18 @@ incbin "D50000_4bpp_sprites.bin"
 org $D60000
 incbin "D60000_4bpp_sprites.bin"
 
+org $D70000
+incbin "D70000_4bpp_sprites.bin"
+
 org $C2C8D5
     ;; Reconfigure graphic frame $19 to show the zombie sprite.
     dw $FFFF, $FFFF, $14A0, $14C0, $14E0, $1500, $1520, $1540
+
+; Shifts the pointer for the Dog sprite over six 8x8 blocks, so frame $19 can retain its
+; function with the Gestahl sprite. (Gestahl's dead sprite is copied over to the old Dog
+; sprite location.)
+org $C0D124
+dw $FFA0
 
 org $C13071
 SetCharacterTertiaryGraphicAction:
