@@ -3,8 +3,8 @@
 ;
 ; Skip showing damage on Interceptor when he blocks
 
-!free = $C2FC54 ; 10 bytes
-!warn = $C2FC5E
+!free = $C2FC58 ; 10 bytes
+!warn = $C2FC68
 
 org $C23451 : JSR ShouldSkipDog ; include Doggy in Zinger check
 
