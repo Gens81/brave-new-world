@@ -254,7 +254,7 @@ org $C1AB8E : JSL StanceCheck ; Skip reset for Runic or DefendRTL
 ; ---							0		---		This means no message is displayed
 ; No useful information			1		28		Used for enemies with very basic scripts
 ; Dangerous!					2		66		Used for all Bosses
-; Kind-hearted...?				3		10		Used for Pug, Lakshmi, Magic Pot, Shemp, Umaro, Tritoch, Treachery, Shiva, Ifrit
+; Kind-hearted...?				3		10		Used for Lakshmi, Magic Pot, Shemp, Umaro, Tritoch, Treachery, Shiva, Ifrit
 ; Strong attack on a timer		4		62
 ; Dangerous when alone			5		43
 ; Dangerous at lower HP			6		33		Used for Zone Eater as well
@@ -345,7 +345,7 @@ org $CF09F1 : db $A6 ; Bomb             Dangerous at lower HP         Counters m
 org $CF0A31 : db $05 ; Boxxy            Dangerous when alone          ---
 org $CF0A51 : db $A5 ; Slamdancer       Dangerous when alone          Counters melee attacks
 org $CF0A71 : db $B6 ; Giant            Dangerous at lower HP         Counters any attack
-org $CF0A91 : db $02 ; Pug              Dangerous!		              ---
+org $CF0A91 : db $02 ; Pug              Dangerous!		                ---
 org $CF0AB1 : db $03 ; Magic Pot        Kind-hearted...?              ---
 org $CF0B11 : db $06 ; Buffalax         Dangerous at lower HP         ---
 org $CF0B31 : db $07 ; Eukaryote        Punishes bad status           ---
