@@ -1140,3 +1140,7 @@ SpendingSplice:
     JSR $0F11       ; queue its upload
     JMP $1368       ; upload it now
 warnpc !warn_b
+
+;status icons overflow fix (Bropedio)
+org $C329B2 : JSR $6A15 ; fixes vanilla bug
+org $C3F849 : JSR $4EF6 ; fixes bnw EL bug
