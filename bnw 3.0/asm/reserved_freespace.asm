@@ -30,3 +30,6 @@ org $C0FF18 : pad $C0FF8E ; 118 bytes
 
 ; new_game_plus (Bropedio's randomizer)
 org $C3F612 : pad $C3F646 ; 52 bytes
+
+; elemental nerf
+org $C47F40 : pad $C47F4C ; 13 bytes
