@@ -928,6 +928,8 @@ org $C421FC : db $2E
 
 org $D85600 : db $02 ; Gives Spook Stick "Zombie Immunity"
 
+org $DDD218 : db $BA ; Kefka Tower half door fix
+
 ;Brave New World data
 org $C33BB8
-	db $d1,$78," Brave New World 3.0 B2 ",$00
+	db $d1,$78,"Brave New World 3.0 B2.1",$00
