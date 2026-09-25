@@ -918,7 +918,7 @@ ZombieHelper:
   AND $FC            ;A = New Statuses - Above statuses that target isn't immune to)
   RTS
 
-;fixed Dreadful Fight aka Four Fiends song data
+;fixed Dreadful Fight aka Four Fiends song data (credit to FigaroCruller)
 org $D4F646
   incbin four-fiends.bin
 
@@ -932,4 +932,4 @@ org $DDD218 : db $BA ; Kefka Tower half door fix
 
 ;Brave New World data
 org $C33BB8
-	db $d1,$78,"Brave New World 3.0 B2.1",$00
+	db $d1,$78,"Brave New World 3.0 B2.2",$00
