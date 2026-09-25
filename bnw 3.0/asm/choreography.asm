@@ -105,7 +105,7 @@ org $ED8676         ; Treasure data: Moogle Charm coordinates
   db $2b            ; move trigger up into wall (unreachable)
 
 org $CB84A3           ; Unused event space
-  db $4B,$7A,$02,$FE  ; Display caption #634: Mig eulogy
+  db $4B,$7A,$42,$FE  ; Display transparent caption #634: Mig eulogy
 
 
 org $CFFE80 ; Reorganize Dance Step -> Attack Number table
