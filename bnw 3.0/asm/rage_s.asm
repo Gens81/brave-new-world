@@ -439,7 +439,7 @@ PrintInnate:
 	LDA [$D0],Y					; Load value
 	STA $DF						; Checkbyte
 	DEC $D0						; Prev byte
-	LDA #$05
+	LDA #$06
 	STA $DC
 	
 .next_bit
