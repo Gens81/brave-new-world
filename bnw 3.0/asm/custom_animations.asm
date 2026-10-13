@@ -1530,8 +1530,8 @@ org $D054B3
 ; [ Animation Script $01EC: Oblivion (Ragnarok) (sprite) ]
 
 org $D02533
-	db $00,$40				; speed 1, align to top of character/monster
-	db $89,$04				; loop start (4 times)
+	db $00,$20				; speed 1, align to center of character/monster
+	db $89,$05				; loop start (5 times)
 	db $83,$DF				; move up 32
 	db $8A					; loop end
 	db $89,$0C				; loop start (12 times)
