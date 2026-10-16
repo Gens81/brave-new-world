@@ -332,7 +332,7 @@ org $D10041					; Item #	Item Name		Jump Animation	Throw Animation
 	db $00					; Item #74	Bone Club		Unarmed
 	db $00					; Item #75	Magic Bone		Unarmed
 	db $0D					; Item #76	Wing Edge		Unarmed			Wing Edge Crit
-	db $00					; Item #77	-
+	db $04					; Item #77	Hell Claw*		Unarmed			Rising Sun Crit *Fake version thrown by Dadaluma
 	db $80					; Item #78	Darts			Unarmed & Ignore Throw
 	db $80					; Item #79	Tarot			Unarmed & Ignore Throw
 	db $80					; Item #80	Viper Darts		Unarmed & Ignore Throw
@@ -342,7 +342,7 @@ org $D10041					; Item #	Item Name		Jump Animation	Throw Animation
 	db $00					; Item #84	Light Claw		Unarmed
 	db $00					; Item #85	Poison Claw		Unarmed
 	db $00					; Item #86	Ocean Claw		Unarmed
-	db $04					; Item #87	Hell Claw		Unarmed			Rising Sun Crit
+	db $00					; Item #87	Hell Claw		Unarmed
 	db $00					; Item #88	Frostgore		Unarmed
 	db $00					; Item #89	Stormfang		Unarmed
 
