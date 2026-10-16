@@ -392,6 +392,5 @@ org $D859CA
 	db $02		;+2 Vigor to Mythril Claw
 
 ; create dummy Hell Claw (id=$4D)
-org $D2B6E9 : db $DE,"Hell>Claw   "
-org $D1008E : db $01    ; throw gfx = thin knife
+org $D2B6E9 : db $DE,"Hell>Claw   " ; for throw animation change, see custom_animations.asm (red spinning object)
 	
