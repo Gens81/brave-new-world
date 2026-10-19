@@ -3,6 +3,7 @@
 ;     Base: BNW 2.2b16
 ;   Author: Fëanor
 ;  Created: 2023-06-10
+;  Modified by SirNewtonFig 2026-10-18
 ; -----------------------------------------------------------------------------
 
 ; -----------------------------------------------------------------------------
@@ -54,3 +55,55 @@ SpliceEsperSelect:
     STA $2BAF,Y     ; [displaced]
     RTS
 warnpc !warn
+
+; -----------------------------------------------------------------------------
+; Modifications by SirNewtonFig 2026-10-18
+;
+; Fix bug resulting from esper targeting data being written to the second
+; X-Magic slot in the pending action struct.
+
+org $C17096
+PendingActionQueue:
+  JSR $6D56
+  LDA $7AE9                       ; are we on second spell of X-Magic?
+  BEQ .first                      ; if not, handle first spell
+.second
+  PHY                             ; stash Y
+  LDA $2BAF,Y                     ; command
+  CMP #$19                        ; is it summon?
+  BEQ +                           ; store data in first spell bytes instead
+  INY
+  INY
+  INY                             ; adjust index to second spell bytes
++ JSR AssignTargets
+  PLY                             ; restore Y
+  LDA $62CA                       ; active character
+  STA $2BAE,Y                     ; shouldn't this already be set?
+  RTS
+.first
+  JSR AssignTargets
+  BRA FinishPendingQueue
+
+AssignTargets:
+    LDA $7A85                     ; ability ID
+    STA $2BB0,Y
+    LDA $2F47                     ; characters acting as monsters?
+    BEQ ++                        ; skip if not
+    LDA $7B7E                     ; monsters with cursor shown
+    AND #$20                      ; isolate slot $20
+    BEQ +                         ; skip ahead if none
+    LDA $2F47                     ; otherwise load CAAMs
+  + ORA $7B7D                     ; add to characters with cursor shown
+    STA $2BB1,Y                   ; store to friendly targets
+    LDA $7B7E                     ; monsters with cursor shown
+    AND #$1F                      ; remove slot $20
+    BRA +++                       ; go to end
+ ++ LDA $7B7D                     ; load characters with cursor shown
+    STA $2BB1,Y                   ; store to friendly targets
+    LDA $7B7E                     ; load monsters with cursor shown
++++ STA $2BB2,Y                   ; store enemy targets
+    RTS
+
+padbyte $FF
+pad $C17101
+FinishPendingQueue:
