@@ -272,6 +272,23 @@ org $C38A3B
 org $C38A54
 	db $cd,$78  	;Move Item name 1 line up
 
+;-----------------------------------------------
+;
+;	Skill sub menu
+;
+;-----------------------------------------------
+org $C3583F
+; main box
+	DW $589d
+	DW $1813
+; skill box
+	DW $588b
+	DW $0208
+; Needed box
+	DW $598b
+	DW $0307
+
+
 ;------------------------------------------------------
 ;Hide rare counter item and expand description box
 ;------------------------------------------------------
