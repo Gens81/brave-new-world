@@ -3,6 +3,7 @@ table table_c3.tbl,rtl
 
 ; BNW - Randomize Party 2
 ; Bropedio (September 14, 2019)
+; Minor compatibility changes for v3.0 made by Khaos (October 22, 2026)
 ;
 ; Can be patched directly on top of Randomize Party 1.
 ; Instead of randomizing just 5-12 of the final lineup,
@@ -344,3 +345,37 @@ ShiftOrder:       ; 52 bytes
   RTS
 warnpc !free_end
 
+; ###############################################
+; New event script that handles the "full party" case by giving the player the
+; opportunity to free a party slot for Shadow. Written by Feanor for base BNW.
+;
+; Hack re-written by Khaos to make work with Bropedio's randomizer hack
+
+; used to calculate relative offsets for jumps and subroutine calls
+org $CA0000 : EventBase:
+
+org $CC704F : ShadowJoins:
+
+org $ED8DC6                 	  ; 51 bytes (original is 60 bytes)
+  	db $B2,$1A,$F6,$00          ; Run subroutine to empty your party
+    db $C0,$54,$80              ; jump to target if "After Meeting Ramuh" ($054==On)
+    dl .refund-EventBase        ; ^ else continue
+    db $99,$01,$7E,$08          ; invoke 1-party selection screen (lock everyone)
+    db $46,$01                  ; make $01 the current party
+    db $47                      ; make character in slot 0 the lead character
+    db $B2,$A4,$CC,$00          ; call subroutine $CACCA4 (delete benched characters)
+    db $B2,$A4,$35,$02          ; call subroutine $CC35A4 (unequip benched characters)
+    db $B2,$C1,$C5,$00          ; call subroutine $CAC5C1 (count party members)
+    db $C0,$A3,$81              ; if four party members jump to target else continue
+    dl .refund-EventBase        ; ^ continued
+    db $B2                      ; call subroutine "Shadow joins party"
+    dl ShadowJoins-EventBase    ; ^ continued
+    db $96,$5C                  ; fade screen back in (wait until complete)
+    db $FE                      ; return
+.refund
+    db $96,$5C                  ; fade screen back in (wait until complete)
+    db $84,$E8,$03              ; give 1000 GP to party
+    db $4B,$E5,$03              ; display caption $3E5 ("Shadow: Go away.")
+    db $FE                      ; return
+    db $EE,$EE,$EE,$EE,$EE		  ; 9 bytes of padding
+  	db $EE,$EE,$EE,$EE
