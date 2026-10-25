@@ -953,4 +953,4 @@ org $DDD21A : db $BA ; Kefka Tower half door fix
 
 ;Brave New World data
 org $C33BB8
-	db $d1,$78,"Brave New World 3.0 B2.4",$00
+	db $d1,$78,"Brave New World 3.0 B3.1",$00 ;.1 due to changes in WoR islands formations
