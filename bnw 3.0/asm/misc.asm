@@ -824,14 +824,18 @@ org $C35C28
 	db $6F	;R
 
 ;zoning edits to avoid missables entries in the Diary
-org $CF553F
-	db $B8	;pack 184 (Mudcrab in Triangle Island) 
+
+org $CF4FB0     ; Sets monster formations for pack 246
+    dw $00B8        ; Mudcrab x2
+    dw $00ED        ; Eukaryote x3, Pan Dora x2
+    dw $00EF        ; Suriander, Succubus, Madam
+    dw $00F0        ; Samurai, Parasoul, Suriander
+
 org $CF55EF
-	db $EC	;pack 236 (Succubus, Madam, Suriander, Eukaryote e Pan Dora in WoR overworld in place of FC rages)
-org $CF55F3
-	db $F0	;pack 240 (Samurai, Parasoul, Suriander, Madam, Succubus in WoR overworld in place of FC rages)
+    db $F6    	; pack 246 (Succubus, Madam, Suriander, Eukaryote, Pan Dora, Samurai, Parasoul, Mudcrab in WoR overworld in place of FC rages on south-west islands)
+
 org $CF5625
-	db $F3	;pack 243 (Ganymede, Europa, IO in Moogle Cave)
+	db $F3		; pack 243 (Ganymede, Europa, IO in Moogle Cave)
 
 ;removed rare Potion drop from Lv.2,4,6,8 Mage
 org $CF34E6
