@@ -1,0 +1,2737 @@
+
+			Final Fantasy VI: Brave New World - UNLOCKABLE README
+
+				   TABLE OF CONTENTS
+				   -----------------
+				1. RARE EQUIPMENT CHECKLIST (BY AREA)
+				2. RARE EQUIPMENT LOCATIONS (BY TYPE)
+				3. UNDISCLOSED CHANGES
+				4. LIST OF REFERENCES
+				5. DEVELOPER'S NOTES
+				6. THE CUTTING ROOM FLOOR
+
+---------------------------------------------------------------------------------------------------------
+
+
+
+
+				1. RARE EQUIPMENT CHECKLIST (BY AREA)
+
+
+
+
+---------------------------------------------------------------------------------------------------------
+
+	SOUTH FIGARO		IMPERIAL CAMP		MOBLIZ (WOB)		NARSHE
+	------------		-------------		------------		------
+	Black Belt		Power Glove		Life Bell		Psycho Belt
+	Magic Cube
+
+	ZOZO			IMTRF			SEALED GATE		BANQUET REWARDS
+	----			-----			-----------		---------------
+	Switchblade (x2)	Reflect Ring		Blood Sword		Life Bell
+	Thief Glove		Zephyr Cape		Demonsbane		Black Belt
+							Kazekiri
+
+	IMPERIAL BASE		ESPER MOUNTAIN		DOMA			FLOATING CONTINENT
+	-------------		--------------		----			------------------
+	Reflect Ring		Gator Hide		Murasame		Atma Weapon
+				Tabby Hide		Power Glove		Ninja Mask
+				Memento Ring					Hero Ring
+
+	TZEN (WOR)		FIGARO CASTLE (WOR)	DARYL'S TOMB		MT. ZOZO
+	---------		------------------	------------		--------
+	Zephyr Cape		Soul Sabre		Frostgore		Stormfang
+				Dragon Helm		Tarot			Iceguard
+							Genji Helm		Cat Hood
+							Ribbon			Force Armor
+							Daryl's Soul		Rogue Cloak
+
+	CAVE ON THE VELDT	THAMASA (WOR)		OWZER'S HOUSE		OPERA HOUSE
+	-----------------	-------------		-------------		-----------
+	Chainsaw		Ross Brush		Chocobo Hide		Force Shield
+	Kagenui			Radiant Gown		Nirvana Band
+	Red Cap
+
+	PHOENIX CAVE		NARSHE (WOR)		UMARO'S CAVE		GOGO'S CAVE
+	------------		------------		------------		-----------
+	Wing Edge		Apocyllumina		Bone Club (x2)		Avenger
+	Viper Darts		Hero Shield		Moogle Hide		Dali Brush
+	Flameguard		Snow Muffler					Aegis Shield
+	Genji Armor		Moogle Charm					Red Cap
+	Dragon Hide								Genji Armor
+										Sage Stone
+										Blizzard Orb
+
+	ANCIENT CASTLE		DOMA NIGHTMARE		FANATICS TOWER		KEFKA'S TOWER
+	--------------		--------------		--------------		------------
+	Zantetsuken		Masamune		Longinus		Excalibur
+	Valiance		Orochi			Genji Helm		Fixed Dice
+	Punisher		Iceguard		Force Armor		Punisher
+	Thunderguard		Thunderguard		Quartz Charm		Genji Shield
+	Genji Shield		Force Armor		Gem Box			Genji Helm
+	Royal Jacket								Skull Cap
+	Mana Battery								Minerva
+										Ribbon
+		COLOSSEUM-EXCLUSIVE STUFF					Hero Ring
+		-------------------------					Muscle Belt
+		Gungnir		(Bet Zantetsuken)				Crystal Orb
+		Mutsunokami	(Bet Ross Brush)
+		Wind Breaker	(Bet Kagenui)
+		Heiji's Coin	(Bet Daryl's Soul)
+		Soul Box	(Bet Gem Box)
+		Mirage Vest	(Bet Atma Weapon, Aegis Shield, or Ribbon)
+
+---------------------------------------------------------------------------------------------------------
+
+
+
+
+				2. RARE EQUIPMENT LOCATIONS (BY TYPE)
+
+
+
+
+---------------------------------------------------------------------------------------------------------
+	SWORD			AREA			HOW OBTAINED
+---------------------------------------------------------------------------------------------------------
+	Blood Sword		Sealed Gate Cave	Chest (missable)
+	Soul Sabre		Figaro Castle		Hidden in statue
+	Atma Weapon		Floating Continent	Dropped by Atma (derp)
+	Zantetsuken		Ancient Castle		Dropped by Blue Dragon
+	Apocyllumina		Narshe (WoR)		Get from Blacksmith (Locke required)
+	Excalibur		Kefka's Tower		Dropped by Kaiser
+
+---------------------------------------------------------------------------------------------------------
+	DAGGER			AREA			HOW OBTAINED
+---------------------------------------------------------------------------------------------------------
+	Switchblade (x2)	Zozo			Chest
+	Demonsbane		Sealed Gate Cave	Chest (missable)
+	Avenger			Gogo's Cave		Chest
+	Valiance		Ancient Castle		Dropped by Katanasoul
+
+---------------------------------------------------------------------------------------------------------
+	CLAW			AREA			HOW OBTAINED
+---------------------------------------------------------------------------------------------------------
+	Frostgore		Daryl's Tomb		Dropped by Chesticle
+	Stormfang		Mt. Zozo		Dropped by Bonelord
+
+---------------------------------------------------------------------------------------------------------
+	SPEAR			AREA			HOW OBTAINED
+---------------------------------------------------------------------------------------------------------
+	Longinus		Fanatics Tower		Dropped by White Dragon
+	Gungnir			Colosseum		Bet Zantetsuken
+
+---------------------------------------------------------------------------------------------------------
+	KATANA			AREA			HOW OBTAINED
+---------------------------------------------------------------------------------------------------------
+	Kazekiri		Sealed Gate Cave	Chest (missable)
+	Murasame		Doma			Chest
+	Masamune		Cyan's Nightmare	Get after defeating Wrexsoul
+	Mutsunokami		Colosseum		Bet Ross Brush
+
+---------------------------------------------------------------------------------------------------------
+	NINJA DAGGER		AREA			HOW OBTAINED
+---------------------------------------------------------------------------------------------------------
+	Kagenui			Cave On The Veldt	Dropped by Tiamat
+	Orochi			Cyan's Nightmare	Chest (missable)
+
+---------------------------------------------------------------------------------------------------------
+	CASINO			AREA			HOW OBTAINED
+---------------------------------------------------------------------------------------------------------
+	Tarot			Daryl's Tomb		Chest
+	Viper Darts		Phoenix Cave		Chest
+	Fixed Dice		Kefka's Tower		Chest
+
+---------------------------------------------------------------------------------------------------------
+	ROD			AREA			HOW OBTAINED
+---------------------------------------------------------------------------------------------------------
+	Punisher		Ancient Castle		Chest
+	Punisher		Kefka's Tower		Chest
+	Wind Breaker		Colosseum		Bet Kagenui
+
+---------------------------------------------------------------------------------------------------------
+	BRUSH			AREA			HOW OBTAINED
+---------------------------------------------------------------------------------------------------------
+	Dali Brush		Gogo's Cave		Chest
+	Ross Brush		Thamasa			Get from Leeroy after defeating Hidon
+
+---------------------------------------------------------------------------------------------------------
+	SPECIAL WEAPON		AREA			HOW OBTAINED
+---------------------------------------------------------------------------------------------------------
+	Wing Edge		Phoenix Cave		Chest
+	Bone Club		Umaro's Cave		Chest
+	Bone Club		Umaro's Cave		Umaro comes with it
+
+---------------------------------------------------------------------------------------------------------
+	TOOL			AREA			HOW OBTAINED
+---------------------------------------------------------------------------------------------------------
+	Chainsaw		Cave on the Veldt	Dropped by Tonberry
+	Mana Battery		Ancient Cave		Dropped by Master T
+
+---------------------------------------------------------------------------------------------------------
+	SHIELD			AREA			HOW OBTAINED
+---------------------------------------------------------------------------------------------------------
+	Genji Shield		Ancient Castle		Chest
+	Genji Shield		Kefka's Tower		Chest
+	Force Shield		Opera House		Dropped by Brown Dragon
+	Aegis Shield		Gogo's Cave		Chest
+	Hero Shield		Narshe (WoR)		Get from random dude (Locke required)
+	Flameguard		Phoenix Cave		Chest
+	Iceguard		Mt. Zozo		Chest
+	Iceguard		Cyan's Nightmare	Chest (missable)
+	Thunderguard		Ancient Cave		Chest
+	Thunderguard		Cyan's Nightmare	Chest (missable)
+
+---------------------------------------------------------------------------------------------------------
+	HELMET			AREA			HOW OBTAINED
+---------------------------------------------------------------------------------------------------------
+	Ninja Mask		Floating Continent	Chest
+	Red Cap			Cave On The Veldt	Chest
+	Red Cap			Gogo's Cave		Chest
+	Genji Helm		Daryl's Tomb		Chest
+	Genji Helm		Fanatics Tower		Chest
+	Genji Helm		Kefka's Tower		Chest
+	Dragon Helm		Figaro Castle		Chest
+	Cat Hood		Mt. Zozo		Chest
+	Skull Cap		Kefka's Tower		Chest
+
+---------------------------------------------------------------------------------------------------------
+	ARMOR			AREA			HOW OBTAINED
+---------------------------------------------------------------------------------------------------------
+	Genji Armor		Phoenix Cave		Chest
+	Genji Armor		Gogo's Cave		Chest
+	Force Armor		Mt. Zozo		Dropped by Purple Dragon
+	Force Armor		Cyan's Nightmare	Dropped by Wrexsoul
+	Force Armor		Fanatics Tower		Chest
+	Minerva			Kefka's Tower		Chest
+	Royal Jacket		Ancient Castle		Chest
+	Radiant Gown		Thamasa			Get from Leeroy after defeating Hidon
+	Tabby Hide		Esper Mountain		Chest
+	Gator Hide		Esper Mountain		Chest
+	Chocobo Hide		Owzer's House		Chest
+	Moogle Hide		Umaro's Cave		Chest
+	Dragon Hide		Phoenix Cave		Dropped by Red Dragon
+	Snow Muffler		Narshe (WoR)		Dropped by Silver Dragon
+	Mirage Vest		Colosseum		Bet Atma Weapon, Aegis Shield, or Ribbon
+
+---------------------------------------------------------------------------------------------------------
+	RELICS (GENERIC)	AREA			HOW OBTAINED
+---------------------------------------------------------------------------------------------------------
+	Ribbon			Daryl's Tomb		Chest
+	Ribbon			Kefka's Tower		Chest
+	Quartz Charm		Fanatics Tower		Chest
+	Life Bell		Mobliz			Send letters to Lola (missable)
+	Life Bell		Banquet Reward		Don't be a dick to Gestahl (missable)
+	Reflect Ring		IMTRF			Chest (missable)
+	Reflect Ring		Imperial Base		Chest (missable)
+	Zephyr Cape		IMTRF			Chest (missable)
+	Zephyr Cape		Tzen (WoR)		Chest (in collapsing house; missable)
+	Black Belt		South Figaro		Chest
+	Black Belt		Banquet Reward		Don't be a dick to Gestahl (missable)
+	Power Glove		Imperial Camp		Dropped by Telstar (missable)
+	Power Glove		Doma			Chest
+	Magic Cube		South Figaro		Dropped by Phantom
+	Hero Ring		Floating Continent	Dropped by Gigantos (missable)
+	Hero Ring		Kefka's Tower		Chest
+	Muscle Belt		Kefka's Tower		Dropped by Gold Dragon
+	Crystal Orb		Kefka's Tower		Dropped by Green Dragon
+
+---------------------------------------------------------------------------------------------------------
+	RELICS (EXCLUSIVE)	AREA			HOW OBTAINED
+---------------------------------------------------------------------------------------------------------
+	Thief Glove		Zozo			Chest
+	Rogue Cloak		Mt. Zozo		Chest
+	Moogle Charm		Narshe (WoR)		Hidden in Mog's room
+	Memento Ring		Esper Mountain		Relm comes with it
+	Daryl's Soul		Daryl's Tomb		Complete the tombstone puzzle
+	Heiji's Coin		Colosseum		Bet Daryl's Soul
+	Nirvana Band		Owzer's House		Chest
+	Sage Stone		Gogo's Cave		Chest
+	Gem Box			Fanatics Tower		Dropped by MagiMaster
+	Soul Box		Colosseum		Bet Gem Box
+	Psycho Belt		Narshe			Chest (in Moogle's Cave)
+	Blizzard Orb		Gogo's Cave		Chest
+
+---------------------------------------------------------------------------------------------------------
+
+
+
+
+				3. UNDISCLOSED CHANGES
+
+
+
+
+---------------------------------------------------------------------------------------------------------
+
+	Persistent BGM		Although the feature of having areas with unique BGM persist throughout
+	--------------		random encounters is fairly standard in modern FF6 hacks, it was still a
+	 (BTB)			fairly novel concept when we first did it. Below is a list of all of the
+				areas in the game where this change applies:
+
+				      •	Narshe Mines		      •	Phantom Forest
+				      • Soul Train    		      •	South Figaro - Basement
+				      •	Zozo			      •	Vector/Imperial Base
+				      •	MagiTek Factory (IMTRF)	      •	Cave To The Sealed Gate
+				      •	Thamasa - Burning House	      •	The Floating Continent
+				      •	Daryl's Tomb		      •	Narshe (WoR)
+				      •	Owzer's House		      •	Phoenix Cave
+				      •	Umaro's Cave		      •	Gogo's Cave
+				      •	Cyan's Nightmare	      •	The Ancient Castle
+				      •	Fanatics Tower		      •	Kefka's Tower
+
+				(Note that the above list excludes areas that already did this, such as
+				the Serpent Trench, mine cart ride, and the collapsing house at Tzen.)
+
+	   Doomed World		Further, the "Doomed World" theme now continues to play on the overworld
+	   -(Poco Loco)		in the WoR after obtaining the Falcon instead of "Searching For Friends"
+				persisting even when you're not in the air.
+
+---------------------------------------------------------------------------------------------------------
+
+	Save & Restore		As mentioned in the readme, several save points have been added to areas
+	--------------		that we felt needed them. We have added ten of them in total:
+	 (Synchysi)
+					• Zozo
+					• Cave to the Sealed Gate (treasure room)
+					• Burning House
+					• Figaro Castle Basement
+					• Cave on the Veldt (room after trapped chest)
+					• Umaro's Cave
+					• Gogo's Cave
+					• Ancient Castle(*)
+					• Fanatics Tower (last treasure room)
+					• Kefka's Tower (4-ton weight room, just after Kaiser)
+
+					*We have no idea why this save point is the wrong color
+
+				Furthermore, several save points have been upgraded to "restore" points
+				that will heal your party completely. These tend to be located either in
+				areas where the player is "stuck" with no access to a shop and/or rest,
+				or occasionally just in really large areas where we felt it appropriate
+				to give the player a break. The list of restore points is as follows:
+
+					• Narshe, New Mines
+					• Mt. Koltz
+					• 1337 River (2nd)
+					• South Figaro Basement
+					• Soul Train (1st - in caboose)
+					• IMTRF (2nd & 3rd - before & after Mine Cart Ride)
+					• Burning House(*)
+					• Floating Continent (2nd - near Atma)
+					• Cyan's Nightmare (1st and 3rd)
+					• Kefka's Tower (after Asura/Isis/Myria)
+
+					*This is the "new" save point from above
+
+---------------------------------------------------------------------------------------------------------
+
+	It Gives You Wings!	Yeah, anyone who saw the name "Red Bull" should not be in the least bit
+	-------------------	surprised about their unadvertised side effect. The truth is that Float
+	 (BTB)			was actually its original (and only) intended use, and the HP recovery
+				was just an afterthought since I'd also been throwing around the idea of
+				a slightly better version of Dried Meat that would be useful around the
+				time that it starts tapering off and Tonics haven't quite kicked in yet.
+
+---------------------------------------------------------------------------------------------------------
+
+	Settle Down, Beavis	Green Cherries, unlike the above, have had even their primary function
+	-------------------	obscured. What players may discover on their own is that they remove the
+	 (BTB/Bropedio)		"muddle" and "bserk" statuses (at 50GP less than the cost of a Remedy),
+				but what most will not is that they are the only non-lethal way in the
+				game to lift the "Rage" and "Dance" statuses (BTB). Further, they will
+				also cancel any action that the target has queued (Bropedio)
+
+---------------------------------------------------------------------------------------------------------
+
+	"Most" Bad Statuses	Regarding the effects of Remedy, it now lifts "most" negative statuses,
+	-------------------	which includes Slow and Stop, but not Zombie, Condemned, Sap, or Frozen.
+	 (BTB)			Anything that lifts ALL bad statuses (i.e. Starlet or Tapir) will also
+				lift those last four. Note that Snake Oil (see "Treasure Hunting" below)
+				falls under the latter category, making it very useful in certain cases.
+
+---------------------------------------------------------------------------------------------------------
+
+	Holy Water Cures Sap	I had to do this one as a last-minute change to prevent the Myria fight
+	--------------------	from being retardedly hard, since revived allies would otherwise bleed
+	 (BTB)			right back to (un)death. As such, this isn't really an intended feature
+				of the product nor is it advertised as one.
+
+				As an aside, an interesting bit of trivia about zombified characters is
+				that they have a 1/16 chance to inflict Blind and another 1/16 chance to
+				inflict Poison with every attack they make. This is actually something
+				left over from the original game and not just a larf that we added.
+
+---------------------------------------------------------------------------------------------------------
+
+	No Free Tools		In the original game, Edgar slips an Autocrossbow into your bag when you
+	-------------		meet him, making buying one rather pointless. He no longer does this.
+	 (Synchysi)
+				More imporantly...
+
+	   Mega Autocrossbow	A Figaro castle guard named Julian will mention in the World of Balance
+				that he aspires to be a master engineer one day. If you talk to him in
+				the World of Ruin with Edgar in your party (the Chancellor will hint to
+				this if you talk to him with Edgar in the party), he will give you the
+				"schematics" key item which applies the "gauntlet" damage bonus to the
+				Autocrossbow, effectively raising its power from 180 to 270, and raises
+				its accuracy to 255% (it will not miss unless Edgar/Gogo is blind).
+
+---------------------------------------------------------------------------------------------------------
+
+	Banon's Lucky Charms	Instead of a Gauntlet or a Genji Glove (neither of which exist anymore),
+	--------------------	you now receive a Safety Glove from Banon if you agree to be his "last
+	 (Synchysi)		ray of hope" or a Barrier Cube if you deny him three times.
+
+				As for the relics that Banon wears himself, one is a codpiece which acts
+				to protect him from seizures (i.e "Sap") that would otherwise murder him
+				due to his low HP max combined with the fact that the Albatrosses on the
+				1337 River spam Fireball like it's going out of style. As explained in
+				the readme (see "Sap/Slow Immunity"), this causes Banon to be immune to
+				the "Regen" status as a result. This is largely moot, however, since you
+				have no access to Regen at that point outside of a hidden item.
+
+				Banon's OTHER relic - a Talisman - is not there for difficulty concerns,
+				but due to a bug wherein leaving him poisoned at the end of his scenario
+				would cause the entire Esperville sequence to play out in blur-o-vision
+				(this bug does not exist in vanilla since it's impossible for Banon to
+				ever become poisoned) due to the fact that Banon and Maduin share a slot
+				in the character data and the code doesn't bother doing a status wipe on
+				it until later on when it becomes General Compost (I mean Leo).
+
+---------------------------------------------------------------------------------------------------------
+
+	You Shall Not Pass!	Brave New World removes the two sequence breaks from Locke's scenario by
+	-------------------	flagging the hidden tiles behind the pub's as impassable and by telling
+	 (Synchysi)		the guard patrolling the edge of town stand the fuck still.
+
+				(It's probably worth mentioning that even if you do still somehow find a
+				way to fuck the mod and skip getting Celes, the game will be unbeatable
+				since you will be unable to escape the Floating Continent with Kutan.)
+
+---------------------------------------------------------------------------------------------------------
+
+	Flowers For Doma	As many FF6 fans know, Cyan's original Japanese name is "Cayenne". Since
+	----------------	this exceeded the character limitations in English, Ted Woolsey opted to
+	(Bropedio/Bauglir)	change his name to something equally stupid. This change inspired us to
+				expand the theme naming to include all of the citizens of Doma, but we
+				quickly realized that female names in this vein are far more common than
+				masculine ones. As a result, Cyan's son is now a daughter named Violet.
+
+				One interesting issue we ran into with this gender swap is the fact that
+				the "dead" little boy sprite used when Cyan discovers his dead family is
+				completely unique to that scene and the counterpart for the girl sprite
+				is this "shocked/wide-eyed" expression that ended up being some unholy
+				combination of hilarious and creepy when we tried to use it as a corpse.
+				Ultimately, Bauglir was commissioned to edit the original "dead" sprite
+				to look like a girl (his work can be seen in the "Gallery" folder).
+
+---------------------------------------------------------------------------------------------------------
+
+	Sales To Die For	Merchant ghosts on the Soul Train are now much easier to identify due to
+	----------------	their coloring. We've also added one of these guys to the final segment
+	 (Synchysi)		of Cyan's Nightmare since you're likely running low on supplies at that
+				point and you're kinda stuck there until you can kill Wrexsoul.
+
+	   Braaaaaains...	The Ghost Ring (AKA "Relic Ring") now grants ALL of the advantages and
+	   -(BTB)		disadvantages of being a walking corpse. This includes immunity to all
+				statuses but "slow", "sap", and death, as well as the standard undead
+				fire/holy weaknesses paired with the ability to absorb dark damage.
+
+				Of course, the Ghost Ring also does the whole "undead reversal" thing
+				with attacks and other abilities that cure or absorb HP. The list of
+				everything that will NOT reverse on the undead is as follows:
+
+						• All items (except for Phoenix Down/Tear)
+						• Life/Life 2(*)
+						• Mana Battery
+						• Mantra & Chakra
+						• Go Fish/Jackpot
+						• Bedevil
+						• Harvester
+						• Paintbrushes/Healing Shiv
+
+					*This is to prevent them from insta-killing undead bosses
+
+				Despite this, the major downside of the Relic Ring in the original game
+				wasn't difficulty healing the wearer, but rather that they couldn't be
+				revived in battle by any means if they died. This issue is addressed in
+				Brave New World by applying the "Overcast" effect to the Ghost Ring so
+				that users become zombies at 0 HP (which can be cured with Holy Water)
+				rather than dying outright - assuming, of course, that the player isn't
+				stupid enough to pair the Ghost Ring with instant death protection.
+
+	   Zombie-D		However, perhaps the oddest case of undead fuckery is the White Dragon.
+	   -(BTB)		The main reason behind giving the Remedy and Regen(X) spells one-sided
+				targeting was not to prevent any sort of abuse as with the Life spells,
+				but rather to mask the fact that they lack the Holy element that makes
+				Cure magic so deliciously effective against the undead. This, in turn,
+				was the reason that we got rid of equipment and enemies that block or
+				absorb holy damage. The White-D was a necessary holdout since all of the
+				dragons need to absorb their own element. This then meant that Holy Wind
+				(which also has the "Holy" elemental flag) would pull a reversal and end
+				up hurting it, instead. Making the White Dragon undead triggers a DOUBLE
+				reversal for Holy Wind, causing everything to work out in the end.
+
+---------------------------------------------------------------------------------------------------------
+
+	Party Of One		The Battle of Narshe is now a two-party campaign instead of three since
+	------------		your forces are too few at this point to be spread so thin. This allows
+	 (Seibaby)		you to form two usable parties instead of just having one of them doing
+				all of the work while the other two (one of which invariably is just Gau
+				standing next to Banon) do nothing.
+
+---------------------------------------------------------------------------------------------------------
+
+	No Royal Discount	While shopkeepers in Figaro still hesitate to take money from Edgar and
+	-----------------	Sabin, both will now still be charged full price because, let's face it,
+	 (BTB)			it's fucking stupid to take less money from the rich than from the poor.
+
+---------------------------------------------------------------------------------------------------------
+
+	...SOLD!		The Auction House in Jidoor has been permanently shut down and replaced
+	--------		with the "advanced" Beginner's School. This allows the one in Narshe to
+	(Synchysi)		focus on general changes without overwhelming new players with advanced
+				details that were unlikely to be retained until they became relevant.
+
+				Regarding the magicite pieces that were once sold at the Auction House,
+				they can now be purchased from "Bob", the crazy asshole who lives north
+				of Kohlingen and aspires to build a Colosseum. If you haven't purchased
+				both before reaching the WoR, you can buy them from him at the Colosseum
+				(and get an idea of just how badly he fucked himself over to build it in
+				the process). Either way, it's a huge improvement over sitting through
+				long, unskippable cutscenes at the Auction House over and over and over
+				again until the RNG finally stopped being a bag of shitty fuckness.
+
+				As for the origin of the name "Bob", this is actually a good example of
+				how Synchysi and I work. When we first set out to axe the Auction House
+				and decided where to move Golem and Zoneseek, Synchysi gave me a general
+				outline of dialogue that I needed to write for the new events using the
+				standard "Alice and Bob" example format and...well, the rest is history.
+				Another example is the time I pointed to an enemy sprite, asked him WTF
+				it was supposed to be, and he just shrugged and said, "cave stuff".
+
+---------------------------------------------------------------------------------------------------------
+
+	Heaven Can Wait		"Go to the Floating Continent" (when available) is no longer the default
+	---------------		option on the helm of the Blackjack so you don't end up constantly going
+	 (Synchysi)		there by mistake when you're just trying to go to Thamasa for a drink.
+
+---------------------------------------------------------------------------------------------------------
+
+	Go Fish			In the original game, fish labeled as "rotten" were actually those that
+	-------			moved at medium speed, whereas the slow-moving ones were simply "fish".
+	(Synchysi)		This was a case of improper labeling that we have fixed. Further, we've
+				doubled the effectiveness of both "healthy" types of fish so that saving
+				Cid's life no longer takes a fucking lifetime (not that you'd want to).
+
+					• Rotten Fish (previously "Fish"): -16
+					• Fish (previously "Rotten Fish"): -4
+
+					• Just A Fish: +32 (previously +16)
+					• Tasty Fish: +64 (previously +32)
+
+---------------------------------------------------------------------------------------------------------
+
+	The Wolf & The Bird	An astute veteran player might look at the new esper restrictions in the
+	-------------------	printme and note that, since Fenrir is only usable by Shadow and Gau,
+	 (Synchysi)		there is absolutely no point whatsoever in heading over to Mobliz until
+				after you've gotten the airship. To remedy this issue, we've swapped the
+				locations of Fenrir and Palidor so that going to Mobliz early will give
+				you something that someone in your party can actually use.
+
+	   Phunbaba Returns	...if, on the other hand, you don't go to Mobliz until after getting the
+	   -(Deschain)		Falcon (which is a perfectly valid lifestyle choice), his second attack
+				can now be triggered immediately after the first without leaving Mobliz;
+				just head straight to the building where Terra is hiding with Katarin as
+				soon as you leave the one where everybody lives.
+
+---------------------------------------------------------------------------------------------------------
+
+	Tentacle Grape		The reworked battle script for the Tentacle battle assumes a party that
+	--------------		includes Sabin. Because of this, it was necessary to call an alternate
+	(Synchysi/BTB)		formation for wackjobs who fail to recruit him so that they don't end
+				up with a b0rked tentacle battle.
+
+				So, how does the Tentacle battle work? Well, originally, quite shittily.
+				In order to prevent the Tentacles from grabbing a character that was
+				already being held, they were scripted to only Grab characters afflicted
+				with the "slow" status, which the Grab attack then lifted. Smart players
+				quickly realized that this entire battle could be shut down by equipping
+				Running Shoes beforehand, as the perma-haste would prevent any unwanted
+				Grabbing from occurring (also very useful on the subways in New York).
+
+				In Brave New World, each Tentacle is scripted to Grab only a specific
+				character, with the fourth one (bottom left) scripted to take over for
+				any Tentacles that have been killed. In the alternate formation that's
+				called if Sabin is not present, his Tentacle (upper right) simply no
+				longer tries to Grab anything. This does make the fight somewhat easier
+				if you know which Tentacles to prioritize killing off, but still much
+				harder overall without Sabin (this isn't vanilla, after all).
+
+---------------------------------------------------------------------------------------------------------
+
+	DG-GPS			Because hunting for Doom Gaze is a huge pain in the ass, we've added an
+	------			option on the Falcon's helm that finds him for you. Note that you still
+	(Synchysi)		can run into him the regular way, so it's a still bad idea to have Relm
+				piloting the ship alone and naked (at least until you kill Doom Gaze).
+
+				FUN RANDOM FACT: the flight path that the Falcon takes when you look for
+				Doom Gaze is identical to Terra's flight when she freaks out at Narshe
+				and flies off to Zozo because we just used the same code. Also, the name
+				of this hack is a joke about what Synchysi and I both do for a living.
+
+---------------------------------------------------------------------------------------------------------
+
+	Intangir Z		The main gimmick of this fight is that, as he's part of a standard enemy
+	----------		group, Intangir is vulnerable to low-tier status effects to which most
+	(BTB/Madsiur)		bosses are not. "Low-tier" statuses are classified as any status which
+				does not override enemy AI and are thus rarely resisted by normal foes.
+				They tend to be of limited use when better options are available, which
+				is why I set out to create situations like this battle (BTB). Intangir
+				takes its name from a "normal" enemy in the original game and the fight
+				now begins using the standard battle music, both of which are meant to
+				suggest that the player treat it as a regular fight. Only when Intangir
+				is killed does the "boss" music kick in and the real fight starts since
+				Intangir Z is undead - and thus immune to most status effects (Madsiur).
+
+	   The Real Kagenui	In the original game, the Striker (Kagenui in BNW) traded for itself at
+	   (-SirNewtonFig)	the Colosseum to prevent it from being lost when it was used to recruit
+				Shadow back into your party. So as not to force the player to hold on to
+				a potentially-unwanted weapon, the Kagenui dropped by Intangir Z is a
+				different item altogether - you get the "real" one when you get Shadow
+				back, which then in turn may be traded in for the Wind Breaker.
+
+				In the event that Shadow died on the Floating Continent - in which case
+				you'll have no use for a weapon that only he can use - you will instead
+				get the "real" Kagenui after fighting Intangir Z. This is to prevent the
+				confusion of needing to trade the Kagenui in for itself a the colosseum
+				before it can be traded for something you might actually want.
+
+---------------------------------------------------------------------------------------------------------
+
+	Zone Eater Fix		Since Zone Eater has a lot of really sweet treasure inside of it, which
+	--------------		is to say nothing of Gogo himself, it was decided to beef gate what was
+	(BTB/Synchysi)		intended to be a late-game dungeon anyway by requiring Zone Eater to be
+				damaged before it swallows you. And since Zone Eater also belongs to a
+				"standard" enemy group, this fight acts as something of a sequel to the
+				one with Intangir (BTB).
+
+				Of note is a little-known bug in vanilla wherein Engulf would only work
+				properly if everyone in your party was alive since dead characters can't
+				be targeted by most attacks and the entire party needed to be swallowed
+				to wind up inside Zone Eater instead of back out on the field. Needless
+				to say, this a bit more of an issue when you actually have to fight the
+				damn thing first, and it has thus been fixed (Synchysi).
+
+---------------------------------------------------------------------------------------------------------
+
+	Relmception		Since nobody in their right minds would actually allow Shadow to die on
+	-----------		the Floating Continent, I figured we'd add in an incentive/easter egg to
+	(Synchysi)		someone who actually decides to. If Shadow is kaputski in the World of
+				Ruin, Interceptor now guards Relm in the same manner that he protected
+				Shadow. That is, Relm inherits the "Dog Block" status from him.
+
+					(This did NOT happen in vanilla - it only happens in BNW)
+
+				Since the damage he deals is based on his owner's stamina (power = 60,
+				ignores defense), Relm can make him hit really hard if you pump	her full
+				of Starlet ELs. But perhaps the best part about Relm getting Incerceptor
+				is that she teaches him how to jump so that he can hit floating targets.
+
+---------------------------------------------------------------------------------------------------------
+
+	Live After Death	In case it wasn't obvious from the printme, you can't learn spells from
+	----------------	equipment anymore - or at least not any of the equipment that taught it
+	 (BTB)			before. The lone piece of magic-teaching equipment in Brave New World is
+				the Memento Ring, which now teaches Relm and Shadow the Rerise spell.
+
+				As this is the only instance in the game of a spell that's learned the
+				"old" way, the player has little way of knowing what the Memento Ring is
+				actually doing until the spell is fully learned. However, you can check
+				your progress in the spell menu by holding "Y" to revert to the vanilla
+				default display of "% learned" rather than MP cost.
+
+---------------------------------------------------------------------------------------------------------
+
+	The Moogle's Charm	One of the more mysterious pieces of equipment in the mod is the Moogle
+	------------------	Charm, since we're not exactly up-front about what it does nor are its
+	 (Synchysi)		effects immediately obvious. In place of its old effect of eliminating
+				random encounters and trivializing the endgame, it now has two different
+				effects that affect two different abilities. We did this to ensure that
+				Mog would find it useful outside of just one specific setup.
+
+	   Dance Like The Wind	The first, and probably more obvious effect is that it causes Mog to no
+				longer be "locked" into his dancing state, which allows him to utilize
+				his versatile range of commands rather than use just one of them all the
+				damn time. For example, Mog can heal the party with a defensive dance on
+				one turn and then attack with his magic or a spear to the face on the
+				next. And speaking of spears to the face...
+
+	   Fall Like A Stone	The second effect is that it eliminates the hang-time from jump attacks.
+				This helps to make Mog more distinct in this role from Edgar, to whom he
+				is generally seen as inferior. It allows him the offensive benefits of
+				jumping without sacrificing his ability to stay on the ground and tank,
+				which is something he tends to like better than Edgar "Fuck This, I'm
+				Outta Here!" Roni Figaro. He may not be able to match The King's raw
+				damage output, given that this setup requires both relic slots and can't
+				be combined with a Power Glove (it's so bad), but the quicker attacks
+				matched with a vigor-focused Mog will likely come out on top in the end.
+
+---------------------------------------------------------------------------------------------------------
+
+	Taking A Sun Bath	One unadvertised feature of Sun Bath is that it now thaws out characters
+	-----------------	who have been frozen by the Cold Dust or N. Cross attacks (which is only
+	 (BTB)			otherwise curable by fire damage, a few rare abilities/items, or simply
+				waiting it out). This is kind of important for balance since, similar to
+				the case with Fanaticism, not everyone can cast fire spells anymore.
+
+---------------------------------------------------------------------------------------------------------
+
+	A Less Horrible Curse	The number of battles required to uncurse the Hero Shield is now a mere
+	---------------------	64 instead of 255 (this is what the NPC who gives it to you is talking
+	 (Synchysi)		aboot when he says "power of eight"). Further, using it while it's still
+				cursed is no longer a pain in the dick since it now just lacks the stat
+				boosts and auto-regen feature of the uncursed version and now only sets
+				condemned instead of every fucking status effect ever.
+
+---------------------------------------------------------------------------------------------------------
+
+	Be A Moogle, Kupo!	No more playing Leatherface with Mog's dead friends. This was changed
+	------------------	partly because having characters who aren't Mog look like Mog is fucking
+	 (Synchysi)		obnoxious, but mostly because the name change from Moogle Suit to Moogle
+				"Hide" led to some unfortunate implications that we wanted to avoid.
+
+				(And by "we" I mostly mean Synchysi seeing as I'm the one who moved the
+				Moogle Hide to Umaro's Cave -BTB)
+
+---------------------------------------------------------------------------------------------------------
+
+	Cross & Blast		The Mind Blast and N.Cross attacks both have complex targeting effects
+	-------------		which are heavily modified in Brave New World. This entry is mostly just
+	(Seibaby/Bropedio)	an excuse to credit Seibaby and Bropedio for their work on them (because
+				God knows these two names don't show up enough in my documentation), but
+				it's also worth getting into the details for anyone interested.
+
+				First, Mind Blast. To the external observer, it would appear to follow
+				the same rules as Cyan's 4-hit Bushidos, making four hits with each one
+				running its own evasion check. What it does instead in the original game
+				is check evasion for each target first and then hit four times at random
+				in the "pool" of everyone who didn't dodge. The result is, statistically
+				speaking, a less even distribution of hits throughout the party, but a
+				guarantee that all four hits will land unless every character manages to
+				avoid the attack (unlikely). Especially bearing in mind the latter, this
+				approach diminishes the value of evasion (or stamina in Brave New World)
+				to mitigate problems. Thus, Mind Blast is changed here to simply attack
+				five times (instead of four), checking against stamina for each hit.
+
+				N.Cross, by comparison, was much simpler (if not much stupider) in the
+				original game. Its special effect simply ran a coin flip as a secondary
+				layer of evasion from the attack, ostensibly as an attempt to prevent an
+				unlucky roll from freezing your entire party. Of course, bad rolls still
+				happened and even moderate luck meant that nobody would get hit at all.
+				This is a case where the "Mind Blast" approach would have worked much
+				better, just using two hits instead of four, which is exactly what we've
+				done here. Stamina remains important insomuch that it helps lower the
+				pool size, thus increasing the odds of only one character getting hit,
+				but the likelihood of it entirely missing a party of four is very low.
+
+				 (NOTE: Green-D's "Thriller" attack uses the same targeting as N.Cross)
+
+---------------------------------------------------------------------------------------------------------
+
+	Your Soul Is Mine!	Wrexsoul was always one of those irritating fights in the original game
+	------------------	because killing your own characters to see which one he possessed was a
+	 (Synchysi)		huge pain in the ass. I've thus added an alternate win condition to the
+				fight, which is to defeat both Soulblazers (this technically existed in
+				the original game, as well, except now X-Zone won't work). Further, I've
+				fixed it so that doing this won't screw you out of his Force Armor drop.
+
+				How did I do this? Easy. Wrexsoul isn't holding the Force Armor - Shemp
+				is. That's why we added that whole scene at the beginning of the fight,
+				whereas Shemp originally just showed up at the end of the Stooge battle
+				as a one-off joke and that was that. The fact that it ended up being a
+				hilarious conclusion to his saga was just a nice little bonus.
+
+---------------------------------------------------------------------------------------------------------
+
+	Booty Call		One of the most aggravating parts of the original game was dealing with
+	----------		the hungry chest at Ebot's Rock due to the fact that it required to be
+	(Gi Nattak)		fed at least 22 pieces of, um... "booty" in a single sitting. Moreover,
+				it completely failed to convey this fact and since booty is a rare item
+				(and thus a simple bit flag as far as the code is concerned), there's no
+				visible way to track how much of it you have. Put these two together and
+				you get one of the most frustrating concepts that vanilla had to offer.
+
+				What the chest does now is simply no longer reset the invisible "booty"
+				counter every time you feed him so that you no longer have to do it all
+				in one sitting and the whole thing is no longer a massive waste of time.
+				Further, the memory bit that gets set whenever the chest is fed is never
+				cleared, so you don't have to feed it again if you go back to re-fight
+				Hidon (not that you'd want to since there's a save point near him now).
+
+	   Hidon Returns	Seeing as it's possible for Strago to miss learning Black Omen or Shield
+	   (-Bropedio)		from Hidon - and there was literally no other reason to fight him at all
+				in the original game - he can be re-fought as many times as you wish by
+				talking to Gungho/Leeroy. In vanilla, his dialogue would randomly branch
+				to the trigger that "revived" Hidon. Here, the trigger is always called.
+
+---------------------------------------------------------------------------------------------------------
+
+	Hidonite Display	Because each Hidonite is a separate enemy in the game's data, and there
+	----------------	are five total enemies in their fight including Hidon himself, it falls
+	 (BTB)			victim to the game's interface limitations and will thus only be able to
+				display the names of three of them. But rather than simply consolidating
+				them into a single enemy (which would then "group" together in the enemy
+				name box as one instance), I elected to instead hide their names from
+				view entirely, à la Inferno's arms or the final tower of bosses.
+
+				Each Hidonite now possesses unique AI reminiscent of a much older game
+				with four enemies who were notable for their unique behavior patterns.
+
+---------------------------------------------------------------------------------------------------------
+
+	When The Queen Stands	The basement level of the Ancient Castle is no longer hidden as part of
+	---------------------	our ongoing effort to remove hidden bullshit that really shouldn't have
+	 (Synchysi)		been hidden in the first place (people had a lot more free time on their
+				hands back in the 90's). What makes this example particularly egregious
+				is the fact that just finding the Ancient Castle in the first place was
+				100,000 GP intel from a thief at the base of the Fanatics Tower, so it's
+				almost insulting that the original game expected you to figure out this
+				secret-within-a-secret by talking to an NPC in the Figaro Castle library
+				after having already discovered the Ancient Castle and returned.
+
+				Suffice it to say, regular NPCs in Brave New World do a much better job
+				of pointing you toward the Ancient Castle - and it doesn't cost a dime.
+
+	   Fuck Off, Raiden	An even MORE questionable design choice than the above was giving the
+				player a magicite containing one of the baddest asses ever, only to have
+				it immediately replaced with Hideo Kojima's biggest mistake. Now, Odin's
+				statue adds a cracked magicite shard to your key items when examined,
+				which the queen's tears will then "restore" into the Odin magicite.
+
+---------------------------------------------------------------------------------------------------------
+
+	Ultimate Magicite	This is a sequential chain of edits that begins with the owner of the
+	-----------------	weapon shop at Narshe, who now offers you a choice between two different
+	 (Synchysi)		swords (one exclusive to Terra, the other to Celes) rather than a choice
+				between a sword and the Ragnarok magicite. Ragnarok is now available as
+				the new reward for defeating all of the legendary dragons (this includes
+				Kaiser). Crusader, the old reward, has been shunted over to Doma Castle
+				in place of Alexandr, which was in turn moved to the guy at the base of
+				the Fanatic's Tower who used to sell overpriced hints but who now sells
+				you the Alexandr magicite for the modest price of 15 bits, or 32,768 GP.
+
+				Initially, before swapping Crusader and Alexandr, we just moved Crusader
+				to the room where the Air Anchor was found in vanilla. But because that
+				room was accessible even before getting the hint about finding it from
+				the White Dragon, we just shitcanned the room and had the White Dragon
+				drop it instead. But that made the White Dragon the only one to drop two
+				rewards, which we didn't like, and we also wanted Celes to have earlier
+				access to the Holy spell than getting it after the Doma nightmare, hence
+				what we ultimately ended up doing with everything.
+
+---------------------------------------------------------------------------------------------------------
+
+	The Two Towers		In order to prevent players from looting Kefka's Tower before they're
+	--------------		legitimately powerful enough to take it on, we've decided to gate it by
+	 (Synchysi)		requiring one of the "optional" areas in the World of Ruin. The obvious
+				candidate for this was the Fanatics Tower, which is both appropriately
+				challenging and narratively linked to Kefka's Tower.
+
+				Attempting to enter Kefka's Tower early will show a scene with Setzer
+				noting that the tower is surrounded by a barrier. To break the barrier,
+				you'll need Terra's pendant, which is now lost when the Blackjack tears
+				apart. The aforementioned cutscene simply tells you to go find it, while
+				attempting to enter Kefka's Tower a second time will give you a more on-
+				the-nose hint about where to go look for it: the Fanatics Tower. A third
+				cutscene will play when you're finally able to enter Kefka's Tower after
+				getting the pendant, but only if you triggered the first scene above.
+
+---------------------------------------------------------------------------------------------------------
+
+	Fanaticism Redux	The infamous "magic only works here" gimmick for the Fanatics Tower has
+	----------------	been removed entirely and is now enforced by limiting the effectiveness
+	 (Synchysi)		of non-magical commands via enemy stats/behavior rather than rendering
+				other commands unusable. The hopefully obvious reason for this change
+				is that, while this gimmick wasn't a problem back when everyone could be
+				taught Ultima, it became a rather serious issue in Brave New World.
+
+				As an added bonus, removing the command restriction allowed us to enable
+				warping out of the tower for all exterior portions except the roof (for
+				obvious reasons) and the base. As you can probably guess, the reason it
+				was disabled in the first place is that the game used an event tile at
+				the tower's base to disable all commands except Magic when you entered
+				and then turn them back on again when you left. And as you can imagine,
+				warping out would have prevented that second part from happening, and
+				thus the rest of the game would have been... well, pretty much the same
+				since all anyone ever did in the original game was spam Ultima.
+
+	   Phoenix Warp		The other major area in the game where warping is now possible where it
+				was not before is the Phoenix Cave (which previously could not be exited
+				aside from the entrance, meeting Locke, or that thing in the room where
+				you meet Locke that looks like a restore point). There was no mechanical
+				reason why it should have been disabled there in the first place, and it
+				seemed particularly odd given that it was allowed in Kefka's Tower.
+
+---------------------------------------------------------------------------------------------------------
+
+	Kefka's Tower Bosses	Have you ever wondered why the first party in Kefka's Tower only fights
+	--------------------	one boss while the other two fight three and four apiece? So did we, so
+	 (Synchysi)		now they fight Guardian instead of the second or third group (depending
+				on which way you went at the switch room). Further, if all eight of the
+				legendary dragons are defeated, party one also fights the ninth: Kaiser.
+				AKA the "Czar" Dragon, Kaiser is an infamous dummied-out boss in vanilla
+				that somehow gained enough notoriety to warrant an appearance as a bonus
+				boss in the GBA re-release/shameless cash grab. Here, he's an optional
+				fight which is unlocked by killing all of his friends; your rewards for
+				defeating him are the Excalibur and Ragnarok.
+
+				This brings us to two mandatory bosses(*) and one optional boss for each
+				group, since Ultima (AKA Atma 2.0) can no longer be skipped as the exit
+				from its room is "sealed by a mysterious force" until it dies.
+
+					*(Yes, Inferno is unskippable, but you're free to try.)
+
+	   The Final Battle	For the final battle, the game originally made the player set the order
+	   -(Bropedio)		in which all twelve characters would fight. This decision was typically
+				limited to the initial team of four followed by "whatever" seeing as the
+				goal was to carry the same party throughout the whole fight and you had
+				to be in some seriously deep shit to ever see anyone below slot 6 or 7.
+				Now, you just select only the first four characters and anyone you lose
+				between tiers is replaced with a random character from those remaining.
+
+---------------------------------------------------------------------------------------------------------
+
+	Everybody Dance Now	Early on in Brave New World's development, I wanted to give Kefka a
+	-------------------	"Puppet Master" attack that gave your entire party the "dance" status,
+	 (BTB)			thus causing them all to lose a turn as they stumbled and fell since I
+				assumed that dancing would automatically fail if no dance was selected.
+				Needless to say I was wrong, and my discovery of that fact might be the
+				the most hilarious thing I've seen since that time a wandering horde of
+				evil mechanics beat the shit out of each other with pipe wrenches.
+
+				But this isn't about that. This is just a list of which dances are the
+				home dance for every background in the game, since a lot of them aren't
+				obvious and that sort of detail is kind of important now since Dance is
+				actually a viable skill:
+
+					TERRAIN					HOME DANCE
+					----------------------------------------------------
+					Grassland (WoB/WoR)			Wind Song
+					The Veldt (WoB/WoR)			Wind Song
+					Wasteland (WoR)				Wind Song
+					Blackjack / Falcon			Wind Song
+					Falling Sky (IAF Battle)		Wind Song
+					Colosseum				Wind Song
+					Final Battle w/ Kefka			Wind Song
+					----------------------------------------------------
+					Desert (WoB/WoR)			Desert Aria
+					!Imperial Camp				Desert Aria
+					----------------------------------------------------
+					Forest (WoB/WoR)			Forest Suite
+					Soul Train, exterior			Forest Suite
+					!Soul Train, battle w/ engine		Forest Suite
+					----------------------------------------------------
+					Mountain, exterior			Earth Blues
+					Floating Continent			Earth Blues
+					Kefka's Tower, exterior (garbage pile)	Earth Blues
+					----------------------------------------------------
+					Caves (brown, red, blue, or mines)	Dusk Requiem
+					Mountain, interior			Dusk Requiem
+					!Mine Cart Ride				Dusk Requiem
+					Bridge (Sealed Gate Cave)		Dusk Requiem
+					Daryl's Tomb				Dusk Requiem
+					Castle, exterior (Ancient Castle/Doma)	Dusk Requiem
+					Kefka's Tower, interior (garbage pile)	Dusk Requiem
+					Final Tower Of Bosses			Dusk Requiem
+					----------------------------------------------------
+					Town, Narshe				Love Sonata
+					Town, Thamasa				Love Sonata
+					*Town, South Figaro/Vector		Love Sonata
+					Zozo, exterior/interior			Love Sonata
+					Opera House, rafters/stage		Love Sonata
+					Burning House				Love Sonata
+					Tentacle Battle				Love Sonata
+					Owzer's Mansion				Love Sonata
+					Cyan's Nightmare (1st area)		Love Sonata
+					Soul Train, interior			Love Sonata
+					Castle, interior (Figaro/Ancient/Doma)	Love Sonata
+					Fanatics Tower, exterior/interior	Love Sonata
+					Imperial Palace/Kefka's Tower		Love Sonata
+					Factory/Kefka's Tower (both styles)	Love Sonata
+					----------------------------------------------------
+					1337 River				Water Rondo
+					Barren Falls				Water Rondo
+					Underwater (Serpent Trench, Ancient Cave)	Water Rondo
+					----------------------------------------------------
+					Snowfield (Narshe cliffs)		Snowman Jazz
+
+					*This is Love Sonata's new "home" backdrop
+					**(See below)
+
+	   WoRondo		Rather infamously, Water Rondo became inaccessible in the original game
+	   -(SirNewtonFig)	if you failed to recruit Mog and then learn it in the World of Balance.
+				In response to this, the bottom-most level of the Ancient Cave (the save
+				point room) is now flooded and utilizes the water backdrop in battle.
+
+---------------------------------------------------------------------------------------------------------
+
+	Treasure Hunting	A long-standing Final Fantasy tradition is the concept of rare items and
+	----------------	equipment that are obtainable only through "treasure hunting" them from
+	 (BTB)			enemies. This makes some degree of sense, since theft is otherwise only
+				useful as a means of saving money, leading to it being ignored by most
+				players. That said, there's a few ground rules I need to go over about
+				how all of this works before talking about the fabulous prizes.
+
+				First of all, no theft-exclusive items are held exclusively by one-time
+				enemies - the last thing we want to do is make the player feel like they
+				need to drag Locke's vagrant ass along with them wherever they go, and
+				we especially hate the idea of missable shit. Secondly, while the shit
+				you obtain in this manner must be useful enough to be worth your effort,
+				it must not under any circumstances be the best that there is - because,
+				again, we don't want anyone feeling like they have to rob everyone blind
+				in order to properly enjoy the mod. To this end, theft-exclusive shit is
+				gimmicky and borderline "jokeitem" material. Third, since this shit is
+				farmable, it all has monetary value so that you can sell it if you don't
+				want it rather than being forced to bring it to the Colosseum and trade
+				it in for something else you probably won't want, either.
+
+				And now, here are the fabulous prizes:
+
+	   Gum Pod		This isn't so much a "prize" as it is a stern warning to quit trying to
+				steal from non-human enemies; stealing one of these is usually the last
+				thing Locke sees before getting his ass beaten. Making an item for this
+				purpose was necessary since enemies cannot react to unsuccessful theft
+				attempts, and steal cannot succeed unless the enemy is actually holding
+				something to steal. (SELLING PRICE: 1 GP)
+
+	   Slim Jim		Dadaluma (AKA Randy "Macho Man" Savage) will snap into one of these
+				periodically during your battle with him right before jumping into the
+				air. It cures 100 HP just as dried meat does, but more importantly also
+				sets haste and regen. (SELLING PRICE: 250 GP)
+
+	   Snake Oil		A Remedy that cures ALL bad statuses (this includes sap, zombie, frozen,
+				and condemned) and also cures 1/4 of the target's max HP. They're great
+				to have on hand for the Atma fight, or really any boss where those four
+				statuses are prone to showing up. (SELLING PRICE: 250 GP)
+
+	   Inviz Scroll		These are no longer buyable since the clear status as a whole is largely
+				downplayed in the mod. I left these in as rare steals since they're the
+				only way to inflict the status outside of the Repo Man/Ninja rages or a
+				Phantom summon (or muddling a Greasemonk). Unlike Smoke Bombs, which can
+				only target a single ally, these things are free-targeting so that they
+				can affect the whole party. (SELLING PRICE: 500 GP)
+
+	   Club			A mid-game weapon for Gau meant to bridge the gap between his immediate
+				physical attack strength and the Bone Club. (SELLING PRICE: 250 GP)
+
+	   Healing Shiv		A knife with the "heals on strike" property that brushes possess. It can
+				make Locke in partciular a far more effective healer in the early game,
+				but he'll have to rely entirely on his magic for offensive output since
+				you can no longer bypass this effect with "Mug". (SELLING PRICE: 500 GP)
+
+	   Stat Hat		A Leather Hat that raises all four primary stats by 5. Probably one of
+				the better pieces of theft-exclusive equipment as it's one of the few
+				with no significant drawbacks. (SELLING PRICE: 1,000 GP)
+
+	   Mystery Egg		It's a mystery. (SELLING PRICE: 1,000 GP)
+
+	   Black Heart		A relic that boosts max HP by 50% - a bonus that is otherwise available
+				only on the Gungnir - at the expense of weakness to every element except
+				for holy and dark. Holy and dark are instead nullified, which means that
+				regular cure spells will not affect the user. (SELLING PRICE: 2,500 GP)
+
+	   Multiguard		A combination of the three elemental shields with the downside that it
+				lowers all four primary stats by 3. (SELLING PRICE: 5,000 GP)
+
+	   Lazy Shell		Highly defensive armor that can be worn by anyone, but is heavy and will
+				tank their speed and vigor. (SELLING PRICE: 10,000 GP)
+
+---------------------------------------------------------------------------------------------------------
+
+	Veldt Encounters	As the readme mentioned, great effort has gone into making rage hunting
+	----------------	as painless of an experience as possible. For the curious and/or bored,
+	 (BTB)			this section will detail the extent of those efforts. As you know, there
+				are now only 64 rages instead of 255, enemies without rages won't appear
+				on the Veldt, and enemies WITH rages can be leapt on even outside of the
+				Veldt. That last bit might indicate to the casual reader that the Veldt
+				is basically a waste of time since it's now easier to hunt for rages at
+				their source, but a complete overhaul of the enemy encounter structure
+				aims to make the Veldt the easiest place to catch 'em all.
+
+				First, a quick glossary of terms:
+
+					Formation - any enemy encounter, random or otherwise
+
+					Pack - a list of enemy formations and their odds of appearing
+
+					Chunk - what the Veldt uses instead of normal packs
+
+				Got it? Good.
+
+				Simply put, the Veldt utilizes a special enemy pack that cycles through
+				the game's first 512 enemy formations in chunks of 8. That is, the first
+				encounter randomly selects between formations 0 and 7, the next one will
+				pick between 8 and 15, then 16 to 23, and so on. Have you ever wondered
+				why encounters on the Veldt always seemed to start with Leafers and then
+				get progressively harder until they reset? Well, this is why. One might
+				say that they tried to mask this fact by throwing a handful of late-game
+				encounters in the lower formations, but a cursory glance at the original
+				code suggests that little, if any of that fucking mess was intentional.
+
+				Part of the original game's problem should already be apparent: you had
+				a 1/8 chance of encountering many foes on the Veldt, and even then only
+				on the one chunk of the cycle where their formation fell. Anyone with no
+				knowledge of how this system worked could easily waste months of their
+				lives in pursuit of elusive rages that, tragically, were about 90% shit.
+
+				If you're at all curious about what the game's original Veldt encounters
+				looked like, I'd suggest consulting Djibriel's excellent Rage Guide on
+				GameFAQs (warning: they're a goddamn mess). But I imagine that you're
+				probably a lot more interested in what they look like now:
+
+					Formations 0 - 7:
+
+						• -
+						• Repo Man, Sewer Rat x2
+						• Sewer Rat x3
+						• Repo Man x2
+						• -
+						• Raven, Leafer x 2
+						• Raven x3
+						• Leafer x2
+
+					Formations 8 - 15:
+
+						• Sand Ray, Antlion x2
+						• Antlion x3
+						• Sand Ray x2
+						• -
+						• Eye Goo, Crawler x2
+						• Hornet, Eye Goo x2
+						• Hornet x2, Crawler x2
+						• -
+
+					Formations 16 - 23:
+
+						• -
+						• -
+						• -
+						• -
+						• -
+						• Scrapper, Vaporite x2
+						• -
+						• Scrapper x2
+
+					Formations 24 - 31:
+
+						• -
+						• -
+						• -
+						• Albatross, Exocite x2
+						• -
+						• -
+						• Albatross x2
+						• -
+
+					Formations 32 - 39:
+
+						• -
+						• -
+						• -
+						• Stray Cat x3
+						• -
+						• -
+						• -
+						• Stray Cat x4
+
+					Formations 40 - 47:
+
+						• -
+						• -
+						• -
+						• -
+						• -
+						• Tek Armor, Soldier x2
+						• -
+						• Tek Armor x2
+
+					Formations 48 - 55:
+
+						• -
+						• -
+						• Conjurer x2, Bomb x2
+						• -
+						• Bomb x3
+						• -
+						• Spirit x4
+						• -
+
+					Formations 56 - 63:
+
+						• Lich x2
+						• -
+						• -
+						• -
+						• Spirit x2, Conjurer
+						• -
+						• -
+						• -
+
+					Formations 64 - 71:
+
+						(No Veldt-enabled formations)
+
+					Formations 72 - 79:
+
+						(No Veldt-enabled formations)
+
+					Formations 80 - 87:
+
+						• Rain Man, Doggo x2
+						• -
+						• -
+						• Doggo, Chickenlip x2
+						• Chickenlip x5
+						• -
+						• -
+						• -
+
+					Formations 88 - 95:
+
+						• -
+						• -
+						• -
+						• Onion Kid x5
+						• -
+						• -
+						• Templar, Flan x2
+						• Flan x4
+
+					Formations 96 - 103:
+
+						• Templar x2
+						• -
+						• -
+						• -
+						• Rhydon, Vulture x2
+						• Rhydon x2
+						• -
+						• -
+
+					Formations 104 - 111:
+
+						• -
+						• -
+						• -
+						• -
+						• Jinn x2, Zombone
+						• -
+						• Zombone x2
+						• -
+
+					Formations 112 - 119:
+
+						• Adamantite x2
+						• -
+						• -
+						• Adamantite, Cephalid x2
+						• -
+						• -
+						• Chimera
+						• Cephalid x3
+
+					Formations 120 - 127:
+
+						• -
+						• -
+						• -
+						• Locust x2, Kudzu
+						• Kudzu x2
+						• -
+						• -
+						• Behemoth x2
+
+					Formations 128 - 135:
+
+						• Gargoyle, Brainpan x2
+						• -
+						• -
+						• -
+						• Ninja x2
+						• -
+						• -
+						• -
+
+					Formations 136 - 143:
+
+						• Rocky x3
+						• -
+						• -
+						• -
+						• Mesosaur x4
+						• -
+						• -
+						• -
+
+					Formations 144 - 151:
+
+						• -
+						• -
+						• Buffalax x2
+						• -
+						• -
+						• Werewolf, Nastidon
+						• Nastidon x2
+						• Werewolf x2
+
+					Formations 152 - 159:
+
+						(No Veldt-enabled formations)
+
+					Formations 160 - 167:
+
+						• -
+						• Mantodea x2
+						• -
+						• Windrunner x2, Mantodea
+						• -
+						• Windrunner, Tumbleweed x2
+						• -
+						• Tumbleweed x4
+
+					Formations 168 - 175:
+
+						• Griffin
+						• -
+						• Griffin, Troll x2
+						• -
+						• Tyrano x2
+						• -
+						• Tyrano, Troll x3
+						• -
+
+					Formations 176 - 183:
+
+						• Osteosaur
+						• -
+						• -
+						• -
+						• Titan
+						• -
+						• -
+						• -
+
+					Formations 184 - 191:
+
+						• -
+						• -
+						• -
+						• Shokan x2
+						• -
+						• -
+						• -
+						• Marlboro, Belladonna x2
+
+					Formations 192 - 199:
+
+						• -
+						• -
+						• -
+						• Vagrant x2
+						• -
+						• -
+						• -
+						• Grizzly, Scarab x2
+
+					Formations 200 - 207:
+
+						(No Veldt-enabled formations)
+
+					Formations 208 - 215:
+
+						• -
+						• -
+						• Witch x2, Revenant x2
+						• -
+						• -
+						• Weedula, Anemone x3
+						• Anemone x5
+						• -
+
+					Formations 216 - 223:
+
+						(No Veldt-enabled formations)
+
+					Formations 224 - 231:
+
+						(No Veldt-enabled formations)
+
+					Formations 232 - 239:
+
+						(No Veldt-enabled formations)
+
+					Formations 240 - 247:
+
+						• -
+						• -
+						• -
+						• -
+						• -
+						• Io
+						• -
+						• -
+
+					Formations 248 - 255:
+
+						• -
+						• -
+						• -
+						• -
+						• -
+						• -
+						• Magic Pot x2
+						• Magic Pot x3
+
+					Formations 256 - 511:
+
+						(No Veldt-enabled formations)
+
+				It's important to note that all formations in a chunk (usually referred
+				to as packs elsewhere, but I call them chunks here to avoid confusing
+				them with regular packs) do not have equal chances of being selected
+				because of how the selection process works. First, the game finds the
+				first chunk that contains at least one Veldt-enabled formation that's
+				been "unlocked" by being encountered. It then selects one of the eight
+				slots in that chunk at random. If the selected slot is not Veldt-enabled
+				or unlocked, then it will move forward, looping back around to the start
+				if it reaches the end, until it finds one that is.
+
+				As an example, take formations 16-23. Assuming that both formations have
+				been unlocked, the Scrapper/2x Vaporite has a 3/4 chance of being called
+				while the 2x Scrapper formation has only 1/4. This is because if any of
+				the empty slots are chosen, it skips ahead to the first one that isn't.
+
+				Thus, not only is the headache of rage hunting alleviated by the overall
+				reduction of rages to find, but also by the rearrangement of formations
+				that makes them more likely to be encountered along with a lower number
+				of chunks in total that must be cycled through (64 in vanilla, 25 here)
+				in order to get another shot at encountering them.
+
+				But wait, there's more! Did you miss your chance to unlock a formation
+				from an area of the game that you can't go back to, like the Soul Train
+				or the IMTRF? Well, first of all, I tried to work the encounter rates so
+				that this sort of thing is very unlikely to occur. But on the off chance
+				it happens, you can now find all of the missable enemy formations in the
+				WoB in either the "Grenade Forest" west of the Veldt (for the Soul Train
+				enemies) or on Triangle Island (for everything else). For the encounters
+				from the Floating Continent, look just south of Albrook in the WoR.
+
+				As an interesting side note, since these formations are from areas with
+				persistent background music (see far above), encountering them will not
+				interrupt the overworld BGM, either. It's actually quite eerie.
+
+---------------------------------------------------------------------------------------------------------
+
+	Lore Hunting		Even though there are only 12 lores in the mod and most of them are very
+	------------		easy to find, it's been requested that I compile a brief guide detailing
+	 (BTB)			the easiest/best places to obtain them. So, here we go:
+
+					LORE		LEARNED FROM
+					----		------------
+					Aqualung	It's pretty hard to miss this one...
+
+					Bad Breath	Marlboro (Daryl's Tomb; Veldt/Rage)
+
+					Black Omen	Hidon (Ebot's Rock)
+
+					Blaze		Heartfire (Burning House - can't be missed)
+
+					Blow Fish	Brainpan (Floating Continent; Veldt/Rage)
+							Phunbaba
+
+					Discord		Jinn (Veldt/Rage)
+							Djinni (Floating Continent)
+
+					Holy Wind	Foamy (WoB, near South Figaro)
+							Rocky (WoR, Solitary Island; Veldt/Rage)
+
+					Raid		Kudzu (Esper's Gathering Place; Veldt/Rage)
+							Belladonna (Daryl's Tomb; Veldt/Rage)
+
+					Raze		Atma Weapon (Floating Continent)
+							Shokan (Daryl's Tomb; Veldt/Rage)
+
+					Refract		Troll (WoR, Narshe/Doma area; Veldt/Rage)
+							Witch (Phoenix Cave; Veldt/Rage)
+
+					Shield		Hidonite (Ebot's Rock)
+
+					Tsunami		Pond Scum (Ancient Cave)
+							Blue-D (Ancient Castle)
+
+---------------------------------------------------------------------------------------------------------
+
+	Limit Breaks		Something that's discussed in the readme is that desperation attacks
+	------------		(i.e. primitive limit breaks) now do damage based on the user's stamina
+	 (BTB)			rather than their magic power. I feel like this makes a lot more sense,
+				plus it doesn't result in characters like Relm and Strago always doing
+				more damage with them than, say, Cyan. But remember that stamina attacks
+				are still technically magical, and so they're unaffected by relics that
+				boost physical damage, as well as the back-row damage penalty.
+
+				All desperation attacks now also have the following properties:
+
+						• Power = 150*
+						• Ignores defense/row
+						• Sets Sap
+
+					*Except Gogo's, which just does 9,999 damage
+
+				How do desperation attacks work? Well, I'm glad you asked. As has always
+				been the case, any character in the "near fatal" status (HP < 1/8 MaxHP)
+				has a 1/16 chance of performing a desperation attack in lieu of a normal
+				one if "Fight" is used. Desperation attacks tend to show up a lot more
+				often in Brave New World due to a combination of regular attacks being
+				more useful on the whole and a MUCH greater likelihood of its characters
+				being in the "near fatal" status. However, there are two conditions that
+				will prevent desperation attacks from occurring:
+
+				   ...if the character has "image", "vanish", "muddle", or "zombie"
+
+				   ...if the character has already used a DA in this fight
+
+				There was a third condition in vanilla where the global battle timer had
+				to have at least reached 768 (about 25 seconds of real time), but that
+				condition was removed by the nATB system.
+
+				(Oh, and Gau and Umaro don't have desperation attacks because they don't
+				have a "Fight" command. But I'm sure you knew that already.)
+
+---------------------------------------------------------------------------------------------------------
+
+	N.O. E.S.C.A.P.E.	There are a few anomalies (one might call them "bugs") with how running
+	-----------------	from fights works in the game. First of all, inability to run is a flag
+	 (BTB)			on individual enemies rather than on the formation itself. The result is
+				that it's possible in the original game to run away from the Ifrit/Shiva
+				fight during the brief period when there's technically no enemies on the
+				battlefield, which of course isn't possible now for obvious reasons.
+
+				(NOTE FOR DEVELOPERS: there is a formation flag to prevent running, but
+				it's very buggy and should not, under any circumstances, be used.)
+
+				The other snag is that I wanted to avoid certain random encounters being
+				inescapable because some or all of the enemies in it can be encountered
+				elsewhere in fights that you shouldn't be able to run from, and so I've
+				just said "fuck it" and enabled running away from those enemies. The big
+				examples here are enemies from "event" battles that later appear on the
+				Veldt (see above), namely the Soldier/Tek Armor battles in the Imperial
+				Camp and two of the three enemies (Albatross and Exocite) that appear on
+				the 1337 River. The latter creates an interesting scenario where you can
+				run from any fight there so long as you kill off any Nautiloids first.
+
+				There's also the soldiers you talk to before the Imperial Banquet, which
+				I could very easily fix just by making those fights with unique enemies,
+				but I honestly really don't give enough of a shit. You want to run from
+				the soldiers at Vector? Be my fucking guest.
+
+---------------------------------------------------------------------------------------------------------
+
+
+
+
+				4. LIST OF REFERENCES
+
+
+
+
+---------------------------------------------------------------------------------------------------------
+
+				REFERENCES TO OTHER VIDEO GAMES
+				-------------------------------
+
+	Baldur's Gate		While discussing an attack on Kefka's Tower after getting the Falcon,
+				Edgar notes that, "...we must gather our party before venturing forth".
+
+	Breath of Fire		The SleepX/SlowX/HasteX/RegenX spells use the same naming convention as
+				the first two BoF games did for upgraded spells. Also, both attacks made
+				by Interceptor are now named "Reprisal" just as the counter-attacks made
+				by your characters in all BoF games are.
+
+				The Deep Eye and Muus enemies have been renamed to Eye Goo and Puff Goo,
+				both of which are variants of one of the series's most notable enemies
+				(they're kind of like BoF's version of Dragon Warrior's slimes).
+
+	Breath of Fire II	Naughty & Nerapa (both fought at the end of the Floating Continent) have
+				been renamed to Bat Lady & Nimufu, both of whom are characters in BoF2
+				(the former is Patty, who is known simply as such for most of the game).
+
+				The special attack of the Wild Cat enemy has been renamed to ChopChop,
+				which refers to a character of the same name in BoF2 who teaches you a
+				defense-ignoring attack of the same name.
+
+	Breath of Fire III	Sabin now channels Rei in nearly every line he has, quoting him directly
+				on several occasions. This includes Rei's oft-spammed catchphrase, "well
+				don't that just beat all..."
+
+				The "Fidor" enemy has been renamed to Pooch in loving memory of the poor
+				doggo Rei and company murder whilst breaking into McNeil's roach hotel.
+				Its special attack, "Snap", is a further reference to the same.
+
+				One of the waitresses at the pub in Albrook asks if you'd like something
+				that's "not on the menu", which refers to a street whore in Syn City in
+				BoF3 who asks you the same thing (she's later mauled by a tiger).
+
+				Terra's pendant is described in the rare items menu as "some things you
+				just can't get rid of...", which is a reference to a completely useless
+				key item obtained in BoF3 that bears the same description. Ironically,
+				while the pendant was indeed useless in the original game, it now not
+				only serves a purpose, but is also gotten rid of ("lost" would actually
+				be a better word) about halfway through the game.
+
+				The special attack of the Kaiser dragon ("Bonebreak") is a reference to
+				an attack of the same name used by Ryu's Kaiser dragon transformation.
+
+				The "stone sleep" entered by the Warring Triad is named after a similar
+				practice of the Guardians in BoF3.
+
+				The goddess "Poltrgeist" of the warring triad has been renamed to Myria,
+				who is also a goddess and the ultimate antagonist of BoF3.
+
+	Castlevania II		The cursed (Hero) Shield is described as "...a horrible shield to have a
+				curse", and the man who gives it to you suggests that you find a way to
+				vanquish said horrible curse.
+
+	Chrono Trigger		The Wirey Drgn and Tyranosaur enemies have been renamed to Dactyl and
+				Tyrano, respectively, both of which are subtle allusions to CT enemies.
+
+				The Seraph summon is named after the Crono/Marle/Robo triple tech.
+
+				One of the NPCs in Albrook comments "what is this, 12,000 B.C.?" if you
+				talk to him while the Floating Continent is up in the sky.
+
+				The battle with Atma (at Kefka's Tower) is now mandatory; if you attempt
+				to continue without fighting it, you'll get a message stating that the
+				exit is "sealed by a mysterious force" (sadly without the audio jingle).
+
+				After killing Guardian, it can't figure out what battle program to load
+				and defaults to Gato... complete with punching itself and then singing
+				(you even get 15 spell points for winning instead of the usual 10).
+
+				A certain quest from Chrono Trigger is rather blatantly referenced by an
+				easter egg (although Brave New World uses a more... direct translation).
+
+	Contra III		Your party quotes a particularly awful line from the introductory scene
+				when you're surrounded by the Imperial Air Force (IAF).
+
+	Dr. Mario		Ifrit and Shiva use special attacks named Fever and Chill (respectively)
+				during your battle with them, which for those unaware are the names of
+				the two music tracks in Dr. Mario.
+
+	Dragon Warrior		If you refuse Emperor Gestahl's request for help at the banquet, he'll
+				just "but thou must!" you until you give in (don't expect a good reward
+				if you do this - you lose points for each refusal).
+
+	Dragon Warrior IV	Several enemy special attacks are named after spells from DW4: Zap (used
+				by Beetles), Beat/Defeat (used by Sand & Sea Devils), Bang/Boom (used by
+				Bombs and Grenades), and the "Vulture" line of enemies use a DW-inspired
+				series of attacks named Blind, Blindmore, and Blindmost
+
+				The Gum Pod (see "Treasure Hunting" above) is named after a similarly
+				worthless item from Dragon Warrior IV. Note that "Gum Pod" is a censored
+				version of the item's actual name: dung.
+
+				The Sage Stone is named after an a late-game item in Dragon Warrior IV
+				(although their functions couldn't be any more different).
+
+				The Radiant Gown's name is inspired by DW4's Radiant Dress, and was so
+				named because I initially wanted to make it give Relm auto-Rflect.
+
+	The Elder Scrolls	Several enemies are now named after staples of the TES series: Mudcrab
+				(found in the collapsing house at Tzen; an NPC there even recites the
+				"I saw a mudcrab the other day..." bit from Oblivion), (Cliff) Racer,
+				Bonelord, and Heartfire (which is actually the name of a MONTH in TES).
+
+				Sabin's ultimate weapons (Frostgore and Stormfang) are both named after
+				weapons from Morrowind's Bloodmoon expansion.
+
+				Although the term "Spore Pod" (an attack used by Belladonnas) is fairly
+				generic, I got the name from spending most of my time playing Morrowind
+				gathering hundreds of these things rather than doing any actual quests.
+
+	Final Fantasy		Duncan's wife was renamed to "Sara" to save on dialogue bank space; her
+				new name was inspired by the princess of Corneria.
+
+				The name of the "Pond Scum" enemy, as well as its stats to some extent,
+				was inspired by a line of similarly-named enemies from the original FF.
+
+				The Scullion enemy has been renamed to Warmech and made into a powerful
+				and (somewhat) rare encounter in Kefka's Tower.
+
+				Before the final battle begins, Kefka makes the mandatory Garland quote;
+				similarly, his name is obscured in the standard printme as "Chaos...?"
+
+				The tombstone puzzle in Daryl's Tomb now asks "...what cannot survive in
+				a square world?" upon carving the correct answer: ENIX. This is a nod to
+				the fact that Final Fantasy has been taking potshots at Dragon Warrior
+				since the very beginning, where a tombstone in Elfville was that of the
+				great hero, Erdrick. Of course, it's a bit more mean-spirited here since
+				the joke is that Enix is now basically Squaresoft's bitch. Such is life.
+
+	Final Fantasy II	One of the wrong password choices for the underground passage in South
+				Figaro is now "Wild Rosebud" to reference a password used in FF2 (Wild
+				Rose) while still maintaining the movie reference of the original line.
+
+	Final Fantasy III	The Pipsqueak enemy has been renamed to Onion Kid.
+
+	Final Fantasy IV	Kefka calls Edgar a "spoony king" after your daring escape from Figaro.
+
+				If one of the fights at the Imperial Camp where Cyan is in bserk mode
+				(before he joins up with you) goes on for too long, he'll bust out with
+				Cleave and (probably) wipe the enemy party. This is an allusion to Rydia
+				summoning Titan in her very first appearance despite it being something
+				that she doesn't learn until much later in the game.
+
+				The Pug at the Narshe checkpoint (also seen later as a rare encounter in
+				Umaro's Cave) is a direct reference to an enemy called "Tricker" in the
+				final dungeon of FF4 that displayed the exact same behavior pattern.
+
+				Dadaluma's strongest attack is throwing an oddly sword-shaped spoon at
+				you for massive damage. This is a reference to the strongest thrown item
+				in FF4, which was was also a knife-shaped spoon (I see that nobody at
+				Squaresoft has ever played knifey-spoony before...)
+
+				General Leo's Shock command (now also used by Celes during the Floating
+				Continent escape sequence) was set to drain 1/8 of the user's max HP per
+				use to suggest that it's an attack whose power is rooted in darkness, a
+				change which was inspired directly by Cecil's "Dark Wave" ability.
+
+				The new battle theme for the elemental dragon battles is the elemental
+				fiend battle theme from Final Fantasy IV (special thanks to Jackimus for
+				composing it and to Gi Nattak for helping us get it working!)
+
+				The undead version of Intangir that attacks you from behind after you
+				kill the original is named Intangir Z to reference Milon from FF4, who
+				pulled pretty much the same shit.
+
+				Although it's a fairly generic term, the "Hold" attack used by the Mu
+				enemy got its name from the paralysis spell in FF4.
+
+				The battle with the stooges in Cyan's dream has been reworked to more
+				closely resemble the fight that inspired it (it initially bore little
+				more than a cursory resemblance to the fight with the Magus Sisters due
+				to shit coding), as well as the actual three stooges for whom they are
+				named. My reworking of this battle was also inspired by the fight with
+				Golbez in the Dwarf Castle, which was exceptionally buggy and prone to
+				very weird things happening if something in his script went awry.
+
+				The goddess "Doom" of the warring triad has been renamed to Asura; while
+				Asura is a recurring name in the Final Fantasy series, FF4 is the first
+				(and seemingly only) to depict Asura as both sentient and female.
+
+	Final Fantasy VII	Locke's "let's mosey" line after the fight with Vargas at Mt. Koltz is
+				taken from FF7's Cloud "I Have No Fucking Personality" Strife; he'll
+				repeat this line later on during the Vector escape sequence in the clean
+				version of the mod (in place of "let's get the hell out of here.")
+
+				Cyan's 2nd Bushido technique (Mindblow) is Barret's 2nd limit break.
+
+				The 2nd ghost you recruit on the Soul Train (obtainable only by skipping
+				Shadow, since he no longer leaves of his own free will) is named Aeris.
+
+				The Soul Train steals Barret's "there ain't no gettin' offa this train
+				we're on!" line prior to the battle with it.
+
+				In the optional scene with Cid helping Setzer repair the airship, Setzer
+				tells Cid to sit down, shut up, and drink his Goddamn tea.
+
+				The Lethal Wpn enemy has been renamed to WEAPON and it uses an attack
+				named "Ruby Blast"; both names reference one of FF7's two superbosses
+
+				Wrexsoul's "Zinger" attack has been renamed to Gi Nattak, the boss from
+				FF7 that steals his gimmick.
+
+	Final Fantasy VIII	A man in WoR Jidoor talks about a card game based on the Warring Triad,
+				which references pretty much the only entertaining part of FF8.
+
+	Final Fantasy Tactics	Tritoch's Tri-Dazer (summon) attack has been renamed to Trisection after
+				one of FFT's many excellent musical themes.
+
+				Shadow's Orochi blade takes its name from FFT (among several other FFs).
+
+	Frogger			The Gigan Toad enemy is now named after that arcade frog who taught kids
+				that it's really fun to play in traffic (protip: it really isn't).
+
+	Gauntlet		The treasure chest at Ebot's Rock needs food badly.
+
+	I Wanna Be The Guy	The old man's cider is made from the giant cherries that make The Kid
+				explode like an over-ripe tomato whenever he touches them. As per their
+				lore, they are harvested with sticks and must be boiled three times in
+				order to remove all of the poison (the bouncing fruit engine of death in
+				IWBTG's Breakout section is what happens when you only boil them twice).
+
+	Illusion Of Gaia	The Phase enemy (the Brainpan palette swaps) has been renamed to Mu
+				because they remind me of the stone heads you find there in IoG.
+
+	Konami (many games)	The blitz input for Bum Rush is now the Konami Code. This was done to
+				make it easier to perform as well as to maintain the consistency of only
+				magical blitzes (which Bum Rush was in vanilla) having circular inputs.
+
+	Legacy of Kain		Cyan uses Kain's battle cry ("Vae Victis!") on several occasions
+
+	Life Force		Kirin's Life Guard (summon) ability is now named Life Force.
+
+	Mega Man		The ProtoArmor enemy has been renamed to Proto Man; its special attack
+				has also been renamed to "Armcannon". Further, another enemy special
+				(used by Mega Armor) is now called Megabuster.
+
+				When Sabin rejoins you in the World of Ruin, he pledges to (among other
+				things) "fight for everlasting peace!"
+
+	Metal Gear		There's a hidden cutscene at the Returner's Hideout wherein a dude who's
+				sleeping in the bed that Terra woke up in starts yelling in his	sleep if
+				you stand on a certain tile. His line is now, "I FEEL ASLEEP!"
+
+	Metal Gear Solid	One of the soldiers at the Imperial Camp responds to the noise made by
+				Sabin hitting or kicking (I forget which) the chest by saying "!" This
+				joke is later repeated in the tooltip for the Scan spell since I didn't
+				have any room left in that bank for a non-joke description.
+
+				The Garm enemy has been renamed to Foxhound; its special attack is now
+				called Foxdie (it poisons you).
+
+	Metroid			Two enemy special attacks are named after items that Samus uses: Spazer
+				(used by Telstar) and Maru Mari (used by Bat Lady). An aside regarding
+				the latter is that it got a better name in Super Metroid (2 didn't even
+				bother with it at all) because Maru Mari literally means "circle ball".
+
+	Might & Magic VII	Speaking with the butler at Owzer's Mansion in the WoB without Celes in
+				your party results in him rather rudely demanding that you get the hell
+				out. His line is very similar to what Lord Markham says to your party in
+				MM7 if you decide to pay him a non-business visit. Unlike MM7, however,
+				Brave New World unfortunately lacks the option to retaliate by murdering
+				Lord Owzer's staff and taking all of his shit.
+
+				The man who gives you the Cursed (Hero) Shield describes its drawbacks
+				and then casually implies that it's your problem now in a manner similar
+				to the description of the Mash relic from MM7:
+
+				"It is said that Mash was the answer to the first ogre's prayer to the
+				gods for a weapon that would make it stronger than anything else.
+				Annoyed, the gods cursed the first ogre with Mash, and all ogres have
+				since borne the mark of that act - strong, but slow, dull, and stupid.
+				In any event, Mash is yours now."
+
+	Mortal Kombat		The game prompts you to "choose your destiny" when you're made to choose
+				between the Apocalypse and Illumina (see "Ragnarok & Crusader" above).
+
+				Wrexsoul does Shang Tsung's "your soul is mine!" bit when he possesses
+				someone (technically, he's only taking their bodies, but whatever).
+
+				The "Orog" enemy line (huge ninja-looking dudes with four arms) has been
+				renamed to reference that guy from Mortal Kombat that they totally look
+				like. "Shokan" is the name of the entire race, "Tarokan" is an attempted
+				play on the former name and "Kintaro", and the most powerful of them is
+				just "Goro" with "kan" slapped onto the end. Interestingly, the vanilla
+				names of the first two (Orog and Ogor) are both anagrams of Goro, which
+				makes the fact that the third was named "Hemophyte" even more confusing.
+				Hell, if I didn't know better, I'd say Woolsey was jerking us around.
+
+	Pac Man			The (internal) names of the four Hidonites are now Blinky, Pinky, Inky,
+				and Clyde, and their individual behavior has been tailored to match.
+
+	Paladin's Quest		The owner of the inn at Thamasa thinking you smell bad and refusing you
+				reasonably-priced service until you talk to Strago (and then go back to
+				him smelling of Strago's fresh-baked kaiyowa bread) is a reference to a
+				section of Paladin's Quest wherein you have to go into a cave to find a
+				kaiyowa seed so that someone can bake it into bread that you eat to make
+				you stop smelling bad so that everyone in the south (your character is
+				from the north) stops being a racist prick to you. No, really.
+
+	Pokemon			Several attacks are now named after Pokemon attacks:
+
+					Tackle		(special attack used by Umaro/Yeti)
+					Toxic		(special attack used by Mandrake)
+					Harden		(special attack used by Osteosaur)
+					Hyper Beam	(special attack used by Chaser)
+					Sleep Spore	(special attack used by Belladonna)
+					Razor Leaf	(the dance step formerly known as Rage)
+
+				The "Rhinotaur" line of enemies has been renamed to match its equivalent
+				Pokemon evolution line (Rhyhorn, Rhydon, Rhyperior).
+
+				The dude at the relic shop in South Figaro who used to demonstrate how
+				Sprint Shoes work (and now is just a retard since there is no auto-dash
+				relic in Brave New World) now says that he likes relics because they are
+				comfy and easy to wear. Sadly, there is no option to kick his ass.
+
+	Resident Evil		When Locke picks the lock to the weapon shop at Narshe, the blacksmith
+				there refers to him as "the master of unlocking".
+
+	River City Ransom	Merchants/Troopers will "BARF!" when Locke steals their clothes.
+
+	Romancing SaGa 3	The guard at Figaro who gives you the Autocrossbow upgrade (see "Super
+				Autocrossbow" above) takes both his name (Julian) and most of his lines
+				from RS3 - or, more specifically, ManaSword's Engrish-filled translation
+				of it. Despite having the excuse of having gone insane from spending a
+				year underground, he makes just as much sense (possibly more) than the
+				character he quotes... at least he doesn't give Edgar a "hot kiss".
+
+				To further the above reference, the matron of the royal family (known in
+				vanilla simply as "Matron") is now named Monica, and the chancellor (now
+				specified to be her brother) is named Mikhail.
+
+	SaGa			After using the WD-40 on the rusted door to Mt. Zozo, you get a message
+				stating, "door it open!" which is a direct quote from the awful English
+				translation of the original SaGa game (better known in the west as the
+				first game of Final Fantasy Legend trilogy).
+
+				The "skin" counter-attacks used by the Komodo and Basilisk enemies when
+				hit by physical attacks were inspired by mutant abilities of the same
+				name in the SaGa series that do the same thing.
+
+				The "X = Weakness, O = Resistance" formatting schema used in the printme
+				has been a staple in the SaGa series since its inception.
+
+	SaGa II			The two scholars in Albrook with conflicting opinions about the true
+				nature of the Atma Weapon (it turns out that both of them are right)
+				refers to two scholars who each lived in different towns and believed
+				something that conflicted with local popular opinion. One of them lived
+				in a mountain town and claimed that the noises people were hearing was
+				just the wind and not a singing robot like everyone said (it turns out
+				that he's wrong and there actually *is* a singing robot living in the
+				mountains). The other scholar, who lived in a port town, attributed the
+				water's red color to an undersea volcano (he was right) while everyone
+				else believed that it was because Neptune was angry. This is further
+				referenced in the mod by another NPC in Albrook (which is also a port
+				town) in the World of Ruin (wherein the water is also red) making the
+				same claim regarding Leviathan.
+
+				The goddess "Goddess" of the warring triad (there's a brilliant fucking
+				name) has been renamed to Isis after the goddess whom you spend most of
+				the game trying to rebuild and kicks all kinds of ass when she finally
+				joins you (to wit, there are two final bosses - she solos one of them).
+
+				The Fortis enemy has been renamed to Arsenal after the aforementioned
+				final boss(es) of the game.
+
+	Secret of Mana		The Rhobite enemy has been renamed to Rabite, which is a common enemy in
+				the Seiken Densetsu series (sort of like of Dragon Warrior's slimes or
+				Breath of Fire's "goo" enemies mentioned earlier).
+
+				The Shimsham attack has been renamed to Air Blast after a spell of the
+				same name taught by Sylphid to The Sprite.
+
+				The Crimson Robbers (the gang that's being helped out by "Gerad") have
+				been renamed to The Scorpion Gang after the marginally less threatening
+				group that kept showing up everywhere you went in Secret of Mana.
+
+	Soul Blazer		Wrexsoul's companions (formerly SoulSavers) are now Soulblazers.
+
+	Star Fox 64		The instructions for riding a chocobo include how to do a barrel roll.
+
+	Street Fighter		Sabin's Air Blade Blitz was renamed to Sonic Boom because he's sort of
+				like Guile, just without the awesome theme song (incidentally, there was
+				already another attack in the game named Sonic Boom which has since been
+				removed). Also, Sabin's desperation attack has been renamed to Hadouken
+				because he's also sort of like Ryu, except not.
+
+	Suikoden V		Cyan's airship dialogue directly following the esper cave event is an
+				adaptation of a quote from this game.
+
+	Super Mario Bros.	If you go to the South Figaro cave before going to the castle, the guard
+				there will say something akin to a familiar line from the first game.
+
+				SMB's warp zones are referenced by the in-game descriptions of both the
+				Warp Whistle ("Welcome to Warp Zone!") and the spell ("Go to World 9").
+				The whistle itself may or may not qualify as a SMB3 reference, depending
+				on whether or not you care that it appeared first in Zelda (see below).
+
+	Super Mario Bros. II	The Maliga enemy has been renamed to Clawglip (and yes, it also attacks
+				mainly by throwing rocks at you).
+
+				The Wight enemy uses an attack called Subcon (it causes sleep).
+
+	Super Mario RPG		Atma's opening battle quote is taken directly from Culex.
+
+				The Quartz Charm, Mystery Egg, and Lazy Shell are all named after hidden
+				items in SMRPG, though only the Lazy Shell has a similar function here.
+
+	Symphony of the Night	Ultima channels Dracula in the opening speech, although the last line is
+				swapped out for his original "feeble creatures... begone!" line because
+				"...but enough talk, have at you!" was already used earlier by Wrexsoul
+				(in an opening speech that was otherwise mostly Iron Maiden lyrics).
+
+	Yoshi's Island		The Psychot enemy has been renamed to Fuzzy. It uses a special attack
+				called Touch, which does pretty much exactly what you think it does.
+
+	The Legend of Zelda	One of the street vendors at Nikeah asks you, "buy somethin', will ya?"
+				in reference to the shopkeeper(s?) in LoZ who all said the same thing.
+
+				The description of the Emperor's Map ("show this to the old man") refers
+				to a letter in LoZ that had to be shown to an old WOman. The old man in
+				question is Gau's father, who is now the only person in the game to be
+				identified simply as "old man".
+
+				Though also found in Super Mario Bros. 3 (see above), the Warp Whistle
+				first appeared in the Legend of Zelda. Thus, any reference to it should
+				probably be credited to the fat elf rather than the fat plumber.
+
+	Zelda II		One of the dudes at the Beginner's School says to use fire when all else
+				fails (which is actually pretty good advice, in the mod or otherwise).
+
+				One of the xenophobic NPCs at Thamasa will claim to know nothing if
+				spoken to before the people there all stop hating you, and another is
+				apparently named "Error" (there is no Bagu, sadly).
+
+	Ocarina of Time		The "How To Use Leap and Rage 101" tutorial now opens with Kappa saying,
+	(Zelda)			"HEY! LISTEN!" because people just didn't hate him enough already.
+
+	Zero Wing		If Locke is leading one of the parties at the Battle of Narshe and you
+				speak to him, he'll do a "for great justice!"
+
+---------------------------------------------------------------------------------------------------------
+
+				REFERENCES TO MOVIES AND TELEVISION
+				----------------------------------
+
+	Airplane!		After recruiting Setzer in the WoR, the thief/bandit-type NPC at the bar
+				will tell you that he overheard Celes's speech to Setzer (just as he did
+				in vanilla) and then follow it up with, "...I just want to tell you all
+				good luck. We're all counting on you." Anyone who's ever seen Airplane!
+				shouldn't be surprised to see this line repeated by several NPCs (all of
+				which use the same thief/bandit sprite) later on.
+
+				Prior to Celes's speech to Setzer (see above), the thoughts of the thief
+				at the bar are simply, "what a pisser."
+
+	American Gladiators	The Crusher enemy has been renamed to Atlasphere.
+
+	Army of Darkness	Edgar's airship line in the WoB is "Hail to the king, baby!"
+
+	Aliens			A fourth (and final) failure/fuckup at the opera house will result in a
+				"game over, man! Game over!"
+
+	Buffy			Several enemy special attacks are named after BTVS episodes:
+
+					Band Candy	(used by Hoodwink)
+					Hush		(used by Warlock)
+					Restless	(used by Maiden)
+					Seeing Red	(used by Mephisto)
+
+				Gau's Magic Bone was inspired by Jonathan's "Magic Bone" (without any of
+				the homosexual undertones) from the sixth season.
+
+	Dead Alive		The Plantpire enemy (renamed from Bloompire) uses a special attack named
+				after this movie (it kicks ass... FOR THE LORD!)
+
+	Die Hard		Sabin exclaims "Yippee-ki-yay!" when escaping from the ghost brigade on
+				the Soul/Phantom Train.
+
+	Dungeons & Dragons	Cyan's airship line in the WoR is take from a line spoken by a character
+				in the second movie (yes, there was a second one. It was pretty decent.)
+
+	Evil Dead		The Weedula enemy (renamed from Uroburos) uses a special attack named
+				after this movie (...groovy!)
+
+				You can buy Doomsticks in Thamasa (but only if you shop smart).
+
+	Frozen			(If you're reading this, then there's a really bad joke in the game that
+				 I neglected to remove. I'm so sorry.) -BTB
+
+	Goldfinger		Chesticle (giggity) uses a special attack named Coldfinger.
+
+	Harry Potter		One of the xenophobic dicks in Thamasa tells you that he has "nothing to
+				say to a muggle." Although the terminology is Potter, the line itself
+				(and its exact wording) was stolen from Romancing SaGa: Minstrel Song.
+
+	Heavy Metal		Asura (AKA "Doom") uses a special attack called Loc-Nar, named after the
+				giant glowing orb of death in the movie that went around terrorizing
+				little girls and disintegrating people for no good reason.
+
+	Heavy Metal 2000	Guardian uses a special attack called FAKK2, named after a term meaning
+				"Federation-Assigned Ketogenic Killzone to the second level" (and since
+				it's from a Heavy Metal movie, I'm pretty sure it also has something to
+				do with tits).
+
+	History Of The World	Edgar's airship line in the WoR proves that, even with the world dying
+				around him, he's still pretty much focused on just one thing.
+
+	Home Alone		Clyde suggests "The Wet Bandits" as a name for his bandit gang before
+				Billy (rightfully) tells him no. Admittedly, "Shadow" isn't much better
+				for a group of more than one people, but it was kind of necessary to
+				force the whole "Clyde takes the name in honor of his dead friend" bit.
+
+	Home Improvement	When the innkeeper at Thamasa tries to charge you 1,500 GP for a night
+				(before you talk to Strago and he suddenly stops being a dick to you),
+				the refusal line is, "I don't think so, Tim."
+
+	Invader Zim		Wrexsoul's Soul Fires use a special attack called Doomy Doom (sadly,
+				there wasn't enough room to rename X-Zone to "The Doom Song").
+
+	Jaws			Setzer says, "I think we're going to need a bigger team," in response to
+				the suggestion of raiding Kefka's Tower right after getting the Falcon.
+
+	Kick-Ass		Relm quotes Hit Girl on two occasions. The first is after killing Ultros
+				when she joins the party ("...what a douche.") and the second is her WoB
+				airship line ("Okay, you cunts! Let's see what you can do.")
+
+	Kill Bill		Sabin's Pummel blitz is the Five-Point-Palm Exploding Heart Technique;
+				Vargas's death to it mirrors Bill's to the same move. Duncan also quotes
+				Pai Mei when teaching Sabin Bum Rush later on, ensuring that his prize
+				pupil will always know how to punch his way out of a coffin.
+
+	Lord of the Rings	If you go back and talk to Cyan at Narshe after finishing Zozo he says
+				that one does not simply walk into the Empire (you have to fly).
+
+				The owner of the weapon shop at Narshe turns into Gollum in the WoR.
+
+	Looney Tunes		Ultros ends his first fight with a, "th-th-that's all folks!" (which he
+				ALMOST sort of did in vanilla, except he said "friends" instead)
+
+				After returning from the Ancient Castle, the jail warden at Figaro notes
+				that he "should have taken that left turn at Albuquerque".
+
+	The Marx Brothers	The password to the secret passage in South Figaro is a reference to a
+				bit from a movie called Horse Feathers which became the poster child for
+				a trope (the password is swordfish) regarding lazy/uncreative passwords
+				in films and television; that one of the wrong choices is now "password"
+				is an (admittedly inadvertent) additional reference to the same bit.
+
+	Metalocalypse		A meta example: every text file that I write (including this one) uses
+				the phrase "I'm afraid that's all we know, gentlemen," as an EOF line.
+
+	My Little Pony		The password to the unlockme archive is the name of a song that Pinkie
+	(Friendship is Magic)	Pie sings about... well, cupcakes. It's also the name of an infamous
+				fanfic wherein Pinkie Pie kidnaps, tortures, and mutilates Rainbow Dash
+				and then bakes her remains into cupcakes, all the while remaining upbeat
+				and inappropriately (and rather disturbingly) cheerful. I'll leave it to
+				you to decide which of the two was my primary source of inspiration.
+
+				Terra's airship line after the Sealed Cave incident in the WoB is rather
+				derpy, to say the least.
+
+				I named one of the hacks earlier in this document "Party of One" >.>
+
+				After Setzer is recruited at Kohlingen in the WoR, the bartender's line
+				changes to something that sounds suspiciously like something Pinkie Pie
+				would say if she didn't realize that nopony was listening to her.
+
+				An NPC in Jidoor (the one who gives you the hint to read Owzer's diary)
+				accuses Owzer of owning a "My Little Chocobo" diary. The fact that you
+				find a Chocobo Hide in his basement probably isn't helping his case any.
+
+				Given the above, the guard who falls asleep while watching Celes under
+				South Figaro (remember what he said?) is probably also a chocobronie.
+
+				The Phantom enemy uses an attack called Somnambula which puts the target
+				to sleep. It's also the name of one of the six "pillars" of ancient pony
+				legend, somewhat curiously as her claim to fame had nothing to do with
+				sleepwalking but rather taking a leap of faith whilst blindfolded.
+
+				The Iron Man enemy uses an attack called Iron Will, which is named after
+				a motivational speaker (he's a MINOTAUR!) who makes Fluttershy start
+				acting like a total cunt to everypony.
+
+	MST3K			During the opera sequence, when Dancho starts getting his panties in a
+				twist, Locke gives him some good advice that everyone needs to hear.
+
+	The Princess Bride	Cyan's final line to Kefka is... well, pretty much what you'd expect.
+
+	Saturday Night Live	The flavor text on the Bouncy Ball item is a reference to one of those
+				fake SNL commercials from the 90's (hey, remember those?)
+
+	The Simpsons		The Stray Cat enemy uses an attack called Snowball, which is meant to
+				reference the Simpson family's pet cat.
+
+				A prisoner in Figaro Castle refers to it as a "urine-soaked hellhole".
+				(Clean New World changes it to "pee-pee-soaked heckhole").
+
+				If you hire Shadow at Kohlingen, the thief at the bar will say that he's
+				never going back to Zozo because it's full of pimps and C.H.U.D.s.
+
+				A woman in Maranda asks, "won't somebody PLEASE think of the children?"
+				for no real apparent reason.
+
+				Choosing to take the Goggles from Lone Wolf rather than saving Mog will
+				result in the game informing you that they do nothing - doubly ironic in
+				that, while they do serve a purpose in the mod, they quite literally did
+				nothing in the original game thanks to the evasion bug.
+
+				In the Clean New World patch, Kefka talks a bit like Ned Flanders.
+
+	South Park		The last two steps of the Blitz tutorial are "???" and "Profit!"
+
+				One of the floppy-heads at Narshe yells, "I'm not your friend, buddy!"
+				when you talk to him. Someone else also calls you "guy".
+
+	Space Ghost		Toe Cutter (a mantis-like enemy) has been renamed to Zorathian, which is
+				the race of insect creatures that Zorak belongs to.
+
+	Spaceballs		Mr. Chupon's special attack is named Snort (to allude to the fact that
+				he's feeling a bit sick); whenever he uses Wind Slash, Ultros mentions
+				that he's "gone from suck to blow".
+
+	Starship Troopers	Setzer asks, "would you like to know more?" when he is teaching you how
+				to fly his airship (right before he threatens to fuck you with a rake
+				should you happen to wreck said airship).
+
+	Star Wars		The soldier named Vicks in the intro is renamed to Biggs, thus restoring
+				the intended Star Wars reference that shows up in several other games in
+				the series; Vicks still exists as one of the soldiers in Maranda who are
+				watching dogs fight in the street as a reference to an American football
+				player named Michael Vick who was arrested on dogfighting charges.
+
+				Celes tells Locke that he's awfully short for a soldier if he frees her
+				while still in a soldier's uniform (this line was also in vanilla).
+
+				The "monster-in-a-box" message is now, "...it's a trap!"
+
+				Nimufu (AKA Nerapa) now does the whole Emperor Palpatine thing to Celes
+				(who is all too happy to oblige by tearing him/her/it a new one)
+
+	The Wizard		I love the Power Glove. It's so bad.
+
+	Various Movies		Ultros quotes a large number of classic (and some not-so-classic) films
+				during the battle at the Opera House in an obvious attempt to ham it up
+				for the audience. His quotes include:
+
+				"Friends! Gentlemen! We can't fight in here! This is the war room!"
+					(Dr. Strangelove)
+
+				"To be... or not to be... THAT is the question!"
+					(Hamlet)
+
+				"You want the truth? You can't HANDLE THE TRUTH!"
+					(A Few Good Men)
+
+				"Are you talkin' to me? Are you talkin' to ME!?"
+					(Taxi Driver)
+
+				"Locke... I am your father!"
+					(The Empire Strikes Back)
+
+				"Get to the CHOPPAAAHHH!"
+					(Predator)
+
+				"This is madness! This is blasphemy! THIS! IS! OPERA!"
+					(300)
+
+				"Frankly, my dear... I don't give a damn!"
+					(Gone With The Wind)
+
+				"Go ahead... make my day!"
+					(Sudden Impact)
+
+				"I'm just a SWEET transvestite! From TRANSEXUAL... Transylvaniaaa...!"
+					(Rocky Horror Picture Show)
+
+				"I love you... you love me... We're a happy fam-i-liy!"
+					(Barney; replaces above quote in Clean New World)
+
+				"Hasta la vista... baby!"
+					(Terminator 2)
+
+---------------------------------------------------------------------------------------------------------
+
+				REFERENCES TO OTHER MEDIA
+				-------------------------
+
+	• The webcomic 8-bit Theater is rather heavily referenced throughout the mod:
+
+		One of the Beginner's School NPCs quotes a shopkeeper who scolds Red Mage for attempting
+		to make purchases with quest items ("Are you on the dope, son?") when discussing relics
+		(the Gauntlet and Genji Glove) that no longer exist in the mod.
+
+		Most of the guards in Figaro Castle either say "Welcome to Figaro" or "I like spears".
+
+		Sabin quotes Fighter ("I'm a helper") when he first meets Cyan.
+
+		An NPC in Zozo attempts to mug you... and then quickly realizes how lame his stick-up
+		phrase ("Your GP or your HP!") is and why it never works.
+
+		The Healing Shiv (see "Treasure Hunting" above) is taken from 8-bit Theater.
+
+		Kefka quotes Black Mage ("If you think about it, that's really your problem") on the
+		Floating Continent when Celes tells him that what he's doing will destroy the world.
+
+		Umaro says, "me stop bad man with violence!" when recruited, which refers to a time when
+		White Mage gives a similar order to Black Belt.
+
+		The treasure chest at Ebot's Rock thinks that eating booty will keep the scurvy away.
+
+	• As stated earlier in this document, Red Bull gives you wings (or Float, as the case may be)
+
+	• Kefka refers to the invasion (and poisoning) of Doma as "Operation Threshold", which is my
+	  commentary on Microsoft's business tactics ("Threshold" is the code name for Windows 10)
+
+	• The Brainpan and Mu enemies use attacks that set "stop" and have a hammer(time) animation
+
+	• The Phantom Train was renamed after a long-running TV show called Soul Train due to space
+	  constraints (because it's also an enemy, the name couldn't exceed 10 characters in length)
+
+	• Ziegfried (*not* Siegfried) now attacks you 27 times before having a heart attack and dying,
+	  which is a subtle nod to one "Weird Al" Yankovic
+
+	• Baram (Shadow's old partner) has been renamed to Billy as a reference to Billy the Kid (note
+	  that this also maintains the original translation's obvious play on Bonnie & Clyde)
+
+	• Someone standing near Duane and Katarin (the two kids in Mobliz who want to bang each other)
+	  tells you that they are discovering what love is; what they say when you talk to them should
+	  really come as no surprise to anyone who's been paying attention thus far
+
+	• Dadaluma is commonly referred to in the Brave New World community as "Macho Man" due to his
+	  wrestling-inspired fighting style, affinity for Slim Jims, and his raging coke habit
+
+	• One of the wrong choices during Celes's opera solo makes her sing "Come Sail Away" by Styx
+
+	• Gestahl laments that Real Ultimate Power was within his grasp as he's being forcefully evicted
+	  from Esperville (also, there is some totally sweet ninja gear hidden in the Sealed Gate Cave)
+
+	• Gungho has been renamed to Leeroy (yes, THAT Leeroy), which is, sadly, an improvement in the
+	  subtlety department since "Gungho" was less "haha" punny and more "please die in a fire" punny
+
+	• The Cephaler enemy has been renamed to Cephalid (of MtG lore); the Plague Rats that appear in
+	  the Opera House (formerly Sewer Rats) were similarly inspired by a MtG card of the same name
+
+	• When both of Inferno's arms have been destroyed, it attacks with a life-draining attack named
+	  Subversion, which is a reference to both Dante's Inferno AND a card of the same name in MTG
+
+	• The Green-D uses an attack called Thriller which turns your characters into zombies (it sadly
+	  does not also inflict the "Dance" status... although I could TOTALLY see it setting Mog to do
+	  nothing but cast Safe if he's not wearing a helmet >.>)
+
+	• Two of the three "squirrel"-type monsters are both now named after famous squirrels: Foamy (of
+	  iLL WiLL PrEss fame) and Rocky (of Bullwinkle fame)
+
+	• The Greasemonk enemy has been renamed to Mechanix, which was the original/working title of The
+	  Four Horsemen by Metallica and/or Dave Mustaine (depending on who you want to believe)
+
+	• The Tomb Thumb enemy has been renamed to Tiny Tim (sounds like a total scrooge job to me)
+
+	• The Air Base enemy has been renamed to Autobot, which I think was a Transformers thing
+
+	• The Raven enemy (renamed from Dark Wind) uses an attack called Nevermore (quoth the Raven)
+
+	• The Beetle enemy (renamed from Delta Bug) uses an attack called Science (it blinds the target)
+
+	• The Eland enemy has been renamed to Dumpty (it shares its sprite with an enemy named Humpty)
+
+	• The Boxed Set enemy has been renamed to Boxxxy (as if you didn't hate them enough already)
+
+	• Master T pities the fool who doesn't get the joke behind his name
+
+	• The Rainbow Brsh (sic) has been renamed to "Ross Brush" after some white dude with an afro
+
+	• The Mana Battery's in-game description is the slogan for Energizer batteries
+
+	• Celes learning the Life spell at level 18 is a (completely unintentional) Skid Row reference
+
+	• The Latin phrase seen upon entering Kefka's Tower (En: "Abandon all hope ye who enter in") is
+	  taken from the Divine Comedy - fitting, as the final boss tower is an allegory to the same
+
+---------------------------------------------------------------------------------------------------------
+
+				REFERENCES TO IRON MAIDEN
+				-------------------------
+
+	• Some enemies and attacks have been renamed to reference Iron Maiden songs or albums:
+
+			Powerslave	(renamed from PowerDemon)
+			Ed Hunter	(used by Powerslave)
+			Deja Vu		(used by Lich)
+			Program666	(used by Number 128)
+
+	• If Locke kills one of the green-uniformed troopers instead of stealing their uniforms, they'll
+	  quote a line from The Trooper (you know the one) and then bayonet the shit out of him
+
+	• Looking at the still life of flowers in Owzer's mansion gives you Piece of Mind
+
+	• An NPC in Zozo states that the time is 11:58, or Two Minutes To Midnight
+
+	• Setzer quotes Iron Maiden songs on two occasions: Aces High is cited in one of his flashbacks
+	  with Daryl and his WoR airship line comes from The Angel And The Gambler
+
+	• One of the soldiers at the Imperial Palace in Vector says, "up the irons!" after you beat him
+
+	• The Memento Ring's in-game description is taken from the cover of No Prayer for the Dying
+
+	• An NPC in South Figaro (WoR) is totally rocking out to The Evil That Men Do
+
+	• Wrexsoul spends most of his opening speech quoting Number of the Beast
+
+	• "Heaven Can Wait" and "Live After Death" (see above) are a song and album, respectively
+
+	• The mod itself is named after (and its logo taken from) Iron Maiden's 12th album
+
+	• Finally, Cousin Eddie himself might just be hidden somewhere in the game
+
+---------------------------------------------------------------------------------------------------------
+
+
+
+
+				5. DEVELOPER'S NOTES
+
+
+
+
+---------------------------------------------------------------------------------------------------------
+
+				GENERAL TRANSLATION NOTES
+				-------------------------
+
+One of the initial primary goals of our re-translation efforts was to avoid the game having an "obvious
+fan translation" feel about it. When we started getting a bit more reference-happy (note the size of the
+above section), that kinda went out the window. Likely the biggest turning point in that regard was when
+we did the Phantom/Soul Train sequence and realized that we had made it into a complete joke. Of course,
+it was a complete joke in the original game, as well, and so the goal then became - as Synchysi put it -
+to maintain the atmosphere of every scene. Thus, the silly scenes remain silly in Brave New World while
+the serious ones are treated with respect - and hopefully everything feels polished and not halfassed.
+
+Our writing aims to strike a balance between what actually worked in the Ted Woolsey translation, the
+original Japanese, and a healthy dose of our own creative efforts. To paraphrase a review written by one
+of our early adapters - we aimed more to take what was already there and build on it in a meaningful way
+that celebrates what made the original game great rather than trying to change the game into something
+else entirely. Yes, there are a lot of wacky, off-the-wall lines here that serve as reminders that you
+are NOT playing the original game, but none of them, we feel, should be a detriment to the main story.
+As a general rule, the more lemony something is, the more you'll have to go out of your way to find it.
+
+A rather notable exception to the above rule is Narshe. You see, a disproportionately large amount of
+Final Fantasy VI's fanbase - and, by extention, Brave New World's fanbase - hail from the Great White
+North. It's David Hasselhoff in Germany kind of thing - floppyheads love them some FF6. In response to
+this, the people of Narshe were written as my loiving shout-out to my friends up north
+
+(And yes, I will readily admit to learning everything I know about Canada from South Park.)
+
+A major impetus of mine was to clarify certain plot elements that weren't adequately explained. A great
+deal of new dialogue was added, for example, to clarify the logistics of Sabin's scenario - namely the
+fact that he spends most of it traveling in the opposite direction of where he intends to go - or, to a
+lesser extent, the logic behind escaping to Narshe via the 1337 River in the first place. Many lines in
+the World of Ruin were similarly added or rewritten to help direct the player to the appropriate places,
+with particular attention given to the needlessly cryptic subplot about finding the Phoenix Cave.
+
+Another thing that I took every possible effort to do was minimize the amount of unassigned lines in the
+game. Unassigned lines are spoken by unspecified characters in your party in situations where there are
+no mandatory characters and the game can't know who will or will not be present. This is most prevalent
+in the World of Ruin, which is largely open-ended. Addressing the issue involved rewriting the dialogue
+in the character re-recruitment scenes to make the character being recruited do most/all of the talking;
+unassigned lines that were necessary to keep the monologue going were kept as laconic as possible.
+
+Censorship is something else that I should touch on, going back to the above point regarding the writing
+being based on several different versions of the game. I'll go into a bit more detail about the worst
+offenders in the character section below, but the long and the short of it is that the American version,
+being a Nintendo game in the 90's, was very obviously censored. We thus aimed to remove that censorship,
+as we felt that it served to the detriment of the game to have situations wherein people did not talk in
+a realistic fashion. It wasn't until we sat down to address the single biggest complaint about earlier
+versions of the mod - the level of swearing that it contained - that we truly realized exactly how much
+swearing there was in this Goddamn motherfucking cunt-ass bag of shitdicks. And so we toned it down.
+
+In addition to cutting back on the amount of swearing in the mod, we also introduced the optional Clean
+New World patch that censored it ENTIRELY. This was done less to appease the vocal minority of players
+who seemed to take issue with any degree of swearing whatsoever and more as a personal "thank you" to a
+man who contributed a tremendous amount of useful feedback and insight, proclaimed Brave New World to be
+a huge improvement to his favorite game in every way, and disliked only that the amount of swearing it
+contained rendered it inappropriate to play through with his younger sister. However, unlike the above-
+mentioned self-censorship, which we voluntarily implemented as we felt it added much to the story that
+had been taken away by liberal amounts of swearing, Clean New World is completely irreverent and silly.
+
+Despite the above, I'm often accused of having written Clean New World to spite our detractors, which is
+entirely untrue. What WOULD have been written purely out of spite would be the oft-requested "vanilla"
+style script that reverted as much of the dialogue as possible to the way it was in the original game.
+While I won't take offense to criticism aimed at Brave New World, I am VERY opposed to the notion that
+there was nothing wrong with the original game and that it should be left as-is. Thus, I had a standing
+offer to the community as a whole that anyone who so desired to write this "vanilla" translation would
+have my resources and support behind them, but I personally would take no active giving of fucks due to
+conflict(/lack) of interest. Most people who stepped up to the plate immediately backed down once they
+realized the amount of work that any re-translation effort would entail, but one brave soul finally did
+persevere and thus "Bland New World" was born.
+
+Finally, another big concern that we had to deal with was space constraints. Not only is there just so
+much text you can fit into those caption boxes, there's also a finite amount of space in the data bank
+where dialogue is stored. Thus, players may notice that I have employed a large number of space-saving
+tricks to stretch my dialogue dollar as far as it can possibly go, such as switching the clock puzzle at
+Zozo over to Roman numerals (this wasn't, as some have assumed, my attempt at a Leisure Suit Larry-esque
+age verification puzzle). Standardizing the dialogue to no longer specify who's talking unless it's a
+named character or if more than one person is speaking also really helped. There's even one case where I
+took advantage of the fact that inserting a call for a character's name used less space than typing out
+something else would, so there's one line (we'll call it an easter egg) that will look rather weird if a
+certain character's name has been changed from the default.
+
+---------------------------------------------------------------------------------------------------------
+
+				NOTES ON CHARACTERS
+				-------------------
+
+Moving on to our translation choices for individual characters, the duties were split between Synchysi
+and myself. Synchysi wrote most of the lines for Kefka, Leo, Banon, Shadow (in his flashbacks), Strago,
+Setzer when he's not being a dick, Gau, Gogo, and early-game Celes; I was mostly responsible for Sabin,
+Setzer when he *is* being a dick, Locke, Relm, Mog, Umaro, late-game Celes, and the bulk of the game's
+NPC's. I forget which of us worked on Cyan, especially since Bishop (shout-outs) came along and revised
+his dialogue into proper "Ye Olde Broken English", Edgar... really hasn't changed much at all, and Terra
+is still the same flat, boring character that she's always been to a satirical degree. Synchysi's edits,
+particularly for Celes and Leo, were largely based on Lina Darkstar's translation of the original script
+and aim to provide a more faithful presentation of the game's original characterization whereas I took a
+bit more in the way of creative liberties with my edits.
+
+To start, the duality between Terra and Celes is heavily played up in Brave New World. Both were granted
+"main character" status as far as game mechanics were concerned (hence their above-average versatility)
+and their available spells and equipment contrast wherever they're not mirrored, such as the case with
+the Apocyllumina and Gem/Soul Box or how Terra learns Shell (as she's the more magic-focused of the two)
+while Celes (the more well-balanced one) instead gets Safe. This duality extends to their personalities,
+as well: Celes is a dynamic, multi-layered character who grows and develops significantly throughout the
+course of the game, whereas Terra simply has no personality whatsoever.
+
+As I mentioned, Celes's early-game personality is largely based on Lina Darkstar's interpretation of the
+original Japanese script. She is very formal and blunt, much to the point that she displays a perceived
+lack of femininity. The English language lacks much capacity to convey tone of speech via text, which is
+a significant source of things like this that tend to get lost in translation from languages that suffer
+no such drawbacks (namely Japanese). Whereas Woolsey portrays Celes as only marginally more progressive
+than the traditional "damsel in distress" character that's mostly represented in FF6 by Terra, Synchysi
+introduces her as a strong, confident, and also a bit stubborn character whose barriers only begin to
+come down when she takes the stage at the opera house with far less hesitation and much more excitement
+than she would have her travel companions believe.
+
+The end of the World of Balance is about the point where I mostly took over Celes's lines, and my goals
+were twofold. First, I had to continue writing her as the strong character that Synchysi had set her up
+to be as opposed to the bland, love-starved twat she originally became in the World of Ruin. Second, I
+wanted to make her actually feel conflicted in her loyalties (something that the original game clearly
+tried to do, but failed miserably at) so that the scene on the Floating Continent where she's forced to
+choose a side held some real dramatic weight. From both of these objectives was born the mod's central
+theme of Celes's character, which is her upbringing as a cold, emotionless killer with no place in the
+world other than what she has been bred to do. It is only through coming to terms with this that she's
+able to embrace her feelings for Locke and discover her true purpose in life.
+
+A major point of debate regarding Celes in Brave New World is the little hissy fit/emo breakdown she had
+in its earlier versions during the Nimufu fight at the end of the Floating Continent, which I have since
+rewritten because even I thought it was narmy as hell. This does shift the focus of the scene a bit away
+from the feelings of being nothing more than an instrument of war and more toward the insinuation that
+her powers are rooted in the powers of darkness rather than light, a fact which is further alluded to by
+the fact that Shock now drains its user's HP (à la Cecil's "Dark Wave" ability in Final Fantasy IV). But
+although this scene was a central point of inspiration for the other choices I made for Celes, the truth
+is that it exists solely for balance reasons rather than for story purposes. Because Celes has to solo
+the next bit of the game, Nimufu will give her 10,000 experience if she is under level 18; the in-battle
+approach (as opposed to just re-averaging her level) is an artifact left over from before we separated
+esper stat gains from the regular leveling system.
+
+Moving on, we have Kefka. I should probably start off by saying that American Kefka and Japanese Kefka
+are two VERY different characters, and the American version is largely considered to be one of Woolsey's
+finer accomplishments. That said, he was still very much a product of censorship, which we aimed to get
+rid of while still retaining Woolsey's unique spin on him. Kefka is one of two characters in Brave New
+World - the other being Relm - who was initially given carte blanche on the swearing front, and oh, did
+he swear. The problem is that, rather than the intended effect of making Kefka come across as childish,
+immature, and juvenile, it made *us* come across as childish, immature, and juvenile.
+
+As I mentioned above, the biggest complaint we received about earlier versions of the mod was the level
+of swearing it had, and the vast majority of those complaints were aimed at Kefka. In response to this,
+we overhauled Kefka's character to emphasize his... effeminate nature. He remains composed and actually
+quite a bit of a dick (at least whenever he's not being a transparent douche to General Leo) when things
+are going his way, but he quickly loses his shit and starts acting like a two year-old when they aren't.
+In either case, his mannerisms and word choices point to someone who's more than just a little bit of a
+gigantic fucking fairy, which is why it was so easy for Woolsey to re-imagine him as a clown. While he
+still does swear in current versions, we made an active decision to reserve the first instance of it to
+the scene where Celes stabs him at the Floating Continent so that it would have maximum impact.
+
+Moving on to the characters that I wrote for, Sabin was by far one of my favorites. What I particularly
+like about him is just how close his resulting characterization is to the original, yet how much more of
+a personality he seems to have at the same time. As I mentioned earlier, BNW's Sabin is based wholesale
+on Rei of BoF3 fame, and it's interesting how little I had to alter Sabin's lines to make the two match
+up, given that Rei is a thief whose dialogue was clearly written by a bogan and Sabin is a monk of royal
+heritage. The common bond between the two is that both characters exist outside of common society, and
+their actions often tend to convey a lack of familiarity with social graces. In Sabin's case, however,
+it's unclear just how much of his behavior can be attributed to his lack of social contact and how much
+of it is due to both his upbringing and training as a monk affording him a great deal of confidence in
+himself (one might say TOO much confidence) along with a certain degree of aloofness.
+
+With Cyan, the initial goal was merely to make his speech patterns more consistent. In the original, he
+dropped his Ye Olde Butchered English about a third of the way through the game and just started talking
+like a normal (albeit a very bland) person. From there, it was only a short jump to mocking him at every
+given opportunity since the way he talks is actually really stupid (note that, even in his home country,
+nobody ELSE talks like that, making him much like Frog from Chrono Trigger in that regard). Synchysi and
+I throughly enjoyed the contrast of by far the game's darkest character becoming a complete walking joke
+who won't shut the fuck up about being the retainer to the dead king of an uninhabited country. We even
+took a shot at Doma itself by giving its citizens more colorful names - personally, I consider it a lost
+opportunity that the king's name isn't "Crimson".
+
+(Also, changing Cyan's son to a daughter wasn't me being progressive or anything. It's just a lot easier
+to come up with female names that are also colors than male ones.)
+
+As mentioned above, we had some external help from a fan for ensuring that all of Cyan's dialogue was as
+accurate as possible to the "ye olden" theme. One moment that stands out to me in particular was looking
+over his (extremely in-depth) notes and seeing him metion the word "horarium" to refer to the train's
+schedules, but suggested that I not use it because nobody would know what the hell I was talking about.
+My response was, "no, no... I can work with this," and thus one of my favorite lines in BNW was born.
+
+Next up is Setzer, who's another one of those characters that's very different depending on the version.
+He was a much darker character in the original Japanese who obviously never got over the death of Daryl,
+whereas Woolsey re-envisioned him as a more carefree, happy-go-lucky kinda guy since suicidal depression
+didn't really go over too well with 90's-era Nintendo of America. When writing Setzer, I chose to focus
+on the one trait common to both versions - that he's kind of a prick - and dial it up to 11. Setzer is
+now thus something of a grade-A asshole, and I leave it up to the player to decide exactly how much of
+that is because of Daryl. As a result, his motives for joining up with the Returners now fall somewhere
+between the original's "I have nothing to live for," and Woolsey's "Meh, I'm just bored".
+
+(For the record, the heavily-modified scene at Kohlingen with Celes re-recruiting Setzer is my favorite
+one in the mod. Thanks to Kain for inspiring me to re-write it from the original.)
+
+While Relm did get toned down a bit along with Kefka back when we realized that there was far much more
+swearing in this mod than we'd originally thought, she's still the undisputed champion of the category.
+Granted, our aim was to make her more offensive than vulgar, but if Kick-Ass has taught us anything it's
+that it's hilarious when a prepubescent girl swears a lot and murders people. This is why I pretty much
+wrote her as a Hit Girl clone, since that's kind of her entire point.
+
+One thing we did want to drive home, however, is that Relm does care for Strago in spite of how much she
+rags on him. Her constant reference to him as a doddering old coot is meant to be affectionate, and it's
+actually quite accurate. Strago is written as a good-natured goofball who mostly serves as a long-winded
+Mr. Exposition whenever he's given lines, generally droning on and on until someone else shuts him up.
+One might speculate that Relm is the way she is due to a general lack of discipline from her laid-back
+grandfather, and that Strago in turn is one of the few people actually willing to tolerate her shit.
+
+As for everyone else... Locke is still a large ham with a severe white knight complex and the occasional
+tendency to ruin moments by shoving his foot in his mouth; Gau's speech patterns are now more deliberate
+and less caveman-like; Mog was rewritten as an obvious author avatar given his "blatant corporate mascot
+insertion" status in the original; Shadow was one of the earliest victims of the dialogue space crunch,
+which is why half of his lines were rewritten to just "..."; and I swear that Gogo is channeling some
+unholy trinity of Christopher Walken, William Shatner, and Nicholas Cage.
+
+Oh, yeah, and one last thing regards two minor characters in the game who in the original game were both
+named "Impresario". The first is the conductor of the Soul Train, and I really have no fucking clue why
+he's named Impresario in the first place. He's renamed in the mod to Charon, after the ferryman of the
+River Styx who's made appearances in other Squaresoft games in the same role. The second is the *actual*
+Impresario of the opera house, whose real name in Brave New World is revealed to be Dancho. I did this
+because Dancho is his actual name in the original Japanese; the FakeMustache relic (not present in the
+mod since the Control ability has been removed) was originally also named after him for some reason.
+
+---------------------------------------------------------------------------------------------------------
+
+				ITEM AND ENEMY NAMES
+				--------------------
+
+My primary goal with renaming enemies, attacks, and items was eliminating all instances of truncated and
+CamelCased names by coming up with ones that fit within the allotted space. It was difficult, given the
+extremely small character limits I had to work with (10 characters for enemy names and attacks, 12 for
+items and equipment) and led to some of my more interesting choices. The one that comes immediately to
+mind is "kite", which I use because it's the smallest word I could find that refers to a type of shield.
+There are also a lot of people who apparently have never heard the word "bolo" before (it's a sword).
+We did cheat the character limitation at exactly one point, however, with the Defibrillator. This was
+accomplished by taking two unused character tiles and turning them into "ill", which is why they appear
+closer together in that name than they otherwise would.
+
+The original game was also chock full of stupid names, damn near to the point that I don't know what Ted
+Woolsey was smoking when he came up with half of it. Beyond renaming things to work within the game's
+space constraints, I also set out to rename everything that made me go, "...what," which unfortunately
+was most of it. When at all possible, I used their original Japanese names (Zantetsuken, Sakura/Kagenui,
+all of Cyan's katanas except the Hanzo) or their correct translations (Life Bell and Heiji's Coin are a
+bit derivative, but qualify). Failing that, I would use names that showed up in any other Final Fantasy
+games, steal names from non-Final Fantasy games (see the reference section above), or just dig around
+through the fantasy kitchen sink until I found something that worked.
+
+Finally, every enemy has a "special" attack (you'll recognize these as what Gau's rages now exclusively
+use in place of regular attacks) which is basically a regular attack with either an added status effect
+or a damage multiplier. The names of these attacks are set individually for each enemy, and I made it a
+specific point to go through and rename them all so that each one was unique (many in the original were
+not). Many of the new names are references (again, see the reference section above), some of them are
+jokes that you probably won't get unless you compare them to the special attacks used by other enemies
+in the same sprite group, but most of them are just funny-sounding words that tested my vocabulary and
+thesaurus skills. I may list all of them here one day, but for now I'll just leave it as is.
+
+---------------------------------------------------------------------------------------------------------
+
+
+
+
+				6. THE CUTTING ROOM FLOOR
+
+
+
+
+---------------------------------------------------------------------------------------------------------
+
+On a final note, there is one thing that Synchysi and I have wanted to do since the inception of Brave
+New World but were unfortunately never able to get working properly, and that is to create a copy of the
+"M-M-M-MAGIC" cutscene, except it's Shadow and Cyan freaking out over Sabin suplexing a train. The code
+was implemented and the scene technically worked, but it fucked up all sorts of other things as a result
+and, sadly, had to be cut. While I am ultimately satisfied with what ended up getting put there instead,
+it feels like such a shame to let the script I wrote for this scene go to waste.
+
+And so, without further adieu, I present to you the lost "S-S-S-SUPLEX" cutscene:
+
+	---
+
+(SABIN suplexes a fucking train. CYAN and SHADOW are noticeably shocked.)
+
+	SHADOW
+
+"Cyan, what's the matter? You look spooked!"
+
+	CYAN
+
+"D-ddddidst thou just see what I saw...?"
+
+	SHADOW
+
+"Yeah... this kid seems loaded for bear..."
+
+	CYAN
+
+"Amazing! That was a suplex! S-U-P-L-E-X!"
+
+	SHADOW
+
+"S-S-S-S-S-S-S-S-SUPLEX!? He suplexed a fucking TRAIN!?"
+
+(CYAN and SHADOW confer in private)
+
+	CYAN & SHADOW
+
+"*whisper* *whisper*"
+
+	CYAN
+
+"Sabin... where on earth didst thou learn that?"
+
+(SABIN looks down shyly)
+
+	SABIN
+
+"Sorry, I... um..."
+
+(CYAN and SHADOW, sensing SABIN's unease, try to be reassuring)
+
+	SHADOW
+
+"Look, I didn't mean to make such a big deal of it..."
+
+	CYAN
+
+"No, indeed not... Yet never have I SEEN anyone suplex a train before! How didst thou...?"
+
+	SABIN
+
+...
+
+	SHADOW
+
+"Cyan, Sabin can suplex trains and we can't. That's the only difference between us."
+
+	SHADOW
+
+"Well, that and you talk kind of funny."
+
+	SABIN
+
+"Uh, guys? Can we maybe have this conversation later? Like, when an evil train isn't trying to kill us?"
+
+(CYAN and SHADOW begin to... you know what, I have no fucking idea what they're supposed to be doing.)
+
+	SABIN
+
+"Stop swooning!"
+
+(SABIN, CYAN, and SHADOW resume trying to KILL A TRAIN.)
+
+---------------------------------------------------------------------------------------------------------
+
+	I'm afraid that's all we know, gentlemen.
