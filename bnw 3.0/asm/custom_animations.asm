@@ -3757,3 +3757,9 @@ org $D00D63
 	db $FF					; end of script
 	db $FE,$FE,$FE,$FE,$FE	; 10d spare bytes
 	db $FE,$FE,$FE,$FE,$FE	
+
+; [ Animation Script $0134: Air Blast, Mega Volt (sprite) ] (Changed from original)
+
+org $D04544
+	db $8B,$0F				; animated loop start (15 times, increment frame offset each time)
+	db $08					; [$08]
