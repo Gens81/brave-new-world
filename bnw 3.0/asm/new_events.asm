@@ -95,4 +95,11 @@ GogoNPCRoomHook:
     db $FE			        	; return
 NewEventScriptFreespace_2:
 
+; -----------------------------------------------------------------------------
+; Do not unequip Gogo (aka Kupek) when WoB is destroyed
+; This prevents the player from getting a free Buckler and Boomerang    
+; -----------------------------------------------------------------------------
+
+org $CA4F67 : db $86,$0B ; Remove all equipment from character $0B (Actor in stot 11) [This is a duplicate of the command just before it]
+
 warnpc $CB8AE3
