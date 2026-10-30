@@ -848,7 +848,7 @@ org $CF34E6
 
 org $C47380 : db	$43, $80, $00, $20, $00, $00, $0C, $00, $65
 
-org $CF2AB3 : db $1C ; Gives Rizopaz fractional immunity to prevent auto-scan from working on it (as it is a boss)
+org $CF2AB3 : db $1C ; Gives Rizopas fractional immunity to prevent auto-scan from working on it (as it is a boss)
 
 ;printme/rom discrepancies fixes
 org $CF0054	: db $C2		;2    Phalanx     Immunity  Amulet + Ribbon     
@@ -955,4 +955,6 @@ org $DDD21A : db $BA ; Kefka Tower half door fix
 
 ;Brave New World data
 org $C33BB8
-	db $d1,$78,"Brave New World 3.0 B3.1",$00 ;.1 due to changes in WoR islands formations
+	db $d1,$78," Brave New World 3.0 B4",$00 
+	; WoR islands formations, fix queued summons, rizopas boss status, 
+	; tweaked some animations, no free buckler/boomerang at WoR
