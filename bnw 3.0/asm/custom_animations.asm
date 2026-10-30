@@ -30,7 +30,75 @@ org $D30000
 
 org $D40000
 	incbin D40000_3bpp_battle_graphics_2.bin
- 
+
+; #########################################################################
+; Blocking Animation for Monsters
+; #########################################################################
+
+; Rewrites the blocking animation when a character blocks for a monster
+; Applicable only to Love Token for the Isis pincer fight
+; Causes the blocker to appear near the center of the screen, instead of the bottom
+
+org $C1BD9A
+Love_Token_Cover:
+        AND.B #$7F
+        SEC
+        SBC.B #$04
+        ASL A
+        TAX
+        LDY.W #$0001
+        LDA.B ($78),Y           ; attacker slot
+        TAY
+        LDA.W $7B10,Y           ; attacker's side flag (not monster's side, which is default)
+        CMP.B #$01
+        REP #$20
+        LDA.W #$0044			; determines y-position
+        STA.B $16
+        STA.B $28
+        LDA.W $801B,X
+        STA.B $26
+        BCS .left
+        LDA.W #$0095			; determines x-position for right side block
+        LDX.W #$000C
+        BRA .store
+.left:
+        TDC
+        TAX
+        LDA.W #$0063			; determines x-position for left side block
+.store:
+        STA.B $14
+        STA.B $24
+        TDC
+        SEP #$20
+        NOP
+
+; #########################################################################
+; Custom Battle Animation Commands
+; #########################################################################
+
+; [ Custom Battle Animation Command $9D: Unimp Monster Graphics ]
+
+; Repurposes an unused battle animation command
+; Used to un-imp monsters when they are cured with anything that isn't the Imp spell
+; This command will run whenever an effect would cause a "happy jump" on a character (Remedy, Harvester, etc.)
+; See custom_animations.asm for more details
+
+org $C1F2F1
+Unimp_Monster:			; Assumes target is a monster and thus *requires* a check for this in the animation script
+    LDY $5B
+    DEY
+    STY $5B				; undo one increment, as this is a 0-parameter command
+	LDX $7AF6
+    LDA $6A39,X			; target (monster, bit 7 set)
+    TAY					; Y = $84 + slot
+    LDA $623E,Y			; = $62C2 + slot
+    LSR					; bit 0 -> carry
+    BCC .done			; already normal
+    TYA					; A = target again
+    JMP $D70D			; toggle (sets to normal), reload gfx, RTS
+.done:
+    RTS					; CLEAN-UP: 7 junk bytes remain after this
+
 ; #########################################################################
 ; Sound Effect Scripts
 ; #########################################################################
@@ -1377,9 +1445,9 @@ org $D07612
 
 org $D03581
 	db $84,$01				; set animation speed to 2
-	db $F0,$8E,$35,$8E,$35	; skip routine if target is a monster
-	db $8E,$35,$8E,$35		
-	db $D3,$35				
+	db $F0,$8E,$35,$8E,$35	; skip routine and un-imp, if target is a monster
+	db $8E,$35,$8E,$35
+	db $D4,$35			
 	db $D1,$01				; invalidate character/monster sprite priority
 	db $82,$07,$07			; forward jump animation
 	db $89,$04				; loop 4 times
@@ -1418,8 +1486,9 @@ org $D03581
 	db $8A					; end loop
 	db $82,$00,$00			; target graphic to no action
 	db $C0					; return from subroutine
-	db $FE,$FE,$FE,$FE,$FE	; 6d spare bytes
-	db $FE					
+	db $9D					; custom "Unimp Monster" command
+	db $C0					; return from subroutine
+	db $FE,$FE,$FE,$FE		; 4d spare bytes
 
 ; [ Animation Script $00F4: Earth Rage (Terrato) (bg3) ] (Code modified from original)
 
