@@ -848,6 +848,8 @@ org $CF34E6
 
 org $C47380 : db	$43, $80, $00, $20, $00, $00, $0C, $00, $65
 
+org $CF2AB3 : db $1C ; Gives Rizopaz fractional immunity to prevent auto-scan from working on it (as it is a boss)
+
 ;printme/rom discrepancies fixes
 org $CF0054	: db $C2		;2    Phalanx     Immunity  Amulet + Ribbon     
 org $CF0156	: db $00        ;10   Parasoul    Immunity  Amulet

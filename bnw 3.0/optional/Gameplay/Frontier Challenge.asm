@@ -36,6 +36,7 @@ org $C1448B : CMP #$14
 org $C1448F : LDA #$14
 org $C0A024 : CMP #$14
 org $C0AD25 : CMP #$14
+org $C9FDFA : LDA #$14	; In v3.0, shop.asm changes how purchasing tools work, and sets a limit for normal items to 99. This changes that limit to 20.
 
 ; Code that has been overwritten, or never runs
 ; org $C18BE4 : CMP #$14
