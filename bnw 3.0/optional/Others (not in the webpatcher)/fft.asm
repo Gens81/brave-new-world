@@ -223,7 +223,7 @@ dw $0000,$4210,$39ce,$10cd		;Dark Red font
 dw $0000,$4210,$39ce,$10cd		;Dark Red font
 dw $0000,$73de,$4210,$73de		;Should be white -> 7fff should be replaced by user font in game. 3rd code is the VWF description shadow
 white_no_box:
-dw $0000,$0000,$39ce,$77FF		;White font
+dw $0000,$0000,$39ce,$73DE		;White font
 dw $0000,$0000,$39ce,$6f60		;Light blue font
 
 ; 3rd row
@@ -241,10 +241,10 @@ dw $0000,$3868,$39ce,$73de		;Gray font with purple shadow
 
 ; 5th row
 Grey:
-dw $0000,$4210,$5294,$77FF		;White font with gray shadow
-dw $0000,$4210,$5294,$77FF		;White font with gray shadow
-dw $0000,$0000,$39ce,$77FF		;White font with black shadow
-dw $0000,$4210,$5294,$77FF		;White font with gray shadow
+dw $0000,$4210,$5294,$73DE		;White font with gray shadow
+dw $0000,$4210,$5294,$73DE		;White font with gray shadow
+dw $0000,$0000,$39ce,$73DE		;White font with black shadow
+dw $0000,$4210,$5294,$73DE		;White font with gray shadow
 
 ; 6th row
 Yellow_fft:
@@ -255,7 +255,7 @@ dw $ffff,$ffff,$ffff,$ffff		;Null
 
 ;7th row
 white_fft:
-dW $0000,$0000,$39ce,$77FF		;White font
+dW $0000,$0000,$39ce,$73DE		;White font
 
 ; Btl Palette
 org $EEB15F
