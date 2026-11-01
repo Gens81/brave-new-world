@@ -18,22 +18,22 @@ org $C16670
 
 org $C9fcf0
 change_palette_fft:
-    cmp #$ED               ; Cmp if icon - Value over Ranged icon
-    BCS no_change_fft          ; Branch if greater or equal
-    cmp #$D0            ; Star value?
-    BEQ change_fft            ; Branch if so
-    cmp #$D7            ; Cmp if icon - Value below 
-    BCC no_change_fft        ; Branch if so
-    LDA #$38            ; White colour
-    BRA color_change    ; Go to save in ram
+    cmp #$ED               	; Cmp if icon - Value over Ranged icon
+    BCS no_change_fft       ; Branch if greater or equal
+    cmp #$D0            	; Star value?
+    BEQ change_fft          ; Branch if so
+    cmp #$D7            	; Cmp if icon - Value below 
+    BCC no_change_fft       ; Branch if so
+    LDA #$38            	; White colour
+    BRA color_change_fft    ; Go to save in ram
 no_change_fft:    
-    lda $29                ; User colour
+    lda $29                	; User colour
 color_change_fft:    
-    sta [$EB],y            ; Save in Ram
+    sta [$EB],y            	; Save in Ram
     rtl
 change_fft: 
-    LDA #$38            ; Yellow colour
-    bra color_change    ; Go to save in ram
+    LDA #$38            	; Yellow colour
+    bra color_change_fft    ; Go to save in ram
 
 org $D095F0
 lore_btl_palette:
@@ -62,7 +62,6 @@ letter:
 ; Change palettes subroutine
 	
 back_from_magic:
-	
 	jsr grey_palette
 	jml $c156e9
 
@@ -373,6 +372,9 @@ org $c16f55
 	jsl exit_magic
 	nop
 
+org $C4A755
+    LDA #$38				; white status labels
+
 ;; New checkmark	
 ;Org $C3FD5E
 ;	LDX $00					; clear x
@@ -393,7 +395,3 @@ org $c16f55
 ;	db $64                  ; 5th Tile
 ;
 ;warnpc $C3FD79
-;
-;org $C4A755
-;    LDA #$38				; white status labels
-
