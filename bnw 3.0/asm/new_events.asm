@@ -34,6 +34,7 @@ WarpHook:
     dl .skip-NewEventBase     	    	; ^ continued
     db $D5, $6F				; clear "bumped something" event bit $26F
     db $D5, $B7				; clear "prison door is open" event bit $2B7
+	db $D7, $97				; clear "sealed castle doors" NPC event bit $397
     db $D3, $06				; clear "castle in east" event bit $106
     db $D0, $DC				; set "castle in west" event bit $0DC
     db $C0, $B9, $02			; if "castle arrival bit" event bit $2B9 is clear, break
@@ -94,6 +95,29 @@ GogoNPCRoomHook:
 .skip3
     db $FE			        	; return
 NewEventScriptFreespace_2:
+
+; “Banon riding chocobo” pose is missing
+; This prevents the bug and gives the player fun dialog
+
+org $CC3336							; Hook to new code if you say 'yes' and hire a Chocobo
+	dl BanonCheck-NewEventBase
+
+org $CC333D							; "Chocobo hired" event code
+HireChocobo:
+
+org NewEventScriptFreespace_2	
+BanonCheck:				
+	db $E2							; Set CaseWord bits depending on who is the lead of the current party
+	db $BE,01						; If character $0E (BANON ) is in the current CaseWord, branch to .denied	
+	dw .denied
+	db $E0
+    db $B2
+    dl HireChocobo-NewEventBase	; hook to new code when you enter the conductor's room
+	db $FE							; return
+.denied				
+	db $4B,$0C,$00					; Display dialogue message, wait for button press
+	db $FE							; return
+NewEventScriptFreespace_3:
 
 ; -----------------------------------------------------------------------------
 ; Do not unequip Gogo (Kupek) when WoB is destroyed
