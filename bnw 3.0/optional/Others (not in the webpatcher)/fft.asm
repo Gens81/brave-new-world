@@ -261,7 +261,7 @@ dW $0000,$0000,$39ce,$73DE		;White font
 org $EEB15F
 dw $0000,$4210,$5294,$73de		;User Color
 dw $0000,$4210,$39ce,$3544		;Blue (equip, turn, etc)
-dw $0000,$4000,$5294,$3544		;Blue (char selection)
+dw $0000,$4eb6,$5294,$3544		;Blue (char selection)
 dw $0000,$14e8,$4eb6,$3544
 
 
