@@ -1,7 +1,7 @@
 arch 65816
 hirom
 
-org $c3031c
+org $C3031C
 	jsl change_palette_fft
 
 ; Keep Magic Icon white	in btl menu
@@ -16,10 +16,10 @@ org $C16578
 org $C16670
 	jsl lore_btl_palette
 
-org $C9fcf0
+org $C9FCF0
 change_palette_fft:
-    cmp #$ED               	; Cmp if icon - Value over Ranged icon
-    BCS no_change_fft       ; Branch if greater or equal
+    cmp #$ED              	; Cmp if icon - Value over Ranged icon
+    BCS no_change_fft    	; Branch if greater or equal
     cmp #$D0            	; Star value?
     BEQ change_fft          ; Branch if so
     cmp #$D7            	; Cmp if icon - Value below 
@@ -35,33 +35,34 @@ change_fft:
     LDA #$38            	; Yellow colour
     bra color_change_fft    ; Go to save in ram
 
-org $D095F0
+org $D0F9A0
 lore_btl_palette:
 	lda $E6f7e5,X
 	bra line_skipped
 icon_btl_palette:
-	lda $d2b300,x	; Load letter
+	lda $d2b300,x			; Load letter
 	bra line_skipped
 btl_palette:
-	lda $effc00,x	; Load letter
+	lda $effc00,x			; Load letter
 line_skipped:
-	cmp #$ED		; Cmp if icon
-	BCS	letter		; grater or equal?
+	cmp #$ED				; Cmp if icon
+	BCS	letter				; greater or equal?
 	cmp #$D7
 	BCC letter
-	XBA				; Change HI with LO bytes
-	LDA #$35		; Load #$39 and load white color palette
-	XBA				; Change Hi with LO byte
+	XBA						; Change HI with LO bytes
+	LDA #$35				; Load #$39 and load white color palette
+	XBA						; Change Hi with LO byte
 	RTL
 letter:
-	XBA				; Change HI with LO bytes
-	LDA $56			; Load palette and bring back user color palette
-	XBA				; Change Hi with LO byte
+	XBA						; Change HI with LO bytes
+	LDA $56					; Load palette and bring back user color palette
+	XBA						; Change Hi with LO byte
 	RTL
 	
 ; Change palettes subroutine
 	
 back_from_magic:
+	
 	jsr grey_palette
 	jml $c156e9
 
@@ -161,13 +162,15 @@ white_color:
 	STA $7E7402
 	STA $7E7206
 	STA $7E7406
-
+	
 warnpc $c0816B
 
-org $c0de00
+	
+org $c0ddf4
 	
 changeshadow_fft:
 	lda $0564
+	and #$00FF		; Isolate lo-bytes
 	bne .white
 	lda #$4210		; set light gray color (default color used in the small font palette)
 	sta $7e7204
@@ -177,8 +180,10 @@ changeshadow_fft:
 	sta $7e7204
 	sta $7e7404
 	stz $0100
-	LDA #$7fff
+	LDA #$73de
 	jmp white_color
+warnpc $C0de22
+
 
 ; Btl quotes shadow	
 org $C199AC
@@ -186,7 +191,7 @@ org $C199AC
 
 ; Output all save files
 org $C31632
-    JSR $6C60      ; Load grayscale
+    JSR $6C60     	; Load grayscale
     LDA #$20        ; Channel: 5
     TRB $43         ; Halt HDMA-5
     LDY #$0002      ; Y: 2
@@ -216,7 +221,7 @@ dw $0000,$4210,$39ce,$10cd		;Dark Red font
 
 ; 2nd row
 dw $0000,$4210,$39ce,$10cd		;Dark Red font
-dw $0000,$7fff,$4210,$7fff		;Should be white -> 7fff should be replaced by user font in game. 3rd code is the VWF description shadow
+dw $0000,$73de,$4210,$73de		;Should be white -> 7fff should be replaced by user font in game. 3rd code is the VWF description shadow
 white_no_box:
 dw $0000,$0000,$39ce,$77FF		;White font
 dw $0000,$0000,$39ce,$6f60		;Light blue font
@@ -230,9 +235,9 @@ dw $0000,$35F0,$256C,$256C		;Gray font
 ; 4th row
 
 dw $0000,$35F0,$256C,$10CD		;Gray font with blue shadow (Esper equipped from other actor)
-dw $0000,$3868,$39ce,$7fff		;Gray font with purple shadow
-dw $0000,$3868,$39ce,$7fff		;Gray font with purple shadow
-dw $0000,$3868,$39ce,$7fff		;Gray font with purple shadow
+dw $0000,$3868,$39ce,$73de		;Gray font with purple shadow
+dw $0000,$3868,$39ce,$73de		;Gray font with purple shadow
+dw $0000,$3868,$39ce,$73de		;Gray font with purple shadow
 
 ; 5th row
 Grey:
@@ -254,22 +259,25 @@ dW $0000,$0000,$39ce,$77FF		;White font
 
 ; Btl Palette
 org $EEB15F
-dw $0000,$4210,$5294,$7fff		;User Color
+dw $0000,$4210,$5294,$73de		;User Color
 dw $0000,$4210,$39ce,$3544		;Blue (equip, turn, etc)
+dw $0000,$4000,$5294,$3544		;Blue (char selection)
+dw $0000,$14e8,$4eb6,$3544
 
-org $c36bee
-	rep #$20			; 16 bit A
+
+Org $C36BEE
+	rep #$20				; 16 bit A
 	lda MenuPalette_fft,x	; Load Palette Data
-	sta $7e3049,x		; Store in RAM
-	sep #$20			; 8 bit A
-	sta $2122			; Put LB in CGRAM
-	xba					; Switch to HB
-	sta $2122			; Put HB in CGRAM
-	inx					; Index +1
-	inx					; Index +1
-	cpx #$00C8			; Set 88 colors
+	sta $7e3049,x			; Store in RAM
+	sep #$20				; 8 bit A
+	sta $2122				; Put LB in CGRAM
+	xba						; Switch to HB
+	sta $2122				; Put HB in CGRAM
+	inx						; Index +1
+	inx						; Index +1
+	cpx #$00C8				; Set 88 colors
 
-org $C4b4f0
+org $C4B4F0
 C4B500_fft:
 	phx
 	ldx $00
@@ -314,12 +322,14 @@ org $c181f1
 	
 warnpc $c181f6
 
+
 ; Press B in Throw menu? (change to grey)
 org $c1872f
 	jml back_from_throw
 	nop
 	
 warnpc $c18734
+
 
 ; Press B in Item Menu? (change to grey)
 
@@ -344,7 +354,8 @@ org $c18524
 org $c18a14
 	jsr $5704
 	rtl
-
+	
+	
 ; Press A in Throw menu and throw/use a tool/launch a magic (Change to grey palette)
 
 org $c16f09
@@ -395,3 +406,4 @@ org $C4A755
 ;	db $64                  ; 5th Tile
 ;
 ;warnpc $C3FD79
+
