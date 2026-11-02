@@ -35,7 +35,7 @@ change_fft:
     LDA #$38            	; Yellow colour
     bra color_change_fft    ; Go to save in ram
 
-org $D0F9A0
+org $D252EE
 lore_btl_palette:
 	lda $E6f7e5,X
 	bra line_skipped
@@ -173,16 +173,16 @@ changeshadow_fft:
 	and #$00FF		; Isolate lo-bytes
 	bne .white
 	lda #$4210		; set light gray color (default color used in the small font palette)
-	sta $7e7204
+	sta $7E7204
 	jmp user_color
 .white
 	lda $00
 	sta $7e7204
 	sta $7e7404
 	stz $0100
-	LDA #$73de
+	LDA #$73DE
 	jmp white_color
-warnpc $C0de22
+warnpc $C0DE22
 
 
 ; Btl quotes shadow	
@@ -203,12 +203,12 @@ org $C31632
          
 ; Fork: Reset font color
 org $C3239B
-    LDY #$0ca6      ; Color: brown
+    LDY #$0CA6      ; Color: brown
     STY $1D55       ; Put in options
 
 ; Reset game data for Load menu
 org $C3709E
-    LDY #$0ca6      ; Color: brown
+    LDY #$0CA6      ; Color: brown
 	
 org $D8E7d0 ; Extending palette
 MenuPalette_fft:
@@ -217,14 +217,14 @@ MenuPalette_fft:
 dw $0000,$4210,$39CE,$0CA6		;User editable color 
 dw $35F0,$35F0,$256C,$256C		;Grey font for unavailable choiches
 dw $0000,$4210,$39CE,$3544		;Blue font
-dw $0000,$4210,$39ce,$10cd		;Dark Red font 
+dw $0000,$4210,$39CE,$10CD		;Dark Red font 
 
 ; 2nd row
-dw $0000,$4210,$39ce,$10cd		;Dark Red font
-dw $0000,$73de,$4210,$73de		;Should be white -> 7fff should be replaced by user font in game. 3rd code is the VWF description shadow
+dw $0000,$4210,$39CE,$10CD		;Dark Red font
+dw $0000,$73DE,$4210,$73DE		;Should be white -> 73DE should be replaced by user font in game. 3rd code is the VWF description shadow
 white_no_box:
-dw $0000,$0000,$39ce,$73DE		;White font
-dw $0000,$0000,$39ce,$6f60		;Light blue font
+dw $0000,$0000,$39CE,$73DE		;White font
+dw $0000,$0000,$39CE,$6f60		;Light blue font
 
 ; 3rd row
 dw $0000,$35F0,$256C,$256C		;Gray font
@@ -235,34 +235,34 @@ dw $0000,$35F0,$256C,$256C		;Gray font
 ; 4th row
 
 dw $0000,$35F0,$256C,$10CD		;Gray font with blue shadow (Esper equipped from other actor)
-dw $0000,$3868,$39ce,$73de		;Gray font with purple shadow
-dw $0000,$3868,$39ce,$73de		;Gray font with purple shadow
-dw $0000,$3868,$39ce,$73de		;Gray font with purple shadow
+dw $0000,$3868,$39CE,$73DE		;Gray font with purple shadow
+dw $0000,$3868,$39CE,$73DE		;Gray font with purple shadow
+dw $0000,$3868,$39CE,$73DE		;Gray font with purple shadow
 
 ; 5th row
 Grey:
 dw $0000,$4210,$5294,$73DE		;White font with gray shadow
 dw $0000,$4210,$5294,$73DE		;White font with gray shadow
-dw $0000,$0000,$39ce,$73DE		;White font with black shadow
+dw $0000,$0000,$39CE,$73DE		;White font with black shadow
 dw $0000,$4210,$5294,$73DE		;White font with gray shadow
 
 ; 6th row
 Yellow_fft:
-dw $0000,$4210,$39ce,$3544		;Blue font (esper bonus points)
+dw $0000,$4210,$39CE,$3544		;Blue font (esper bonus points)
 dw $ffff,$ffff,$ffff,$ffff		;Null
 dw $ffff,$ffff,$ffff,$ffff		;Null
 dw $ffff,$ffff,$ffff,$ffff		;Null
 
 ;7th row
 white_fft:
-dW $0000,$0000,$39ce,$73DE		;White font
+dW $0000,$0000,$39CE,$73DE		;White font
 
 ; Btl Palette
 org $EEB15F
-dw $0000,$4210,$5294,$73de		;User Color
-dw $0000,$4210,$39ce,$3544		;Blue (equip, turn, etc)
-dw $0000,$4eb6,$5294,$3544		;Blue (char selection)
-dw $0000,$14e8,$4eb6,$3544
+dw $0000,$4210,$5294,$73DE		;User Color
+dw $0000,$4210,$39CE,$3544		;Blue (equip, turn, etc)
+dw $0000,$4210,$39CE,$3544		;Blue (char selection)
+dw $0000,$14E8,$4EB6,$3544
 
 
 Org $C36BEE
