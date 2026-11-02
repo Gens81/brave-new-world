@@ -33,3 +33,8 @@ org $C3F612 : pad $C3F646 ; 52 bytes
 
 ; elemental nerf
 org $C47F40 : pad $C47F4C ; 13 bytes
+
+; fft skin
+org $D252EE : pad $D25312 ; 37 bytes
+
+
