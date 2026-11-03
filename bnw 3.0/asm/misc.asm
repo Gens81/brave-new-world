@@ -957,6 +957,7 @@ org $DDD21A : db $BA ; Kefka Tower half door fix
 
 ;Brave New World data
 org $C33BB8
-	db $d1,$78," Brave New World 3.0 B4",$00 
+	db $d1,$78,"Brave New World 3.0 B4.1",$00 
 	; WoR islands formations, fix queued summons, rizopas boss status, 
 	; tweaked some animations, no free buckler/boomerang at WoR
+	; banon chocobo pose event, megalixir fix, tweaked blaze animation and fixed ancient castle warp
