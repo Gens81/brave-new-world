@@ -386,6 +386,11 @@ org $c16f55
 org $C4A755
     LDA #$38				; white status labels
 
+;SP diary colors
+org $f00290
+    DW $0000,$4210,$39ce,$10CD    
+    DW $0000,$4210,$39ce,$0ca6
+
 ;; New checkmark	
 ;Org $C3FD5E
 ;	LDX $00					; clear x
