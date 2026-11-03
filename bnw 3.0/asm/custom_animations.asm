@@ -1,7 +1,7 @@
 ; #########################################################################
 ;
 ; Custom Animation Hack made for Brave New World
-; Animation Designs, Sprites, and Hack by Khaos (IAmUrza) 2026-08-27 v.1.09
+; Animation Designs, Sprites, and Hack by Khaos (IAmUrza) 2026-11-02 v.1.10
 ;
 ; Requirements:
 ;  	D20000_3bpp_battle_tile_formation.bin
@@ -193,7 +193,7 @@ org $D086C0 : db	$1F, $02, $58, $00, $FF, $FF, $C0, $00, $00, $18, $57, $FF, $FF
 org $D08722 : db	$50, $01, $FF, $FF, $FF, $FF, $38, $00, $00, $D5, $01, $FF, $FF, $10	; Blink (Spell #136d)
 																							; Aqualung (Spell #139d)
 org $D0875A : db	$7E, $02, $58, $01, $FF, $FF, $9D, $99, $00, $63, $52, $FF, $FF, $10	; Bad Breath (Spell #140d)
-org $D08776 : db	$55, $01, $FF, $FF, $FF, $FF, $C0, $00, $00, $16, $57, $FF, $FF, $38	; Blaze (Spell #142d)
+org $D08776 : db	$55, $01, $FF, $FF, $FF, $FF, $C0, $00, $00, $16, $57, $FF, $FF, $10	; Blaze (Spell #142d)
 org $D087AE : db	$BA, $00, $BB, $00, $FF, $FF, $C1, $B3, $00, $18, $18, $FF, $FF, $10	; Leech (Spell #146d)
 org $D087BC : db	$55, $01, $FF, $FF, $FF, $FF, $86, $00, $00, $16, $57, $FF, $FF, $10	; Raze (Spell #147d)
 org $D087CA : db	$50, $01, $FF, $FF, $FF, $FF, $D0, $00, $00, $D5, $01, $FF, $FF, $10	; Refract (Spell #148d)
