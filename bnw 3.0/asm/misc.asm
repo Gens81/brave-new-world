@@ -874,6 +874,8 @@ org $CF2428	: db $31,$75    ;289  Moe         HP        30000
 org $CF2739	: db $08        ;313  Lv.8 Mage   Weakness  Dark
 org $CF2ADD	: db $01        ;342  Phantom     Innate    Float
 
+org $D86C17 : db $65 		; Allows Megalixir to properly cure Blind, Poison, Imp, and Petrify (per printme and item description)
+
 ; stop displaying required XP for next LV up in status menu once LV 50 is reached
 org $C360A6 : CMP #$32
 
