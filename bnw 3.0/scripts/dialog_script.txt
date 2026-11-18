@@ -98,7 +98,7 @@ Girl: My name_ <D>is <A0>_<EOP>
 Man: Wow! I've never heard of anyone recovering this fast!
 
 [caption #25]
-Open up! Give us the girl that was riding the Magitek Armor!
+Open up! Give us the girl that was riding the Magitek Armour!
 
 [caption #26]
 We're here for the girl! She's an officer of the Empire!
@@ -201,7 +201,7 @@ Need help?
 <C> No
 
 [caption #54]
-You'll fight in 3 groups. Press ± to switch between them.<EOP>
+You'll fight in 3 groups. Press ą to switch between them.<EOP>
 Your objective is to defeat the commander before his men reach <A0>.<EOP>
 And don't steal my spear - I need it to defend myself. <D>Go buy your own, kupo.
 
@@ -1537,7 +1537,7 @@ Old Man: Are you here to fix my hat? 'bout time! It ain't hatting at all no more
 Old Man: Quit actin' like a damn child and get to work!
 
 [caption #441]
-[HOT!]
+<OP$18>HOT!
 
 [caption #442]
 Take a nap?
@@ -2112,7 +2112,7 @@ Got 'em! Over here!
 
 [caption #598]
 This is a classroom for the beginner_ <D>and unless you've played this mod before, that means you.<EOP>
-Please, speak with everyone here and heed their advice.
+Speak with everyone here, heed their advice and maybe one day, you'll be worthy to cross blades with me.
 
 [caption #599]
 It should go without saying, but talk to everyone that you meet.<EOP>
@@ -2144,7 +2144,7 @@ We thought that was stupid, so now they don't.
 
 [caption #605]
 When outfitting your party, remember that most equipment does more now than just boost raw defense or battle power.<EOP>
-Hold ± when shopping to view the full stats of any item prior to purchase.<EOP>
+Hold ą when shopping to view the full stats of any item prior to purchase.<EOP>
 Equipment can be also reviewed in the item menu: press $ twice for info and use @/& to switch views.<EOP>
 Note that while stat boosts from equipment will stack, other properties (including HP/MP boosts) will not.
 
@@ -2168,17 +2168,17 @@ Enemies will flash red when performing counters.<EOP>
 Finally, hitting an elemental weakness can sometimes have additional effects on enemies beyond the extra damage dealt.
 
 [caption #609]
-Hold down £ and { to run from battles that get out of hand.<EOP>
+Hold down Ģ and { to run from battles that get out of hand.<EOP>
 Faster characters like <A1> are better at getting away quickly than others are.<EOP>
 Also, by pressing }` in battle, you can cycle between ATB, current/max HP and current/max MP display.
 
 [caption #610]
-Press ^ or ± in battle to [hold] an active character's turn and cycle to the next available ally.<EOP>
-When targeting a foe, ^ displays HP/MP, while ± displays current status.<EOP>
+Press ^ or ą in battle to [hold] an active character's turn and cycle to the next available ally.<EOP>
+When targeting a foe, ^ displays HP/MP, while ą displays current status.<EOP>
 When a command is queued, the ATB gauge turns blue and counts down until it executes. This [Wait Gauge] can be disabled in the config menu.
 
 [caption #611]
-Press £ or { to select multiple targets for any spell with no targeting restrictions, such as
+Press Ģ or { to select multiple targets for any spell with no targeting restrictions, such as
 <A0>'s Fire and Cure spells.<EOP>
 Other commands with [free] targeting are [Throw] (with stars) and [GP Toss].<EOP>
 The damage (or healing) dealt by anything split in this manner will be reduced by 50%.<EOP>
@@ -2316,9 +2316,10 @@ Doing so will consume half a turn for one hand; changing both requires a full tu
 Kupo!<D> I learn Dances from the terrain I fight in. <D>Explore different areas to learn them all and unlock my full talent.
 
 [caption #633]
-HERE LIES MIG
-[You kept the monsters away_
-and now you're gone forever]
+
+                 HERE LIES MIG
+    [You kept the monsters away_
+    and now you're gone forever]
 
 [caption #634]
 In battle, select the current (yellow) terrain to use a [Repeat] step, or another to switch terrain and use a [Shift] step.<EOP>
@@ -3167,7 +3168,7 @@ Need some info?
 <C> No
 
 [caption #877]
-You'll fight in 2 groups. Press ± to switch between them.<EOP>
+You'll fight in 2 groups. Press ą to switch between them.<EOP>
 Defeat Kefka before his men reach Banon, or it's game over!
 
 [caption #878]
@@ -3351,7 +3352,7 @@ Wanna know how to ride a chocobo?
 | = steer
 $ = move forward
 \ = dismount
-£/{ = do a barrel roll
+Ģ/{ = do a barrel roll
 
 [caption #934]
 Chocobo ride, 100 GP!
@@ -3819,19 +3820,19 @@ Door it open!
 Oooooh_ gwarrr_
 
 [caption #1072]
-[<A0>?]
+<OP$18><A0>?
 
 [caption #1073]
 She's frightened, you know.
 
 [caption #1074]
-[Who are you?]
+<OP$18>Who are you?
 
 [caption #1075]
 Old Man: _this girl is your friend?
 
 [caption #1076]
-[Is <A0> all right?]
+<OP$18>Is <A0> all right?
 
 [caption #1077]
 <A2>: How fareth <A0>?
@@ -3854,7 +3855,7 @@ Old Man: As for me, I am Ramuh, the esper.
 [Esper!?]
 
 [caption #1083]
-[But don't espers live in another world?]
+<OP$18>But don't espers live in another world?
 
 [caption #1084]
 <A6>: We thought that espers lived in a different realm_
@@ -3867,7 +3868,7 @@ Ramuh: That doesn't mean we don't live here, too. There are many forms among esp
 Ramuh: Some of us look very much similar to humans, so we're able to peacefully live among them.
 
 [caption #1087]
-[Why do you hide the fact that you're espers?]
+<OP$18>Why do you hide the fact that you're espers?
 
 [caption #1088]
 <A11>: Gau, GAU! <D>_Gau?
@@ -3879,7 +3880,7 @@ Ramuh: Humans and espers are incompatible creatures.
 <A1>: My grandma told me that espers and people once lived side by side. I thought it was just a fairy tale_
 
 [caption #1091]
-[I heard that espers and people once coexisted, but I thought it was just a fairy tale.]
+<OP$18>I heard that espers and people once coexisted, but I thought it was just a fairy tale.
 
 [caption #1092]
 <A3>: A woman I once knew told me that espers and people used to coexist_ <D>I thought it was just a fairy tale.
@@ -3891,7 +3892,7 @@ Ramuh: Humans and espers are incompatible creatures.
 Ramuh: That was no fairy tale. We started out living together in harmony. <D>But then came the War of the Magi_
 
 [caption #1095]
-[War of the Magi_]
+<OP$18>War of the Magi_
 
 [caption #1096]
 Ramuh: It took place long ago_<EOP>
@@ -3916,33 +3917,33 @@ Ramuh: Many of my kind are still trapped in the Empire's Magitek Research Facili
 Ramuh: I fled here to avoid a similar fate.
 
 [caption #1102]
-[It'll be all right, <A0>_]
+<OP$18>It'll be all right, <A0>_
 
 [caption #1103]
 Ramuh: I sensed that <A0> was in trouble, so I summoned her here.
 
 [caption #1104]
-[<A0>'s_ <D>an esper?]
+<OP$18><A0>'s_ <D>an esper?
 
 [caption #1105]
 Ramuh: No, she's actually quite different.
 
 [caption #1106]
-[She looks like she's suffering.]<EOP>
+<OP$18>She looks like she's suffering.<EOP>
 Ramuh: She's uncertain of who she is, and this is causing her distress.
 
 [caption #1107]
-[How can we help her?]
+<OP$18>How can we help her?
 
 [caption #1108]
 Ramuh: When she fully understands her true nature, her anxiety should subside.
 
 [caption #1109]
-[Is there nothing we can do until then?]<EOP>
+<OP$18>Is there nothing we can do until then?<EOP>
 Ramuh: Free those of my kind imprisoned in Gestahl's Magitek Research Facility. One of them may be able to help her.
 
 [caption #1110]
-[If we can get inside the Magitek Research Facility, you're sure we'll find your people?]
+<OP$18>If we can get inside the Magitek Research Facility, you're sure we'll find your people?
 
 [caption #1111]
 <A6>: The Magitek Research Facility_
@@ -3958,29 +3959,29 @@ Ramuh: I left my friends behind and escaped to spend my days in hiding.<EOP>
 Ramuh: But that must now come to an end.
 
 [caption #1115]
-[What do you mean?]
+<OP$18>What do you mean?
 
 [caption #1116]
 Ramuh: Gestahl's methods are incorrect. Draining an esper by force will only result in incomplete magic.<EOP>
 Ramuh: It is only when we are reduced to magicite that our abilities can be transferred in full.
 
 [caption #1117]
-[I don't understand.]<EOP>
+<OP$18>I don't understand.<EOP>
 Ramuh: I want to help you, so I will turn myself to magicite so you can use my power.<EOP>
-[Magicite_?]
+<OP$18>Magicite_?
 
 [caption #1118]
 Ramuh: Magicite is an esper's power in its purest form. When an esper dies, magicite is all that's left behind.<EOP>
 Ramuh: These are my comrades who fell as we fled the Empire. And I will give you my power as well_
 
 [caption #1119]
-[Why are you doing this?]
+<OP$18>Why are you doing this?
 
 [caption #1120]
 Ramuh: We few can help save many. The War of the Magi must not be repeated_
 
 [caption #1121]
-[Old man_ <D>are you really gone?]
+<OP$18>Old man_ <D>are you really gone?
 
 [caption #1122]
 <A3>: You old fool_ <D>why throw it all away?
@@ -3995,10 +3996,10 @@ Ramuh: We few can help save many. The War of the Magi must not be repeated_
 <A11>: Gau.
 
 [caption #1126]
-[Magicite_?]
+
 
 [caption #1127]
-[He gave up his own life to help us_]
+<OP$18>He gave up his own life to help us_
 
 [caption #1128]
 <A2>: He gave all that we might by this means save some_
@@ -4010,7 +4011,7 @@ Ramuh: We few can help save many. The War of the Magi must not be repeated_
 <A11>: Gaauuu_
 
 [caption #1131]
-[Wait for us <A0>. We'll be back.]
+<OP$18>Wait for us <A0>. We'll be back.
 
 [caption #1132]
 
@@ -4707,7 +4708,7 @@ Would you like to know more?
 <C> No
 
 [caption #1317]
-<A9>: Press #+ to toggle the map. Hold ± and use the | to move in all directions.<EOP>
+<A9>: Press #+ to toggle the map. Hold ą and use the | to move in all directions.<EOP>
 <A9>: Crash this thing and so help me I will fuck you with a rake.
 
 [caption #1318]
@@ -5437,7 +5438,7 @@ Legend has it that its horrible curse requires the [power of eight] to vanquish,
 Guess you'd better strap it on and start killing things.
 
 [caption #1523]
-[A bone sculpture_ <D>something's stuck in the eye_ <D>magicite?]
+<OP$18>A bone sculpture_ <D>something's stuck in the eye_ <D>magicite?
 
 [caption #1524]
 Take the magicite?
@@ -5792,7 +5793,7 @@ Arvis: Good luck!
 
 
 [caption #1630]
-[Wait_ <D>I feel like we're forgetting something_]<EOP>
+<OP$18>Wait_ <D>I feel like we're forgetting something_<EOP>
 (<A0>: No shit!)
 
 [caption #1631]
@@ -5842,19 +5843,19 @@ Kefka: Hee hee_
 Kefka: Emperor Gestahl was right!
 
 [caption #1645]
-[<A0>! <D>_the gate!]
+<OP$18><A0>! <D>_the gate!
 
 [caption #1646]
-[What the_?]
+
 
 [caption #1647]
-[Espers?]
+
 
 [caption #1648]
-[Hey! The gate!]
+<OP$18>Hey! The gate!
 
 [caption #1649]
-[Where did the espers go_?]
+<OP$18>Where did the espers go_?
 
 [caption #1650]
 <A0>: We'd better get back to the Blackjack.
@@ -5966,23 +5967,22 @@ Cid: You're awake at last.
 <A0>: I just wanted to help_
 
 [caption #1681]
-[What happened?]
+<OP$17><$0D>What happened?
 
 [caption #1682]
 <A0>: I_ <D>don't know.
 
 [caption #1683]
-[We saw a whole bunch of them flying away from the base.]
+<OP$17><$0D>We saw a whole bunch of them flying away from the base.
 
 [caption #1684]
 <A0>: Which way did they go?
 
 [caption #1685]
-[Toward the Imperial capital_]
+<OP$17><$0D>Toward the Imperial capital_
 
 [caption #1686]
 
-    There's something here_
 
 [caption #1687]
 <A0>: Vector_
@@ -6007,6 +6007,7 @@ You win_ but you'll never find the treasure I buried here!
 
 [caption #1693]
 
+    There's something here_
 
 [caption #1694]
 <A4>: That barrier must be generated by the Warring Triad_ <D>it's just like the one that guarded the esper world.<EOP>
@@ -6208,8 +6209,8 @@ Wolf: If that's how it's gonna be_ <D>take this!
 Look out!
 
 [caption #1754]
-[We've defeated the Warring Triad, but magic hasn't disappeared_<EOP>
-Has Kefka drained so much of their power that HE has become the source of all magic?]
+<OP$18>We've defeated the Warring Triad, but magic hasn't disappeared_<EOP>
+<OP$18>Has Kefka drained so much of their power that HE has become the source of all magic?
 
 [caption #1755]
 Unequip anyone?
@@ -6226,7 +6227,7 @@ Are you done talking to the soldiers?
 Moogle: Thankupo!
 
 [caption #1758]
-[You can talk!?]
+<OP$18>You can talk!?
 
 [caption #1759]
 Human-loving, fast-talking,
@@ -7505,14 +7506,14 @@ Choose 3 characters.
  Three is this many: / / /
 
 [caption #2126]
-[It's the Imperial Air Force (IAF)!]<EOP>
-[We're surrounded! Let's attack aggressively!]
+<OP$18>It's the Imperial Air Force (IAF)!<EOP>
+<OP$18>We're surrounded! Let's attack aggressively!
 
 [caption #2127]
-[What the hell is that?]
+<OP$18>What the hell is that?
 
 [caption #2128]
-[Kefka and Gestahl are just ahead.]
+<OP$18>Kefka and Gestahl are just ahead.
 
 [caption #2129]
 <A3>: Filthy, backstabbing Empire. They tried to kill me the second they thought I'd served my purpose_
@@ -7521,7 +7522,7 @@ Choose 3 characters.
 <A3>: Is Interceptor okay?
 
 [caption #2131]
-<A3>: _he is? <D>Good. <D>Come on, I've got a score to settle.
+<A3>: _<D>come on, I've got a score to settle.
 
 [caption #2132]
 <A3>: _
@@ -7867,7 +7868,7 @@ Hurry, before the house collapses!
 <A6>: <A5>! You're alive!
 
 [caption #2220]
-[<A5>!]
+<OP$18><A5>!
 
 [caption #2221]
 <A5>: Heh, you think a minor thing like the end of the world was gonna do me in?
@@ -7877,7 +7878,7 @@ Hurry, before the house collapses!
 <A6>: But I can't give up now, can I? They might all still be alive. <D>And once we find everyone_
 
 [caption #2223]
-[Come on, we've got work to do!]
+<OP$18>Come on, we've got work to do!
 
 [caption #2224]
 <A5>: Yeah, I know. We smash Kefka and fight for everlasting peace!
@@ -7892,7 +7893,7 @@ Go back inside!
 
 [caption #2227]
 I'm scared!<EOP>
-[Come on, let's go!]
+<OP$18>Come on, let's go!
 
 [caption #2228]
 On that day, debris from all over the world floated to the center of this continent and formed that tower_
@@ -7990,7 +7991,7 @@ Y-you're gonna have to fight your way in here!
                Wait!
 
 [caption #2254]
-[<A0>!]
+<OP$18><A0>!
 
 [caption #2255]
 Mama! Do you know these people?
@@ -8033,7 +8034,7 @@ Run! Phunbaba's coming!
 <A0>: Ancient demon Phunbaba, reborn from the world's ruin! You won't harm this village!
 
 [caption #2267]
-[<A0>! <D>Wake up!_]
+<OP$18><A0>! <D>Wake up!_
 
 [caption #2268]
 <A0>: Wow. I've really lost it, haven't I?<EOP>
@@ -8492,7 +8493,7 @@ I knew we should have taken that left turn at Albuquerque.
 No more Returners, no more Empire_ seems we need to decide on our own what to fight for.
 
 [caption #2403]
-[What is this?]
+<OP$18>What is this?
 
 [caption #2404]
 It's an esper attack! <D>Let's show them some of OUR esper magic!
@@ -8710,7 +8711,7 @@ Daryl: This experimental engine may be dangerous_
 
 [caption #2463]
 
-              R.I.P. DARYL
+                   R.I.P. DARYL
 
 [caption #2464]
 <A9>: And you're pushing it to its limits? You can't be serious! What are you trying to prove?
@@ -9061,7 +9062,7 @@ Lola: I was lying to myself, but I'm all right now. <D>As I read those letters, 
 Lola: I'm sure whoever wrote them has suffered greatly_ <D>I wish I could meet him_
 
 [caption #2551]
-[Well_]
+<OP$17><$06>Well_
 
 [caption #2552]
 <A2>: <D>Look to the future instead. <D>There is still much of life thou hast left to live.
@@ -9079,7 +9080,7 @@ Lola: I'll take your words to heart_ <D>thank you.
           Noble is the heart of man_ <E$1C><OP$12>
 
 [caption #2556]
-[<A2>!]
+<OP$18><A2>!
 
 [caption #2557]
 <A2>: _! <D>Thou yet livest!?
@@ -9162,25 +9163,25 @@ _or should we ask?
 <A12>: Then I <D>shall mimic you trying <D>to save the world. <D>When do we leave?
 
 [caption #2576]
-[Is that_ <D>Interceptor?]
+<OP$18>Is that_ <D>Interceptor?
 
 [caption #2577]
-[Look at those wounds_]
+<OP$18>Look at those wounds_
 
 [caption #2578]
-[Come on, we're taking you back to Thamasa.]
+<OP$18>Come on, we're taking you back to Thamasa.
 
 [caption #2579]
-[Must be having a nightmare_]
+<OP$18>Must be having a nightmare_
 
 [caption #2580]
-[Come on, let's go.]
+<OP$18>Come on, let's go.
 
 [caption #2581]
 
 
 [caption #2582]
-[Are you okay?]
+<OP$18>Are you okay?
 
 [caption #2583]
 <A8>: I'll be okay. Interceptor will watch out for me!
@@ -9209,13 +9210,13 @@ He never came near when all four of us were together.
 Nobody wants to feel like a fifth wheel, I suppose_
 
 [caption #2591]
-[<A1>!]
+<OP$18><A1>!
 
 [caption #2592]
 <A1>: Look, I finally found it! The legendary treasure that can undo death itself!
 
 [caption #2593]
-[It looks like_ <D>magicite_]<EOP>
+<OP$18>It looks like_ <D>magicite_<EOP>
 <A1>: Legend has it that ages ago the Phoenix turned itself to stone, so it would make sense.<EOP>
 <A1>: But this has some deep cracks in it. <D>I fear it may have lost its power.
 
@@ -9301,7 +9302,7 @@ Many people have since gone there in search of loot.<EOP>
 Some like to call it [treasure hunting], but I just call it common thievery.
 
 [caption #2614]
-Press ± to switch parties.
+Press ą to switch parties.
 
 [caption #2615]
 Don't bother heading in_ <D>there's nothing left.
@@ -9324,9 +9325,9 @@ Jump off the cliff?
 <A10>: Kupo! It's about time you showed up. Do you have any idea how boring it is just standing here like this?
 
 [caption #2620]
-<A10>:  That frozen esper is still on the cliff behind the city. You should go there next.<EOP>
-<A10>:  Oh, and take me with you. There's a sasquatch who lives there and he hits like a truck.<EOP>
-<A10>:  _subtlety is not my strong suit. <D>Kupo.
+<A10>: That frozen esper is still on the cliff behind the city. You should go there next.<EOP>
+<A10>: Oh, and take me with you. There's a sasquatch who lives there and he hits like a truck.<EOP>
+<A10>: _subtlety is not my strong suit. <D>Kupo.
 
 [caption #2621]
 Did you not know you could get me earlier or do you just not like moogles? <D>Kupo.
@@ -9451,7 +9452,7 @@ Ultros: Congratulations! You're all now unhitched! Here's 50 GP in chips, and re
 Ultros: _suit yerself, bub.
 
 [caption #2655]
-[K-Kefka! <D>You followed us!]
+<OP$18>K-Kefka! <D>You followed us!
 
 [caption #2656]
 Kefka: Hee hee! The emperor was right! <D>Let <A0> fall into your hands, and you'd open the gate for us!
@@ -9463,7 +9464,7 @@ Kefka: How does it feel to know you've been working for us this whole time?
 Kefka: Now step aside, I've no more business with you.
 
 [caption #2659]
-[Think again, Kefka!]
+<OP$18>Think again, Kefka!
 
 [caption #2660]
 Kefka: Oh dear_ you want to fight, don't you? <D>This is just dreadful!
@@ -9483,16 +9484,16 @@ Are you ready?
 <C> No
 
 [caption #2665]
-
+<A8>: He came to us hurt_ <D>but Uncle <A1> says he'll be back to ripping out lungs in no time!
 
 [caption #2666]
-
+<A7>: We found him injured, but I expect he'll make a full recovery. <D><A8> is keeping an eye on him.
 
 [caption #2667]
-
+<A1>: We found him pretty roughed up, but I was able to treat his wounds. <D>He'll be back in action in no time.
 
 [caption #2668]
-
+<OP$18>We found him in Thamasa. <D>He's hurt, but he'll recover.
 
 [caption #2669]
 
@@ -9841,7 +9842,7 @@ This man's soul is ours!
 Tonight, we dine well!
 
 [caption #2763]
-[Wait!]
+<OP$18>Wait!
 
 [caption #2764]
 _you again? <D>How did you even get in here?<EOP>
@@ -9854,7 +9855,7 @@ Sorry, but your quest will be over here. Take our Delta Attack and farewell!
 Scarlet: Please_ <D>my husband needs your help.
 
 [caption #2767]
-[Where are we?]
+<OP$18>Where are we?
 
 [caption #2768]
 Scarlet: You're inside <D><A2>'s soul_
@@ -10553,7 +10554,7 @@ Use the crane?
 <C> No
 
 [caption #2961]
-[This is it_ the final battle.]
+<OP$18>This is it_ the final battle.
 
 [caption #2962]
 
@@ -10632,7 +10633,7 @@ A piece of magicite fell out of Doom Gaze!
 Kefka: I knew you would come, so I've done my very best to prepare suitable entertainment.
 
 [caption #2986]
-[How long are you going to continue this insanity?]<EOP>
+<OP$18>How long are you going to continue this insanity?<EOP>
 Kefka: I've tapped into the ultimate power. Observe!
 
 [caption #2987]
@@ -10643,24 +10644,24 @@ Kefka: Everything will perish in time. <D>This world will crumble. <D>Nothing wi
 Kefka: I'm merely accelerating the process.
 
 [caption #2989]
-[People can and will create anew.]
+<OP$18>People can and will create anew.
 
 [caption #2990]
 Kefka: And those things, too, will one day rot away. Why create anything, knowing full well it will not last?<EOP>
 Kefka: What is the purpose of living when death is inevitable? You lose everything when you die.
 
 [caption #2991]
-[It's not the end result of one's life that's important!]<EOP>
-[It's having something to live for right now_ something you've helped create_ something worth protecting.]
+<OP$17><$02>It's not the end result of one's life that's important!<EOP>
+<OP$17><$02>It's having something to live for right now_ something you've helped create_ something worth protecting.
 
 [caption #2992]
-[It's enough if people are able to find their purpose in the time that they have!]
+<OP$17><$02>It's enough if people are able to find their purpose in the time that they have!
 
 [caption #2993]
 Kefka: And have you found your [purpose] in this world of ours hanging on the brink of extinction?
 
 [caption #2994]
-[Yes!]
+<OP$17><$02>Yes!
 
 [caption #2995]
 <A0>: The power of love_ <D>and the people who make it all worthwhile!
@@ -10705,7 +10706,7 @@ Kefka: This is sickening. <D>You all sound like chapters from a self-help book!
 Kefka: I will destroy them! <D>I will annihilate these things that sustain you!
 
 [caption #3009]
-[Kefka, stop!]
+<OP$18>Kefka, stop!
 
 [caption #3010]
 Kefka: I command the greatest power in the world! You are all less than dirt to me!
@@ -10714,13 +10715,13 @@ Kefka: I command the greatest power in the world! You are all less than dirt to 
 Kefka: I will destroy everything! <D>I will create a monument to non-existence!
 
 [caption #3012]
-[Life and dreams will continue to be born!]
+<OP$17><$03>Life and dreams will continue to be born!
 
 [caption #3013]
 Kefka: No! I will hunt them down! I will destroy it all! Destroy! Destroy! Destroy! <D>There will be NOTHING!
 
 [caption #3014]
-[We will not allow you to harm another living thing!]
+<OP$17><$04>We will not allow you to harm another living thing!
 
 [caption #3015]
 Kefka: Hee hee hee! Destruction without death? <D>What fun is that?
@@ -10733,7 +10734,7 @@ Kefka: I, Kefka, will knock you all down!
 
 
 [caption #3018]
-[The tower is breaking apart!]
+<OP$18>The tower is breaking apart!
 
 [caption #3019]
 <A9>: Well, come on already! The airship is just ahead!
@@ -10790,11 +10791,11 @@ Kefka: I, Kefka, will knock you all down!
 
 [caption #3036]
 
-          _is ********. <E$08><OP$12>
+          _is ***. <E$08><OP$12>
 
 [caption #3037]
 
-     Got it? It's ********. <E$08><OP$12>
+     Got it? It's ***. <E$08><OP$12>
 
 [caption #3038]
 <A6>: Ugh_ <E$08><OP$12>
@@ -10937,7 +10938,3 @@ Maduin: _you may be able to remain in this world as a human. <E$10><OP$12>
 
 [caption #3082]
 <A8>: _just you wait and see!
-
-[caption #3083]
-
-
