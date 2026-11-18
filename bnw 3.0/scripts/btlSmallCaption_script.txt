@@ -109,7 +109,7 @@
 [caption #27]
  [This is madness!]<D>
  [This is blasphemy!]<D>
- [THIS! <D>IS! <D>OPERA!]<D>
+ [THIS <D>IS <D>OPERA!]<D>
 
 [caption #28]
  [Frankly, my dear_]<D>
@@ -234,7 +234,7 @@ Chupon: Fungahhh!<D>
 
 [caption #55]
 <A$06>: No_ <D>not darkness_<D>
-<A$06>:_light.<D>
+<A$06>: _light.<D>
 
 [caption #56]
  _dragon started moving faster!<D>
@@ -313,7 +313,7 @@ Larry: Fuck this, I'm outta here!<D>
  [Where are you!?]<D>
 
 [caption #79]
-<A$00>:_the gate! <D>It's opening!<D>
+<A$00>: _the gate! <D>It's opening!<D>
 
 [caption #80]
          WARNING! <D>WARNING!<D>
@@ -375,7 +375,7 @@ Larry: Fuck this, I'm outta here!<D>
  [I'll be back!]<D>
 
 [caption #97]
- [Go to Hell!]<D>
+ [Go to hell!]<D>
 
 [caption #98]
 
