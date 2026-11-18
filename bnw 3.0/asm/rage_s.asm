@@ -494,7 +494,7 @@ PrintInnate:
 	STZ $0170
 	RTL
 	
-org $D0FC40
+org $D2544A
 Undead_Sprite_Hook:
 ; Update arrow for gear data menu
 			TAX             ; Index mode
