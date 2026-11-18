@@ -955,6 +955,19 @@ org $D85600 : db $02 ; Gives Spook Stick "Zombie Immunity"
 
 org $DDD21A : db $BA ; Kefka Tower half door fix
 
+; Fix Aqualung to always require mana (for characters and monsters) to let Mute/Rasp work properly
+org $CF89AC : db $8B ; Change attack 175 (0MP Aqualung) to 139 (Normal Aqualung) for Chimera
+org $CF8BFD : db $8B,$8B ; Change attacks 175 (0MP Aqualung) to 139 (Normal Aqualung) for Anguiform
+org $CF91F1 : db $8B ; Change attack 175 (0MP Aqualung) to 139 (Normal Aqualung) for Manticore
+org $CF9ABB : db $8B ; Change attack 175 (0MP Aqualung) to 139 (Normal Aqualung) for Sphinx
+org $CFB01B : db $8B ; Change attack 175 (0MP Aqualung) to 139 (Normal Aqualung) for Kaiser
+org $CF463E : db $8B ; Changes Chimera's Rage to Normal Aqualung
+org $CF03EA : dw $01F4 ; Give 500 MP to Chimera
+org $CF074A : dw $01F4 ; Give 500 MP to Anguiform
+org $CF0FCA : dw $03E8 ; Give 1000 MP to Manticore
+org $CF1C8A : dw $05DC ; Give 1500 MP to Sphinx
+org $CF463E : db $8B ; Change Gau's Chimera Rage from 175 (0MP Aqualung) to 139 (Normal Aqualung)
+
 ;Brave New World data
 org $C33BB8
 	db $d1,$78,"Brave New World 3.0 B4.1",$00 
