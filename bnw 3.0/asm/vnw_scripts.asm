@@ -63,3 +63,10 @@ org $ED1D00
 	incbin "../gfx/default_portraits.bin"
 
 warnpc $ED5AC0
+
+;------------------------------------------------------------------
+;Misc
+;------------------------------------------------------------------
+
+org $CB8505
+	db $4B,$0A,$00					; Display a different, less jokey dialogue message for VNW as part of the Banon_chocobo fix
