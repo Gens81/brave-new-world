@@ -1,7 +1,7 @@
 ; #########################################################################
 ;
 ; Custom Animation Hack made for Brave New World
-; Animation Designs, Sprites, and Hack by Khaos (IAmUrza) 2026-11-02 v.1.10
+; Animation Designs, Sprites, and Hack by Khaos (IAmUrza) 2026-11-15 v.1.11
 ;
 ; Requirements:
 ;  	D20000_3bpp_battle_tile_formation.bin
@@ -71,6 +71,15 @@ Love_Token_Cover:
         TDC
         SEP #$20
         NOP
+
+; #########################################################################
+; Gradient Background Effect
+; #########################################################################
+
+; Changes the unused red/yellow gradient background effect (originally used for Megaserk) to be red only
+; This is now used by the S.Cross animation script
+
+org $C1D2C4 : db $20,$20,$20,$20,$20,$20,$20,$20
 
 ; #########################################################################
 ; Custom Battle Animation Commands
@@ -190,6 +199,7 @@ org $D0866C : db	$47, $01, $46, $01, $FF, $FF, $55, $1F, $00, $20, $10, $FF, $FF
 org $D0867A : db	$48, $01, $49, $01, $FF, $FF, $D0, $9E, $00, $C0, $1B, $FF, $FF, $00	; Snowbird (Spell #124d)
 org $D086A4 : db	$1B, $02, $FF, $FF, $FF, $FF, $BA, $00, $00, $83, $25, $FF, $FF, $10	; Trifecta (Spell #127d)
 org $D086C0 : db	$1F, $02, $58, $00, $FF, $FF, $C0, $00, $00, $18, $57, $FF, $FF, $16	; Solitaire (Spell #129d)
+																							; Exploder (Gau) (Spell #132d)
 org $D08722 : db	$50, $01, $FF, $FF, $FF, $FF, $38, $00, $00, $D5, $01, $FF, $FF, $10	; Blink (Spell #136d)
 																							; Aqualung (Spell #139d)
 org $D0875A : db	$7E, $02, $58, $01, $FF, $FF, $9D, $99, $00, $63, $52, $FF, $FF, $10	; Bad Breath (Spell #140d)
@@ -208,6 +218,7 @@ org $D08872 : db	$11, $02, $12, $02, $FF, $FF, $C9, $C9, $00, $CE, $22, $FF, $FF
 org $D088AA : db	$7E, $02, $58, $01, $FF, $FF, $9D, $60, $00, $63, $52, $FF, $FF, $10	; Bio Blast (Spell #164d)
 																							; Schiller (Spell #167d)
 org $D088FE : db	$7E, $02, $8F, $01, $6B, $00, $00, $B9, $00, $79, $1B, $FF, $FF, $10	; Boil (Spell #170d)
+																							; Exploder (Spell #171d)
 org $D0891A : db	$85, $01, $DD, $80, $FF, $FF, $E3, $E3, $00, $FD, $1B, $7D, $81, $14	; Starlight (Spell #172d)
 org $D08928 : db	$7E, $02, $75, $02, $FF, $FF, $00, $ED, $00, $95, $1B, $FF, $FF, $10	; Net (Spell #173d)
 																							; Aqualung (Enemy) (Spell #175d)
@@ -223,6 +234,7 @@ org $D08A40 : db	$7B, $01, $20, $02, $FF, $FF, $E3, $00, $00, $18, $57, $FF, $FF
 org $D08A78 : db	$30, $01, $DF, $80, $08, $02, $54, $0C, $00, $36, $10, $FF, $FF, $1C	; N.Cross (Spell #197d)
 org $D08A86 : db	$A4, $01, $A5, $01, $A6, $01, $C1, $6B, $5E, $B7, $61, $FF, $FF, $10	; Flare Star (Spell #198d)
 																							; Sneeze (Spell #203d)
+org $D08ADA : db	$AC, $81, $AD, $01, $FF, $FF, $BD, $10, $00, $B4, $63, $AC, $81, $10	; S.Cross (Spell #204d)
 org $D08B20 : db	$0C, $02, $0D, $02, $FF, $FF, $73, $CA, $00, $13, $72, $FF, $FF, $10	; Hyperdrive (Spell #209d)
 org $D08B2E : db	$7E, $02, $83, $01, $84, $01, $38, $66, $C8, $30, $5D, $FF, $FF, $10	; Pale Omen (Spell #210d)
 																							; Thriller (Spell #214d)
@@ -573,6 +585,7 @@ org $D1ED86 : db	$89, $61	; $0157		Ice Beam (bg1)				RegenX (bg1)
 org $D1ED8C : db	$69, $36	; $015A		Grav Bomb (sprite)			!Kazekiri, !Mutsunokami and Wind Breaker (sprite)
 org $D1ED8E : db	$76, $36	; $015B		Grav Bomb (bg1)				!Kazekiri (bg1) (shared with below)
 org $D1ED90 : db	$76, $36	; $015C		Confuser (bg3)				!Mutsunokami and Wind Breaker (bg1) (shared with above)
+org $D1ED9A : db	$C2, $3B	; $0161		Exploder (bg3)				Exploder (Monster / Gau Version) (bg3)
 org $D1EDA8 : db	$6D, $3A	; $0168		---							Volt Array (bg1)
 org $D1EDCC : db	$57, $36	; $017A		Delta Hit (sprite)			SleepX (sprite)
 org $D1EDCE : db	$CD, $72	; $017B		Delta Hit (bg1)				Wallchange (sprite)
@@ -3763,3 +3776,60 @@ org $D00D63
 org $D04544
 	db $8B,$0F				; animated loop start (15 times, increment frame offset each time)
 	db $08					; [$08]
+
+; [ Animation Script $01AD: S. Cross (bg1) ] (Changed from original)
+
+org $D02EE0
+	db $80,$4B,$FF			; update red gradient lines, increase intensity by 1
+org $D02F05
+	db $80,$4B,$00			; update red gradient lines
+org $D02F38
+	db $80,$4B,$00			; update red gradient lines
+org $D02F8F
+	db $80,$4B,$00			; update red gradient lines
+org $D02FC5
+	db $80,$4B,$00			; update red gradient lines
+org $D02FD0
+	db $80,$4B,$00			; update red gradient lines
+
+; [ Animation Script $0160: Exploder (sprite) ]
+
+org $D03BAC
+	db $20,$20				; speed 3, align to center of character/monster
+	db $C9,$00				; play default sound effect
+	db $83,$BF				; move up/forward 32
+	db $E9,$3F,$3F			; move animation randomly (0..63,0..63)
+	db $00					; [$00]
+	db $01					; [$01]
+	db $02					; [$02]
+	db $80,$3B				; change target's color palette to animation palette
+	db $03					; [$03]
+	db $80,$3C				; restore target's color palette
+	db $04					; [$04]
+	db $05					; [$05]
+	db $06					; [$06]
+	db $07					; [$07]
+	db $FF					; end of script
+
+; [ Animation Script $0161: Exploder (bg3) ]
+
+org $D03BC2
+	db $00,$20				; speed 1, align to center of character/monster
+	db $AF,$60				; set background color subtraction to 0 (red)
+	db $C9,$00				; play default sound effect
+	db $8B,$05				; animated loop start (5 times, increment frame offset each time)
+	db $B6,$62				; increase background color subtraction by 2 (red)
+	db $00					; [$00]
+	db $B6,$62				; increase background color subtraction by 2 (red)
+	db $00					; [$00]
+	db $8C					; animated loop end
+	db $89,$20				; loop start (32 times)
+	db $0F					; [$0F]
+	db $BD,$A0				; hide bg1 thread
+	db $8A					; loop end
+	db $89,$0B				; loop start (11 times)
+	db $B6,$72				; decrease background color subtraction by 2 (red)
+	db $0F					; [$0F]
+	db $8A					; loop end
+	db $FF					; end of script
+	db $FE,$FE,$FE,$FE		; 4d spare bytes
