@@ -970,7 +970,16 @@ org $CF463E : db $8B ; Change Gau's Chimera Rage from 175 (0MP Aqualung) to 139 
 
 ;Brave New World data
 org $C33BB8
-	db $d1,$78,"Brave New World 3.0 B4.1",$00 
-	; WoR islands formations, fix queued summons, rizopas boss status, 
-	; tweaked some animations, no free buckler/boomerang at WoR
-	; banon chocobo pose event, megalixir fix, tweaked blaze animation and fixed ancient castle warp
+	db $d1,$78," Brave New World 3.0 B5",$00 
+	; WoR islands formations
+	; Banon chocobo pose event 
+	; Megalixir fix
+	; fixed ancient castle warp
+	; fixed Rizopas autoscan bug
+	; no buckler/boomerang at world end
+	; tweaked love token, blaze, exploder, mega volt, air blade, and s.cross animations
+    ; fixed monster imp bug
+    ; you won't lose the ability to summon an esper if it gets cancelled somehow
+	; aqualung requires mana in all cases (universally stopped by mute now)
+    ; unassigned dialog lines removed - some scenes will use specific actors in your party, or your party leader as the speaker
+
