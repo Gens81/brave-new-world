@@ -88,9 +88,9 @@ mterial:	dw $444a,$0224	:	db " promotional material",$00
 name_13:	dw $44d8,$0120	:	db "A DUMMY",$00
 
 script:		dw $444E,$0224	:	db " script editing",$00
-name_14:	dw $44D4,$0220	:	db "FIELD $ BEAR",$FE
+name_14:	dw $44D4,$0220	:	db "DESCHAIN $ BEAR",$FE
 								db " BISHOP",$FE
-								db "  DESCHAIN",$00
+								db "  FIELD",$00
 								
 translat:	dw $4454,$0424	:	db "translations",$00
 name_15:	dw $44d8,$0420	:	db "GENS",$FE
