@@ -564,7 +564,7 @@ prepare_index:
 		TAX
 		SEP #$20
 		RTL
-warnpc $D0FD00
+warnpc $D2550A
 
 
 ORG $C36512
