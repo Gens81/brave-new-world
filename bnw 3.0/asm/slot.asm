@@ -339,11 +339,11 @@ C34B6F:  db $80         			; Wraps vertically
 ; Cursor positions for Skills menu
 C34B74:  dw $1400     				; Espers
          dw $2100     				; Magic
-         dw $4100     				; SwdTech
-         dw $5100     				; Blitz
-         dw $6100     				; Lore
-         dw $7100     				; Rage
-         dw $8100     				; Dance
+         dw $4100     				; Blitz
+         dw $5100     				; Bushido
+         dw $6100     				; Dance
+         dw $7100     				; Lore
+         dw $8100     				; Rage
 		 dw $9100					; Slot
 
 ; Load navigation data for Magic menu
@@ -569,12 +569,12 @@ C34CDE:
 	
 C320A5:  dw $20B3					; Espers
          dw $211C					; Magic
-         dw $20EE					; SwdTech
          dw $2105					; Blitz
+         dw $20EE					; Bushido
+         dw $21DE					; Dance
          dw $216E					; Lore
          dw $21A6					; Rage
-         dw $21DE					; Dance
-		 dw init_slot				; Slot
+         dw init_slot				; Slot
 
 ; Box Pointers
 C34D16:  dw #C34DA4    					; (Upper submenus)
@@ -603,11 +603,11 @@ C34D3D:  JSL CB4D3D					; Assign a palette to each submenu in Skills menu
 ; Battle commands that unlock a skill menu
 C34D78:  db $02         			; Magic (unlocks Espers)
          db $02         			; Magic (unlocks Magic)
-         db $07         			; SwdTech
          db $0A         			; Blitz
+         db $07         			; Bushido
+         db $13         			; Dance
          db $0C         			; Lore
          db $10         			; Rage
-         db $13         			; Dance
 		 db $0F						; Slot
 
 ; Draw Magic list and blue "MP…" and create portrait
@@ -635,11 +635,11 @@ C34DB8:  dw $608B,$031C				 ; 30x05 at $608B (Description)
 skill_pointer_tbl:
 	dw #C35C3A						; Esper
 	dw #C35C42						; Magic
-	dw #C35C4A						; Bushido
 	dw #C35C54						; Blitz
+	dw #C35C4A						; Bushido
+	dw #C35C6C						; Dance
 	dw #C35C5C						; Lore
 	dw #C35C64						; Rage
-	dw #C35C6C						; Dance
 	dw #C35C75						; Slot
 
 
@@ -675,15 +675,15 @@ C34D9B:
     JMP $572A    					; Load description
 
 padbyte $ff
-pad $c34dbc
-warnpc $c34dbc
+pad $C34DBC
+warnpc $C34DBC
 
 ; Invoke skill submenu
-org $c3209b
+org $C3209B
 	JMP (C320A5,X)  				; Invoke menu
 
 ; Load navigation data for Slot
-org $c355c9							; 16 free bytes
+org $C355C9							; 16 free bytes
 slot_navi:
 	LDY #navi_data 					; Pointer
 	JMP $05FE   					; Load navig data
@@ -695,10 +695,10 @@ reloc_curs:
 	LDY #cursor_pos					; Pointer
 	STY $E7							; ...
 	JMP $0640  					    ; Relocate cursor
-warnpc $c355da 
+warnpc $C355DA 
 
 ; Navigation data 
-org $c3295f							; 7 free bytes
+org $C3295F							; 7 free bytes
 navi_data:
 	db $00        					; Wraps on all sides
 	db $00         					; Initial column
@@ -708,7 +708,7 @@ navi_data:
 	
 warnpc $c32966
 
-org $C3f6a5
+org $C3F6A5
 cursor_pos:
 ; Cursor positions for SwdTech, Blitz, and Dance menus
 	dw $7008      					; Skill 1
@@ -722,7 +722,7 @@ slot_sprite:
 	JSL $ED79DD
 	RTS
 
-warnpc $c3f6cb
+warnpc $C3F6CB
 
 
 ; Fill Palette with new colours
@@ -872,16 +872,16 @@ org $c31e95
 org $C35C3A
 C35C3A:  dw $790D : db "Espers",$00
 C35C42:  dw $798D : db "Magic",$00
-C35C4A:  dw $7A8D : db "Bushido",$00
-C35C54:  dw $7B0D : db "Blitz",$00
-C35C5C:  dw $7B8D : db "Lore",$00
-C35C64:  dw $7C0D : db "Rage",$00
-C35C6C:  dw $7C8D : db "Dance",$00
+C35C4A:  dw $7B0D : db "Bushido",$00	; it was $7A8D
+C35C54:  dw $7A8D : db "Blitz",$00		; $7B0D
+C35C5C:  dw $7C0D : db "Lore",$00		; $7B8D
+C35C64:  dw $7C8D : db "Rage",$00		; $7C0D
+C35C6C:  dw $7B8D : db "Dance",$00		; $7C8D
 C35C75:  dw $7D0D : db "Slot",$00
 
 warnpc $C35C81
 
-org $Cb5790
+org $CB5790
 ; Assign a palette to each submenu in Skills menu
 CB4D3D:  LDA #$24       			; Gray palette
          LDX $00        			; 1st: Espers
