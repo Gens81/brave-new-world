@@ -514,7 +514,7 @@ Undead_Sprite_Hook:
 			LDA #table_UD
 			STA $32C9,X		    ; Set sprite's
 			SEP #$20        	; 8-bit A
-			LDA #$D0       		; Bank: $D0
+			LDA #$D2       		; Bank: $D2
 			STA $35CA,X    		; Set ptr HB
 			%FakeC3(1206)	   	; Set pose timer
 			INC $3649,X    		; Mode +1
