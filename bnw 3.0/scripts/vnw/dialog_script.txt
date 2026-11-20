@@ -200,7 +200,7 @@ Need help?
 <C> No
 
 [caption #54]
-You'll fight in 3 groups. Press ą to switch between them.<EOP>
+You'll fight in 3 groups. Press ± to switch between them.<EOP>
 Your objective is to defeat the commander before his men reach <A0>.<EOP>
 And don't steal my spear - I need it to defend myself. <D>Go buy your own, kupo.
 
@@ -2139,7 +2139,7 @@ This is no longer the case.
 
 [caption #605]
 When outfitting your party, remember that most equipment does more now than just boost raw defense or battle power.<EOP>
-Hold ą when shopping to view the full stats of any item prior to purchase.<EOP>
+Hold ± when shopping to view the full stats of any item prior to purchase.<EOP>
 Equipment can be also reviewed in the item menu: press $ twice for info and use @/& to switch views.<EOP>
 Note that while stat boosts from equipment will stack, other properties (including HP/MP boosts) will not.
 
@@ -2163,17 +2163,17 @@ Enemies will flash red when performing counters.<EOP>
 Finally, hitting an elemental weakness can sometimes have additional effects on enemies beyond the extra damage dealt.
 
 [caption #609]
-Hold down Ģ and { to run from battles that get out of hand.<EOP>
+Hold down £ and { to run from battles that get out of hand.<EOP>
 Faster characters like <A1> are better at getting away quickly than others are.<EOP>
 Also, by pressing }` in battle, you can cycle between ATB, current/max HP and current/max MP display.
 
 [caption #610]
-Press ^ or ą in battle to [hold] an active character's turn and cycle to the next available ally.<EOP>
-When targeting a foe, ^ displays HP/MP, while ą displays current status.<EOP>
+Press ^ or ± in battle to [hold] an active character's turn and cycle to the next available ally.<EOP>
+When targeting a foe, ^ displays HP/MP, while ± displays current status.<EOP>
 When a command is queued, the ATB gauge turns blue and counts down until it executes. This [Wait Gauge] can be disabled in the config menu.
 
 [caption #611]
-Press Ģ or { to select multiple targets for any spell with no targeting restrictions, such as
+Press £ or { to select multiple targets for any spell with no targeting restrictions, such as
 <A0>'s Fire and Cure spells.<EOP>
 Other commands with [free] targeting are [Throw] (with stars) and [GP Toss].<EOP>
 The damage (or healing) dealt by anything split in this manner will be reduced by 50%.<EOP>
@@ -3155,7 +3155,7 @@ Need some info?
 <C> No
 
 [caption #877]
-You'll fight in 2 groups. Press ą to switch between them.<EOP>
+You'll fight in 2 groups. Press ± to switch between them.<EOP>
 Defeat Kefka before his men reach Banon, or it's game over!
 
 [caption #878]
@@ -3340,7 +3340,7 @@ Wanna know how to ride a chocobo?
 | = steer
 $ = move forward
 \ = dismount, bird returns here
-Ģ/{ = sharp turn
+£/{ = sharp turn
 
 [caption #934]
 Chocobo ride, 100 GP!
@@ -4693,7 +4693,7 @@ Would you like to know more?
 <C> No
 
 [caption #1317]
-<A9>: Press #+ to toggle the map. Hold ą and use the | to move in all directions.<EOP>
+<A9>: Press #+ to toggle the map. Hold ± and use the | to move in all directions.<EOP>
 <A9>: Crash this thing and I'll make you wish the crash had killed you.
 
 [caption #1318]
@@ -9263,7 +9263,7 @@ Many people have since gone there in search of loot.<EOP>
 Some like to call it [treasure hunting], but I just call it common thievery.
 
 [caption #2614]
-Press ą to switch parties.
+Press ± to switch parties.
 
 [caption #2615]
 Don't bother heading in_ <D>there's nothing left.
