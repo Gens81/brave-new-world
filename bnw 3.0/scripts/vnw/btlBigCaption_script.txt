@@ -19,7 +19,7 @@ The frozen creature began
 emitting an eerie light_<P>
 
 [caption #4]
-Girl: _<P>
+
 
 [caption #5]
 Biggs: Wh-what the hell_?<P>
@@ -203,7 +203,7 @@ Banon: _<P>
 the raft_<P>
 
 [caption #55]
-<A$00>: <A$05>!<P>
+
 
 [caption #56]
 <A$04>: <A$05>!<P>
@@ -305,11 +305,18 @@ S<P>U<P>P<P>L<P>E<P>X!<P>
 
 [caption #84]
 <A$03>:
+S<P>
+S
+S
+S
+S
+S
+S
+S
 SUPLEX!?<P>
-He suplexed a fucking TRAIN!?<P>
+He suplexed a TRAIN!?<P>
 
 [caption #85]
-<A$02> <A$03>:
 *whisper* *whisper*<P>
 
 [caption #86]
@@ -366,9 +373,9 @@ difference between us.<P>
 kind of funny.<P>
 
 [caption #101]
-<A$05>: Uh, guys?<P> Can we maybe have
-this conversation later?<P> Like, when
-an evil train isn't trying to kill us?
+<A$05>: Uh, guys?<P> Can we have
+this conversation when an evil
+train isn't trying to kill us?
 
 [caption #102]
 <A$05>: Stop swooning!<P>
@@ -469,7 +476,7 @@ be happy!<P>
 <A$00>: No! <A$08>, don't!<P>
 
 [caption #129]
-*whisper* *whisper*<P>
+
 
 [caption #130]
 <A$00>: How dare you tease her like
@@ -580,7 +587,9 @@ to her!<P>
 thing!<P>
 
 [caption #157]
-Fin~<P>
+Press ± on an enemy name in
+the Rage menu for details.
+<D>Fin~<P>
 
 [caption #158]
 <A$02>: Worry not. I can not brood
@@ -603,8 +612,8 @@ Shiny, shiny, shiny, shiny!<P>
 <A$05>: _but is it shiny?<P>
 
 [caption #163]
-<A$0B>: Does Mr. Thou like <D>shiny 
-things?<P>
+<A$0B>: Does Mr. Thou like
+<D>shiny things?<P>
 
 [caption #164]
 <A$05>: Mr. Thou's that one over
@@ -712,8 +721,7 @@ MAGIC!?<P>
 She used magic?<P>
 
 [caption #189]
-<A$04> <A$01>:
-*whisper* *whisper*<P>
+
 
 [caption #190]
 <A$04>: <A$00>_ where on earth did
@@ -732,7 +740,7 @@ actually SEEN magic before!<P>
 How did you_?<P>
 
 [caption #194]
-<A$00>: _<P>
+
 
 [caption #195]
 <A$01>: <A$04>, <A$00> can use magic
@@ -966,8 +974,8 @@ my bidding in the afterlife!]<P>
 
 [caption #251]
 [Now, then_ where was I? <P>Oh,
-yes, I will possess your body until
-you die.]<P>
+yes, I will possess your body
+until you die.]<P>
 
 [caption #252]
 <A$02>: I am not certain_<P>
