@@ -375,7 +375,7 @@ kind of funny.<P>
 [caption #101]
 <A$05>: Uh, guys?<P> Can we have
 this conversation when an evil
-train isn't trying to kill us?
+train isn't trying to kill us?<P>
 
 [caption #102]
 <A$05>: Stop swooning!<P>
@@ -587,7 +587,7 @@ to her!<P>
 thing!<P>
 
 [caption #157]
-Press ± on an enemy name in
+Hold ± on an enemy name in
 the Rage menu for details.
 <D>Fin~<P>
 
