@@ -1,6 +1,6 @@
 # Upcoming
 
-### 2.2 features that would be ok to have but not necessary:
+### serious candidates:
 - Recruit shadow right after banquet
 - Make Blood Sword and Soul Sabre trade each other in Colosseum
 - Allow Esper menu to open "Curative Ally Targeting" submenu
@@ -20,7 +20,6 @@
 - Raise Slow accuracy (or make SlowX free targeting and 100% accurate when ST)
 
 ### Events
-- Restore Shadow cutscene during Soul train fight
 - Banon's death reference at the end of Thamasa events 
 	Terra: Where's Banon?
 	Edgar: (head down) He_<D> didn't make it out.
@@ -29,7 +28,6 @@
 ### Bugfixes/features temporarily discarded:
 - Import Snaphat compression algorythm
 - Stuck in a pose (walking pose in events like npc unequip)
-- Banon riding chocobo pose 
 - Imperial camp dialogue fix (sabin aware of doma without speaking to Shadow)
 - Oceanic line anomaly
 - Narshe Cave door by Leet Fletcher
