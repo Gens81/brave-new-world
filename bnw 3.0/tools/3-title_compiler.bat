@@ -18,7 +18,7 @@ rem ----------------------------------------------------------------------------
 echo.
 echo Applying hacks...
 
-%ASAR% --pause-mode=on-error %PATCHES%\new_opening_after_khaos.asm %EDITED_BIN2%
+%ASAR% --pause-mode=on-error %PATCHES%\new_opening.asm %EDITED_BIN2%
 %ASAR% --pause-mode=on-error %PATCHES%\main.asm %EDITED_ROM%
 
 echo Inserting Compressed Graphics...
