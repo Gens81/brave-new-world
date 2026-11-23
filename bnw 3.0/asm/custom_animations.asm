@@ -109,6 +109,21 @@ Unimp_Monster:			; Assumes target is a monster and thus *requires* a check for t
     RTS					; CLEAN-UP: 7 junk bytes remain after this
 
 ; #########################################################################
+; Gi Nattak (Zinger) Fade-in Fix
+; #########################################################################
+
+org $C207D1
+	JSL ZingerHook
+	NOP
+
+org $D25536				; Free space
+ZingerHook:
+	LDA.w $3019,X		; [DISPLACED]
+	STA.b $B9			; [DISPLACED]
+	TRB.w $201E			; Clear from "monsters visible" so fade-in happens properly
+	RTL
+
+; #########################################################################
 ; Sound Effect Scripts
 ; #########################################################################
 
