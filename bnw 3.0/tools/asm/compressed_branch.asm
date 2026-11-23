@@ -29,3 +29,34 @@ TDC
 STA $211A
 PLB
 RTL
+
+; This code is needed for the opening title sequence to work properly
+ORG $D25502
+title_work_init:
+TDC
+TAY
+STY $25
+STY $27
+STY $29
+STY $2B
+STY $2D
+STY $2F
+STY $15
+STY $04
+STY $06
+STY $08
+STA $33
+STA $18
+STA $19
+STA $1A
+STA $17
+STA $31
+STA $32
+STA $36
+STY $12
+STY $0E
+LDA #$7E
+STA $14
+LDY #$FFFF
+STY $10
+RTL
