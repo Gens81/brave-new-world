@@ -175,7 +175,7 @@ org $CB3C22 : db $31			; Begin action queue for character $31 (Party Character 1
 org $CB3C27 : db $33			; Begin action queue for character $33 (Party Character 3), 3 bytes long 
 org $CB3C2C : db $32			; Begin action queue for character $32 (Party Character 2), 3 bytes long 
 
-org $CB3C30
+org $CB3C33
 	db $3F,$00,$01				; Assign character $00 (Actor in stot 0) to party 1
 	db $3C,$00,$FF,$FF,$FF		; Set up the party as follows: $00 (Actor in stot 0), $FF (<Invalid Character>), $FF (<Invalid Character>), $FF (<Invalid Character>)
 	db $B2,$2B,$2E,$01			; Call subroutine $CB2E2B
