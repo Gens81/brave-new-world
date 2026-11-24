@@ -247,6 +247,43 @@ org $CBD27E
 	db $5A						; Fade screen at speed $03
 
 ; -----------------------------------------------------------------------------
+; Stops Cid and the Emperor from phasing through senties prior to banquet
+; -----------------------------------------------------------------------------
+
+org $CC84BC
+	db $B2									; Call subroutine
+	dl guard1move-NewEventBase
+
+org $CC8510	: db $CF						; Have Cid face left
+org $CC854B	: db $FD      	 				; Have Cid face downwards
+org $CC859F	: db $FD,$FD,$FD,$FD,$FD,$FD	; Always move guard up one space up at event end
+org $CC85AA	: db $FD,$FD,$FD,$FD,$FD,$FD	; Always move guard up one space up at event end
+
+org $CC85BC
+guard1move:
+	db $3D,$16								; [DISPLACED] Create object $16
+	db $41,$16								; [DISPLACED] Show object $16
+	db $C0,$F0,$01							; If ($1E80($1F0) [$1EBE, bit 0] is clear), branch
+	dl guard2move-NewEventBase
+	db $17,$83								; Begin action queue for character $17 (NPC $17), 3 bytes long (Wait until complete)
+	db $83									; Move vehicle/entity left 1 tile
+	db $86									; Move vehicle/entity down 2 tiles
+	db $FF									; End queue
+	db $D3,	$F0								; Clear event bit $1E80($1F0) [$1EBE, bit 0]
+guard2move:
+	db $C0,$F1,$01							; If ($1E80($1F1) [$1EBE, bit 1] is clear), branch
+	dl guardreturn-NewEventBase
+	db $18,$83								; Begin action queue for character $18 (NPC $18), 3 bytes long (Wait until complete)
+	db $81									; Move vehicle/entity right 1 tile
+	db $86									; Move vehicle/entity down 2 tiles
+	db $FF									; End queue
+	db $D3,$F1								; Clear event bit $1E80($1F1) [$1EBE, bit 1]
+guardreturn:
+	db $FE									; Return
+
+padbyte $EA : pad $CC85E3
+
+; -----------------------------------------------------------------------------
 ; Minor dialogue adjustments per the new dialog "unassigned speaker" changes
 ; -----------------------------------------------------------------------------
 
