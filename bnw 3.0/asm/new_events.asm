@@ -108,11 +108,10 @@ HireChocobo:
 org NewEventScriptFreespace_2	
 BanonCheck:				
 	db $E2							; Set CaseWord bits depending on who is the lead of the current party
-	db $BE,01						; If character $0E (BANON ) is in the current CaseWord, branch to .denied	
-	dw .denied
-	db $E0
-    db $B2                          ; else, branch to "Chocobo hired" event code
-    dl HireChocobo-NewEventBase
+	db $C0,$AE,$81					; If character $0E (BANON ) is in the current CaseWord, branch to .denied	
+	dl .denied-NewEventBase
+    db $B2
+    dl HireChocobo-NewEventBase		; Run "Chocobo hired" subroutine
 	db $FE							; return
 .denied				
 	db $4B,$0C,$00					; Display dialogue message, wait for button press
