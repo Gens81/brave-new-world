@@ -110,7 +110,7 @@ BanonCheck:
 	db $E2							; Set CaseWord bits depending on who is the lead of the current party
 	db $BE,01						; If character $0E (BANON ) is in the current CaseWord, branch to .denied	
 	dw .denied
-	db $E0
+	db $E1
     db $B2                          ; else, branch to "Chocobo hired" event code
     dl HireChocobo-NewEventBase
 	db $FE							; return
